@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Timeline - Major Events</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn">Characters</a>
+            <a href="events.html" class="nav-btn active">Events</a>
+        </div>
+
+        <header>
+            <h1>📖 Genesis Events</h1>
+            <p class="subtitle">Major Events in Chronological Order</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in chronological order
+        const mainEvents = [
+            {
+                name: "Creation",
+                date: "c. 4000 BC",
+                scripture: "Genesis 1:1-2:3",
+                intro: "The foundational event of Genesis and all Scripture. God speaks the universe into existence in six days, creating light, sky, land, plants, sun and moon, sea creatures and birds, land animals, and finally humans in His image. On the seventh day, God rests, establishing the pattern of Sabbath rest.",
+                tagline: "In the beginning, God created",
+                summary: "In the beginning, God created the heavens and the earth. The earth was formless and empty, darkness was over the surface of the deep, and the Spirit of God was hovering over the waters. On day one, God said 'Let there be light' and separated light from darkness. Day two, He separated the waters to create sky. Day three, He gathered waters to form seas and dry ground, then created vegetation. Day four, He created the sun, moon, and stars to mark seasons and days. Day five, He created sea creatures and birds. Day six, He created land animals, then created humans—male and female—in His own image, giving them dominion over creation. God saw all He had made and declared it 'very good.' On the seventh day, God rested from all His work, blessing and making it holy—establishing the Sabbath pattern."
+            },
+            {
+                name: "The Fall",
+                date: "c. 4000 BC",
+                scripture: "Genesis 3:1-24",
+                intro: "The moment when sin enters the world. The serpent tempts Eve, who eats the forbidden fruit and gives it to Adam. Their eyes are opened to shame, they hide from God, and face consequences. Yet even in judgment, God shows mercy and promises a future redeemer.",
+                tagline: "Sin enters the world",
+                summary: "The serpent, more crafty than any other animal, questioned God's command, asking Eve 'Did God really say you must not eat from any tree in the garden?' Eve responded that they could eat from any tree except the tree of knowledge of good and evil, or they would die. The serpent contradicted God, saying 'You will not certainly die. For God knows that when you eat from it your eyes will be opened, and you will be like God, knowing good and evil.' Eve saw the fruit was good for food, pleasing to the eye, and desirable for gaining wisdom. She took some and ate it, then gave some to Adam who was with her, and he ate. Immediately their eyes were opened, they realized they were naked, and they sewed fig leaves together to cover themselves. When they heard God walking in the garden, they hid. God called out 'Where are you?' Adam admitted he was afraid because he was naked. God asked 'Who told you that you were naked? Have you eaten from the tree I commanded you not to eat from?' Adam blamed Eve, Eve blamed the serpent. God pronounced consequences: the serpent would crawl on its belly, enmity between the serpent and woman's offspring, pain in childbearing for women, toil and thorns for men, and death. But God also made garments of skin for them and promised that the woman's offspring would crush the serpent's head—the first promise of redemption."
+            },
+            {
+                name: "Cain and Abel",
+                date: "c. 4000 BC",
+                scripture: "Genesis 4:1-16",
+                intro: "The first act of worship and the first murder. Two brothers bring offerings to God—Abel's is accepted, Cain's is not. Jealousy leads Cain to murder his brother, showing how sin escalates. God confronts Cain with justice and mercy.",
+                tagline: "First worship, first murder",
+                summary: "Adam and Eve had two sons. Cain worked the soil, Abel kept flocks. In the course of time, Cain brought some of the fruits of the soil as an offering to the Lord. Abel brought fat portions from some of the firstborn of his flock. The Lord looked with favor on Abel and his offering, but on Cain and his offering He did not look with favor. Cain was very angry, and his face was downcast. The Lord said to Cain 'Why are you angry? Why is your face downcast? If you do what is right, will you not be accepted? But if you do not do what is right, sin is crouching at your door; it desires to have you, but you must rule over it.' Instead of repenting, Cain invited Abel to go out to the field, where he attacked and killed him. The Lord asked Cain 'Where is your brother Abel?' Cain responded 'I don't know. Am I my brother's keeper?' God said 'What have you done? Listen! Your brother's blood cries out to me from the ground.' God cursed Cain from the ground and made him a restless wanderer. Cain feared someone would kill him, but God put a mark on him so no one would kill him. Cain went out from the Lord's presence and lived in the land of Nod, east of Eden."
+            },
+            {
+                name: "The Flood",
+                date: "c. 2348 BC",
+                scripture: "Genesis 6:1-9:17",
+                intro: "God's judgment on a corrupt world and His preservation of a remnant. Noah builds an ark, the flood covers the earth, and God makes the first covenant with humanity, promising never to flood the earth again and giving the rainbow as a sign.",
+                tagline: "Judgment and new beginning",
+                summary: "As the human population grew, the Lord saw how great the wickedness of the human race had become on the earth, and that every inclination of the thoughts of the human heart was only evil all the time. The Lord regretted making humans and was grieved. He said 'I will wipe from the face of the earth the human race I have created.' But Noah found favor in the eyes of the Lord. Noah was a righteous man, blameless among the people of his time, and he walked faithfully with God. God told Noah to build an ark of cypress wood—450 feet long, 75 feet wide, and 45 feet high. Noah was to bring two of every kind of animal, male and female, into the ark, along with his family. For 120 years (or possibly 100), Noah built the ark while the world mocked. When everything was ready, God shut them in. The floodgates of heaven opened and the springs of the great deep burst forth. Rain fell for 40 days and 40 nights, and the waters covered the earth for 150 days. Every living thing on dry land perished. After the waters receded, the ark came to rest on the mountains of Ararat. Noah sent out a raven and a dove to test if the waters had receded. When the dove returned with an olive leaf, Noah knew the waters had gone down. God told Noah to come out of the ark. Noah built an altar and offered sacrifices. God smelled the pleasing aroma and made a covenant: 'Never again will I curse the ground because of humans, even though every inclination of the human heart is evil from childhood. And never again will I destroy all living creatures.' God set a rainbow in the clouds as a sign of this everlasting covenant."
+            },
+            {
+                name: "Tower of Babel",
+                date: "c. 2200 BC",
+                scripture: "Genesis 11:1-9",
+                intro: "Humanity's attempt to reach heaven and make a name for themselves. God confuses their language and scatters them across the earth, showing that human pride and self-sufficiency will not succeed against God's purposes.",
+                tagline: "Pride and confusion",
+                summary: "The whole world had one language and a common speech. As people moved eastward, they found a plain in Shinar and settled there. They said to each other 'Come, let's make bricks and bake them thoroughly.' They used brick instead of stone, and tar for mortar. Then they said 'Come, let us build ourselves a city, with a tower that reaches to the heavens, so that we may make a name for ourselves; otherwise we will be scattered over the face of the whole earth.' The Lord came down to see the city and the tower the people were building. The Lord said 'If as one people speaking the same language they have begun to do this, then nothing they plan to do will be impossible for them. Come, let us go down and confuse their language so they will not understand each other.' So the Lord scattered them from there over all the earth, and they stopped building the city. That is why it was called Babel—because there the Lord confused the language of the whole world. From there the Lord scattered them over the face of the whole earth."
+            },
+            {
+                name: "Call of Abraham",
+                date: "c. 2091 BC",
+                scripture: "Genesis 12:1-9",
+                intro: "God's call to Abram to leave everything familiar for an unknown land. This marks the beginning of God's covenant relationship with His chosen people and the promise to bless all nations through Abraham's descendants.",
+                tagline: "Journey of faith begins",
+                summary: "The Lord had said to Abram 'Go from your country, your people and your father's household to the land I will show you. I will make you into a great nation, and I will bless you; I will make your name great, and you will be a blessing. I will bless those who bless you, and whoever curses you I will curse; and all peoples on earth will be blessed through you.' So Abram went, as the Lord had told him. He was 75 years old when he left Harran. He took his wife Sarai, his nephew Lot, all the possessions they had accumulated, and the people they had acquired in Harran. They set out for the land of Canaan. When they arrived, the Lord appeared to Abram and said 'To your offspring I will give this land.' So Abram built an altar there to the Lord, who had appeared to him. From there he went on toward the hills east of Bethel and pitched his tent, with Bethel on the west and Ai on the east. There he built an altar to the Lord and called on the name of the Lord. Then Abram set out and continued toward the Negev."
+            },
+            {
+                name: "Destruction of Sodom and Gomorrah",
+                date: "c. 2067 BC",
+                scripture: "Genesis 18:16-19:29",
+                intro: "God's judgment on extreme wickedness. Abraham intercedes for the cities, but only Lot and his daughters are rescued. The cities are destroyed with fire and sulfur, serving as a warning about the consequences of persistent sin.",
+                tagline: "Divine judgment on wickedness",
+                summary: "The outcry against Sodom and Gomorrah was so great and their sin so grievous that the Lord decided to investigate. Abraham interceded, asking if God would destroy the righteous with the wicked. God agreed that if He found ten righteous people, He would spare the cities. Two angels went to Sodom and found Lot sitting at the city gate. Lot invited them to stay at his house, but the men of Sodom surrounded the house and demanded to have sex with the visitors. Lot offered his daughters instead, but the angels pulled him inside and struck the men with blindness. The angels told Lot to take his family and flee, warning 'Don't look back, and don't stop anywhere in the plain! Flee to the mountains or you will be swept away!' As dawn broke, the Lord rained down burning sulfur on Sodom and Gomorrah from the Lord out of the heavens. He overthrew those cities and the entire plain, destroying all those living in the cities. Lot's wife looked back and became a pillar of salt. Abraham looked down and saw dense smoke rising from the land, like smoke from a furnace. But God remembered Abraham and brought Lot out of the catastrophe that overthrew the cities where Lot had lived."
+            },
+            {
+                name: "Binding of Isaac",
+                date: "c. 2050 BC",
+                scripture: "Genesis 22:1-19",
+                intro: "The ultimate test of Abraham's faith. God asks Abraham to sacrifice his son Isaac, the child of promise. Abraham obeys completely, demonstrating absolute trust. God provides a ram as substitute, confirming Abraham's faith and foreshadowing the ultimate sacrifice.",
+                tagline: "Ultimate test of faith",
+                summary: "Some time later, God tested Abraham. He said to him 'Abraham!' 'Here I am,' he replied. Then God said 'Take your son, your only son, whom you love—Isaac—and go to the region of Moriah. Sacrifice him there as a burnt offering on a mountain I will show you.' Early the next morning, Abraham got up and loaded his donkey. He took with him two of his servants and his son Isaac. On the third day, Abraham saw the place in the distance. He said to his servants 'Stay here with the donkey while I and the boy go over there. We will worship and then we will come back to you.' Abraham took the wood for the burnt offering and placed it on his son Isaac, and he himself carried the fire and the knife. As the two of them went on together, Isaac spoke up and said to his father Abraham 'Father?' 'Yes, my son?' Abraham replied. 'The fire and wood are here,' Isaac said 'but where is the lamb for the burnt offering?' Abraham answered 'God himself will provide the lamb for the burnt offering, my son.' When they reached the place God had told him about, Abraham built an altar and arranged the wood on it. He bound his son Isaac and laid him on the altar, on top of the wood. Then he reached out his hand and took the knife to slay his son. But the angel of the Lord called out to him from heaven 'Abraham! Abraham!' 'Here I am,' he replied. 'Do not lay a hand on the boy,' he said. 'Do not do anything to him. Now I know that you fear God, because you have not withheld from me your son, your only son.' Abraham looked up and there in a thicket he saw a ram caught by its horns. He went over and took the ram and sacrificed it as a burnt offering instead of his son. The angel of the Lord called to Abraham a second time and said 'I swear by myself that because you have done this and have not withheld your son, your only son, I will surely bless you and make your descendants as numerous as the stars in the sky and as the sand on the seashore.'"
+            },
+            {
+                name: "Jacob's Dream (Ladder to Heaven)",
+                date: "c. 1929 BC",
+                scripture: "Genesis 28:10-22",
+                intro: "Jacob's first direct encounter with God. Fleeing from Esau, Jacob dreams of a stairway reaching to heaven with angels ascending and descending. God renews the covenant promises to Jacob, who responds with worship and a vow.",
+                tagline: "Heaven opened to earth",
+                summary: "Jacob left Beersheba and set out for Harran. When he reached a certain place, he stopped for the night because the sun had set. Taking one of the stones there, he put it under his head and lay down to sleep. He had a dream in which he saw a stairway resting on the earth, with its top reaching to heaven, and the angels of God were ascending and descending on it. There above it stood the Lord, and He said 'I am the Lord, the God of your father Abraham and the God of Isaac. I will give you and your descendants the land on which you are lying. Your descendants will be like the dust of the earth, and you will spread out to the west and to the east, to the north and to the south. All peoples on earth will be blessed through you and your offspring. I am with you and will watch over you wherever you go, and I will bring you back to this land. I will not leave you until I have done what I have promised you.' When Jacob awoke from his sleep, he thought 'Surely the Lord is in this place, and I was not aware of it.' He was afraid and said 'How awesome is this place! This is none other than the house of God; this is the gate of heaven.' Early the next morning, Jacob took the stone he had placed under his head and set it up as a pillar and poured oil on top of it. He called that place Bethel (house of God). Then Jacob made a vow, saying 'If God will be with me and will watch over me on this journey I am taking and will give me food to eat and clothes to wear so that I return safely to my father's household, then the Lord will be my God and this stone that I have set up as a pillar will be God's house, and of all that you give me I will give you a tenth.'"
+            },
+            {
+                name: "Jacob Wrestles with God",
+                date: "c. 1909 BC",
+                scripture: "Genesis 32:22-32",
+                intro: "Jacob's transformation moment. On the night before meeting Esau, Jacob wrestles all night with a man who turns out to be God. He refuses to let go until blessed, and God renames him Israel, meaning 'he struggles with God.'",
+                tagline: "Transformation through struggle",
+                summary: "That night Jacob got up and took his two wives, his two female servants and his eleven sons and crossed the ford of the Jabbok. After he had sent them across the stream, he sent over all his possessions. So Jacob was left alone, and a man wrestled with him till daybreak. When the man saw that he could not overpower him, he touched the socket of Jacob's hip so that his hip was wrenched as he wrestled with the man. Then the man said 'Let me go, for it is daybreak.' But Jacob replied 'I will not let you go unless you bless me.' The man asked him 'What is your name?' 'Jacob,' he answered. Then the man said 'Your name will no longer be Jacob, but Israel, because you have struggled with God and with humans and have overcome.' Jacob said 'Please tell me your name.' But he replied 'Why do you ask my name?' Then he blessed him there. So Jacob called the place Peniel, saying 'It is because I saw God face to face, and yet my life was spared.' The sun rose above him as he passed Peniel, and he was limping because of his hip. Therefore to this day the Israelites do not eat the tendon attached to the socket of the hip, because the socket of Jacob's hip was touched near the tendon."
+            },
+            {
+                name: "Joseph Sold into Slavery",
+                date: "c. 1898 BC",
+                scripture: "Genesis 37:12-36",
+                intro: "The beginning of Joseph's journey from favored son to slave. His jealous brothers sell him to Midianite merchants for twenty shekels of silver, setting in motion God's plan to save many lives through Joseph's suffering.",
+                tagline: "Betrayal that leads to salvation",
+                summary: "Now his brothers had gone to graze their father's flocks near Shechem. Israel said to Joseph 'As you know, your brothers are grazing the flocks near Shechem. Come, I am going to send you to them.' 'Very well,' he replied. So Joseph went after his brothers and found them near Dothan. But they saw him in the distance, and before he reached them, they plotted to kill him. 'Here comes that dreamer!' they said to each other. 'Come now, let's kill him and throw him into one of these cisterns and say that a ferocious animal devoured him. Then we'll see what comes of his dreams.' When Reuben heard this, he tried to rescue him from their hands. 'Let's not take his life,' he said. 'Don't shed any blood. Throw him into this cistern here in the wilderness, but don't lay a hand on him.' Reuben said this to rescue him from them and take him back to his father. So when Joseph came to his brothers, they stripped him of his robe—the ornate robe he was wearing—and they took him and threw him into the cistern. The cistern was empty; there was no water in it. As they sat down to eat their meal, they looked up and saw a caravan of Ishmaelites coming from Gilead. Their camels were loaded with spices, balm and myrrh, and they were on their way to take them down to Egypt. Judah said to his brothers 'What will we gain if we kill our brother and cover up his blood? Come, let's sell him to the Ishmaelites and not lay our hands on him; after all, he is our brother, our own flesh and blood.' His brothers agreed. So when the Midianite merchants came by, his brothers pulled Joseph up out of the cistern and sold him for twenty shekels of silver to the Ishmaelites, who took him to Egypt."
+            },
+            {
+                name: "Joseph in Egypt",
+                date: "c. 1885-1875 BC",
+                scripture: "Genesis 39:1-41:57",
+                intro: "Joseph's rise from slave to second-in-command of Egypt. Despite false accusations and imprisonment, God blesses everything Joseph does. He interprets Pharaoh's dreams and is elevated to save Egypt from famine.",
+                tagline: "From prison to palace",
+                summary: "Now Joseph had been taken down to Egypt. Potiphar, an Egyptian who was one of Pharaoh's officials, the captain of the guard, bought him from the Ishmaelites who had taken him there. The Lord was with Joseph so that he prospered, and he lived in the house of his Egyptian master. When his master saw that the Lord was with him and that the Lord gave him success in everything he did, Joseph found favor in his eyes and became his attendant. Potiphar put him in charge of his household, and he entrusted to his care everything he owned. But Potiphar's wife falsely accused Joseph, and he was thrown into prison. Even in prison, the Lord was with Joseph and gave him favor in the eyes of the prison warden. The warden put Joseph in charge of all those held in the prison. Some time later, Pharaoh's cupbearer and baker offended their master and were imprisoned. Both had dreams, and Joseph interpreted them correctly—the cupbearer would be restored, the baker would be executed. Two years later, Pharaoh had dreams that no one could interpret. The cupbearer remembered Joseph. Joseph was brought before Pharaoh and interpreted the dreams: seven years of abundance followed by seven years of famine. Joseph advised Pharaoh to store grain during the good years. Pharaoh said to Joseph 'Since God has made all this known to you, there is no one so discerning and wise as you. You shall be in charge of my palace, and all my people are to submit to your orders. Only with respect to the throne will I be greater than you.' So Pharaoh took his signet ring from his finger and put it on Joseph's finger. He dressed him in robes of fine linen and put a gold chain around his neck. He had him ride in a chariot as his second-in-command."
+            },
+            {
+                name: "Joseph Reveals Himself",
+                date: "c. 1875 BC",
+                scripture: "Genesis 45:1-15",
+                intro: "The emotional climax of Joseph's story. After testing his brothers, Joseph reveals his identity and forgives them completely, recognizing that God used their evil intentions for good purposes to save many lives.",
+                tagline: "Forgiveness and reconciliation",
+                summary: "Joseph could no longer control himself before all his attendants, and he cried out 'Have everyone leave my presence!' So there was no one with Joseph when he made himself known to his brothers. And he wept so loudly that the Egyptians heard him, and Pharaoh's household heard about it. Joseph said to his brothers 'I am Joseph! Is my father still living?' But his brothers were not able to answer him, because they were terrified at his presence. Then Joseph said to his brothers 'Come close to me.' When they had done so, he said 'I am your brother Joseph, the one you sold into Egypt! And now, do not be distressed and do not be angry with yourselves for selling me here, because it was to save lives that God sent me ahead of you. For two years now there has been famine in the land, and for the next five years there will be no plowing and reaping. But God sent me ahead of you to preserve for you a remnant on earth and to save your lives by a great deliverance. So then, it was not you who sent me here, but God. He made me father to Pharaoh, lord of his entire household and ruler of all Egypt. Now hurry back to my father and say to him, 'This is what your son Joseph says: God has made me lord of all Egypt. Come down to me; don't delay. You shall live in the region of Goshen and be near me—you, your children and grandchildren, your flocks and herds, and all you have. I will provide for you there, because five years of famine are still to come. Otherwise you and your household and all who belong to you will become destitute.' Then he threw his arms around his brother Benjamin and wept, and Benjamin embraced him, weeping. And he kissed all his brothers and wept over them. Afterward his brothers talked with him."
+            },
+            {
+                name: "Jacob's Family Moves to Egypt",
+                date: "c. 1875 BC",
+                scripture: "Genesis 46:1-47:12",
+                intro: "The fulfillment of God's promise to Abraham. Jacob's entire family moves to Egypt to escape famine, where Joseph provides for them. This sets the stage for the Exodus story and the formation of the nation of Israel.",
+                tagline: "Seventy souls become a nation",
+                summary: "So Israel set out with all that was his, and when he reached Beersheba, he offered sacrifices to the God of his father Isaac. And God spoke to Israel in a vision at night and said 'Jacob! Jacob!' 'Here I am,' he replied. 'I am God, the God of your father,' he said. 'Do not be afraid to go down to Egypt, for I will make you into a great nation there. I will go down to Egypt with you, and I will surely bring you back again. And Joseph's own hand will close your eyes.' Then Jacob left Beersheba, and Israel's sons took their father Jacob and their children and their wives in the carts that Pharaoh had sent to transport him. They also took with them their livestock and the possessions they had acquired in Canaan. Jacob and all his offspring went to Egypt. He took with him to Egypt his sons and grandsons and his daughters and granddaughters—all his offspring. All those who went to Egypt with Jacob—those who were his direct descendants, not counting his sons' wives—numbered sixty-six persons. With the two sons who had been born to Joseph in Egypt, the members of Jacob's family, which went to Egypt, were seventy in all. Joseph had his chariot made ready and went to Goshen to meet his father Israel. As soon as Joseph appeared before him, he threw his arms around his father and wept for a long time. Israel said to Joseph 'Now I am ready to die, since I have seen for myself that you are still alive.' Joseph settled his father and his brothers in Egypt and gave them property in the best part of the land, the district of Rameses, as Pharaoh directed. Joseph also provided his father and his brothers and all his father's household with food, according to the number of their children."
+            }
+        ];
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${event.scripture}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    <button class="audio-btn">Listen to Story</button>
+                `;
+
+                content.addEventListener('click', (e) => {
+                    // Don't toggle if clicking the audio button
+                    if (!e.target.classList.contains('audio-btn')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                // Add audio button functionality
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (British English, male)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer British English voices (Jarvis is British)
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            // Try to find a British voice first
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            // Fallback to any English male voice
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        // Wait for voices to load
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        // Initialize voice
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Play audio function
+        function playAudio(button, text) {
+            
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9; // Slightly slower, more deliberate
+            currentUtterance.pitch = 0.8; // Slightly lower pitch
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB'; // British English
+
+            // Update button state
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize
+        renderTimeline();
+    </script>
+</body>
+</html>
+

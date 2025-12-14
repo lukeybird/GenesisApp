@@ -57,6 +57,43 @@
             z-index: 1;
         }
 
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
         header {
             background: rgba(10, 14, 39, 0.7);
             backdrop-filter: blur(20px);
@@ -407,11 +444,21 @@
             .character-name {
                 font-size: 1.8em;
             }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn active">Characters</a>
+            <a href="events.html" class="nav-btn">Events</a>
+        </div>
+
         <header>
             <h1>📖 Genesis Characters</h1>
             <p class="subtitle">Main Characters in Chronological Order</p>
