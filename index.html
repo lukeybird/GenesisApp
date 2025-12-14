@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genesis Timeline - Main Characters</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📖 Genesis Characters</h1>
+            <p class="subtitle">Main Characters in Chronological Order</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // All relevant characters in chronological order
+        const mainCharacters = [
+            {
+                name: "God",
+                date: "Eternal",
+                scripture: "Genesis 1-50 (throughout)",
+                intro: "The central character of Genesis, God is the Creator who speaks the universe into existence. Throughout the book, He establishes relationships with humanity, makes covenants, and works through generations to fulfill His promises despite human failure.",
+                tagline: "Creator, life-giver, speaks order from chaos",
+                summary: "God exists before all things, speaking light from darkness and order from chaos. He creates the universe in six days, forming humans in His own image as the crown of creation, declaring everything 'very good.' He walks with Adam and Eve in the garden, desiring relationship. When they disobey, He grieves deeply but doesn't abandon them—He asks where they are, confronts their sin with justice, yet shows mercy by making clothing to cover their shame and promising a future redeemer through Eve's offspring who will crush the serpent's head."
+            },
+            {
+                name: "Adam & Eve",
+                date: "c. 4000 BC",
+                scripture: "Genesis 1:26-5:5",
+                intro: "The first humans created by God, made in His image. Their story establishes the pattern of human relationship with God—created for fellowship, given choice, and the consequences of choosing independence over trust. Through them, sin enters the world, but God also promises redemption.",
+                tagline: "First humans, made in God's image",
+                summary: "God created Adam from dust and breathed life into him, placing him in the Garden of Eden to care for it. God made Eve from Adam's rib as his helper and companion. They lived in perfect fellowship with God, walking with Him in the garden. God gave them one command: don't eat from the tree of knowledge of good and evil. The serpent tempted Eve, questioning God's goodness. She ate and gave fruit to Adam, who also ate. Their eyes were opened to shame and they hid from God. God confronted them, pronouncing consequences but also making them clothing and promising a future redeemer through Eve's offspring. They were expelled from Eden but given hope."
+            },
+            {
+                name: "Cain",
+                date: "c. 4000 BC",
+                scripture: "Genesis 4:1-17",
+                intro: "The firstborn son of Adam and Eve, Cain represents the tragic consequences of unchecked sin. His story shows how jealousy and pride lead to the first murder, demonstrating that sin spreads and escalates when not addressed. God's response shows both justice and mercy.",
+                tagline: "Brothers with different hearts",
+                summary: "Born as the firstborn son of Adam and Eve, Cain worked as a farmer. When he and his brother Abel brought offerings to God, Abel's animal sacrifice was accepted but Cain's grain offering was not—God saw Cain's heart wasn't right. God warned Cain that sin was crouching at his door, desiring to control him, but he could master it. Instead of repenting, Cain let jealousy consume him. He lured Abel into a field and murdered him, becoming the first murderer."
+            },
+            {
+                name: "Abel",
+                date: "c. 4000 BC",
+                scripture: "Genesis 4:1-10",
+                intro: "Adam and Eve's second son who became a shepherd. His story demonstrates the importance of offering God our best with a right heart. Though his life was cut short as the first murder victim, his example of faithful worship endures.",
+                tagline: "Worshipful brother",
+                summary: "Abel was Adam and Eve's second son who became a shepherd. Unlike his brother, Abel brought God the best of his flock—the fat portions of the firstborn animals. God looked with favor on Abel and his offering because it came from a heart of faith and worship. This pleased God but stirred jealousy in Cain. Abel became the first person to die, murdered by his own brother in a field. Though his life was cut short, his blood cried out to God from the ground, and God avenged him."
+            },
+            {
+                name: "Seth",
+                date: "c. 3870-2958 BC",
+                scripture: "Genesis 4:25-5:8",
+                intro: "The third son of Adam and Eve, born after Abel's murder. Through Seth's line, the knowledge and worship of God is preserved. His descendants maintain a relationship with the Lord, in contrast to Cain's increasingly wicked line.",
+                tagline: "Third son, carrier of godly line",
+                summary: "After Abel's murder and Cain's exile, Adam and Eve had another son. Eve named him Seth, saying 'God has granted me another child in place of Abel, since Cain killed him.' Seth was born when Adam was 130 years old. Unlike Cain's line which became increasingly wicked, Seth's line preserved the knowledge and worship of God. When Seth had his own son Enosh, 'at that time people began to call on the name of the Lord.'"
+            },
+            {
+                name: "Enoch",
+                date: "c. 3382-3017 BC",
+                scripture: "Genesis 5:18-24",
+                intro: "The seventh generation from Adam through Seth's godly line. Enoch distinguished himself by walking faithfully with God for 300 years. He is unique in that he never died—God took him directly to heaven, showing the reward of intimate fellowship with God.",
+                tagline: "Walked with God, taken without death",
+                summary: "Enoch was the seventh generation from Adam through Seth's godly line. He lived in a time of increasing wickedness on earth, yet he distinguished himself by walking faithfully with God. When Enoch was 65 years old, he fathered Methuselah. After Methuselah's birth, something profound happened—Enoch 'walked with God' for 300 years. This phrase, used only of Enoch and Noah in Genesis, indicates an intimate, continuous fellowship with God. Altogether, Enoch lived 365 years. Then one day, Enoch walked faithfully with God; then he is no more, because God takes him away. Enoch never dies—God simply takes him directly to heaven."
+            },
+            {
+                name: "Methuselah",
+                date: "c. 3317-2348 BC",
+                scripture: "Genesis 5:21-27",
+                intro: "The son of Enoch and grandfather of Noah, Methuselah holds the distinction of being the oldest person recorded in the Bible, living 969 years. His incredibly long life may have been God's way of extending maximum mercy before judgment.",
+                tagline: "Oldest person in Bible (969 years)",
+                summary: "Methuselah holds the distinction of being the oldest person recorded in the Bible, living 969 years. He was the son of Enoch, the man who walked with God and was taken up without dying. Methuselah's very name may be prophetic, possibly meaning 'when he dies, it shall come' or 'man of the javelin/dart.' When Methuselah was 187 years old, he became the father of Lamech. According to biblical chronology, Methuselah died the same year as the flood began, suggesting God delayed judgment as long as Methuselah lived."
+            },
+            {
+                name: "Lamech (Noah's father)",
+                date: "c. 3130-2353 BC",
+                scripture: "Genesis 5:25-31",
+                intro: "The son of Methuselah and father of Noah. When Lamech was 182 years old, he had a son and gave him a prophetic name, calling him Noah and saying he would comfort them from the curse. Lamech represents the faithful passing of hope from one generation to the next.",
+                tagline: "Father of Noah, prophesied comfort",
+                summary: "Lamech was the son of Methuselah and father of Noah. When Lamech was 182 years old, he had a son and gave him a prophetic name. He called him Noah, saying 'He will comfort us in the labor and painful toil of our hands caused by the ground the Lord has cursed.' Lamech recognized the burden of living under God's curse on the ground (pronounced after Adam's sin), and he prophetically hoped his son would bring relief. Lamech lived a total of 777 years, dying five years before the flood, and thus never saw the fulfillment of his prophecy about Noah bringing comfort and renewal."
+            },
+            {
+                name: "Noah",
+                date: "c. 2948-1998 BC",
+                scripture: "Genesis 5:28-10:32",
+                intro: "A righteous man in a corrupt generation, Noah demonstrates faithfulness to God when the entire world has turned to evil. His story shows God's judgment on sin but also His preservation of a remnant. Through Noah, God makes the first covenant with humanity and restarts creation after the flood.",
+                tagline: "Righteous in corrupt generation",
+                summary: "In a generation where 'every inclination of the thoughts of the human heart was only evil all the time,' Noah stood out as a righteous man who walked faithfully with God. God grieved creating humanity and decided to wipe them out with a flood, but Noah found favor in God's eyes. God told Noah to build an enormous ark—450 feet long, 75 feet wide, 45 feet high—though no rain had ever fallen. For likely 100-120 years, Noah preached righteousness and built the ark while the world mocked. After the flood, God made a covenant never to flood the earth again, giving the rainbow as a sign."
+            },
+            {
+                name: "Abraham (Abram)",
+                date: "c. 2166-1991 BC",
+                scripture: "Genesis 11:26-25:10",
+                intro: "The father of faith, Abraham is called by God to leave everything familiar for an unknown land. His story establishes the pattern of God's covenant relationship with His people. Through Abraham, God promises to bless all nations, and Abraham's faith becomes the model for all who trust God's promises.",
+                tagline: "Father of faith",
+                summary: "Born in Ur of the Chaldeans as Abram, he was 75 years old when God called him to leave everything—family, country, comfort—for an unknown destination. God promised to make him into a great nation, bless him, and make his name great. Abram obeyed, taking his wife Sarai and nephew Lot to Canaan. God promised this land to his descendants, but Abram and Sarai were childless. At 99, God appeared again, changed his name to Abraham ('father of many'), and promised a son through Sarai (now Sarah) within a year. When Isaac was born, Abraham was 100. God tested Abraham's faith by asking him to sacrifice Isaac on Mount Moriah. Abraham obeyed, raising the knife before God provided a ram instead, confirming Abraham's complete trust."
+            },
+            {
+                name: "Sarah (Sarai)",
+                date: "c. 2156-2029 BC",
+                scripture: "Genesis 11:29-23:20",
+                intro: "Beautiful and barren, Sarah followed her husband Abraham from Ur to Canaan. Her story shows the struggle between doubt and faith, as she laughs at God's promise but then experiences the joy of the impossible becoming reality. Through her, the covenant line continues.",
+                tagline: "Wife of promise",
+                summary: "Beautiful and barren, Sarai followed her husband Abram from Ur to Canaan without knowing where they were going. Frustrated by childlessness, she gave her Egyptian servant Hagar to Abram, but this created household strife when Hagar conceived Ishmael. When God promised her a son at age 89, she laughed in disbelief—how could a worn-out woman have a baby? God asked 'Is anything too hard for the Lord?' At 90, Sarah bore Isaac and her laughter turned from doubt to joy. She died at 127 in Hebron, the only woman whose age at death is recorded in Scripture."
+            },
+            {
+                name: "Lot",
+                date: "c. 2100 BC",
+                scripture: "Genesis 11:27-19:38",
+                intro: "Abraham's nephew who traveled with him from Ur to Canaan. Lot's story demonstrates the danger of gradual compromise—choosing worldly comfort over godly separation. Though rescued by God's grace, his choices lead to devastating consequences for his family.",
+                tagline: "Abraham's nephew, compromiser",
+                summary: "Abram's nephew who traveled with him from Ur to Canaan. When their herdsmen quarreled over limited pasture, Abram generously let Lot choose where to settle. Lot chose the well-watered Jordan valley near Sodom, pitching his tents near the wicked city. He gradually moved into Sodom itself despite its evil reputation. When four kings attacked Sodom and took Lot captive, Abraham rescued him. God sent two angels to destroy Sodom and Gomorrah, but they rescued Lot because of Abraham's intercession. Lot's wife looked back and became a pillar of salt. Lot and his two daughters hid in a cave, where his daughters got him drunk and bore Moab and Ben-Ammi, fathers of nations that would trouble Israel."
+            },
+            {
+                name: "Melchizedek",
+                date: "c. 2000 BC",
+                scripture: "Genesis 14:18-20",
+                intro: "A mysterious priest-king of Salem who appears suddenly after Abraham's victory. He brings bread and wine and blesses Abraham, receiving tithes from him. Melchizedek serves as both king and priest, foreshadowing Christ's eternal priesthood.",
+                tagline: "Mysterious priest-king of Salem",
+                summary: "Melchizedek is one of the most mysterious and significant figures in Genesis. He appears suddenly in the narrative as 'king of Salem' (likely Jerusalem) and 'priest of God Most High' after Abraham's victory over the four kings who had captured Lot. This is remarkable because there was no formal priesthood yet, and Salem was a Canaanite city. Melchizedek brought out bread and wine—elements that would later have deep symbolic meaning. He blessed Abraham, saying 'Blessed be Abram by God Most High, Creator of heaven and earth.' Abraham recognized Melchizedek's spiritual authority and gave him a tenth of everything—a tithe. Melchizedek's name means 'king of righteousness,' and his title 'king of Salem' means 'king of peace.'"
+            },
+            {
+                name: "Hagar",
+                date: "c. 2100 BC",
+                scripture: "Genesis 16:1-16, 21:9-21",
+                intro: "Sarah's Egyptian servant who becomes the mother of Ishmael. Her story shows God's care for the marginalized and overlooked. When she flees to the wilderness, God sees her, speaks to her, and makes promises about her son. She names God 'El Roi'—the God who sees me.",
+                tagline: "Seen by God",
+                summary: "Sarah's Egyptian servant, possibly acquired during their time in Egypt. When Sarah couldn't conceive, she gave Hagar to Abraham as a wife. Once pregnant with Ishmael, Hagar grew proud and looked down on Sarah. Sarah mistreated her and Hagar fled to the wilderness. The Angel of the Lord found her by a spring and told her to return and submit—God had heard her misery and would make Ishmael into a great nation. She called God 'El Roi' (the God who sees me), amazed that God saw her suffering. Years later, when Isaac was weaned, Sarah demanded Hagar and Ishmael be sent away. God heard Ishmael crying in the wilderness and provided water, renewing His promise about Ishmael."
+            },
+            {
+                name: "Ishmael",
+                date: "c. 2080-1943 BC",
+                scripture: "Genesis 16:11-16, 17:18-27, 21:8-21, 25:9-18",
+                intro: "Abraham's first son, born to Hagar when Abraham was 86. Though blessed by God and promised to become a great nation, Ishmael is not the child of the covenant promise. His story shows God's faithfulness to bless even those outside the main covenant line.",
+                tagline: "First son but not covenant child",
+                summary: "Son of Abraham and Hagar, born when Abraham was 86 years old. His name means 'God hears' because God heard Hagar's affliction. The angel prophesied he would be 'a wild donkey of a man' whose hand would be against everyone. Abraham loved Ishmael and raised him for 13 years as his only son. When Isaac was born, tension grew. At Isaac's weaning feast, Ishmael (now a teenager) mocked, leading Sarah to demand their expulsion. Though Abraham was grieved, God assured him Ishmael would also become a great nation. After nearly dying of thirst in the wilderness, God provided and promised to make Ishmael into twelve princes. Ishmael grew up in the Desert of Paran, became an expert archer, and had twelve sons who became tribal rulers."
+            },
+            {
+                name: "Abimelech",
+                date: "c. 2000 BC",
+                scripture: "Genesis 20:1-18, 21:22-34, 26:1-33",
+                intro: "The king of Gerar who encounters both Abraham and Isaac. His story shows that even outside Israel, people could recognize and respond to God's truth. He represents a God-fearing pagan ruler who sought to do what was right.",
+                tagline: "King of Gerar",
+                summary: "Abimelech was the king of Gerar (likely a Philistine city). His name means 'my father is king' and may have been a royal title rather than a personal name. Abimelech appears in two significant encounters—one with Abraham and one with Isaac years later. When Abraham journeyed to Gerar, he told people Sarah was his sister. Abimelech took Sarah into his household, but God came to him in a dream, saying 'You are as good as dead because of the woman you have taken; she is a married woman.' Abimelech protested his innocence, and God acknowledged his integrity. He returned Sarah to Abraham and gave him gifts. Years later, when Isaac came to Gerar and repeated his father's deception, Abimelech discovered the truth and protected them, making a treaty recognizing God's blessing on Isaac."
+            },
+            {
+                name: "Isaac",
+                date: "c. 2066-1886 BC",
+                scripture: "Genesis 21:1-35:29",
+                intro: "The miracle son born to 100-year-old Abraham and 90-year-old Sarah. His name means 'laughter' because both parents laughed at God's promise. Isaac represents the quieter life of faith—not as dramatic as Abraham or Jacob, but faithful and blessed. He carries the covenant forward to the next generation.",
+                tagline: "Child of promise, peaceful",
+                summary: "The miracle son born to 100-year-old Abraham and 90-year-old Sarah. His name means 'laughter' because both parents laughed at God's promise. When weaned (about 3 years old), Abraham threw a great feast, but Ishmael's mocking led to Hagar and Ishmael's expulsion. As a young man, Abraham took Isaac to Mount Moriah to sacrifice him as God commanded. Isaac carried the wood for his own sacrifice, asking 'Where is the lamb?' He submitted to being bound on the altar, trusting his father and God. When Abraham raised the knife, God provided a ram, and Isaac's life became a picture of resurrection faith. At 40, Isaac married Rebekah, chosen by Abraham's servant through prayer. Isaac loved her deeply. He prayed for his barren wife for 20 years until she conceived twins. Isaac lived peacefully, growing rich through farming and herds. He died at 180, and both sons buried him beside Abraham in the cave of Machpelah."
+            },
+            {
+                name: "Rebekah",
+                date: "c. 2000-1850 BC",
+                scripture: "Genesis 24:1-67, 25:19-28, 27:1-28:5",
+                intro: "Granddaughter of Abraham's brother Nahor, Rebekah becomes Isaac's wife through a divinely orchestrated meeting at a well. Her story shows initiative, kindness, and servant-heartedness, but also the consequences of favoritism and manipulation when she helps Jacob steal Esau's blessing.",
+                tagline: "Decisive, prayerful mother",
+                summary: "Granddaughter of Abraham's brother Nahor, living in Mesopotamia. When Abraham's servant came seeking a wife for Isaac, Rebekah appeared at the well and fulfilled the exact sign the servant had prayed for—offering water to him and all his camels (a huge task). She showed initiative, kindness, and servant-heartedness. When asked if she'd go immediately to marry a man she'd never met, she boldly said 'I will go.' Isaac loved her at first sight and was comforted after his mother's death. Rebekah was barren for 20 years until Isaac prayed and she conceived twins who struggled in her womb. God told her 'Two nations are in your womb... the older will serve the younger.' She favored Jacob and when Isaac prepared to bless Esau, she masterminded an elaborate deception, helping Jacob steal the blessing. She never saw her beloved son Jacob again after he fled to Laban."
+            },
+            {
+                name: "Esau",
+                date: "c. 2006-1800 BC",
+                scripture: "Genesis 25:19-34, 27:1-45, 32:1-33:16, 36:1-43",
+                intro: "The firstborn twin, red and hairy at birth. Esau represents the worldly person who trades eternal value for temporary satisfaction. He sells his birthright for a meal, but later shows surprising capacity for forgiveness when he reconciles with Jacob.",
+                tagline: "Impulsive hunter",
+                summary: "The firstborn twin, red and hairy at birth. He became a skilled hunter and outdoorsman, Isaac's favorite because he brought him wild game. Esau was impulsive and lived for the moment. Returning famished from hunting, he sold his birthright to Jacob for a single meal of red lentil stew, showing he 'despised his birthright.' He married two Hittite women at 40, bringing grief to Isaac and Rebekah. When Jacob stole his blessing through deception, Esau wept bitterly and begged for a blessing too. Isaac gave him a lesser blessing: he'd live by the sword, serve his brother, but eventually break free. Esau hated Jacob and planned to kill him after Isaac died, forcing Jacob to flee. When Jacob returned after 20 years, Esau ran to meet him, embraced him, kissed him, and wept—he had forgiven and become prosperous with 400 men."
+            },
+            {
+                name: "Jacob",
+                date: "c. 2006-1859 BC",
+                scripture: "Genesis 25:19-50:13",
+                intro: "The grandson of Abraham, Jacob's name means 'deceiver' and his early life lives up to it. Through manipulation and trickery, he gains the birthright and blessing. But God transforms him through struggle and hardship, renaming him Israel. His story shows God's ability to work through flawed people and transform them into His purposes.",
+                tagline: "Deceiver transformed",
+                summary: "Born clutching his twin brother Esau's heel, his name means 'he grasps the heel' (figuratively, 'deceiver'). The younger twin, he was quieter and stayed among the tents while Esau hunted. When Esau came in famished, Jacob manipulated him into selling his birthright for a bowl of red stew. Years later, with Rebekah's help, he disguised himself as Esau and stole the blessing from his nearly-blind father Isaac. Esau vowed to kill him, so Jacob fled to his uncle Laban in Haran. On the journey, he had a dream of a stairway to heaven with angels ascending and descending—God renewed the covenant promises to him. Jacob worked seven years to marry Rachel but Laban tricked him, substituting Leah on the wedding night. He worked seven more years for Rachel. Through his wives and their servants, he had twelve sons and a daughter. After twenty years, God told him to return home. Jacob wrestled with God all night at the Jabbok River, refusing to let go until blessed. God renamed him Israel ('he struggles with God') and dislocated his hip. Jacob reconciled with Esau but settled separately."
+            },
+            {
+                name: "Laban",
+                date: "c. 2000 BC",
+                scripture: "Genesis 24:29-60, 29:1-31:55",
+                intro: "Rebekah's brother and Jacob's uncle and father-in-law. Laban is a master manipulator who deceives the deceiver—substituting Leah for Rachel and changing Jacob's wages ten times. His story shows how the world's deceptiveness and greed constantly try to take advantage, yet God protects His people.",
+                tagline: "Rebekah's brother, Jacob's uncle",
+                summary: "Laban was Rebekah's brother, son of Bethuel and grandson of Abraham's brother Nahor. He first appears when Abraham's servant came seeking a wife for Isaac—Laban ran to meet the servant and showed hospitality. Years later, when Jacob fled from Esau and came to Haran, Laban welcomed him as family. After Jacob worked for him a month, Laban asked what his wages should be. When Jacob offered to work seven years for Rachel, Laban agreed. But on the wedding night, Laban substituted Leah for Rachel—deceiving the deceiver. When Jacob confronted him, Laban said it wasn't their custom to give the younger before the older. Laban extracted another seven years of work for Rachel. Later, when Jacob wanted to leave and asked for wages, Laban kept changing his wages—ten times according to Jacob. But every time Laban changed the rules, God blessed Jacob anyway. When Jacob finally fled with his family after twenty years, Laban pursued him for seven days. God warned Laban in a dream not to harm Jacob. They made a covenant at Mizpah, setting up a pillar as a witness."
+            },
+            {
+                name: "Leah",
+                date: "c. 2000 BC",
+                scripture: "Genesis 29:16-35, 30:9-21, 31:4-16, 33:1-7, 35:23, 49:31",
+                intro: "Laban's older daughter with 'weak eyes,' substituted for Rachel on Jacob's wedding night. Though unloved by Jacob, Leah was seen and valued by God—He opened her womb while Rachel remained barren. Through her son Judah came King David and ultimately Jesus Christ. Her life reveals God's heart for the overlooked and rejected.",
+                tagline: "Unloved but seen by God",
+                summary: "Laban's older daughter with 'weak eyes' (likely meaning less beautiful than Rachel). On Jacob's wedding night, her father substituted her for Rachel in a deceptive scheme. Jacob worked seven years for Rachel but woke up married to Leah. Though custom required the older to marry first, the deception wounded Leah deeply. Jacob agreed to work seven more years for Rachel, but Leah was 'unloved.' God saw her pain and opened her womb while Rachel remained barren. Leah bore Reuben, Simeon, Levi, and Judah, each time hoping Jacob would love her. Despite six sons and a daughter (Dinah), Jacob never loved her as he loved Rachel. In desperation, she traded mandrakes with Rachel for a night with Jacob, bearing Issachar and Zebulun. Though unloved by Jacob, Leah was seen and valued by God—and through her son Judah came King David and ultimately Jesus Christ."
+            },
+            {
+                name: "Rachel",
+                date: "c. 2000-1850 BC",
+                scripture: "Genesis 29:6-30, 30:1-8, 30:22-24, 31:4-19, 33:1-7, 35:16-20, 48:7",
+                intro: "Laban's younger daughter, beautiful and dearly loved by Jacob. Her story shows that being most loved doesn't guarantee blessing—she struggled with barrenness and envy. She finally bore Joseph and Benjamin, but died giving birth to Benjamin. Her tomb became a memorial to Israel's sorrow.",
+                tagline: "Beloved but struggling",
+                summary: "Laban's younger daughter, beautiful and dearly loved by Jacob. When Jacob first saw her coming with her father's sheep, he rolled the stone from the well and watered her flock, then kissed her and wept aloud. Jacob worked seven years for her, and 'they seemed like only a few days because of his love for her.' After being deceived by her father's substitution of Leah, Jacob worked seven more years but married Rachel after the bridal week. Though Jacob's favorite, Rachel was barren while Leah bore son after son. She grew desperate and envious, demanding Jacob 'Give me children or I'll die!' She gave her servant Bilhah to Jacob, claiming Bilhah's sons as her own victory. Finally God remembered Rachel and opened her womb. She bore Joseph, saying 'God has taken away my disgrace.' Years later, pregnant again while traveling, she went into hard labor and died giving birth to Benjamin (though she named him Ben-Oni, 'son of my trouble'). Jacob buried Rachel near Bethlehem, setting up a pillar that remained for generations."
+            },
+            {
+                name: "Dinah",
+                date: "c. 1900 BC",
+                scripture: "Genesis 30:21, 34:1-31",
+                intro: "Jacob and Leah's daughter, the only daughter of Jacob mentioned by name in Genesis. Her story is tragic—violated by Shechem and then used as justification for her brothers' excessive vengeance. She represents the vulnerable and voiceless, caught between violation and violent revenge.",
+                tagline: "Jacob and Leah's daughter",
+                summary: "Dinah was the daughter of Jacob and Leah, born after Leah's six sons. She is the only daughter of Jacob mentioned by name in Genesis, though he likely had other daughters. When Jacob's family settled near Shechem in Canaan, Dinah went out to visit the women of the land—likely as a young teenager wanting to make friends. Shechem, the son of Hamor the Hivite (the ruler of that region), saw her, took her, and raped her. However, after violating her, Shechem's soul was drawn to Dinah. He loved her and spoke tenderly to her. He asked his father Hamor to get Dinah as his wife. Jacob's sons answered deceitfully because Shechem had defiled their sister. They said all the men of the city must be circumcised, then they would give Dinah in marriage. Three days later, while all the men were still in pain, Simeon and Levi (Dinah's full brothers) took their swords, attacked the unsuspecting city, and killed every male, including Hamor and Shechem. They rescued Dinah from Shechem's house."
+            },
+            {
+                name: "Reuben",
+                date: "c. 1900 BC",
+                scripture: "Genesis 29:32, 30:14, 35:22, 37:21-30, 42:22, 42:37, 49:3-4",
+                intro: "Jacob's firstborn son with Leah. As the firstborn, Reuben should have received the double portion and blessing of leadership. He showed some moral courage when trying to save Joseph, but lost everything through sin with his father's concubine Bilhah.",
+                tagline: "Jacob's firstborn",
+                summary: "Reuben was the firstborn son of Jacob and Leah, conceived when God saw that Leah was unloved and opened her womb. Leah named him Reuben saying 'The Lord has seen my misery; surely my husband will love me now.' As the firstborn, Reuben should have received the double portion and the blessing of leadership. He showed some moral courage when his brothers plotted to kill Joseph—Reuben suggested throwing Joseph into a cistern instead, planning to rescue him later and return him to their father. However, Reuben committed a terrible sin. While Israel camped near Migdal Eder, Reuben slept with Bilhah, his father's concubine (Rachel's servant and mother of Dan and Naphtali). Israel heard about it, and though the text simply says 'Israel heard of it,' this sin would cost Reuben everything. Years later, on his deathbed, Jacob condemned Reuben: 'Reuben, you are my firstborn, my might, the first sign of my strength, excelling in honor, excelling in power. Turbulent as the waters, you will no longer excel, for you went up onto your father's bed, onto my couch and defiled it.' Reuben lost the birthright—the double portion went to Joseph's sons, the leadership went to Judah."
+            },
+            {
+                name: "Simeon",
+                date: "c. 1900 BC",
+                scripture: "Genesis 29:33, 34:25-31, 42:24, 42:36, 43:23, 49:5-7",
+                intro: "Jacob's second son with Leah. Simeon is most known for his violent actions at Shechem, where he and Levi massacred all the men of the city after Dinah was violated. This violence cost him his father's blessing and his tribe was scattered in Israel.",
+                tagline: "Violent, led massacre at Shechem",
+                summary: "Simeon was the second son of Jacob and Leah. Leah named him Simeon (meaning 'one who hears') saying 'Because the Lord heard that I am not loved, he gave me this one too.' Simeon is most known for his violent actions. When his sister Dinah was raped by Shechem, Simeon and his full brother Levi were filled with rage. They deceived the men of Shechem, requiring them all to be circumcised before agreeing to any marriage arrangement. Three days later, while the men were still in pain from circumcision, Simeon and Levi took their swords, attacked the unsuspecting city, and killed every male including Hamor and Shechem. They rescued Dinah from Shechem's house, and their other brothers plundered the city. Jacob was horrified, fearing retaliation, but Simeon and Levi responded, 'Should he have treated our sister like a prostitute?' Years later, when Joseph's brothers came to Egypt to buy grain, Joseph (whom they didn't recognize) kept Simeon as a hostage while the others returned to get Benjamin. On Jacob's deathbed, he cursed Simeon and Levi together: 'Cursed be their anger, so fierce, and their fury, so cruel! I will scatter them in Jacob and disperse them in Israel.'"
+            },
+            {
+                name: "Levi",
+                date: "c. 1900 BC",
+                scripture: "Genesis 29:34, 34:25-31, 49:5-7",
+                intro: "Jacob's third son with Leah. Like his brother Simeon, Levi is known for violence at Shechem. However, Levi's story took a dramatically different turn—generations later, the Levites stood with Moses at Mount Sinai, and God chose the tribe of Levi to be His priests, showing how God can redeem even fierce anger when surrendered to Him.",
+                tagline: "Violent at Shechem, but tribe became priests",
+                summary: "Levi was the third son of Jacob and Leah. Leah named him Levi (meaning 'attached') saying 'Now at last my husband will become attached to me, because I have borne him three sons.' Like his brother Simeon, Levi is known for violence against Shechem after their sister Dinah was raped. Simeon and Levi together planned and executed the massacre of all the men of Shechem while they were recovering from circumcision. They killed Hamor and Shechem, rescued Dinah, and their brothers plundered the city. This violence brought Jacob's rebuke and later his deathbed curse. However, Levi's story took a dramatically different turn than Simeon's. Generations later, during the golden calf incident at Mount Sinai, the Levites stood with Moses for the Lord when he called out 'Whoever is for the Lord, come to me!' The Levites executed judgment on the idolaters, showing the same fierce zeal but now channeled for God's purposes rather than personal revenge. Because of their faithfulness, God chose the tribe of Levi to be His priests and servants in the tabernacle and temple. Moses and Aaron came from Levi's line."
+            },
+            {
+                name: "Judah",
+                date: "c. 1900 BC",
+                scripture: "Genesis 29:35, 37:26-28, 38:1-30, 43:3-10, 44:14-34, 46:28, 49:8-12",
+                intro: "The fourth son of Jacob and Leah, Judah suggested selling Joseph to merchants rather than killing him—marginally better but still betrayal. However, his story shows remarkable transformation. When tested in Egypt, he offers himself as a substitute for Benjamin, showing complete change from the man who sold his brother. Through Judah comes the royal line and ultimately the Messiah.",
+                tagline: "Transformed brother",
+                summary: "Fourth son of Jacob and Leah, Judah suggested selling Joseph to merchants rather than killing him—marginally better but still betrayal. He left his brothers and married a Canaanite woman who bore three sons: Er, Onan, and Shelah. Er married Tamar but was wicked and God killed him. Onan refused to give Tamar children for his brother and God killed him too. Judah promised Tamar his youngest son Shelah when he grew up but didn't keep his word. Tamar disguised herself as a prostitute and Judah slept with her, leaving his seal and staff as pledge. When told Tamar was pregnant through prostitution, Judah ordered her burned—until she produced his seal and staff. He admitted 'She is more righteous than I.' She bore twins Perez and Zerah (Perez became an ancestor of David and Jesus). When famine struck, Judah convinced Jacob to let Benjamin go to Egypt, pledging his own life as guarantee. When Joseph's cup was found in Benjamin's sack and Joseph demanded Benjamin as a slave, Judah gave an impassioned speech offering himself as substitute, showing complete transformation from the man who sold his brother. This broke Joseph's heart and led to reconciliation. Jacob's blessing prophesied the scepter would not depart from Judah—kings and the Messiah would come from his line."
+            },
+            {
+                name: "Dan",
+                date: "c. 1900 BC",
+                scripture: "Genesis 30:6, 35:25, 46:23, 49:16-18",
+                intro: "The first son born to Bilhah, Rachel's servant. When Dan was born, Rachel said 'God has vindicated me' and named him Dan, which means 'he has judged' or 'he has vindicated.' Jacob's blessing predicted Dan would provide justice for his people but also be like a snake that causes stumbling.",
+                tagline: "Son of Jacob and Bilhah",
+                summary: "Dan was the first son born to Bilhah, Rachel's servant, whom Rachel gave to Jacob when she was desperate for children. When Dan was born, Rachel said 'God has vindicated me; he has listened to my plea and given me a son.' She named him Dan, which means 'he has judged' or 'he has vindicated.' Rachel claimed Dan as her own victory in the sister rivalry with Leah. Years later, when Jacob blessed his sons before dying, he gave Dan a notable prophecy: 'Dan will provide justice for his people as one of the tribes of Israel. Dan will be a snake by the roadside, a viper along the path, that bites the horse's heels so that its rider tumbles backward.' The tribe of Dan did produce Samson, one of Israel's judges who delivered Israel from the Philistines. However, Dan's tribe also led Israel into idolatry—they set up carved images and alternative worship centers, becoming 'a snake' that caused Israel to stumble spiritually."
+            },
+            {
+                name: "Naphtali",
+                date: "c. 1900 BC",
+                scripture: "Genesis 30:8, 35:25, 46:24, 49:21",
+                intro: "The second son born to Bilhah, Rachel's servant. When Naphtali was born, Rachel said 'I have had a great struggle with my sister, and I have won.' She named him Naphtali, which means 'my struggle' or 'my wrestling.' His very name reflects the intense sister rivalry between Rachel and Leah.",
+                tagline: "Son of Jacob and Bilhah",
+                summary: "Naphtali was the second son born to Bilhah, Rachel's servant. When Naphtali was born, Rachel said 'I have had a great struggle with my sister, and I have won.' She named him Naphtali, which means 'my struggle' or 'my wrestling.' His very name reflects the intense sister rivalry between Rachel and Leah—Rachel saw each child born to Bilhah as a victory in her competition with Leah. Years later, when Jacob blessed his sons before dying, he gave Naphtali a beautiful but brief prophecy: 'Naphtali is a doe set free that bears beautiful fawns.' This poetic blessing suggests freedom, grace, beauty, and eloquence. The tribe of Naphtali received beautiful, fertile territory in northern Israel by the Sea of Galilee. This region later became important in Jesus' ministry—much of His teaching and miracles occurred in the territory of Naphtali."
+            },
+            {
+                name: "Gad",
+                date: "c. 1900 BC",
+                scripture: "Genesis 30:11, 35:26, 46:16, 49:19",
+                intro: "The first son born to Zilpah, Leah's servant. When Gad was born, Leah said 'What good fortune!' (or 'A troop comes!') and named him Gad, which means 'good fortune' or 'troop.' Jacob's blessing predicted Gad would face constant attacks but would ultimately prevail.",
+                tagline: "Son of Jacob and Zilpah",
+                summary: "Gad was the first son born to Zilpah, Leah's servant, whom Leah gave to Jacob when she stopped having children herself. When Gad was born, Leah said 'What good fortune!' (or 'A troop comes!') and named him Gad, which means 'good fortune' or 'troop.' Leah gave Zilpah to Jacob to continue building her family and maintain her position in competition with Rachel. Years later, when Jacob blessed his sons before dying, he gave Gad a prophecy that played on his name: 'Gad will be attacked by a band of raiders, but he will attack them at their heels.' This prediction suggested Gad's tribe would face constant attacks but would ultimately prevail. The prophecy proved accurate—the tribe of Gad settled east of the Jordan River in territory exposed to raiders from the desert, and they became fierce warriors who defended the border."
+            },
+            {
+                name: "Asher",
+                date: "c. 1900 BC",
+                scripture: "Genesis 30:13, 35:26, 46:17, 49:20",
+                intro: "The second son born to Zilpah, Leah's servant. When Asher was born, Leah said 'How happy I am! The women will call me happy.' She named him Asher, which means 'happy' or 'blessed.' Jacob's blessing focused on prosperity and provision for Asher's tribe.",
+                tagline: "Son of Jacob and Zilpah",
+                summary: "Asher was the second son born to Zilpah, Leah's servant. When Asher was born, Leah said 'How happy I am! The women will call me happy.' She named him Asher, which means 'happy' or 'blessed.' Even through her servant, Leah found joy in adding to her family and saw it as a sign of her own blessed status. Years later, when Jacob blessed his sons before dying, he gave Asher a blessing focused on prosperity and provision: 'Asher's food will be rich; he will provide delicacies fit for a king.' This prophecy predicted agricultural abundance and prosperity for Asher's tribe. The tribe of Asher received fertile coastal territory in northern Israel along the Mediterranean, known for olive groves and agricultural richness. True to the prophecies, Asher's territory produced abundant olive oil and agricultural delicacies."
+            },
+            {
+                name: "Issachar",
+                date: "c. 1900 BC",
+                scripture: "Genesis 30:18, 35:23, 46:13, 49:14-15",
+                intro: "Leah's fifth son, born after a bizarre incident involving mandrakes and a trade for time with Jacob. His name means 'reward' or 'wages,' but also sounds like 'hired man' in Hebrew. Jacob's blessing predicted Issachar would be strong workers who valued their good land.",
+                tagline: "Son of Jacob and Leah",
+                summary: "Issachar was Leah's fifth son, born after a bizarre incident involving mandrakes and a trade for time with Jacob. During wheat harvest, Leah's son Reuben found mandrake plants (believed to aid fertility) and brought them to his mother. Rachel desperately wanted them, and Leah bitterly responded 'Wasn't it enough that you took away my husband? Will you take my son's mandrakes too?' Rachel offered to let Jacob sleep with Leah that night in exchange for the mandrakes. From that humiliating transaction, Leah conceived Issachar. She named him Issachar, saying 'God has rewarded me for giving my servant to my husband.' The name means 'reward' or 'wages,' but it's also a wordplay suggesting 'hired man.' Years later, Jacob's blessing for Issachar reflected this: 'Issachar is a rawboned donkey lying down among the sheep pens. When he sees how good is his resting place and how pleasant is his land, he will bend his shoulder to the burden and submit to forced labor.' The tribe of Issachar received fertile land in the Jezreel Valley and became known as strong, dependable workers and also for their wisdom in understanding the times."
+            },
+            {
+                name: "Zebulun",
+                date: "c. 1900 BC",
+                scripture: "Genesis 30:20, 35:23, 46:14, 49:13",
+                intro: "Leah's sixth and final son. After bearing Issachar, Leah conceived again and gave birth to a sixth son. She said 'God has presented me with a precious gift. This time my husband will treat me with honor, because I have borne him six sons.' She named him Zebulun, which means 'honor' or 'dwelling.'",
+                tagline: "Son of Jacob and Leah",
+                summary: "Zebulun was Leah's sixth and final son. After bearing Issachar, Leah conceived again and gave birth to a sixth son. She said 'God has presented me with a precious gift. This time my husband will treat me with honor, because I have borne him six sons.' She named him Zebulun, which means 'honor' or 'dwelling.' Even after bearing six sons, Leah still hoped that Jacob would finally honor her and dwell with her, showing her desperate desire for her husband's love. Years later, when Jacob blessed his sons before dying, he gave Zebulun a prophecy about maritime location and prosperity: 'Zebulun will live by the seashore and become a haven for ships; his border will extend toward Sidon.' This predicted that Zebulun's tribe would settle near the sea and engage in maritime trade. The tribe of Zebulun received territory in lower Galilee, near (though not directly on) the Mediterranean coast and the Sea of Galilee. They benefited from trade routes and maritime commerce."
+            },
+            {
+                name: "Benjamin",
+                date: "c. 1800 BC",
+                scripture: "Genesis 35:16-18, 42:4, 42:36, 43:14-16, 43:29, 44:12, 45:12, 46:19, 49:27",
+                intro: "Jacob's twelfth and youngest son, and Rachel's second son born after many years. Rachel had longed for another child after Joseph, and God finally granted her request. But the birth was tragic—Rachel died giving birth to him. Benjamin became Jacob's most treasured son after Joseph disappeared.",
+                tagline: "Jacob's youngest son, Rachel's second",
+                summary: "Benjamin was the twelfth and youngest son of Jacob, and Rachel's second son born after many years. Rachel had longed for another child after Joseph, and God finally granted her request. But the birth was tragic. As they traveled from Bethel, Rachel went into labor and had great difficulty. As she labored in severe pain, the midwife said 'Don't despair, for you have another son.' But Rachel was dying. With her last breath, she named him Ben-Oni, meaning 'son of my trouble' or 'son of my sorrow.' But Jacob refused to let his beloved son carry a name associated with his mother's death, so he renamed him Benjamin, meaning 'son of my right hand' or 'son of the south.' Rachel died and was buried on the road to Bethlehem. Benjamin grew up as the youngest, and after Joseph disappeared, he became Jacob's most treasured son—the only remaining son of his beloved Rachel. When famine struck and the brothers needed to return to Egypt with Benjamin, Jacob initially refused, saying 'His brother is dead and he is the only one left. If harm comes to him...you will bring my gray head down to the grave in sorrow.' Only Judah's personal guarantee finally persuaded Jacob. Jacob's blessing for Benjamin was fierce: 'Benjamin is a ravenous wolf; in the morning he devours the prey, in the evening he divides the plunder.'"
+            },
+            {
+                name: "Bilhah",
+                date: "c. 1900 BC",
+                scripture: "Genesis 29:29, 30:3-8, 35:22, 35:25, 37:2",
+                intro: "Rachel's servant, given to her by Laban when Rachel married Jacob. When Rachel remained barren while Leah bore son after son, Rachel gave Bilhah to Jacob as a wife, following the custom that allowed barren wives to use surrogate mothers. Bilhah bore Jacob two sons: Dan and Naphtali.",
+                tagline: "Rachel's servant",
+                summary: "Bilhah was Rachel's servant, given to her by Laban when Rachel married Jacob. When Rachel remained barren while Leah bore son after son, Rachel gave Bilhah to Jacob as a wife, following the custom that allowed barren wives to use surrogate mothers. Bilhah bore Jacob two sons: Dan and Naphtali. Rachel claimed these children as her own victory in the sister rivalry with Leah. Later, while Israel camped near Migdal Eder, Reuben slept with Bilhah, his father's concubine, which cost Reuben the birthright blessing."
+            },
+            {
+                name: "Zilpah",
+                date: "c. 1900 BC",
+                scripture: "Genesis 29:24, 30:9-13, 35:26, 37:2",
+                intro: "Leah's servant, given to her by Laban when Leah married Jacob. When Leah stopped having children after bearing four sons, she gave Zilpah to Jacob as a wife to continue building her family and maintain her position in competition with Rachel. Zilpah bore Jacob two sons: Gad and Asher.",
+                tagline: "Leah's servant",
+                summary: "Zilpah was Leah's servant, given to her by Laban when Leah married Jacob. When Leah stopped having children after bearing four sons, she gave Zilpah to Jacob as a wife to continue building her family and maintain her position in competition with Rachel. Zilpah bore Jacob two sons: Gad and Asher. This continued the pattern of using servant wives to build families in competition between the sisters."
+            },
+            {
+                name: "Joseph",
+                date: "c. 1915-1805 BC",
+                scripture: "Genesis 30:22-24, 37:1-50:26",
+                intro: "The favorite son of Jacob, Joseph's story spans the final chapters of Genesis. Sold into slavery by his jealous brothers, he rises to become second-in-command of Egypt through God's blessing. His story demonstrates God's sovereignty—using evil intentions for good purposes—and the power of forgiveness. Through Joseph, God preserves the family of Israel during famine.",
+                tagline: "Faithful in suffering",
+                summary: "Born to Jacob and Rachel after years of barrenness, Joseph was Jacob's eleventh son but Rachel's firstborn. Jacob loved him more than his other sons and made him an ornate robe, stirring his brothers' hatred. At 17, Joseph had dreams showing his family bowing to him. He naively shared these, deepening his brothers' jealousy. When Jacob sent Joseph to check on his brothers tending flocks, they plotted to kill him. Reuben saved his life, and they sold him to Midianite merchants for twenty shekels of silver. In Egypt, Joseph was sold to Potiphar, captain of Pharaoh's guard. God blessed everything Joseph did, and Potiphar promoted him to oversee his household. Potiphar's wife falsely accused him, and Joseph was imprisoned but God gave him favor with the warden. He interpreted dreams for Pharaoh's cupbearer and baker—the cupbearer was restored but forgot Joseph for two years. When Pharaoh had troubling dreams, the cupbearer finally remembered Joseph. At 30, Joseph interpreted Pharaoh's dreams (seven years of abundance, seven of famine) and was made second-in-command over Egypt. He stored grain during abundance and sold it during famine. His brothers came to buy grain, bowing before him without recognition. Through elaborate tests, Joseph revealed himself, wept loudly, and forgave them: 'You intended to harm me, but God intended it for good to accomplish what is now being done, the saving of many lives.'"
+            },
+            {
+                name: "Tamar",
+                date: "c. 1900 BC",
+                scripture: "Genesis 38:1-30",
+                intro: "Judah's daughter-in-law, married first to Er, Judah's firstborn son. When both Er and Onan died, Judah promised Tamar his youngest son Shelah but didn't keep his word. Tamar took matters into her own hands, disguising herself and tricking Judah into fathering her children. Through her son Perez came the line of David and ultimately Jesus.",
+                tagline: "Judah's daughter-in-law",
+                summary: "Tamar was Judah's daughter-in-law, married first to Er, Judah's firstborn son. When Er was wicked and God killed him, Judah commanded his second son Onan to fulfill the levirate duty and give Tamar children. But Onan refused and God killed him too. Judah promised Tamar his youngest son Shelah when he grew up but didn't keep his word. Tamar disguised herself as a prostitute and Judah slept with her, leaving his seal and staff as pledge. When told Tamar was pregnant through prostitution, Judah ordered her burned—until she produced his seal and staff. He admitted 'She is more righteous than I.' She bore twins Perez and Zerah. Perez became an ancestor of King David and ultimately Jesus Christ. Tamar's story shows determination and the importance of preserving family lines, even through unconventional means."
+            },
+            {
+                name: "Potiphar",
+                date: "c. 1800 BC",
+                scripture: "Genesis 37:36, 39:1-20",
+                intro: "An Egyptian official, the captain of Pharaoh's guard. He purchased Joseph as a slave from the Midianite merchants. Potiphar recognized that the Lord was with Joseph and gave him success in everything he did, so he put Joseph in charge of his entire household.",
+                tagline: "Egyptian official who owned Joseph",
+                summary: "Potiphar was an Egyptian official, the captain of Pharaoh's guard. He purchased Joseph as a slave from the Midianite merchants who had bought him from his brothers. Potiphar recognized that the Lord was with Joseph and gave him success in everything he did, so he put Joseph in charge of his entire household and entrusts to his care everything he owns. From the time Potiphar put him in charge, the Lord blessed the household because of Joseph. The blessing of the Lord is on everything Potiphar has, both in the house and in the field. Potiphar leaves everything in Joseph's care and doesn't concern himself with anything except the food he eats."
+            },
+            {
+                name: "Potiphar's Wife",
+                date: "c. 1800 BC",
+                scripture: "Genesis 39:7-20",
+                intro: "Potiphar's wife noticed that Joseph was well-built and handsome. After a while, she began to make advances toward him daily, but Joseph refused, saying 'How then could I do such a wicked thing and sin against God?' When he fled from her, she falsely accused him of assault, leading to Joseph's imprisonment.",
+                tagline: "Falsely accused Joseph",
+                summary: "Potiphar's wife noticed that Joseph was well-built and handsome. After a while, she began to make advances toward him, saying 'Come to bed with me!' But Joseph refused, saying 'My master has withheld nothing from me except you, because you are his wife. How then could I do such a wicked thing and sin against God?' Though she spoke to Joseph day after day, he refused to go to bed with her or even be with her. One day Joseph goes into the house to attend to his duties, and none of the household servants is inside. Potiphar's wife catches him by his cloak and says 'Come to bed with me!' But Joseph leaves his cloak in her hand and runs out of the house. When she sees he has left his cloak and has run out, she calls her household servants and says 'This Hebrew has been brought to us to make sport of us! He came in here to sleep with me, but I screamed. When he heard me scream, he left his cloak beside me and ran out of the house.' She keeps Joseph's cloak until Potiphar comes home and tells him the same story. Potiphar takes Joseph and puts him in prison."
+            },
+            {
+                name: "Pharaoh",
+                date: "c. 1800 BC",
+                scripture: "Genesis 40:1-41:57, 47:1-31",
+                intro: "The king of Egypt during Joseph's time. Pharaoh had troubling dreams that none of his magicians or wise men could interpret. When the cupbearer finally remembered Joseph, Pharaoh sent for him. Joseph interpreted the dreams and was made second-in-command over Egypt.",
+                tagline: "King of Egypt during Joseph's time",
+                summary: "The Pharaoh during Joseph's time in Egypt had troubling dreams that none of his magicians or wise men could interpret. In one dream, seven sleek, fat cows are eaten by seven ugly, gaunt cows. In the other, seven good heads of grain are swallowed up by seven thin, scorched heads. When the cupbearer finally remembered Joseph, Pharaoh sent for him. Joseph interpreted the dreams, explaining that seven years of abundance would be followed by seven years of severe famine. Joseph advised Pharaoh to store grain during the abundance. The plan seems good to Pharaoh and all his officials. Pharaoh asks them 'Can we find anyone like this man, one in whom is the spirit of God?' Pharaoh says to Joseph 'Since God has made all this known to you, there is no one so discerning and wise as you. You shall be in charge of my palace, and all my people are to submit to your orders. Only with respect to the throne will I be greater than you.' Pharaoh takes his signet ring from his finger and puts it on Joseph's finger. He dresses him in robes of fine linen and puts a gold chain around his neck. He has Joseph ride in a chariot as his second-in-command."
+            },
+            {
+                name: "Cupbearer and Baker",
+                date: "c. 1800 BC",
+                scripture: "Genesis 40:1-23",
+                intro: "Pharaoh's cupbearer and baker offended the king and were imprisoned where Joseph was confined. Both men had dreams on the same night, each with its own meaning. Joseph interpreted their dreams: the cupbearer would be restored to his position in three days, but the baker would be executed in three days. Everything happened exactly as Joseph predicted.",
+                tagline: "Had dreams Joseph interpreted",
+                summary: "Pharaoh's cupbearer and baker offended the king and were imprisoned where Joseph was confined. The captain of the guard assigns Joseph to them. After they've been in custody for some time, both men have dreams on the same night, each with its own meaning. Joseph interprets their dreams: the cupbearer's dream of a vine with three branches means he will be restored to his position in three days. The baker's dream of three baskets of bread means he will be executed in three days. Joseph asks the cupbearer to remember him when he's restored, but the cupbearer forgets Joseph for two years. Three days later, on Pharaoh's birthday, everything happens as Joseph predicted. The cupbearer is restored, the baker is executed. When Pharaoh has troubling dreams two years later, the cupbearer finally remembers Joseph and tells Pharaoh about him."
+            },
+            {
+                name: "Asenath",
+                date: "c. 1800 BC",
+                scripture: "Genesis 41:45, 41:50, 46:20",
+                intro: "The daughter of Potiphera, priest of On (Heliopolis). Pharaoh gave her to Joseph as his wife after making him second-in-command over Egypt. She bore Joseph two sons: Manasseh and Ephraim. Through these sons, Joseph received a double portion of Jacob's inheritance when Jacob adopted them as his own sons.",
+                tagline: "Joseph's Egyptian wife",
+                summary: "Asenath was the daughter of Potiphera, priest of On (Heliopolis). Pharaoh gave her to Joseph as his wife after making him second-in-command over Egypt. She bore Joseph two sons: Manasseh and Ephraim. Through these sons, Joseph received a double portion of Jacob's inheritance when Jacob adopted them as his own sons. Manasseh means 'God has made me forget all my trouble and all my father's household.' Ephraim means 'God has made me fruitful in the land of my suffering.'"
+            },
+            {
+                name: "Ephraim and Manasseh",
+                date: "c. 1800 BC",
+                scripture: "Genesis 41:50-52, 46:20, 48:1-22",
+                intro: "Joseph's two sons born to him and Asenath in Egypt. When Jacob was dying in Egypt, Joseph brought his two sons to receive Jacob's blessing. Jacob adopted them as his own sons, giving Joseph a double portion of the inheritance. Though Joseph tried to position Manasseh (the firstborn) for the greater blessing, Jacob crossed his hands and blessed Ephraim (the younger) more greatly.",
+                tagline: "Joseph's sons, adopted by Jacob",
+                summary: "Ephraim and Manasseh were the two sons born to Joseph and Asenath in Egypt. When Jacob was dying in Egypt, Joseph brought his two sons to receive Jacob's blessing. Jacob adopted them as his own sons, giving Joseph a double portion of the inheritance. Though Joseph tried to position Manasseh (the firstborn) for the greater blessing, Jacob crossed his hands and blessed Ephraim (the younger) more greatly, prophesying that he would be greater. This continues God's pattern of choosing the younger over the older. Both sons became full tribes of Israel, with Ephraim becoming the dominant northern tribe."
+            }
+        ];
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainCharacters.forEach((character, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${character.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${character.date}</div>
+                        ${character.scripture ? `<div class="character-scripture">${character.scripture}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${character.intro}</div>
+                    <div class="character-tagline">${character.tagline}</div>
+                    <div class="character-summary">${character.summary}</div>
+                    <button class="audio-btn">Listen to Story</button>
+                `;
+
+                content.addEventListener('click', (e) => {
+                    // Don't toggle if clicking the audio button
+                    if (!e.target.classList.contains('audio-btn')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                // Add audio button functionality
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (British English, male)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer British English voices (Jarvis is British)
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            // Try to find a British voice first
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            // Fallback to any English male voice
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        // Wait for voices to load
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        // Initialize voice
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Play audio function
+        function playAudio(button, text) {
+            
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9; // Slightly slower, more deliberate
+            currentUtterance.pitch = 0.8; // Slightly lower pitch
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB'; // British English
+
+            // Update button state
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize
+        renderTimeline();
+    </script>
+</body>
+</html>
