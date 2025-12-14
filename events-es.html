@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Línea de Tiempo de Génesis - Eventos Principales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .lang-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .lang-btn {
+            padding: 8px 20px;
+            background: rgba(0, 195, 255, 0.15);
+            border: 1px solid rgba(0, 195, 255, 0.4);
+            color: #88d0ff;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.85em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .lang-btn:hover {
+            background: rgba(0, 195, 255, 0.25);
+            border-color: rgba(0, 195, 255, 0.6);
+        }
+
+        .lang-btn.active {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.7);
+            color: #00c3ff;
+        }
+
+        .nav-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .nav-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .lang-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lang-buttons">
+            <a href="events.html" class="lang-btn">English</a>
+            <a href="events-es.html" class="lang-btn active">Español</a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index-es.html" class="nav-btn">Personajes</a>
+            <a href="events-es.html" class="nav-btn active">Eventos</a>
+        </div>
+
+        <header>
+            <h1>📖 Eventos de Génesis</h1>
+            <p class="subtitle">Eventos Principales en Orden Cronológico</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in chronological order
+        const mainEvents = [
+            {
+                name: "La Creación",
+                date: "c. 4000 a.C.",
+                scripture: "Génesis 1:1-2:3",
+                intro: "El evento fundamental de Génesis y toda la Escritura. Dios habla el universo a la existencia en seis días, creando luz, cielo, tierra, plantas, sol y luna, criaturas marinas y aves, animales terrestres, y finalmente humanos a Su imagen. En el séptimo día, Dios descansa, estableciendo el patrón del descanso del Sábado.",
+                tagline: "En el principio, Dios creó",
+                summary: "En el principio, Dios creó los cielos y la tierra. La tierra estaba sin forma y vacía, las tinieblas cubrían la superficie del abismo, y el Espíritu de Dios se movía sobre las aguas. En el día uno, Dios dijo 'Sea la luz' y separó la luz de las tinieblas. Día dos, separó las aguas para crear el cielo. Día tres, reunió las aguas para formar mares y tierra seca, luego creó la vegetación. Día cuatro, creó el sol, la luna y las estrellas para marcar las estaciones y los días. Día cinco, creó las criaturas marinas y las aves. Día seis, creó los animales terrestres, luego creó humanos—varón y hembra—a Su propia imagen, dándoles dominio sobre la creación. Dios vio todo lo que había hecho y lo declaró 'muy bueno.' En el séptimo día, Dios descansó de toda Su obra, bendiciéndolo y santificándolo—estableciendo el patrón del Sábado."
+            },
+            {
+                name: "La Caída",
+                date: "c. 4000 a.C.",
+                scripture: "Génesis 3:1-24",
+                intro: "El momento en que el pecado entra al mundo. La serpiente tienta a Eva, quien come del fruto prohibido y se lo da a Adán. Sus ojos se abren a la vergüenza, se esconden de Dios y enfrentan consecuencias. Sin embargo, incluso en el juicio, Dios muestra misericordia y promete un futuro redentor.",
+                tagline: "El pecado entra al mundo",
+                summary: "La serpiente, más astuta que cualquier otro animal, cuestionó el mandamiento de Dios, preguntando a Eva '¿Conque Dios les ha dicho que no coman de ningún árbol del jardín?' Eva respondió que podían comer de cualquier árbol excepto del árbol del conocimiento del bien y del mal, o morirían. La serpiente contradijo a Dios, diciendo '¡No es cierto, no van a morir! Dios sabe muy bien que cuando ustedes coman de ese árbol, se les abrirán los ojos y serán como Dios, conocedores del bien y del mal.' Eva vio que el fruto era bueno para comer, agradable a los ojos y deseable para alcanzar sabiduría. Tomó y comió, luego le dio a Adán que estaba con ella, y él comió. Inmediatamente se les abrieron los ojos, se dieron cuenta de que estaban desnudos, y cosieron hojas de higuera para cubrirse. Cuando oyeron a Dios caminando en el jardín, se escondieron. Dios llamó '¿Dónde estás?' Adán admitió que tenía miedo porque estaba desnudo. Dios preguntó '¿Quién te dijo que estabas desnudo? ¿Acaso has comido del árbol del que te prohibí comer?' Adán culpó a Eva, Eva culpó a la serpiente. Dios pronunció consecuencias: la serpiente se arrastraría sobre su vientre, enemistad entre la serpiente y la descendencia de la mujer, dolor en el parto para las mujeres, trabajo y espinos para los hombres, y muerte. Pero Dios también hizo túnicas de piel para ellos y prometió que la descendencia de la mujer aplastaría la cabeza de la serpiente—la primera promesa de redención."
+            },
+            {
+                name: "Caín y Abel",
+                date: "c. 4000 a.C.",
+                scripture: "Génesis 4:1-16",
+                intro: "El primer acto de adoración y el primer asesinato. Dos hermanos traen ofrendas a Dios—la de Abel es aceptada, la de Caín no. Los celos llevan a Caín a asesinar a su hermano, mostrando cómo el pecado se intensifica. Dios confronta a Caín con justicia y misericordia.",
+                tagline: "Primera adoración, primer asesinato",
+                summary: "Adán y Eva tuvieron dos hijos. Caín trabajaba la tierra, Abel cuidaba rebaños. Con el tiempo, Caín trajo algunos frutos de la tierra como ofrenda al Señor. Abel trajo las mejores porciones de los primogénitos de su rebaño. El Señor miró con agrado a Abel y su ofrenda, pero a Caín y su ofrenda no miró con agrado. Caín se enojó mucho y su rostro se descompuso. El Señor le dijo a Caín '¿Por qué estás enojado? ¿Por qué tienes el rostro descompuesto? Si hicieras lo bueno, ¿no serías aceptado? Pero si no haces lo bueno, el pecado está a la puerta; te acecha, pero tú debes dominarlo.' En lugar de arrepentirse, Caín invitó a Abel a salir al campo, donde lo atacó y lo mató. El Señor preguntó a Caín '¿Dónde está tu hermano Abel?' Caín respondió 'No lo sé. ¿Acaso soy yo el guardián de mi hermano?' Dios dijo '¿Qué has hecho? ¡Escucha! La sangre de tu hermano clama a mí desde la tierra.' Dios maldijo a Caín desde la tierra y lo hizo un errante inquieto. Caín temía que alguien lo matara, pero Dios puso una marca en él para que nadie lo matara. Caín salió de la presencia del Señor y vivió en la tierra de Nod, al este del Edén."
+            },
+            {
+                name: "El Diluvio",
+                date: "c. 2348 a.C.",
+                scripture: "Génesis 6:1-9:17",
+                intro: "El juicio de Dios sobre un mundo corrupto y Su preservación de un remanente. Noé construye un arca, el diluvio cubre la tierra, y Dios hace el primer pacto con la humanidad, prometiendo nunca más inundar la tierra y dando el arcoíris como señal.",
+                tagline: "Juicio y nuevo comienzo",
+                summary: "A medida que la población humana crecía, el Señor vio cuán grande se había vuelto la maldad de la raza humana en la tierra, y que toda inclinación de los pensamientos del corazón humano era solo maldad todo el tiempo. El Señor se arrepintió de haber hecho a los humanos y se entristeció. Dijo 'Borraré de la faz de la tierra a la raza humana que he creado.' Pero Noé halló gracia ante los ojos del Señor. Noé era un hombre justo, intachable entre la gente de su tiempo, y caminó fielmente con Dios. Dios le dijo a Noé que construyera un arca de madera de ciprés—450 pies de largo, 75 pies de ancho y 45 pies de alto. Noé debía traer dos de cada clase de animal, macho y hembra, al arca, junto con su familia. Durante 120 años (o posiblemente 100), Noé construyó el arca mientras el mundo se burlaba. Cuando todo estuvo listo, Dios los encerró. Se abrieron las compuertas del cielo y brotaron las fuentes del gran abismo. La lluvia cayó durante 40 días y 40 noches, y las aguas cubrieron la tierra durante 150 días. Toda criatura viviente en tierra firme pereció. Después de que las aguas retrocedieron, el arca se posó en las montañas de Ararat. Noé envió un cuervo y una paloma para probar si las aguas habían retrocedido. Cuando la paloma regresó con una hoja de olivo, Noé supo que las aguas habían bajado. Dios le dijo a Noé que saliera del arca. Noé construyó un altar y ofreció sacrificios. Dios olió el aroma agradable e hizo un pacto: 'Nunca más maldeciré la tierra por causa de los humanos, aunque toda inclinación del corazón humano sea mala desde la niñez. Y nunca más destruiré a todas las criaturas vivientes.' Dios puso un arcoíris en las nubes como señal de este pacto eterno."
+            },
+            {
+                name: "La Torre de Babel",
+                date: "c. 2200 a.C.",
+                scripture: "Génesis 11:1-9",
+                intro: "El intento de la humanidad de alcanzar el cielo y hacerse un nombre. Dios confunde su idioma y los dispersa por toda la tierra, mostrando que el orgullo y la autosuficiencia humanos no triunfarán contra los propósitos de Dios.",
+                tagline: "Orgullo y confusión",
+                summary: "Todo el mundo tenía un solo idioma y un habla común. A medida que la gente se movía hacia el este, encontraron una llanura en Sinar y se establecieron allí. Se dijeron unos a otros 'Vamos, hagamos ladrillos y cocémoslos bien.' Usaron ladrillo en lugar de piedra, y alquitrán como argamasa. Luego dijeron 'Vamos, construyamos una ciudad con una torre que llegue hasta el cielo, para hacernos un nombre; de lo contrario, seremos dispersados por toda la faz de la tierra.' El Señor bajó a ver la ciudad y la torre que la gente estaba construyendo. El Señor dijo 'Si como un solo pueblo que habla el mismo idioma han comenzado a hacer esto, entonces nada de lo que planeen hacer les será imposible. Vamos, bajemos y confundamos su idioma para que no se entiendan unos a otros.' Entonces el Señor los dispersó desde allí por toda la tierra, y dejaron de construir la ciudad. Por eso se llamó Babel—porque allí el Señor confundió el idioma de todo el mundo. Desde allí el Señor los dispersó por toda la faz de la tierra."
+            },
+            {
+                name: "El Llamado de Abraham",
+                date: "c. 2091 a.C.",
+                scripture: "Génesis 12:1-9",
+                intro: "El llamado de Dios a Abram para dejar todo lo familiar por una tierra desconocida. Esto marca el comienzo de la relación de pacto de Dios con Su pueblo elegido y la promesa de bendecir a todas las naciones a través de los descendientes de Abraham.",
+                tagline: "Comienza el viaje de fe",
+                summary: "El Señor había dicho a Abram 'Vete de tu tierra, de tu parentela y de la casa de tu padre, a la tierra que te mostraré. Haré de ti una nación grande, y te bendeciré; engrandeceré tu nombre, y serás bendición. Bendeciré a los que te bendigan, y al que te maldiga, lo maldeciré; y todas las familias de la tierra serán benditas en ti.' Entonces Abram se fue, como el Señor le había dicho. Tenía 75 años cuando salió de Harán. Tomó a su esposa Sarai, a su sobrino Lot, todas las posesiones que habían acumulado, y la gente que habían adquirido en Harán. Se dirigieron a la tierra de Canaán. Cuando llegaron, el Señor se apareció a Abram y dijo 'A tu descendencia daré esta tierra.' Entonces Abram construyó allí un altar al Señor, que se le había aparecido. Desde allí se dirigió hacia las colinas al este de Betel y plantó su tienda, con Betel al oeste y Hai al este. Allí construyó un altar al Señor e invocó el nombre del Señor. Luego Abram partió y continuó hacia el Néguev."
+            },
+            {
+                name: "Destrucción de Sodoma y Gomorra",
+                date: "c. 2067 a.C.",
+                scripture: "Génesis 18:16-19:29",
+                intro: "El juicio de Dios sobre la extrema maldad. Abraham intercede por las ciudades, pero solo Lot y sus hijas son rescatados. Las ciudades son destruidas con fuego y azufre, sirviendo como advertencia sobre las consecuencias del pecado persistente.",
+                tagline: "Juicio divino sobre la maldad",
+                summary: "El clamor contra Sodoma y Gomorra era tan grande y su pecado tan grave que el Señor decidió investigar. Abraham intercedió, preguntando si Dios destruiría a los justos con los malvados. Dios acordó que si encontraba diez personas justas, perdonaría las ciudades. Dos ángeles fueron a Sodoma y encontraron a Lot sentado en la puerta de la ciudad. Lot los invitó a quedarse en su casa, pero los hombres de Sodoma rodearon la casa y exigieron tener relaciones sexuales con los visitantes. Lot ofreció a sus hijas en su lugar, pero los ángeles lo metieron adentro e hirieron a los hombres con ceguera. Los ángeles le dijeron a Lot que tomara a su familia y huyera, advirtiendo '¡No mires atrás, y no te detengas en ningún lugar de la llanura! ¡Huye a las montañas o serás arrastrado!' Al amanecer, el Señor hizo llover azufre ardiente sobre Sodoma y Gomorra desde el cielo. Derribó esas ciudades y toda la llanura, destruyendo a todos los que vivían en las ciudades. La esposa de Lot miró atrás y se convirtió en una columna de sal. Abraham miró hacia abajo y vio denso humo subiendo de la tierra, como humo de un horno. Pero Dios se acordó de Abraham y sacó a Lot de la catástrofe que derribó las ciudades donde Lot había vivido."
+            },
+            {
+                name: "El Sacrificio de Isaac",
+                date: "c. 2050 a.C.",
+                scripture: "Génesis 22:1-19",
+                intro: "La prueba definitiva de la fe de Abraham. Dios le pide a Abraham que sacrifique a su hijo Isaac, el hijo de la promesa. Abraham obedece completamente, demostrando confianza absoluta. Dios provee un carnero como sustituto, confirmando la fe de Abraham y prefigurando el sacrificio definitivo.",
+                tagline: "Prueba definitiva de fe",
+                summary: "Algún tiempo después, Dios probó a Abraham. Le dijo '¡Abraham!' 'Aquí estoy,' respondió. Entonces Dios dijo 'Toma a tu hijo, tu único hijo, al que amas—Isaac—y ve a la región de Moriah. Sacrifícalo allí como holocausto en un monte que yo te mostraré.' Temprano a la mañana siguiente, Abraham se levantó y cargó su asno. Llevó consigo a dos de sus siervos y a su hijo Isaac. Al tercer día, Abraham vio el lugar a lo lejos. Dijo a sus siervos 'Quédense aquí con el asno mientras yo y el muchacho vamos allá. Adoraremos y luego volveremos a ustedes.' Abraham tomó la leña para el holocausto y la puso sobre su hijo Isaac, y él mismo llevó el fuego y el cuchillo. Mientras los dos iban juntos, Isaac habló y le dijo a su padre Abraham '¿Padre?' 'Sí, hijo mío?' respondió Abraham. 'El fuego y la leña están aquí,' dijo Isaac 'pero ¿dónde está el cordero para el holocausto?' Abraham respondió 'Dios mismo proveerá el cordero para el holocausto, hijo mío.' Cuando llegaron al lugar que Dios le había indicado, Abraham construyó un altar y arregló la leña sobre él. Ató a su hijo Isaac y lo puso sobre el altar, encima de la leña. Luego extendió su mano y tomó el cuchillo para matar a su hijo. Pero el ángel del Señor le gritó desde el cielo '¡Abraham! ¡Abraham!' 'Aquí estoy,' respondió. 'No pongas tu mano sobre el muchacho,' dijo. 'No le hagas nada. Ahora sé que temes a Dios, porque no me has negado a tu hijo, tu único hijo.' Abraham miró hacia arriba y allí en un matorral vio un carnero enredado por los cuernos. Fue y tomó el carnero y lo sacrificó como holocausto en lugar de su hijo. El ángel del Señor llamó a Abraham por segunda vez y dijo 'Juro por mí mismo que porque has hecho esto y no me has negado a tu hijo, tu único hijo, ciertamente te bendeciré y haré que tus descendientes sean tan numerosos como las estrellas del cielo y como la arena en la orilla del mar.'"
+            },
+            {
+                name: "El Sueño de Jacob (Escalera al Cielo)",
+                date: "c. 1929 a.C.",
+                scripture: "Génesis 28:10-22",
+                intro: "El primer encuentro directo de Jacob con Dios. Huyendo de Esaú, Jacob sueña con una escalera que llega al cielo con ángeles ascendiendo y descendiendo. Dios renueva las promesas del pacto a Jacob, quien responde con adoración y un voto.",
+                tagline: "El cielo abierto a la tierra",
+                summary: "Jacob salió de Beerseba y se dirigió a Harán. Cuando llegó a cierto lugar, se detuvo para pasar la noche porque el sol se había puesto. Tomando una de las piedras de allí, la puso debajo de su cabeza y se acostó a dormir. Tuvo un sueño en el que vio una escalera apoyada en la tierra, con su parte superior llegando al cielo, y los ángeles de Dios subían y bajaban por ella. Allí arriba estaba el Señor, y Él dijo 'Yo soy el Señor, el Dios de tu padre Abraham y el Dios de Isaac. Te daré a ti y a tu descendencia la tierra en la que estás acostado. Tus descendientes serán como el polvo de la tierra, y te extenderás hacia el oeste y hacia el este, hacia el norte y hacia el sur. Todos los pueblos de la tierra serán bendecidos a través de ti y tu descendencia. Estoy contigo y te cuidaré dondequiera que vayas, y te traeré de vuelta a esta tierra. No te dejaré hasta que haya cumplido lo que te he prometido.' Cuando Jacob despertó de su sueño, pensó 'Ciertamente el Señor está en este lugar, y yo no lo sabía.' Tuvo miedo y dijo '¡Qué imponente es este lugar! No es otra cosa que la casa de Dios; esta es la puerta del cielo.' Temprano a la mañana siguiente, Jacob tomó la piedra que había puesto debajo de su cabeza y la erigió como pilar y derramó aceite sobre ella. Llamó a ese lugar Betel (casa de Dios). Entonces Jacob hizo un voto, diciendo 'Si Dios está conmigo y me cuida en este viaje que estoy haciendo y me da comida para comer y ropa para vestir para que regrese sano y salvo a la casa de mi padre, entonces el Señor será mi Dios y esta piedra que he erigido como pilar será la casa de Dios, y de todo lo que me des te daré la décima parte.'"
+            },
+            {
+                name: "Jacob Lucha con Dios",
+                date: "c. 1909 a.C.",
+                scripture: "Génesis 32:22-32",
+                intro: "El momento de transformación de Jacob. En la noche antes de encontrarse con Esaú, Jacob lucha toda la noche con un hombre que resulta ser Dios. Se niega a soltarlo hasta ser bendecido, y Dios lo renombra Israel, que significa 'él lucha con Dios.'",
+                tagline: "Transformación a través de la lucha",
+                summary: "Esa noche Jacob se levantó y tomó a sus dos esposas, sus dos siervas y sus once hijos y cruzó el vado del Jaboc. Después de enviarlos al otro lado del arroyo, envió todas sus posesiones. Así que Jacob se quedó solo, y un hombre luchó con él hasta el amanecer. Cuando el hombre vio que no podía dominarlo, tocó la articulación de la cadera de Jacob de modo que su cadera se dislocó mientras luchaba con el hombre. Entonces el hombre dijo 'Déjame ir, porque ya amanece.' Pero Jacob respondió 'No te dejaré ir a menos que me bendigas.' El hombre le preguntó '¿Cuál es tu nombre?' 'Jacob,' respondió. Entonces el hombre dijo 'Ya no te llamarás Jacob, sino Israel, porque has luchado con Dios y con los hombres, y has vencido.' Jacob dijo 'Por favor, dime tu nombre.' Pero él respondió '¿Por qué preguntas mi nombre?' Luego lo bendijo allí. Así que Jacob llamó a ese lugar Peniel, diciendo 'Es porque vi a Dios cara a cara, y sin embargo mi vida fue preservada.' El sol salió sobre él mientras pasaba Peniel, y cojeaba por su cadera. Por eso hasta el día de hoy los israelitas no comen el tendón adherido a la articulación de la cadera, porque la articulación de la cadera de Jacob fue tocada cerca del tendón."
+            },
+            {
+                name: "José Vendido como Esclavo",
+                date: "c. 1898 a.C.",
+                scripture: "Génesis 37:12-36",
+                intro: "El comienzo del viaje de José de hijo favorito a esclavo. Sus hermanos celosos lo venden a comerciantes madianitas por veinte monedas de plata, poniendo en marcha el plan de Dios para salvar muchas vidas a través del sufrimiento de José.",
+                tagline: "Traición que lleva a la salvación",
+                summary: "Sus hermanos habían ido a apacentar los rebaños de su padre cerca de Siquem. Israel le dijo a José 'Como sabes, tus hermanos están apacentando los rebaños cerca de Siquem. Ven, voy a enviarte a ellos.' 'Muy bien,' respondió. Entonces José fue tras sus hermanos y los encontró cerca de Dotán. Pero lo vieron a lo lejos, y antes de que llegara a ellos, tramaron matarlo. '¡Ahí viene ese soñador!' se dijeron unos a otros. 'Vamos, matémoslo y arrojémoslo en uno de estos pozos y digamos que un animal feroz lo devoró. Entonces veremos qué pasa con sus sueños.' Cuando Rubén oyó esto, trató de rescatarlo de sus manos. 'No le quitemos la vida,' dijo. 'No derramemos sangre. Arrójenlo en este pozo aquí en el desierto, pero no pongan sus manos sobre él.' Rubén dijo esto para rescatarlo de ellos y llevarlo de vuelta a su padre. Así que cuando José llegó a sus hermanos, le quitaron su túnica—la túnica adornada que llevaba—y lo tomaron y lo arrojaron al pozo. El pozo estaba vacío; no había agua en él. Mientras se sentaban a comer su comida, miraron hacia arriba y vieron una caravana de ismaelitas que venía de Galaad. Sus camellos estaban cargados con especias, bálsamo y mirra, y estaban en camino a llevarlos a Egipto. Judá les dijo a sus hermanos '¿Qué ganaremos si matamos a nuestro hermano y ocultamos su sangre? Vamos, vendámoslo a los ismaelitas y no pongamos nuestras manos sobre él; después de todo, es nuestro hermano, nuestra propia carne y sangre.' Sus hermanos estuvieron de acuerdo. Así que cuando los comerciantes madianitas pasaron, sus hermanos sacaron a José del pozo y lo vendieron por veinte monedas de plata a los ismaelitas, quienes lo llevaron a Egipto."
+            },
+            {
+                name: "José en Egipto",
+                date: "c. 1885-1875 a.C.",
+                scripture: "Génesis 39:1-41:57",
+                intro: "El ascenso de José de esclavo a segundo al mando de Egipto. A pesar de falsas acusaciones y encarcelamiento, Dios bendice todo lo que José hace. Interpreta los sueños del Faraón y es elevado para salvar a Egipto del hambre.",
+                tagline: "De prisión a palacio",
+                summary: "José había sido llevado a Egipto. Potifar, un egipcio que era uno de los oficiales del Faraón, el capitán de la guardia, lo compró a los ismaelitas que lo habían llevado allí. El Señor estaba con José de modo que prosperó, y vivió en la casa de su amo egipcio. Cuando su amo vio que el Señor estaba con él y que el Señor le daba éxito en todo lo que hacía, José halló gracia ante sus ojos y se convirtió en su asistente. Potifar lo puso a cargo de su casa, y le confió todo lo que poseía. Pero la esposa de Potifar acusó falsamente a José, y fue arrojado a prisión. Incluso en prisión, el Señor estaba con José y le dio favor ante los ojos del carcelero. El carcelero puso a José a cargo de todos los que estaban en prisión. Algún tiempo después, el copero y el panadero del Faraón ofendieron a su amo y fueron encarcelados. Ambos tuvieron sueños, y José los interpretó correctamente—el copero sería restaurado, el panadero sería ejecutado. Dos años después, el Faraón tuvo sueños que nadie podía interpretar. El copero recordó a José. José fue llevado ante el Faraón e interpretó los sueños: siete años de abundancia seguidos de siete años de hambre. José aconsejó al Faraón que almacenara grano durante los años buenos. El Faraón le dijo a José 'Ya que Dios te ha hecho saber todo esto, no hay nadie tan perspicaz y sabio como tú. Estarás a cargo de mi palacio, y todo mi pueblo se someterá a tus órdenes. Solo con respecto al trono seré mayor que tú.' Entonces el Faraón tomó su anillo de sello de su dedo y lo puso en el dedo de José. Lo vistió con ropas de lino fino y le puso una cadena de oro alrededor del cuello. Lo hizo montar en un carro como su segundo al mando."
+            },
+            {
+                name: "José Se Revela",
+                date: "c. 1875 a.C.",
+                scripture: "Génesis 45:1-15",
+                intro: "El clímax emocional de la historia de José. Después de probar a sus hermanos, José revela su identidad y los perdona completamente, reconociendo que Dios usó sus malas intenciones para buenos propósitos para salvar muchas vidas.",
+                tagline: "Perdón y reconciliación",
+                summary: "José ya no pudo contenerse ante todos sus asistentes, y gritó '¡Que todos salgan de mi presencia!' Así que no había nadie con José cuando se dio a conocer a sus hermanos. Y lloró tan fuerte que los egipcios lo oyeron, y la casa del Faraón se enteró. José les dijo a sus hermanos '¡Yo soy José! ¿Vive todavía mi padre?' Pero sus hermanos no pudieron responderle, porque estaban aterrorizados ante su presencia. Entonces José les dijo a sus hermanos 'Acérquense a mí.' Cuando lo hicieron, dijo 'Yo soy su hermano José, ¡el que ustedes vendieron a Egipto! Y ahora, no se angustien ni se enojen con ustedes mismos por haberme vendido aquí, porque fue para salvar vidas que Dios me envió delante de ustedes. Ya han pasado dos años de hambre en la tierra, y durante los próximos cinco años no habrá arado ni siega. Pero Dios me envió delante de ustedes para preservar para ustedes un remanente en la tierra y para salvar sus vidas mediante una gran liberación. Así que no fueron ustedes quienes me enviaron aquí, sino Dios. Él me hizo padre del Faraón, señor de toda su casa y gobernante de todo Egipto. Ahora regresen rápidamente a mi padre y díganle: 'Esto es lo que dice su hijo José: Dios me ha hecho señor de todo Egipto. Baja a mí; no te demores. Vivirás en la región de Gosén y estarás cerca de mí—tú, tus hijos y nietos, tus rebaños y manadas, y todo lo que tienes. Te proveeré allí, porque aún faltan cinco años de hambre. De lo contrario, tú y tu casa y todos los que te pertenecen se quedarán en la miseria.' Luego abrazó a su hermano Benjamín y lloró, y Benjamín lo abrazó, llorando. Y besó a todos sus hermanos y lloró sobre ellos. Después sus hermanos hablaron con él."
+            },
+            {
+                name: "La Familia de Jacob Se Muda a Egipto",
+                date: "c. 1875 a.C.",
+                scripture: "Génesis 46:1-47:12",
+                intro: "El cumplimiento de la promesa de Dios a Abraham. Toda la familia de Jacob se muda a Egipto para escapar del hambre, donde José los provee. Esto prepara el escenario para la historia del Éxodo y la formación de la nación de Israel.",
+                tagline: "Setenta almas se convierten en una nación",
+                summary: "Entonces Israel partió con todo lo que tenía, y cuando llegó a Beerseba, ofreció sacrificios al Dios de su padre Isaac. Y Dios habló a Israel en una visión de noche y dijo '¡Jacob! ¡Jacob!' 'Aquí estoy,' respondió. 'Yo soy Dios, el Dios de tu padre,' dijo. 'No tengas miedo de bajar a Egipto, porque allí te haré una gran nación. Bajaré a Egipto contigo, y ciertamente te traeré de vuelta. Y la propia mano de José cerrará tus ojos.' Entonces Jacob salió de Beerseba, y los hijos de Israel tomaron a su padre Jacob y a sus hijos y a sus esposas en los carros que el Faraón había enviado para transportarlo. También llevaron consigo su ganado y las posesiones que habían adquirido en Canaán. Jacob y toda su descendencia fueron a Egipto. Llevó consigo a Egipto a sus hijos y nietos y a sus hijas y nietas—toda su descendencia. Todos los que fueron a Egipto con Jacob—aquellos que eran sus descendientes directos, sin contar las esposas de sus hijos—sumaban sesenta y seis personas. Con los dos hijos que le habían nacido a José en Egipto, los miembros de la familia de Jacob que fueron a Egipto eran setenta en total. José hizo preparar su carro y fue a Gosén para encontrarse con su padre Israel. Tan pronto como José apareció ante él, abrazó a su padre y lloró durante mucho tiempo. Israel le dijo a José 'Ahora estoy listo para morir, ya que he visto con mis propios ojos que todavía estás vivo.' José estableció a su padre y a sus hermanos en Egipto y les dio propiedades en la mejor parte de la tierra, el distrito de Ramesés, como el Faraón había ordenado. José también proveyó a su padre y a sus hermanos y a toda la casa de su padre con comida, según el número de sus hijos."
+            }
+        ];
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${event.scripture}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    <button class="audio-btn">Escuchar Historia</button>
+                `;
+
+                content.addEventListener('click', (e) => {
+                    // Don't toggle if clicking the audio button
+                    if (!e.target.classList.contains('audio-btn')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                // Add audio button functionality
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Spanish voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helvetica - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)'
+            ];
+            
+            // Try to find a Spanish voice first
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            const spanishVoice = voices.find(v => 
+                v.lang.startsWith('es')
+            );
+            
+            return spanishVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Wait for voices to load
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        // Initialize voice
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Play audio function
+        function playAudio(button, text) {
+            
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9; // Slightly slower, more deliberate
+            currentUtterance.pitch = 0.8; // Slightly lower pitch
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES'; // Spanish
+
+            // Update button state
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize
+        renderTimeline();
+    </script>
+</body>
+</html>
+
