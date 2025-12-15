@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exodus Timeline - Main Characters</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu">
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="bookBtn">
+                    <span class="emoji">📖</span>
+                    <span class="text">Exodus</span>
+                </button>
+                <div class="dropdown-menu" id="bookMenu">
+                    <a href="index.html" class="dropdown-item" data-book="genesis">Genesis</a>
+                    <a href="exodus.html" class="dropdown-item active" data-book="exodus">Exodus</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="typeBtn">
+                    <span class="emoji">👤</span>
+                    <span class="text">Characters</span>
+                </button>
+                <div class="dropdown-menu" id="typeMenu">
+                    <a href="exodus.html" class="dropdown-item active">Characters</a>
+                    <a href="exodus-events.html" class="dropdown-item">Events</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="langBtn">
+                    <span class="emoji">🇺🇸</span>
+                    <span class="text">English</span>
+                </button>
+                <div class="dropdown-menu" id="langMenu">
+                    <a href="exodus.html" class="dropdown-item active">English</a>
+                    <a href="exodus-es.html" class="dropdown-item">Español</a>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <h1>📖 Exodus Characters</h1>
+            <p class="subtitle">Main Characters in Chronological Order</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // All relevant characters in chronological order
+        const mainCharacters = [
+            {
+                name: "Moses",
+                date: "c. 1526-1406 BC",
+                scripture: "Exodus 1-40, Deuteronomy 34",
+                intro: "The central human figure of Exodus, Moses is chosen by God to deliver Israel from Egyptian slavery. Though initially reluctant, he becomes God's instrument to confront Pharaoh, lead the exodus, receive the Law, and guide Israel toward the Promised Land. His story demonstrates God's power working through human weakness.",
+                tagline: "Deliverer, lawgiver, friend of God",
+                summary: "Born to Hebrew parents during Pharaoh's decree to kill all Hebrew boys, Moses was hidden in a basket and found by Pharaoh's daughter, who raised him as her own. At 40, he killed an Egyptian for beating a Hebrew and fled to Midian. After 40 years as a shepherd, God appeared to him in a burning bush, calling him to deliver Israel. Despite his objections about being slow of speech, God sent Aaron as his spokesman. Moses confronted Pharaoh with ten plagues, led Israel through the Red Sea, received the Ten Commandments on Mount Sinai, and guided Israel for 40 years in the wilderness. He was known as the most humble man on earth and spoke with God face to face. He died at 120 on Mount Nebo, seeing but not entering the Promised Land."
+            },
+            {
+                name: "Aaron",
+                date: "c. 1529-1407 BC",
+                scripture: "Exodus 4-40, Numbers 20, Deuteronomy 10",
+                intro: "Moses' older brother and spokesman, Aaron becomes the first high priest of Israel. Though he supports Moses in confronting Pharaoh, he also shows weakness—making the golden calf and joining Miriam in questioning Moses' leadership. His story demonstrates both the honor and responsibility of priesthood.",
+                tagline: "First high priest, Moses' spokesman",
+                summary: "Aaron was Moses' older brother, three years his senior. When God called Moses to deliver Israel, Moses protested that he was slow of speech. God appointed Aaron as Moses' spokesman, saying 'He will speak to the people for you, and it will be as if he were your mouth.' Aaron met Moses in the wilderness and together they confronted Pharaoh, performing signs and bringing the plagues. Aaron threw down his staff and it became a snake. He stretched out his hand and the Nile turned to blood. God appointed Aaron and his sons as priests, with Aaron as the first high priest. However, when Moses was on Mount Sinai receiving the Law, the people pressured Aaron to make gods for them. Aaron made a golden calf, showing weakness under pressure. Later, Aaron joined Miriam in questioning Moses' marriage, but God defended Moses. Aaron died at 123 on Mount Hor, and his son Eleazar succeeded him as high priest."
+            },
+            {
+                name: "Miriam",
+                date: "c. 1530-1400 BC",
+                scripture: "Exodus 2:4-10, 15:20-21, Numbers 12, 20:1",
+                intro: "Moses and Aaron's sister, Miriam is a prophetess and leader. She watched over baby Moses in the Nile, led the women in celebration after crossing the Red Sea, but also challenged Moses' authority and was struck with leprosy. Her story shows both the power and danger of leadership.",
+                tagline: "Prophetess, sister of Moses",
+                summary: "Miriam was the older sister of Moses and Aaron. When Moses' mother placed him in a basket in the Nile, Miriam watched from a distance. When Pharaoh's daughter found the baby, Miriam cleverly offered to find a Hebrew woman to nurse him, bringing their own mother. After the Red Sea crossing, Miriam took a tambourine and led all the women in song and dance, singing 'Sing to the Lord, for he is highly exalted. The horse and its rider he has hurled into the sea.' However, Miriam and Aaron spoke against Moses because of his Cushite wife, questioning whether God spoke only through Moses. God called them to the tent of meeting and rebuked them, striking Miriam with leprosy. Moses interceded for her, and after seven days of isolation, she was healed. Miriam died at Kadesh in the wilderness."
+            },
+            {
+                name: "Pharaoh",
+                date: "c. 1500-1446 BC",
+                scripture: "Exodus 1-14",
+                intro: "The king of Egypt who enslaved the Israelites and refused to let them go. His hardened heart led to ten devastating plagues and the destruction of his army in the Red Sea. He represents human pride and resistance to God's will.",
+                tagline: "Hardened heart, resisted God",
+                summary: "The Pharaoh of the Exodus enslaved the Israelites and ordered the killing of all Hebrew baby boys. When Moses and Aaron came demanding Israel's release, Pharaoh's heart was hardened. He refused to let the people go, asking 'Who is the Lord, that I should obey him?' God sent ten plagues: water to blood, frogs, gnats, flies, livestock death, boils, hail, locusts, darkness, and finally the death of the firstborn. After each plague, Pharaoh would promise to let Israel go, then change his mind when the plague ended. After the final plague, he finally released them, but then changed his mind again and pursued them with his army. God parted the Red Sea for Israel, then closed it over Pharaoh's army, destroying them completely. Pharaoh represents the ultimate futility of resisting God's purposes."
+            },
+            {
+                name: "Jethro",
+                date: "c. 1500 BC",
+                scripture: "Exodus 2:16-22, 3:1, 18:1-27",
+                intro: "Moses' father-in-law and a Midianite priest. He gave Moses refuge in Midian, provided wise counsel about leadership, and recognized the greatness of Israel's God. His story shows God's care for His servant and the value of godly counsel.",
+                tagline: "Moses' father-in-law, wise counselor",
+                summary: "Jethro was a priest of Midian and Moses' father-in-law. When Moses fled Egypt after killing an Egyptian, he came to Midian and met Jethro's seven daughters at a well. Moses helped them water their flock, and Jethro invited him to stay, giving him his daughter Zipporah as a wife. Moses worked as a shepherd for Jethro for 40 years. After the exodus, Jethro heard what God had done for Israel and came to visit Moses in the wilderness, bringing Zipporah and Moses' two sons. Jethro rejoiced at God's deliverance and offered sacrifices. However, he noticed that Moses was trying to judge all the people's disputes alone from morning to evening. Jethro wisely advised Moses to appoint capable men as judges over thousands, hundreds, fifties, and tens, reserving only the difficult cases for himself. Moses listened and implemented this system, showing the value of godly counsel."
+            },
+            {
+                name: "Zipporah",
+                date: "c. 1500 BC",
+                scripture: "Exodus 2:21-22, 4:24-26, 18:2",
+                intro: "Moses' wife, daughter of Jethro the Midianite priest. She saved Moses' life by circumcising their son when God was about to kill him. Her story shows the importance of obedience to God's commands.",
+                tagline: "Moses' wife, saved his life",
+                summary: "Zipporah was one of Jethro's seven daughters whom Moses met at a well in Midian. After Moses helped them water their flock, Jethro gave Zipporah to Moses as a wife. She bore Moses two sons: Gershom and Eliezer. When God called Moses to return to Egypt, Moses took Zipporah and their sons. On the journey, God was about to kill Moses because he had not circumcised his son. Zipporah quickly took a flint knife, circumcised her son, and touched Moses' feet with the foreskin, saying 'Surely you are a bridegroom of blood to me.' This act saved Moses' life and showed the importance of the covenant sign of circumcision. Later, Moses sent Zipporah and the boys back to Jethro, and they rejoined him after the exodus."
+            },
+            {
+                name: "Joshua",
+                date: "c. 1500-1390 BC",
+                scripture: "Exodus 17:8-16, 24:13, 32:17, 33:11, Numbers 13-14, 27, Deuteronomy 31, 34, Joshua 1-24",
+                intro: "Moses' assistant and successor, Joshua was one of only two adults who left Egypt and entered the Promised Land. He led Israel in battle, served as Moses' aide, and eventually succeeded him as leader. His name means 'the Lord saves.'",
+                tagline: "Moses' successor, faithful spy",
+                summary: "Joshua was from the tribe of Ephraim and served as Moses' assistant. He first appears leading Israel in battle against the Amalekites while Moses held up his hands. Joshua was one of the twelve spies sent to explore Canaan. Unlike the other ten spies who brought back a bad report, Joshua and Caleb trusted God and urged the people to take the land. For this faith, they were the only two adults from the exodus generation allowed to enter the Promised Land. Joshua served as Moses' aide, going up Mount Sinai with him and staying in the tent of meeting. Before Moses died, God appointed Joshua as his successor. Joshua led Israel across the Jordan River, conquered Jericho and the land of Canaan, and distributed the land to the tribes. His name was originally Hoshea but Moses called him Joshua, meaning 'the Lord saves.'"
+            },
+            {
+                name: "Bezalel",
+                date: "c. 1446 BC",
+                scripture: "Exodus 31:1-11, 35:30-36:1, 37-38",
+                intro: "A skilled craftsman filled with the Spirit of God, Bezalel was chosen to construct the tabernacle and its furnishings. His story shows how God equips people with artistic and practical skills for His service.",
+                tagline: "Master craftsman, built tabernacle",
+                summary: "Bezalel was from the tribe of Judah, the son of Uri and grandson of Hur. God specifically chose him and filled him with the Spirit of God, giving him skill, ability, and knowledge in all kinds of crafts. He was appointed to make artistic designs for work in gold, silver, and bronze, to cut and set stones, to work in wood, and to engage in all kinds of artistic crafts. Bezalel, along with Oholiab from the tribe of Dan, was responsible for constructing the tabernacle, the ark of the covenant, the table, the lampstand, the altar of incense, the altar of burnt offering, and all the other furnishings according to the exact specifications God gave Moses. His work demonstrated that artistic skill, when dedicated to God, is a spiritual gift and form of worship."
+            },
+            {
+                name: "Hur",
+                date: "c. 1446 BC",
+                scripture: "Exodus 17:10-12, 24:14, 31:2",
+                intro: "A leader who supported Moses during the battle with Amalek by holding up Moses' hands. He was left in charge when Moses went up Mount Sinai, and was the grandfather of Bezalel, the tabernacle craftsman.",
+                tagline: "Supported Moses, held up his hands",
+                summary: "Hur first appears during the battle with the Amalekites. When Moses grew tired holding up his staff, Aaron and Hur held up his hands, one on each side, so his hands remained steady until sunset, ensuring Israel's victory. Later, when Moses went up Mount Sinai to receive the Law, he left Aaron and Hur in charge of the people, saying 'Wait here for us until we come back to you.' Hur was also the grandfather of Bezalel, the master craftsman who built the tabernacle. His name means 'white' or 'linen,' and he represents the importance of supporting leaders and being faithful in delegated responsibilities."
+            },
+            {
+                name: "Amram and Jochebed",
+                date: "c. 1530 BC",
+                scripture: "Exodus 2:1-10, 6:20, Numbers 26:59",
+                intro: "Moses' parents who defied Pharaoh's decree by hiding their son for three months, then placing him in a basket in the Nile. Their faith and courage saved the future deliverer of Israel.",
+                tagline: "Moses' parents, defied Pharaoh",
+                summary: "Amram was a Levite, and Jochebed was his wife and also his aunt (daughter of Levi). They were the parents of Moses, Aaron, and Miriam. When Pharaoh decreed that all Hebrew baby boys should be thrown into the Nile, Amram and Jochebed had faith and did not fear the king's edict. They hid their son for three months. When they could hide him no longer, Jochebed made a papyrus basket, coated it with tar and pitch, placed the baby in it, and put it among the reeds along the bank of the Nile. Miriam watched from a distance. When Pharaoh's daughter found the baby, Miriam cleverly offered to get a Hebrew woman to nurse him, bringing Jochebed. So Moses' own mother raised him until he was weaned, then returned him to Pharaoh's daughter. Their faith and courage preserved the life of Israel's future deliverer."
+            },
+            {
+                name: "Shiphrah and Puah",
+                date: "c. 1530 BC",
+                scripture: "Exodus 1:15-21",
+                intro: "Hebrew midwives who defied Pharaoh's order to kill all Hebrew baby boys. They feared God more than Pharaoh and were blessed for their courage. Their story shows that civil disobedience is sometimes necessary when human law conflicts with God's law.",
+                tagline: "Faithful midwives, feared God",
+                summary: "Shiphrah and Puah were Hebrew midwives commanded by Pharaoh to kill all Hebrew baby boys at birth. However, they feared God and did not do what the king of Egypt had told them to do; they let the boys live. When Pharaoh questioned them, they cleverly explained that Hebrew women were vigorous and gave birth before the midwives arrived. God was kind to the midwives and the people increased and became even more numerous. Because the midwives feared God, He gave them families of their own. Their courageous act of civil disobedience saved countless Hebrew lives and demonstrated that obedience to God takes precedence over obedience to human authorities when they conflict."
+            },
+            {
+                name: "Pharaoh's Daughter",
+                date: "c. 1530 BC",
+                scripture: "Exodus 2:5-10",
+                intro: "The Egyptian princess who found baby Moses in the Nile and raised him as her own son. Her compassion and adoption of Moses set in motion God's plan for Israel's deliverance.",
+                tagline: "Adopted Moses, showed compassion",
+                summary: "Pharaoh's daughter came down to the Nile to bathe while her attendants walked along the riverbank. She saw the basket among the reeds and sent her female slave to get it. When she opened it, she saw the baby crying and felt sorry for him. Despite her father's decree to kill all Hebrew boys, she had compassion. Miriam, who had been watching, approached and asked if she should get one of the Hebrew women to nurse the baby. Pharaoh's daughter agreed, and Miriam brought Jochebed, Moses' own mother. After the child was weaned, he was taken to Pharaoh's daughter, and she named him Moses, saying 'I drew him out of the water.' Moses grew up in Pharaoh's palace, receiving the best education Egypt could offer, which God would later use for His purposes. Her act of compassion unknowingly preserved the future deliverer of Israel."
+            }
+        ];
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainCharacters.forEach((character, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${character.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${character.date}</div>
+                        ${character.scripture ? `<div class="character-scripture">${character.scripture}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${character.intro}</div>
+                    <div class="character-tagline">${character.tagline}</div>
+                    <div class="character-summary">${character.summary}</div>
+                    <button class="audio-btn">Listen to Story</button>
+                `;
+
+                content.addEventListener('click', (e) => {
+                    // Don't toggle if clicking the audio button
+                    if (!e.target.classList.contains('audio-btn')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                // Add audio button functionality
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (British English, male)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer British English voices (Jarvis is British)
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            // Try to find a British voice first
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            // Fallback to any English male voice
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        // Wait for voices to load
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        // Initialize voice
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Play audio function
+        function playAudio(button, text) {
+            
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+                currentUtterance.voice = jarvisVoice;
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1.0;
+            currentUtterance.volume = 1.0;
+
+            // Update button state
+            button.classList.add('playing');
+            button.textContent = 'Stop Audio';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+            };
+
+            // Start speech
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize on page load
+        renderTimeline();
+
+        // Dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const btn = dropdown.querySelector('.dropdown-btn');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // Close all other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            const otherBtn = otherDropdown.querySelector('.dropdown-btn');
+                            const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                            otherBtn.classList.remove('open');
+                            otherMenu.classList.remove('open');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    btn.classList.toggle('open');
+                    menu.classList.toggle('open');
+                });
+                
+                // Update button text when item is clicked
+                const items = menu.querySelectorAll('.dropdown-item');
+                items.forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        const text = this.textContent.trim();
+                        const textSpan = btn.querySelector('.text');
+                        const emojiSpan = btn.querySelector('.emoji');
+                        
+                        // Update text
+                        if (textSpan) {
+                            textSpan.textContent = text;
+                        }
+                        
+                        // Update emoji based on selection
+                        if (emojiSpan) {
+                            const btnId = btn.id;
+                            if (btnId === 'bookBtn') {
+                                emojiSpan.textContent = '📖';
+                            } else if (btnId === 'typeBtn') {
+                                if (text.toLowerCase().includes('character') || text.toLowerCase().includes('personaje')) {
+                                    emojiSpan.textContent = '👤';
+                                } else if (text.toLowerCase().includes('event') || text.toLowerCase().includes('evento')) {
+                                    emojiSpan.textContent = '📅';
+                                }
+                            } else if (btnId === 'langBtn') {
+                                if (text.toLowerCase().includes('english') || text.toLowerCase().includes('inglés')) {
+                                    emojiSpan.textContent = '🇺🇸';
+                                } else if (text.toLowerCase().includes('español') || text.toLowerCase().includes('spanish')) {
+                                    emojiSpan.textContent = '🇪🇸';
+                                }
+                            }
+                        }
+                        
+                        // Update active state
+                        items.forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Close dropdown
+                        btn.classList.remove('open');
+                        menu.classList.remove('open');
+                    });
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown')) {
+                    dropdowns.forEach(dropdown => {
+                        const btn = dropdown.querySelector('.dropdown-btn');
+                        const menu = dropdown.querySelector('.dropdown-menu');
+                        btn.classList.remove('open');
+                        menu.classList.remove('open');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

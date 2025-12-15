@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éxodo - Personajes Principales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu">
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="bookBtn">
+                    <span class="emoji">📖</span>
+                    <span class="text">Éxodo</span>
+                </button>
+                <div class="dropdown-menu" id="bookMenu">
+                    <a href="index-es.html" class="dropdown-item" data-book="genesis">Génesis</a>
+                    <a href="exodus-es.html" class="dropdown-item active" data-book="exodus">Éxodo</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="typeBtn">
+                    <span class="emoji">👤</span>
+                    <span class="text">Personajes</span>
+                </button>
+                <div class="dropdown-menu" id="typeMenu">
+                    <a href="exodus-es.html" class="dropdown-item active">Personajes</a>
+                    <a href="exodus-events-es.html" class="dropdown-item">Eventos</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="langBtn">
+                    <span class="emoji">🇪🇸</span>
+                    <span class="text">Español</span>
+                </button>
+                <div class="dropdown-menu" id="langMenu">
+                    <a href="exodus.html" class="dropdown-item">Inglés</a>
+                    <a href="exodus-es.html" class="dropdown-item active">Español</a>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <h1>📖 Personajes de Éxodo</h1>
+            <p class="subtitle">Personajes Principales en Orden Cronológico</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // All relevant characters in chronological order
+        const mainCharacters = [
+            {
+                name: "Moisés",
+                date: "c. 1526-1406 a.C.",
+                scripture: "Éxodo 1-40, Deuteronomio 34",
+                intro: "La figura humana central de Éxodo, Moisés es elegido por Dios para liberar a Israel de la esclavitud egipcia. Aunque inicialmente reacio, se convierte en el instrumento de Dios para enfrentar al faraón, liderar el éxodo, recibir la Ley y guiar a Israel hacia la Tierra Prometida. Su historia demuestra el poder de Dios obrando a través de la debilidad humana.",
+                tagline: "Liberador, legislador, amigo de Dios",
+                summary: "Nacido de padres hebreos durante el decreto del faraón de matar a todos los niños hebreos, Moisés fue escondido en una canasta y encontrado por la hija del faraón, quien lo crió como suyo. A los 40 años, mató a un egipcio por golpear a un hebreo y huyó a Madián. Después de 40 años como pastor, Dios se le apareció en una zarza ardiente, llamándolo a liberar a Israel. A pesar de sus objeciones sobre ser tardo en el habla, Dios envió a Aarón como su portavoz. Moisés enfrentó al faraón con diez plagas, guió a Israel a través del Mar Rojo, recibió los Diez Mandamientos en el Monte Sinaí y guió a Israel durante 40 años en el desierto. Era conocido como el hombre más humilde de la tierra y hablaba con Dios cara a cara. Murió a los 120 años en el Monte Nebo, viendo pero no entrando a la Tierra Prometida."
+            },
+            {
+                name: "Aarón",
+                date: "c. 1529-1407 a.C.",
+                scripture: "Éxodo 4-40, Números 20, Deuteronomio 10",
+                intro: "El hermano mayor de Moisés y su portavoz, Aarón se convierte en el primer sumo sacerdote de Israel. Aunque apoya a Moisés al enfrentar al faraón, también muestra debilidad—haciendo el becerro de oro y uniéndose a Miriam para cuestionar el liderazgo de Moisés. Su historia demuestra tanto el honor como la responsabilidad del sacerdocio.",
+                tagline: "Primer sumo sacerdote, portavoz de Moisés",
+                summary: "Aarón era el hermano mayor de Moisés, tres años mayor que él. Cuando Dios llamó a Moisés para liberar a Israel, Moisés protestó que era tardo en el habla. Dios designó a Aarón como portavoz de Moisés, diciendo 'Él hablará al pueblo por ti, y será como si fuera tu boca.' Aarón se encontró con Moisés en el desierto y juntos enfrentaron al faraón, realizando señales y trayendo las plagas. Aarón arrojó su vara y se convirtió en una serpiente. Extendió su mano y el Nilo se convirtió en sangre. Dios designó a Aarón y sus hijos como sacerdotes, con Aarón como el primer sumo sacerdote. Sin embargo, cuando Moisés estaba en el Monte Sinaí recibiendo la Ley, el pueblo presionó a Aarón para que les hiciera dioses. Aarón hizo un becerro de oro, mostrando debilidad bajo presión. Más tarde, Aarón se unió a Miriam para cuestionar el matrimonio de Moisés, pero Dios defendió a Moisés. Aarón murió a los 123 años en el Monte Hor, y su hijo Eleazar lo sucedió como sumo sacerdote."
+            },
+            {
+                name: "Miriam",
+                date: "c. 1530-1400 a.C.",
+                scripture: "Éxodo 2:4-10, 15:20-21, Números 12, 20:1",
+                intro: "Hermana de Moisés y Aarón, Miriam es una profetisa y líder. Vigiló al bebé Moisés en el Nilo, lideró a las mujeres en celebración después de cruzar el Mar Rojo, pero también desafió la autoridad de Moisés y fue golpeada con lepra. Su historia muestra tanto el poder como el peligro del liderazgo.",
+                tagline: "Profetisa, hermana de Moisés",
+                summary: "Miriam era la hermana mayor de Moisés y Aarón. Cuando la madre de Moisés lo colocó en una canasta en el Nilo, Miriam observó desde la distancia. Cuando la hija del faraón encontró al bebé, Miriam ofreció astutamente encontrar a una mujer hebrea para amamantarlo, trayendo a su propia madre. Después del cruce del Mar Rojo, Miriam tomó una pandereta y lideró a todas las mujeres en canto y baile, cantando 'Canten al Señor, porque es sumamente exaltado. El caballo y su jinete ha arrojado al mar.' Sin embargo, Miriam y Aarón hablaron contra Moisés por su esposa cusita, cuestionando si Dios hablaba solo a través de Moisés. Dios los llamó a la tienda de reunión y los reprendió, golpeando a Miriam con lepra. Moisés intercedió por ella, y después de siete días de aislamiento, fue sanada. Miriam murió en Cades en el desierto."
+            },
+            {
+                name: "Faraón",
+                date: "c. 1500-1446 a.C.",
+                scripture: "Éxodo 1-14",
+                intro: "El rey de Egipto que esclavizó a los israelitas y se negó a dejarlos ir. Su corazón endurecido llevó a diez plagas devastadoras y la destrucción de su ejército en el Mar Rojo. Representa el orgullo humano y la resistencia a la voluntad de Dios.",
+                tagline: "Corazón endurecido, resistió a Dios",
+                summary: "El Faraón del Éxodo esclavizó a los israelitas y ordenó la matanza de todos los niños hebreos. Cuando Moisés y Aarón vinieron exigiendo la liberación de Israel, el corazón del faraón se endureció. Se negó a dejar ir al pueblo, preguntando '¿Quién es el Señor, para que yo le obedezca?' Dios envió diez plagas: agua a sangre, ranas, piojos, moscas, muerte del ganado, úlceras, granizo, langostas, oscuridad y finalmente la muerte de los primogénitos. Después de cada plaga, el faraón prometería dejar ir a Israel, luego cambiaría de opinión cuando la plaga terminaba. Después de la plaga final, finalmente los liberó, pero luego cambió de opinión nuevamente y los persiguió con su ejército. Dios partió el Mar Rojo para Israel, luego lo cerró sobre el ejército del faraón, destruyéndolos por completo. El faraón representa la futilidad última de resistir los propósitos de Dios."
+            },
+            {
+                name: "Jetro",
+                date: "c. 1500 a.C.",
+                scripture: "Éxodo 2:16-22, 3:1, 18:1-27",
+                intro: "Suegro de Moisés y sacerdote madianita. Dio refugio a Moisés en Madián, proporcionó sabio consejo sobre liderazgo y reconoció la grandeza del Dios de Israel. Su historia muestra el cuidado de Dios por Su siervo y el valor del consejo piadoso.",
+                tagline: "Suegro de Moisés, consejero sabio",
+                summary: "Jetro era un sacerdote de Madián y suegro de Moisés. Cuando Moisés huyó de Egipto después de matar a un egipcio, llegó a Madián y conoció a las siete hijas de Jetro en un pozo. Moisés las ayudó a dar agua a su rebaño, y Jetro lo invitó a quedarse, dándole a su hija Séfora como esposa. Moisés trabajó como pastor para Jetro durante 40 años. Después del éxodo, Jetro escuchó lo que Dios había hecho por Israel y vino a visitar a Moisés en el desierto, trayendo a Séfora y los dos hijos de Moisés. Jetro se regocijó por la liberación de Dios y ofreció sacrificios. Sin embargo, notó que Moisés estaba tratando de juzgar todas las disputas del pueblo solo desde la mañana hasta la noche. Jetro aconsejó sabiamente a Moisés que designara hombres capaces como jueces sobre miles, cientos, cincuenta y diez, reservando solo los casos difíciles para sí mismo. Moisés escuchó e implementó este sistema, mostrando el valor del consejo piadoso."
+            },
+            {
+                name: "Séfora",
+                date: "c. 1500 a.C.",
+                scripture: "Éxodo 2:21-22, 4:24-26, 18:2",
+                intro: "Esposa de Moisés, hija de Jetro el sacerdote madianita. Salvó la vida de Moisés circuncidando a su hijo cuando Dios estaba a punto de matarlo. Su historia muestra la importancia de la obediencia a los mandamientos de Dios.",
+                tagline: "Esposa de Moisés, salvó su vida",
+                summary: "Séfora era una de las siete hijas de Jetro a quien Moisés conoció en un pozo en Madián. Después de que Moisés las ayudó a dar agua a su rebaño, Jetro le dio a Séfora a Moisés como esposa. Ella le dio a Moisés dos hijos: Gersón y Eliezer. Cuando Dios llamó a Moisés para regresar a Egipto, Moisés tomó a Séfora y sus hijos. En el viaje, Dios estaba a punto de matar a Moisés porque no había circuncidado a su hijo. Séfora rápidamente tomó un cuchillo de pedernal, circuncidó a su hijo y tocó los pies de Moisés con el prepucio, diciendo 'Ciertamente eres un esposo de sangre para mí.' Este acto salvó la vida de Moisés y mostró la importancia de la señal del pacto de la circuncisión. Más tarde, Moisés envió a Séfora y los niños de vuelta a Jetro, y se reunieron con él después del éxodo."
+            },
+            {
+                name: "Josué",
+                date: "c. 1500-1390 a.C.",
+                scripture: "Éxodo 17:8-16, 24:13, 32:17, 33:11, Números 13-14, 27, Deuteronomio 31, 34, Josué 1-24",
+                intro: "Asistente y sucesor de Moisés, Josué fue uno de solo dos adultos que salieron de Egipto y entraron a la Tierra Prometida. Lideró a Israel en batalla, sirvió como ayudante de Moisés y finalmente lo sucedió como líder. Su nombre significa 'el Señor salva.'",
+                tagline: "Sucesor de Moisés, espía fiel",
+                summary: "Josué era de la tribu de Efraín y sirvió como asistente de Moisés. Aparece por primera vez liderando a Israel en batalla contra los amalecitas mientras Moisés levantaba sus manos. Josué fue uno de los doce espías enviados a explorar Canaán. A diferencia de los otros diez espías que trajeron un mal informe, Josué y Caleb confiaron en Dios y urgieron al pueblo a tomar la tierra. Por esta fe, fueron los únicos dos adultos de la generación del éxodo a los que se les permitió entrar a la Tierra Prometida. Josué sirvió como ayudante de Moisés, subiendo al Monte Sinaí con él y permaneciendo en la tienda de reunión. Antes de que Moisés muriera, Dios designó a Josué como su sucesor. Josué guió a Israel a través del río Jordán, conquistó Jericó y la tierra de Canaán, y distribuyó la tierra a las tribus. Su nombre originalmente era Oseas pero Moisés lo llamó Josué, que significa 'el Señor salva.'"
+            },
+            {
+                name: "Bezaleel",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 31:1-11, 35:30-36:1, 37-38",
+                intro: "Un artesano hábil lleno del Espíritu de Dios, Bezaleel fue elegido para construir el tabernáculo y sus muebles. Su historia muestra cómo Dios equipa a las personas con habilidades artísticas y prácticas para Su servicio.",
+                tagline: "Maestro artesano, construyó el tabernáculo",
+                summary: "Bezaleel era de la tribu de Judá, hijo de Uri y nieto de Hur. Dios lo eligió específicamente y lo llenó del Espíritu de Dios, dándole habilidad, capacidad y conocimiento en todo tipo de artesanías. Fue designado para hacer diseños artísticos para trabajar en oro, plata y bronce, para cortar y engastar piedras, para trabajar en madera y para dedicarse a todo tipo de artesanías artísticas. Bezaleel, junto con Aholiab de la tribu de Dan, fue responsable de construir el tabernáculo, el arca del pacto, la mesa, el candelabro, el altar de incienso, el altar de holocausto y todos los demás muebles según las especificaciones exactas que Dios le dio a Moisés. Su trabajo demostró que la habilidad artística, cuando se dedica a Dios, es un don espiritual y una forma de adoración."
+            },
+            {
+                name: "Hur",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 17:10-12, 24:14, 31:2",
+                intro: "Un líder que apoyó a Moisés durante la batalla con Amalec sosteniendo las manos de Moisés. Fue dejado a cargo cuando Moisés subió al Monte Sinaí, y era el abuelo de Bezaleel, el artesano del tabernáculo.",
+                tagline: "Apoyó a Moisés, sostuvo sus manos",
+                summary: "Hur aparece por primera vez durante la batalla con los amalecitas. Cuando Moisés se cansó de sostener su vara, Aarón y Hur sostuvieron sus manos, uno a cada lado, para que sus manos permanecieran firmes hasta la puesta del sol, asegurando la victoria de Israel. Más tarde, cuando Moisés subió al Monte Sinaí para recibir la Ley, dejó a Aarón y Hur a cargo del pueblo, diciendo 'Esperen aquí por nosotros hasta que regresemos a ustedes.' Hur también era el abuelo de Bezaleel, el maestro artesano que construyó el tabernáculo. Su nombre significa 'blanco' o 'lino,' y representa la importancia de apoyar a los líderes y ser fiel en las responsabilidades delegadas."
+            },
+            {
+                name: "Amram y Jocabed",
+                date: "c. 1530 a.C.",
+                scripture: "Éxodo 2:1-10, 6:20, Números 26:59",
+                intro: "Padres de Moisés que desafiaron el decreto del faraón escondiendo a su hijo durante tres meses, luego colocándolo en una canasta en el Nilo. Su fe y coraje salvaron al futuro liberador de Israel.",
+                tagline: "Padres de Moisés, desafiaron al faraón",
+                summary: "Amram era un levita, y Jocabed era su esposa y también su tía (hija de Leví). Eran los padres de Moisés, Aarón y Miriam. Cuando el faraón decretó que todos los niños hebreos deberían ser arrojados al Nilo, Amram y Jocabed tuvieron fe y no temieron el edicto del rey. Escondieron a su hijo durante tres meses. Cuando ya no pudieron esconderlo, Jocabed hizo una canasta de papiro, la cubrió con alquitrán y brea, colocó al bebé en ella y la puso entre los juncos a lo largo de la orilla del Nilo. Miriam observó desde la distancia. Cuando la hija del faraón encontró al bebé, Miriam ofreció astutamente conseguir a una mujer hebrea para amamantarlo, trayendo a Jocabed. Así que la propia madre de Moisés lo crió hasta que fue destetado, luego lo devolvió a la hija del faraón. Su fe y coraje preservaron la vida del futuro liberador de Israel."
+            },
+            {
+                name: "Sifra y Fúa",
+                date: "c. 1530 a.C.",
+                scripture: "Éxodo 1:15-21",
+                intro: "Parteras hebreas que desafiaron la orden del faraón de matar a todos los niños hebreos. Temieron a Dios más que al faraón y fueron bendecidas por su coraje. Su historia muestra que la desobediencia civil a veces es necesaria cuando la ley humana entra en conflicto con la ley de Dios.",
+                tagline: "Parteras fieles, temieron a Dios",
+                summary: "Sifra y Fúa eran parteras hebreas a las que el faraón ordenó matar a todos los niños hebreos al nacer. Sin embargo, temieron a Dios y no hicieron lo que el rey de Egipto les había dicho; dejaron vivir a los niños. Cuando el faraón las cuestionó, explicaron astutamente que las mujeres hebreas eran vigorosas y daban a luz antes de que llegaran las parteras. Dios fue bondadoso con las parteras y el pueblo aumentó y se volvió aún más numeroso. Porque las parteras temieron a Dios, Él les dio familias propias. Su acto valiente de desobediencia civil salvó innumerables vidas hebreas y demostró que la obediencia a Dios tiene prioridad sobre la obediencia a las autoridades humanas cuando entran en conflicto."
+            },
+            {
+                name: "Hija del Faraón",
+                date: "c. 1530 a.C.",
+                scripture: "Éxodo 2:5-10",
+                intro: "La princesa egipcia que encontró al bebé Moisés en el Nilo y lo crió como su propio hijo. Su compasión y adopción de Moisés pusieron en marcha el plan de Dios para la liberación de Israel.",
+                tagline: "Adoptó a Moisés, mostró compasión",
+                summary: "La hija del faraón bajó al Nilo para bañarse mientras sus sirvientas caminaban por la orilla del río. Vio la canasta entre los juncos y envió a su esclava a buscarla. Cuando la abrió, vio al bebé llorando y sintió lástima por él. A pesar del decreto de su padre de matar a todos los niños hebreos, tuvo compasión. Miriam, que había estado observando, se acercó y preguntó si debería conseguir a una de las mujeres hebreas para amamantar al bebé. La hija del faraón estuvo de acuerdo, y Miriam trajo a Jocabed, la propia madre de Moisés. Después de que el niño fue destetado, fue llevado a la hija del faraón, y ella lo llamó Moisés, diciendo 'Lo saqué del agua.' Moisés creció en el palacio del faraón, recibiendo la mejor educación que Egipto podía ofrecer, que Dios usaría más tarde para Sus propósitos. Su acto de compasión preservó sin saberlo al futuro liberador de Israel."
+            }
+        ];
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainCharacters.forEach((character, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${character.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${character.date}</div>
+                        ${character.scripture ? `<div class="character-scripture">${character.scripture}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${character.intro}</div>
+                    <div class="character-tagline">${character.tagline}</div>
+                    <div class="character-summary">${character.summary}</div>
+                    <button class="audio-btn">Escuchar Historia</button>
+                `;
+
+                content.addEventListener('click', (e) => {
+                    // Don't toggle if clicking the audio button
+                    if (!e.target.classList.contains('audio-btn')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                // Add audio button functionality
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Spanish voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helvetica - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)'
+            ];
+            
+            // Try to find a Spanish voice first
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            const spanishVoice = voices.find(v => 
+                v.lang.startsWith('es')
+            );
+            
+            return spanishVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Wait for voices to load
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        // Initialize voice
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Play audio function
+        function playAudio(button, text) {
+            
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9; // Slightly slower, more deliberate
+            currentUtterance.pitch = 0.8; // Slightly lower pitch
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es'; // Spanish
+
+            // Update button state
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize
+        renderTimeline();
+
+        // Dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const btn = dropdown.querySelector('.dropdown-btn');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // Close all other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            const otherBtn = otherDropdown.querySelector('.dropdown-btn');
+                            const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                            otherBtn.classList.remove('open');
+                            otherMenu.classList.remove('open');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    btn.classList.toggle('open');
+                    menu.classList.toggle('open');
+                });
+                
+                // Update button text when item is clicked
+                const items = menu.querySelectorAll('.dropdown-item');
+                items.forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        const text = this.textContent.trim();
+                        const textSpan = btn.querySelector('.text');
+                        const emojiSpan = btn.querySelector('.emoji');
+                        
+                        // Update text
+                        if (textSpan) {
+                            textSpan.textContent = text;
+                        }
+                        
+                        // Update emoji based on selection
+                        if (emojiSpan) {
+                            const btnId = btn.id;
+                            if (btnId === 'bookBtn') {
+                                emojiSpan.textContent = '📖';
+                            } else if (btnId === 'typeBtn') {
+                                if (text.toLowerCase().includes('character') || text.toLowerCase().includes('personaje')) {
+                                    emojiSpan.textContent = '👤';
+                                } else if (text.toLowerCase().includes('event') || text.toLowerCase().includes('evento')) {
+                                    emojiSpan.textContent = '📅';
+                                }
+                            } else if (btnId === 'langBtn') {
+                                if (text.toLowerCase().includes('english') || text.toLowerCase().includes('inglés')) {
+                                    emojiSpan.textContent = '🇺🇸';
+                                } else if (text.toLowerCase().includes('español') || text.toLowerCase().includes('spanish')) {
+                                    emojiSpan.textContent = '🇪🇸';
+                                }
+                            }
+                        }
+                        
+                        // Update active state
+                        items.forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Close dropdown
+                        btn.classList.remove('open');
+                        menu.classList.remove('open');
+                    });
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown')) {
+                    dropdowns.forEach(dropdown => {
+                        const btn = dropdown.querySelector('.dropdown-btn');
+                        const menu = dropdown.querySelector('.dropdown-menu');
+                        btn.classList.remove('open');
+                        menu.classList.remove('open');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

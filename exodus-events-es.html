@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Éxodo - Eventos Principales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu">
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="bookBtn">
+                    <span class="emoji">📖</span>
+                    <span class="text">Éxodo</span>
+                </button>
+                <div class="dropdown-menu" id="bookMenu">
+                    <a href="events-es.html" class="dropdown-item" data-book="genesis">Génesis</a>
+                    <a href="exodus-events-es.html" class="dropdown-item active" data-book="exodus">Éxodo</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="typeBtn">
+                    <span class="emoji">📅</span>
+                    <span class="text">Eventos</span>
+                </button>
+                <div class="dropdown-menu" id="typeMenu">
+                    <a href="exodus-es.html" class="dropdown-item">Personajes</a>
+                    <a href="exodus-events-es.html" class="dropdown-item active">Eventos</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="langBtn">
+                    <span class="emoji">🇪🇸</span>
+                    <span class="text">Español</span>
+                </button>
+                <div class="dropdown-menu" id="langMenu">
+                    <a href="exodus-events.html" class="dropdown-item">Inglés</a>
+                    <a href="exodus-events-es.html" class="dropdown-item active">Español</a>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <h1>📖 Eventos de Éxodo</h1>
+            <p class="subtitle">Eventos Principales en Orden Cronológico</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in chronological order
+        const mainEvents = [
+            {
+                name: "La Zarza Ardiente",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 3:1-4:17",
+                intro: "El llamado de Dios a Moisés desde una zarza que arde pero no se consume. Esto marca el comienzo de la misión de Moisés para liberar a Israel de la esclavitud egipcia. Dios revela Su nombre como 'YO SOY' y promete estar con Moisés.",
+                tagline: "Dios llama a Su libertador",
+                summary: "Moisés pastoreaba el rebaño de Jetro su suegro, sacerdote de Madián, y llevó el rebaño al otro lado del desierto y llegó a Horeb, el monte de Dios. Allí el ángel de Jehová se le apareció en una llama de fuego en medio de una zarza. Y Moisés miró, y vio que la zarza ardía en fuego, y la zarza no se consumía. Entonces Moisés dijo: 'Iré ahora y veré esta gran visión, por qué causa la zarza no se quema.' Viendo Jehová que él iba a ver, lo llamó Dios de en medio de la zarza, y dijo: '¡Moisés, Moisés!' Y él respondió: 'Heme aquí.' Y dijo: 'No te acerques; quita tu calzado de tus pies, porque el lugar en que tú estás, tierra santa es.' Y dijo: 'Yo soy el Dios de tu padre, Dios de Abraham, Dios de Isaac, y Dios de Jacob.' Entonces Moisés cubrió su rostro, porque tuvo miedo de mirar a Dios. Dijo luego Jehová: 'Bien he visto la aflicción de mi pueblo que está en Egipto, y he oído su clamor a causa de sus exactores; pues he conocido sus angustias. Y he descendido para librarlos de mano de los egipcios, y sacarlos de aquella tierra a una tierra buena y ancha, a tierra que fluye leche y miel. Ven, por tanto, ahora, y te enviaré a Faraón, para que saques de Egipto a mi pueblo, los hijos de Israel.' Entonces Moisés respondió a Dios: '¿Quién soy yo para que vaya a Faraón, y saque de Egipto a los hijos de Israel?' Y él respondió: 'Ve, porque yo estaré contigo.' Dijo Moisés a Dios: 'He aquí que llego yo a los hijos de Israel, y les digo: El Dios de vuestros padres me ha enviado a vosotros. Si ellos me preguntaren: ¿Cuál es su nombre?, ¿qué les responderé?' Y respondió Dios a Moisés: 'YO SOY EL QUE SOY.' Y dijo: 'Así dirás a los hijos de Israel: YO SOY me ha enviado a vosotros.' Además dijo Dios a Moisés: 'Así dirás a los hijos de Israel: Jehová, el Dios de vuestros padres, el Dios de Abraham, el Dios de Isaac y el Dios de Jacob, me ha enviado a vosotros. Este es mi nombre para siempre; con él se me recordará por todas las generaciones.'"
+            },
+            {
+                name: "Las Diez Plagas",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 7:14-12:30",
+                intro: "El juicio de Dios sobre Egipto a través de diez plagas devastadoras. Cada plaga ataca a un dios egipcio, demostrando la supremacía del Señor. El corazón del Faraón se endurece, pero las plagas aumentan en severidad hasta la plaga final: la muerte de los primogénitos.",
+                tagline: "El poder de Dios sobre los dioses de Egipto",
+                summary: "Cuando el Faraón se negó a dejar ir a los israelitas, el Señor envió diez plagas sobre Egipto. La primera plaga convirtió el río Nilo en sangre, matando a todos los peces y haciendo el agua imbebible. La segunda plaga trajo ranas que cubrieron la tierra. La tercera plaga convirtió el polvo en mosquitos que cubrieron a personas y animales. La cuarta plaga trajo enjambres de moscas por todo Egipto, excepto en Gosén, donde vivían los israelitas. La quinta plaga mató a todo el ganado de los egipcios. La sexta plaga trajo úlceras con tumores sobre personas y animales. La séptima plaga trajo la peor granizada que Egipto había visto, destruyendo cultivos y árboles. La octava plaga trajo langostas que devoraron todo lo que quedaba después del granizo. La novena plaga trajo tres días de oscuridad total sobre Egipto, mientras que los israelitas tuvieron luz. Cada vez, el Faraón prometía dejar ir al pueblo, pero luego endurecía su corazón cuando se quitaba la plaga. La décima y última plaga fue la muerte de cada primogénito en Egipto, desde el hijo del Faraón hasta el primogénito del prisionero en la mazmorra, y el primogénito de todo el ganado. Esta plaga finalmente rompería la resistencia del Faraón y conduciría al éxodo."
+            },
+            {
+                name: "La Pascua",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 12:1-30",
+                intro: "La institución de la Pascua, la noche en que el Señor pasó por alto las casas de los israelitas marcadas con la sangre del cordero. Este evento se convierte en el fundamento de la identidad y adoración de Israel, conmemorando su liberación de la esclavitud.",
+                tagline: "Liberación por medio de la sangre",
+                summary: "El Señor dijo a Moisés y a Aarón en la tierra de Egipto: 'Este mes os será principio de los meses; será para vosotros el primero en los meses del año. Hablad a toda la congregación de Israel, diciendo: En el diez de este mes tómese cada uno un cordero según las familias de los padres, un cordero por casa. Los animales que elijáis serán machos de un año, sin defecto. Los guardaréis hasta el día catorce de este mes, y toda la congregación del pueblo de Israel lo inmolará entre las dos tardes. Y tomarán de la sangre, y la pondrán en los dos postes y en el dintel de las casas en que lo han de comer. Y aquella noche comerán la carne asada al fuego, y panes sin levadura; con hierbas amargas lo comerán. Así lo comeréis: ceñidos vuestros lomos, vuestro calzado en vuestros pies, y vuestro bordón en vuestra mano; y lo comeréis apresuradamente; es la Pascua de Jehová. Pues yo pasaré aquella noche por la tierra de Egipto, y heriré a todo primogénito en la tierra de Egipto, así de los hombres como de las bestias; y ejecutaré mis juicios en todos los dioses de Egipto. Yo Jehová. Y la sangre os será por señal en las casas donde vosotros estéis; y veré la sangre y pasaré de vosotros, y no habrá en vosotros plaga de mortandad cuando hiera la tierra de Egipto.' Y aconteció que a la medianoche Jehová hirió a todo primogénito en la tierra de Egipto, desde el primogénito de Faraón que se sentaba sobre su trono, hasta el primogénito del cautivo que estaba en la cárcel, y todo primogénito de los animales. Y se levantó aquella noche Faraón, él y todos sus siervos, y todos los egipcios; y hubo un gran clamor en Egipto, porque no había casa donde no hubiese un muerto."
+            },
+            {
+                name: "El Cruce del Mar Rojo",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 14:1-31",
+                intro: "La liberación milagrosa de Israel a través del Mar Rojo. Con el ejército del Faraón persiguiéndolos, Dios divide el mar, permitiendo a Israel cruzar en tierra seca, luego cierra las aguas sobre el ejército egipcio. Este evento demuestra el poder de Dios para salvar y Su compromiso con Su pueblo.",
+                tagline: "Salvación a través del mar",
+                summary: "Cuando se le informó al rey de Egipto que el pueblo había huido, el Faraón y sus oficiales cambiaron de opinión y dijeron: '¿Qué hemos hecho? ¡Hemos dejado ir a los israelitas y hemos perdido sus servicios!' Así que preparó su carro y tomó su ejército con él. Tomó seiscientos de los mejores carros, junto con todos los demás carros de Egipto, con oficiales sobre todos ellos. El Señor endureció el corazón del Faraón, rey de Egipto, para que persiguiera a los israelitas, que marchaban audazmente. Los egipcios —todos los caballos y carros del Faraón, jinetes y tropas— persiguieron a los israelitas y los alcanzaron mientras acampaban junto al mar. Al acercarse el Faraón, los israelitas levantaron la vista, y allí estaban los egipcios, marchando tras ellos. Estaban aterrorizados y clamaron al Señor. Dijeron a Moisés: '¿Acaso no había sepulcros en Egipto para que nos trajeras al desierto a morir? ¡Mejor nos hubiera sido servir a los egipcios que morir en el desierto!' Moisés respondió al pueblo: 'No temáis; estad firmes, y ved la salvación que Jehová hará hoy con vosotros; porque los egipcios que hoy habéis visto, nunca más para siempre los veréis. Jehová peleará por vosotros, y vosotros estaréis tranquilos.' Entonces Jehová dijo a Moisés: '¿Por qué clamas a mí? Di a los hijos de Israel que marchen. Y tú alza tu vara, y extiende tu mano sobre el mar, y divídelo, y entren los hijos de Israel por en medio del mar en seco.' Moisés extendió su mano sobre el mar, y toda aquella noche el Señor hizo que el mar retrocediera con un fuerte viento del este y lo convirtió en tierra seca. Las aguas se dividieron, y los israelitas pasaron por en medio del mar en seco, teniendo las aguas como muro a su derecha y a su izquierda. Los egipcios los persiguieron, y todos los caballos y carros y jinetes del Faraón los siguieron hasta el mar. Durante la última vigilia de la noche, el Señor miró desde la columna de fuego y nube al ejército egipcio y lo sumió en confusión. Atascó las ruedas de sus carros para que tuvieran dificultad para conducir. Entonces el Señor dijo a Moisés: 'Extiende tu mano sobre el mar, para que las aguas vuelvan sobre los egipcios, sobre sus carros y sobre su caballería.' Moisés extendió su mano sobre el mar, y al amanecer el mar volvió a su lugar. Los egipcios huían hacia él, y el Señor los arrojó al mar. Las aguas volvieron y cubrieron los carros y los jinetes, todo el ejército del Faraón que había seguido a los israelitas al mar. Ni uno solo de ellos sobrevivió. Pero los israelitas pasaron por el mar en seco, con un muro de agua a su derecha y a su izquierda. Aquel día el Señor salvó a Israel de manos de los egipcios, e Israel vio a los egipcios muertos en la orilla. Y cuando los israelitas vieron la mano poderosa del Señor desplegada contra los egipcios, el pueblo temió al Señor y puso su confianza en él y en Moisés su siervo."
+            },
+            {
+                name: "Maná y Codornices",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 16:1-36",
+                intro: "La provisión diaria de alimento de Dios en el desierto. Cada mañana, aparece maná en el suelo, y por la tarde, codornices cubren el campamento. Esto demuestra la fidelidad de Dios para proveer las necesidades de Su pueblo y les enseña a confiar en Él día a día.",
+                tagline: "Pan diario del cielo",
+                summary: "Toda la comunidad israelita partió de Elim y llegó al desierto de Sin, que está entre Elim y Sinaí, el día quince del segundo mes después de haber salido de Egipto. En el desierto, toda la comunidad murmuró contra Moisés y Aarón. Los israelitas les dijeron: '¡Ojalá hubiéramos muerto a manos del Señor en Egipto! Allí nos sentábamos alrededor de las ollas de carne y comíamos todo el alimento que queríamos, pero nos habéis traído a este desierto para matar de hambre a toda esta asamblea.' Entonces el Señor dijo a Moisés: 'He aquí, yo os haré llover pan del cielo; y el pueblo saldrá, y recogerá diariamente la porción de un día, para que yo lo pruebe si anda en mi ley, o no. Mas en el sexto día prepararán para guardar el doble de lo que suelen recoger cada día.' Así que Moisés y Aarón dijeron a todos los israelitas: 'En la tarde sabréis que Jehová os ha sacado de la tierra de Egipto, y a la mañana veréis la gloria de Jehová; porque él ha oído vuestras murmuraciones contra Jehová.' Aquella tarde subieron codornices y cubrieron el campamento, y por la mañana había una capa de rocío alrededor del campamento. Cuando el rocío se hubo ido, aparecieron sobre la faz del desierto unas cosas menudas, redondas, finas como escarcha sobre la tierra. Y viéndolo los hijos de Israel, se dijeron unos a otros: '¿Qué es esto?' porque no sabían lo que era. Entonces Moisés les dijo: 'Es el pan que Jehová os da para comer. Esto es lo que Jehová ha mandado: 'Recoged de él cada uno según lo que pueda comer; un gomer por cabeza, conforme al número de vuestras personas, tomaréis cada uno para los que están en su tienda.'' Y los hijos de Israel lo hicieron así; y recogieron unos más, otros menos. Y al medirlo por gomer, no sobró al que había recogido mucho, ni faltó al que había recogido poco; cada uno había recogido lo que necesitaba. Y Moisés les dijo: 'Ninguno deje de ello para mañana.' Mas ellos no obedecieron a Moisés, sino que algunos dejaron de ello para otro día, y crió gusanos, y hedió; y se enojó contra ellos Moisés. Cada mañana, cada uno recogía lo que necesitaba, y cuando el sol calentaba, se derretía. En el sexto día, recogieron el doble —dos gomeres por persona. El pueblo de Israel llamó a ese pan maná. Era blanco como semilla de cilantro y sabía a hojuelas con miel. Moisés dijo: 'Esto es lo que Jehová ha mandado: 'Llenad un gomer de él y guardadlo para vuestras generaciones, para que vean el pan que yo os di a comer en el desierto, cuando os saqué de la tierra de Egipto.'' Así que Moisés dijo a Aarón: 'Toma una vasija y pon en ella un gomer de maná, y ponlo delante de Jehová, para que sea guardado para vuestras generaciones.' Los israelitas comieron maná cuarenta años, hasta que llegaron a una tierra habitada; comieron maná hasta que llegaron a la frontera de Canaán."
+            },
+            {
+                name: "Agua de la Roca",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 17:1-7",
+                intro: "Dios provee agua de una roca cuando el pueblo se queja de sed. Moisés golpea la roca en Horeb, y el agua fluye. Esto demuestra la capacidad de Dios para proveer las necesidades de Su pueblo incluso de las maneras más improbables.",
+                tagline: "Agua viva de la piedra",
+                summary: "Toda la comunidad israelita partió del desierto de Sin, viajando de un lugar a otro según el mandato del Señor. Acamparon en Refidim, pero no había agua para que el pueblo bebiera. Así que riñeron con Moisés y dijeron: 'Danos agua para beber.' Moisés respondió: '¿Por qué reñís conmigo? ¿Por qué tentáis a Jehová?' Pero el pueblo tenía sed allí, y murmuró contra Moisés. Dijeron: '¿Por qué nos hiciste subir de Egipto para matarnos de sed a nosotros, a nuestros hijos y a nuestro ganado?' Entonces Moisés clamó a Jehová, diciendo: '¿Qué haré con este pueblo? De aquí a un poco me apedrearán.' Y Jehová dijo a Moisés: 'Pasa delante del pueblo, y toma contigo de los ancianos de Israel; y toma también en tu mano tu vara con que golpeaste el río, y ve. He aquí que yo estaré delante de ti allí sobre la peña en Horeb; y golpearás la peña, y saldrán de ella aguas para que beba el pueblo.' Y Moisés lo hizo así en presencia de los ancianos de Israel. Y llamó el nombre de aquel lugar Masá y Meribá, por la rencilla de los hijos de Israel, y porque tentaron a Jehová, diciendo: '¿Está Jehová entre nosotros, o no?'"
+            },
+            {
+                name: "Los Diez Mandamientos",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 19:1-20:21",
+                intro: "Dios da la Ley a Israel en el Monte Sinaí. Los Diez Mandamientos forman el fundamento de la relación de pacto entre Dios y Su pueblo, estableciendo estándares morales y éticos que guiarían a Israel e influirían en toda la civilización humana.",
+                tagline: "La ley de Dios para Su pueblo",
+                summary: "Al tercer mes de la salida de los hijos de Israel de la tierra de Egipto, en aquel día llegaron al desierto de Sinaí. Habiendo salido de Refidim, llegaron al desierto de Sinaí, y acamparon en el desierto; y acampó allí Israel delante del monte. Y Moisés subió a Dios; y Jehová lo llamó desde el monte, diciendo: 'Así dirás a la casa de Jacob, y anunciarás a los hijos de Israel: Vosotros visteis lo que hice a los egipcios, y cómo os tomé sobre alas de águilas, y os he traído a mí. Ahora, pues, si diereis oído a mi voz, y guardareis mi pacto, vosotros seréis mi especial tesoro sobre todos los pueblos; porque mía es toda la tierra. Y vosotros me seréis un reino de sacerdotes, y gente santa.' Y todo el pueblo respondió a una, y dijeron: 'Todo lo que Jehová ha dicho, haremos.' Aconteció al tercer día, cuando vino la mañana, que hubo truenos y relámpagos, y espesa nube sobre el monte, y sonido de bocina muy fuerte; y se estremeció todo el pueblo que estaba en el campamento. Y Moisés sacó del campamento al pueblo para recibir a Dios; y se detuvieron al pie del monte. Todo el monte Sinaí humeaba, porque Jehová había descendido sobre él en fuego; y el humo subía como el humo de un horno, y todo el monte se estremecía en gran manera. Y el sonido de la bocina iba aumentando en extremo; Moisés hablaba, y Dios le respondía con voz. Y habló Dios todas estas palabras, diciendo: 'Yo soy Jehová tu Dios, que te saqué de la tierra de Egipto, de casa de servidumbre. No tendrás dioses ajenos delante de mí. No te harás imagen, ni ninguna semejanza de lo que esté arriba en el cielo, ni abajo en la tierra, ni en las aguas debajo de la tierra. No te inclinarás a ellas, ni las honrarás; porque yo soy Jehová tu Dios, fuerte, celoso, que visito la maldad de los padres sobre los hijos hasta la tercera y cuarta generación de los que me aborrecen, y hago misericordia a millares, a los que me aman y guardan mis mandamientos. No tomarás el nombre de Jehová tu Dios en vano. Acuérdate del día de reposo para santificarlo. Honra a tu padre y a tu madre. No matarás. No cometerás adulterio. No hurtarás. No dirás falso testimonio contra tu prójimo. No codiciarás la casa de tu prójimo, no codiciarás la mujer de tu prójimo, ni su siervo, ni su criada, ni su buey, ni su asno, ni cosa alguna de tu prójimo.' Todo el pueblo observaba los truenos y los relámpagos, y el sonido de la bocina, y el monte que humeaba; y viéndolo el pueblo, temblaron, y se pusieron de lejos. Y dijeron a Moisés: 'Habla tú con nosotros, y nosotros oiremos; pero no hable Dios con nosotros, para que no muramos.'"
+            },
+            {
+                name: "El Becerro de Oro",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 32:1-35",
+                intro: "El gran pecado de idolatría de Israel. Mientras Moisés está en la montaña recibiendo la Ley, el pueblo exige que Aarón les haga un dios. Crean un becerro de oro y lo adoran, rompiendo el pacto que acababan de hacer. Moisés intercede, y Dios muestra tanto juicio como misericordia.",
+                tagline: "Idolatría e intercesión",
+                summary: "Cuando el pueblo vio que Moisés tardaba en descender del monte, se acercaron a Aarón y le dijeron: 'Levántate, haznos dioses que vayan delante de nosotros; porque a este Moisés, el varón que nos sacó de la tierra de Egipto, no sabemos qué le haya acontecido.' Y Aarón les dijo: 'Apartad los zarcillos de oro que están en las orejas de vuestras mujeres, de vuestros hijos y de vuestras hijas, y traédmelos.' Y todo el pueblo apartó los zarcillos de oro que tenían en sus orejas, y los trajeron a Aarón; y él los tomó de las manos de ellos, y le dio forma con buril, e hizo de ello un becerro de fundición. Entonces dijeron: 'Israel, estos son tus dioses, que te sacaron de la tierra de Egipto.' Y viendo esto Aarón, edificó un altar delante del becerro; y pregonó Aarón, y dijo: 'Mañana será fiesta para Jehová.' Y al día siguiente madrugaron, y ofrecieron holocaustos, y presentaron ofrendas de paz; y se sentó el pueblo a comer y a beber, y se levantó a regocijarse. Entonces Jehová dijo a Moisés: 'Anda, desciende, porque tu pueblo que sacaste de la tierra de Egipto se ha corrompido. Pronto se han apartado del camino que yo les mandé; se han hecho un becerro de fundición, y lo han adorado, y le han ofrecido sacrificios, y han dicho: Israel, estos son tus dioses, que te sacaron de la tierra de Egipto. Yo he visto a este pueblo, que por cierto es pueblo de dura cerviz. Ahora, pues, déjame que se encienda mi ira en ellos, y los consuma; y de ti yo haré una nación grande.' Entonces Moisés oró en presencia de Jehová su Dios, y dijo: 'Oh Jehová, ¿por qué se encenderá tu ira contra tu pueblo, que tú sacaste de la tierra de Egipto con gran poder y con mano fuerte? ¿Por qué han de hablar los egipcios, diciendo: Para mal los sacó, para matarlos en los montes, y para raerlos de sobre la faz de la tierra? Vuélvete del furor de tu ira, y arrepiéntete del mal que quieres hacer a tu pueblo. Acuérdate de Abraham, de Isaac y de Israel tus siervos, a los cuales has jurado por ti mismo, y les has dicho: Yo multiplicaré vuestra descendencia como las estrellas del cielo, y les daré toda esta tierra que he dicho, y la heredarán para siempre.' Y Jehová se arrepintió del mal que dijo que había de hacer a su pueblo. Y volviéndose Moisés, descendió del monte trayendo en sus manos las dos tablas del testimonio, tablas escritas por ambos lados; de uno y otro lado estaban escritas. Y al acercarse Moisés al campamento y ver el becerro y las danzas, su ira se encendió, y arrojó las tablas de sus manos, y las quebró al pie del monte. Y tomó el becerro que habían hecho, y lo quemó en el fuego, y lo molió hasta reducirlo a polvo, que esparció sobre las aguas, y lo dio a beber a los hijos de Israel. Y se puso Moisés a la puerta del campamento, y dijo: '¿Quién está por Jehová? Júntese conmigo.' Y se juntaron con él todos los hijos de Leví. Y él les dijo: 'Así ha dicho Jehová, el Dios de Israel: Poned cada uno su espada sobre su muslo; pasad y volved de puerta a puerta por el campamento, y matad cada uno a su hermano, y a su amigo, y a su pariente.' Y los hijos de Leví hicieron conforme al dicho de Moisés; y cayeron del pueblo en aquel día como tres mil hombres. Entonces Moisés dijo: 'Hoy os habéis consagrado a Jehová, pues cada uno se ha opuesto a su hijo y a su hermano, para que él os dé hoy bendición.'"
+            },
+            {
+                name: "La Construcción del Tabernáculo",
+                date: "c. 1445 a.C.",
+                scripture: "Éxodo 25:1-40:38",
+                intro: "La construcción del Tabernáculo, un santuario portátil donde Dios habitaría entre Su pueblo. Cada detalle es especificado por Dios, y el pueblo contribuye generosamente. El Tabernáculo se convierte en el centro de la adoración de Israel y el patrón de la presencia de Dios con Su pueblo.",
+                tagline: "Dios habita con Su pueblo",
+                summary: "Jehová habló a Moisés, diciendo: 'Di a los hijos de Israel que tomen para mí ofrenda; de todo varón que la diere de voluntad de su corazón, de este tomaréis mi ofrenda. Y esta es la ofrenda que tomaréis de ellos: oro, plata, cobre, azul, púrpura, carmesí, lino fino, pelo de cabras, pieles de carneros teñidas de rojo, pieles de tejones, madera de acacia, aceite para el alumbrado, especias para el aceite de la unción y para el incienso aromático, y piedras de ónice, y piedras de engaste para el efod y para el pectoral. Y harán un santuario para mí, y habitaré en medio de ellos. Conforme a todo lo que yo te muestre, el diseño del tabernáculo, y el diseño de todos sus utensilios, así lo haréis.' El Señor dio instrucciones detalladas para cada parte del Tabernáculo: el arca del pacto con su propiciatorio, la mesa para el pan de la proposición, el candelabro de oro, el tabernáculo con su armazón y sus cubiertas, el altar del holocausto y todos los utensilios. El Señor también llamó a Bezaleel y a Aholiab, llenándolos del Espíritu de Dios, en sabiduría, en inteligencia, en ciencia y en toda artesanía, para diseñar obras de arte en oro, plata y bronce, para cortar y engastar piedras, para trabajar la madera y para dedicarse a todo tipo de artesanías. El pueblo trajo más que suficientes materiales para la obra. Moisés tuvo que restringirlos para que no trajeran más. Los obreros hábiles hicieron el Tabernáculo con diez cortinas de lino fino torcido y azul, púrpura y carmesí, con querubines tejidos en ellas. Hicieron el arca de madera de acacia, recubierta de oro puro. Hicieron el propiciatorio de oro puro. Hicieron la mesa, el candelabro, el altar del holocausto, la fuente de bronce y todos los demás utensilios exactamente como el Señor había mandado. Levantaron el Tabernáculo el primer día del primer mes del segundo año. Entonces la nube cubrió el tabernáculo de reunión, y la gloria de Jehová llenó el tabernáculo. Y no podía Moisés entrar en el tabernáculo de reunión, porque la nube estaba sobre él, y la gloria de Jehová lo tenía lleno. Y cuando la nube se alzaba del tabernáculo, los hijos de Israel se movían en todas sus jornadas; pero si la nube no se alzaba, no se movían hasta el día en que se alzaba. Porque la nube de Jehová estaba de día sobre el tabernáculo, y el fuego estaba de noche sobre él, a vista de toda la casa de Israel en todas sus jornadas."
+            },
+            {
+                name: "Batalla con Amalec",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 17:8-16",
+                intro: "La primera batalla de Israel como nación libre. Los amalecitas atacan a los israelitas en Refidim. Josué lidera el ejército mientras Moisés, Aarón y Hur observan desde una colina. Cuando Moisés levanta sus manos, Israel prevalece; cuando las baja, Amalec prevalece. Esto demuestra el poder de la intercesión y la protección de Dios sobre Su pueblo.",
+                tagline: "Victoria por intercesión",
+                summary: "Vinieron los amalecitas y pelearon contra Israel en Refidim. Y dijo Moisés a Josué: 'Escoge hombres, y sal a pelear contra Amalec; mañana yo estaré sobre la cumbre del collado, y la vara de Dios en mi mano.' E hizo Josué como le dijo Moisés, peleando contra Amalec; y Moisés, Aarón y Hur subieron a la cumbre del collado. Y sucedía que cuando alzaba Moisés su mano, Israel prevalecía; mas cuando él bajaba su mano, prevalecía Amalec. Y las manos de Moisés se cansaban; por lo que tomaron una piedra y la pusieron debajo de él, y se sentó sobre ella; y Aarón y Hur sostenían sus manos, uno de un lado y otro del otro; así hubo en sus manos firmeza hasta que se puso el sol. Y Josué deshizo a Amalec y a su pueblo a filo de espada. Y Jehová dijo a Moisés: 'Escribe esto para memoria en un libro, y di a Josué que raeré del todo la memoria de Amalec de debajo del cielo.' Y Moisés edificó un altar, y llamó su nombre Jehová-nisi; y dijo: 'Por cuanto la mano de Amalec se levantó contra el trono de Jehová, Jehová tendrá guerra con Amalec de generación en generación.'"
+            },
+            {
+                name: "Visita de Jetro",
+                date: "c. 1446 a.C.",
+                scripture: "Éxodo 18:1-27",
+                intro: "El suegro de Moisés, Jetro, visita y observa a Moisés juzgando al pueblo desde la mañana hasta la noche. Jetro aconseja a Moisés que delegue autoridad a líderes capaces, estableciendo un sistema de jueces. Esto demuestra la importancia del consejo sabio y el liderazgo compartido.",
+                tagline: "Sabiduría en el liderazgo",
+                summary: "Oyó Jetro, sacerdote de Madián, suegro de Moisés, todas las cosas que Dios había hecho con Moisés, y con Israel su pueblo, y cómo Jehová había sacado a Israel de Egipto. Y tomó Jetro, suegro de Moisés, a Séfora la mujer de Moisés, después que él la envió, y a sus dos hijos; el uno se llamaba Gersón, porque dijo: 'Forastero he sido en tierra ajena'; y el otro se llamaba Eliezer, porque dijo: 'El Dios de mi padre me ayudó, y me libró de la espada de Faraón.' Y Jetro, suegro de Moisés, con los hijos y la mujer de este, vino a Moisés en el desierto, donde estaba acampado junto al monte de Dios. Y envió a decir a Moisés: 'Yo tu suegro Jetro vengo a ti, con tu mujer, y tus dos hijos con ella.' Y Moisés salió a recibir a su suegro, y se inclinó, y lo besó; y se preguntaron el uno al otro cómo estaban, y vinieron a la tienda. Y contó Moisés a su suegro todas las cosas que Jehová había hecho a Faraón y a los egipcios por causa de Israel, y todo el trabajo que habían pasado en el camino, y cómo los había librado Jehová. Y se alegró Jetro de todo el bien que Jehová había hecho a Israel, al haberlos librado de mano de los egipcios. Y al día siguiente aconteció que Moisés se sentó a juzgar al pueblo; y el pueblo estuvo delante de Moisés desde la mañana hasta la tarde. Viendo el suegro de Moisés todo lo que él hacía con el pueblo, dijo: '¿Qué es esto que haces tú con el pueblo? ¿Por qué te sientas tú solo, y todo el pueblo está delante de ti desde la mañana hasta la tarde?' Y Moisés respondió a su suegro: 'Porque el pueblo viene a mí para consultar a Dios. Cuando tienen algún asunto, vienen a mí; y yo juzgo entre uno y otro, y declaro las ordenanzas de Dios y sus leyes.' Entonces el suegro de Moisés le dijo: 'No está bien lo que haces. Desfallecerás del todo, tú, y también este pueblo que está contigo; porque el trabajo es demasiado pesado para ti; no podrás hacerlo tú solo. Oye ahora mi voz; yo te aconsejaré, y Dios estará contigo. Tú estarás por el pueblo delante de Dios, y llevarás los asuntos a Dios. Y tú enseñarás a ellos las ordenanzas y las leyes, y les mostrarás el camino por donde deben andar, y lo que han de hacer. Además, escoge de entre todo el pueblo varones de virtud, temerosos de Dios, hombres de verdad, que aborrezcan la avaricia; y ponlos sobre el pueblo por jefes de millares, de centenas, de cincuentas y de dieces. Ellos juzgarán al pueblo en todo tiempo; y todo asunto grave lo traerán a ti, y ellos juzgarán todo asunto pequeño. Así aligerarás la carga de sobre ti, y la llevarán ellos contigo. Si esto hicieres, y Dios te lo mandare, tú podrás sostenerte, y también todo este pueblo llegará en paz a su lugar.' Y oyó Moisés la voz de su suegro, e hizo todo lo que dijo. Y escogió Moisés varones de virtud de entre todo Israel, y los puso por jefes sobre el pueblo, jefes de millares, de centenas, de cincuentas y de dieces. Y juzgaban al pueblo en todo tiempo; el asunto difícil lo traían a Moisés, y ellos juzgaban todo asunto pequeño. Y despidió Moisés a su suegro, y este se volvió a su tierra."
+            }
+        ];
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${event.scripture}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    <button class="audio-btn">Escuchar Historia</button>
+                `;
+
+                content.addEventListener('click', (e) => {
+                    // Don't toggle if clicking the audio button
+                    if (!e.target.classList.contains('audio-btn')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                // Add audio button functionality
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Spanish voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helvetica - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)'
+            ];
+            
+            // Try to find a Spanish voice first
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            const spanishVoice = voices.find(v => 
+                v.lang.startsWith('es')
+            );
+            
+            return spanishVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Wait for voices to load
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        // Initialize voice
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Play audio function
+        function playAudio(button, text) {
+            
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9; // Slightly slower, more deliberate
+            currentUtterance.pitch = 0.8; // Slightly lower pitch
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es'; // Spanish
+
+            // Update button state
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize
+        renderTimeline();
+
+        // Dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const btn = dropdown.querySelector('.dropdown-btn');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // Close all other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            const otherBtn = otherDropdown.querySelector('.dropdown-btn');
+                            const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                            otherBtn.classList.remove('open');
+                            otherMenu.classList.remove('open');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    btn.classList.toggle('open');
+                    menu.classList.toggle('open');
+                });
+                
+                // Update button text when item is clicked
+                const items = menu.querySelectorAll('.dropdown-item');
+                items.forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        const text = this.textContent.trim();
+                        const textSpan = btn.querySelector('.text');
+                        const emojiSpan = btn.querySelector('.emoji');
+                        
+                        // Update text
+                        if (textSpan) {
+                            textSpan.textContent = text;
+                        }
+                        
+                        // Update emoji based on selection
+                        if (emojiSpan) {
+                            const btnId = btn.id;
+                            if (btnId === 'bookBtn') {
+                                emojiSpan.textContent = '📖';
+                            } else if (btnId === 'typeBtn') {
+                                if (text.toLowerCase().includes('character') || text.toLowerCase().includes('personaje')) {
+                                    emojiSpan.textContent = '👤';
+                                } else if (text.toLowerCase().includes('event') || text.toLowerCase().includes('evento')) {
+                                    emojiSpan.textContent = '📅';
+                                }
+                            } else if (btnId === 'langBtn') {
+                                if (text.toLowerCase().includes('english') || text.toLowerCase().includes('inglés')) {
+                                    emojiSpan.textContent = '🇺🇸';
+                                } else if (text.toLowerCase().includes('español') || text.toLowerCase().includes('spanish')) {
+                                    emojiSpan.textContent = '🇪🇸';
+                                }
+                            }
+                        }
+                        
+                        // Update active state
+                        items.forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Close dropdown
+                        btn.classList.remove('open');
+                        menu.classList.remove('open');
+                    });
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown')) {
+                    dropdowns.forEach(dropdown => {
+                        const btn = dropdown.querySelector('.dropdown-btn');
+                        const menu = dropdown.querySelector('.dropdown-menu');
+                        btn.classList.remove('open');
+                        menu.classList.remove('open');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

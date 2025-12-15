@@ -57,49 +57,21 @@
             z-index: 1;
         }
 
-        .nav-buttons {
+        .nav-menu {
             display: flex;
             gap: 15px;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
-        .lang-buttons {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 15px;
-        }
-
-        .lang-btn {
-            padding: 8px 20px;
-            background: rgba(0, 195, 255, 0.15);
-            border: 1px solid rgba(0, 195, 255, 0.4);
-            color: #88d0ff;
-            border-radius: 20px;
-            cursor: pointer;
-            font-family: 'Rajdhani', sans-serif;
-            font-size: 0.85em;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-            text-decoration: none;
+        .dropdown {
+            position: relative;
             display: inline-block;
         }
 
-        .lang-btn:hover {
-            background: rgba(0, 195, 255, 0.25);
-            border-color: rgba(0, 195, 255, 0.6);
-        }
-
-        .lang-btn.active {
-            background: rgba(0, 195, 255, 0.3);
-            border-color: rgba(0, 195, 255, 0.7);
-            color: #00c3ff;
-        }
-
-        .nav-btn {
+        .dropdown-btn {
             padding: 12px 30px;
             background: rgba(0, 195, 255, 0.2);
             border: 1px solid rgba(0, 195, 255, 0.5);
@@ -112,21 +84,98 @@
             letter-spacing: 1px;
             transition: all 0.3s ease;
             text-transform: uppercase;
-            text-decoration: none;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
         }
 
-        .nav-btn:hover {
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
             background: rgba(0, 195, 255, 0.3);
             border-color: rgba(0, 195, 255, 0.8);
             box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
             transform: translateY(-2px);
         }
 
-        .nav-btn.active {
+        .dropdown-btn.active {
             background: rgba(0, 195, 255, 0.4);
             border-color: rgba(0, 195, 255, 0.8);
             box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
         }
 
         header {
@@ -480,23 +529,82 @@
                 font-size: 1.8em;
             }
 
-            .nav-buttons {
-                flex-direction: column;
+            .nav-menu {
+                flex-direction: row;
                 align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="lang-buttons">
-            <a href="index.html" class="lang-btn">English</a>
-            <a href="index-es.html" class="lang-btn active">Español</a>
+        <div class="nav-menu">
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="bookBtn">
+                    <span class="emoji">📖</span>
+                    <span class="text">Génesis</span>
+                </button>
+                <div class="dropdown-menu" id="bookMenu">
+                    <a href="index-es.html" class="dropdown-item active" data-book="genesis">Génesis</a>
+                    <a href="exodus-es.html" class="dropdown-item" data-book="exodus">Éxodo</a>
+                </div>
         </div>
 
-        <div class="nav-buttons">
-            <a href="index-es.html" class="nav-btn active">Personajes</a>
-            <a href="events-es.html" class="nav-btn">Eventos</a>
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="typeBtn">
+                    <span class="emoji">👤</span>
+                    <span class="text">Personajes</span>
+                </button>
+                <div class="dropdown-menu" id="typeMenu">
+                    <a href="index-es.html" class="dropdown-item active">Personajes</a>
+                    <a href="events-es.html" class="dropdown-item">Eventos</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="langBtn">
+                    <span class="emoji">🇪🇸</span>
+                    <span class="text">Español</span>
+                </button>
+                <div class="dropdown-menu" id="langMenu">
+                    <a href="index.html" class="dropdown-item">English</a>
+                    <a href="index-es.html" class="dropdown-item active">Español</a>
+                </div>
+            </div>
         </div>
 
         <header>
@@ -1018,6 +1126,89 @@
 
         // Initialize
         renderTimeline();
+
+        // Dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const btn = dropdown.querySelector('.dropdown-btn');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    
+                    // Close all other dropdowns
+                    dropdowns.forEach(otherDropdown => {
+                        if (otherDropdown !== dropdown) {
+                            const otherBtn = otherDropdown.querySelector('.dropdown-btn');
+                            const otherMenu = otherDropdown.querySelector('.dropdown-menu');
+                            otherBtn.classList.remove('open');
+                            otherMenu.classList.remove('open');
+                        }
+                    });
+                    
+                    // Toggle current dropdown
+                    btn.classList.toggle('open');
+                    menu.classList.toggle('open');
+                });
+                
+                // Update button text when item is clicked
+                const items = menu.querySelectorAll('.dropdown-item');
+                items.forEach(item => {
+                    item.addEventListener('click', function(e) {
+                        const text = this.textContent.trim();
+                        const textSpan = btn.querySelector('.text');
+                        const emojiSpan = btn.querySelector('.emoji');
+                        
+                        // Update text
+                        if (textSpan) {
+                            textSpan.textContent = text;
+                        }
+                        
+                        // Update emoji based on selection
+                        if (emojiSpan) {
+                            const btnId = btn.id;
+                            if (btnId === 'bookBtn') {
+                                emojiSpan.textContent = '📖';
+                            } else if (btnId === 'typeBtn') {
+                                if (text.toLowerCase().includes('character') || text.toLowerCase().includes('personaje')) {
+                                    emojiSpan.textContent = '👤';
+                                } else if (text.toLowerCase().includes('event') || text.toLowerCase().includes('evento')) {
+                                    emojiSpan.textContent = '📅';
+                                }
+                            } else if (btnId === 'langBtn') {
+                                if (text.toLowerCase().includes('english') || text.toLowerCase().includes('inglés')) {
+                                    emojiSpan.textContent = '🇺🇸';
+                                } else if (text.toLowerCase().includes('español') || text.toLowerCase().includes('spanish')) {
+                                    emojiSpan.textContent = '🇪🇸';
+                                }
+                            }
+                        }
+                        
+                        // Update active state
+                        items.forEach(i => i.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Close dropdown
+                        btn.classList.remove('open');
+                        menu.classList.remove('open');
+                    });
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!e.target.closest('.dropdown')) {
+                    dropdowns.forEach(dropdown => {
+                        const btn = dropdown.querySelector('.dropdown-btn');
+                        const menu = dropdown.querySelector('.dropdown-menu');
+                        btn.classList.remove('open');
+                        menu.classList.remove('open');
+                    });
+                }
+            });
+        });
     </script>
 </body>
 </html>
