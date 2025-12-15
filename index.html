@@ -411,6 +411,20 @@
             font-style: italic;
         }
 
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
         .character-intro {
             color: #c0d0e0;
             line-height: 1.8;
@@ -980,6 +994,14 @@
             }
         ];
 
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
         // Render timeline
         function renderTimeline() {
             const timeline = document.getElementById('timeline');
@@ -997,7 +1019,7 @@
                     <div class="character-name">${character.name}</div>
                     <div class="character-date-row">
                         <div class="character-date">${character.date}</div>
-                        ${character.scripture ? `<div class="character-scripture">${character.scripture}</div>` : ''}
+                        ${character.scripture ? `<div class="character-scripture">${createBibleGatewayLink(character.scripture)}</div>` : ''}
                     </div>
                     <div class="character-intro">${character.intro}</div>
                     <div class="character-tagline">${character.tagline}</div>
@@ -1006,8 +1028,10 @@
                 `;
 
                 content.addEventListener('click', (e) => {
-                    // Don't toggle if clicking the audio button
-                    if (!e.target.classList.contains('audio-btn')) {
+                    // Don't toggle if clicking the audio button or scripture link
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link')) {
                         content.classList.toggle('expanded');
                     }
                 });
