@@ -586,40 +586,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="nav-menu">
-            <div class="dropdown">
-                <button class="dropdown-btn active" id="bookBtn">
-                    <span class="emoji">📖</span>
-                    <span class="text">Exodus</span>
-                </button>
-                <div class="dropdown-menu" id="bookMenu">
-                    <a href="events.html" class="dropdown-item" data-book="genesis">Genesis</a>
-                    <a href="exodus-events.html" class="dropdown-item active" data-book="exodus">Exodus</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropdown-btn active" id="typeBtn">
-                    <span class="emoji">📅</span>
-                    <span class="text">Events</span>
-                </button>
-                <div class="dropdown-menu" id="typeMenu">
-                    <a href="exodus.html" class="dropdown-item">Characters</a>
-                    <a href="exodus-events.html" class="dropdown-item active">Events</a>
-                </div>
-            </div>
-
-            <div class="dropdown">
-                <button class="dropdown-btn active" id="langBtn">
-                    <span class="emoji">🇺🇸</span>
-                    <span class="text">English</span>
-                </button>
-                <div class="dropdown-menu" id="langMenu">
-                    <a href="exodus-events.html" class="dropdown-item active">English</a>
-                    <a href="exodus-events-es.html" class="dropdown-item">Español</a>
-                </div>
-            </div>
-        </div>
+        <div class="nav-menu"></div>
 
         <header>
             <h1>📖 Exodus Events</h1>
@@ -882,89 +849,8 @@
         // Initialize
         renderTimeline();
 
-        // Dropdown functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const dropdowns = document.querySelectorAll('.dropdown');
-            
-            dropdowns.forEach(dropdown => {
-                const btn = dropdown.querySelector('.dropdown-btn');
-                const menu = dropdown.querySelector('.dropdown-menu');
-                
-                btn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    
-                    // Close all other dropdowns
-                    dropdowns.forEach(otherDropdown => {
-                        if (otherDropdown !== dropdown) {
-                            const otherBtn = otherDropdown.querySelector('.dropdown-btn');
-                            const otherMenu = otherDropdown.querySelector('.dropdown-menu');
-                            otherBtn.classList.remove('open');
-                            otherMenu.classList.remove('open');
-                        }
-                    });
-                    
-                    // Toggle current dropdown
-                    btn.classList.toggle('open');
-                    menu.classList.toggle('open');
-                });
-                
-                // Update button text when item is clicked
-                const items = menu.querySelectorAll('.dropdown-item');
-                items.forEach(item => {
-                    item.addEventListener('click', function(e) {
-                        const text = this.textContent.trim();
-                        const textSpan = btn.querySelector('.text');
-                        const emojiSpan = btn.querySelector('.emoji');
-                        
-                        // Update text
-                        if (textSpan) {
-                            textSpan.textContent = text;
-                        }
-                        
-                        // Update emoji based on selection
-                        if (emojiSpan) {
-                            const btnId = btn.id;
-                            if (btnId === 'bookBtn') {
-                                emojiSpan.textContent = '📖';
-                            } else if (btnId === 'typeBtn') {
-                                if (text.toLowerCase().includes('character') || text.toLowerCase().includes('personaje')) {
-                                    emojiSpan.textContent = '👤';
-                                } else if (text.toLowerCase().includes('event') || text.toLowerCase().includes('evento')) {
-                                    emojiSpan.textContent = '📅';
-                                }
-                            } else if (btnId === 'langBtn') {
-                                if (text.toLowerCase().includes('english') || text.toLowerCase().includes('inglés')) {
-                                    emojiSpan.textContent = '🇺🇸';
-                                } else if (text.toLowerCase().includes('español') || text.toLowerCase().includes('spanish')) {
-                                    emojiSpan.textContent = '🇪🇸';
-                                }
-                            }
-                        }
-                        
-                        // Update active state
-                        items.forEach(i => i.classList.remove('active'));
-                        this.classList.add('active');
-                        
-                        // Close dropdown
-                        btn.classList.remove('open');
-                        menu.classList.remove('open');
-                    });
-                });
-            });
-            
-            // Close dropdowns when clicking outside
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.dropdown')) {
-                    dropdowns.forEach(dropdown => {
-                        const btn = dropdown.querySelector('.dropdown-btn');
-                        const menu = dropdown.querySelector('.dropdown-menu');
-                        btn.classList.remove('open');
-                        menu.classList.remove('open');
-                    });
-                }
-            });
-        });
     </script>
+    <script src="menu.js"></script>
 </body>
 </html>
 
