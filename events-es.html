@@ -515,6 +515,94 @@
             50% { opacity: 0.5; }
         }
 
+        .dive-in-btn {
+            display: none;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.3), rgba(0, 200, 255, 0.2));
+            border: 1px solid rgba(0, 180, 255, 0.6);
+            color: #4dd0ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 15px rgba(0, 180, 255, 0.3),
+                inset 0 0 10px rgba(0, 200, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .timeline-content.expanded .dive-in-btn {
+            display: inline-block;
+        }
+
+        .dive-in-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .dive-in-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .dive-in-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.4), rgba(0, 200, 255, 0.3));
+            border-color: rgba(0, 180, 255, 0.9);
+            box-shadow: 
+                0 0 25px rgba(0, 180, 255, 0.5),
+                inset 0 0 20px rgba(0, 200, 255, 0.2);
+            transform: translateY(-2px);
+            color: #66d9ff;
+        }
+
+        .dive-in-btn:hover::after {
+            left: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button-container .audio-btn {
+            margin-top: 0;
+        }
+
+        .button-container .dive-in-btn {
+            margin-top: 0;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 2em;
@@ -766,6 +854,15 @@
                 const content = document.createElement('div');
                 content.className = 'timeline-content';
                 
+                // Check if this is the Creation event to add Dive In button
+                const isCreation = event.name === "La Creación";
+                const buttonsHTML = isCreation 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                        <a href="dive-in-creation-es.html" class="dive-in-btn">Sumérgete!</a>
+                    </div>`
+                    : `<button class="audio-btn">Escuchar Historia</button>`;
+
                 content.innerHTML = `
                     <div class="expand-icon">▼</div>
                     <div class="character-name">${event.name}</div>
@@ -776,12 +873,14 @@
                     <div class="character-intro">${event.intro}</div>
                     <div class="character-tagline">${event.tagline}</div>
                     <div class="character-summary">${event.summary}</div>
-                    <button class="audio-btn">Escuchar Historia</button>
+                    ${buttonsHTML}
                 `;
 
                 content.addEventListener('click', (e) => {
-                    // Don't toggle if clicking the audio button or scripture link
+                    // Don't toggle if clicking the audio button, dive-in button, or scripture link
                     if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
                         !e.target.classList.contains('scripture-link') &&
                         !e.target.closest('.scripture-link')) {
                         content.classList.toggle('expanded');

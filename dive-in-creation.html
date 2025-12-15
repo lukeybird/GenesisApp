@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dive In: Creation - Genesis Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu">
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="bookBtn">
+                    <span class="emoji">📖</span>
+                    <span class="text">Genesis</span>
+                </button>
+                <div class="dropdown-menu" id="bookMenu">
+                    <a href="index.html" class="dropdown-item" data-book="genesis">Genesis</a>
+                    <a href="exodus-events.html" class="dropdown-item" data-book="exodus">Exodus</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="typeBtn">
+                    <span class="emoji">📅</span>
+                    <span class="text">Events</span>
+                </button>
+                <div class="dropdown-menu" id="typeMenu">
+                    <a href="index.html" class="dropdown-item">Characters</a>
+                    <a href="events.html" class="dropdown-item active">Events</a>
+                </div>
+            </div>
+
+            <div class="dropdown">
+                <button class="dropdown-btn active" id="langBtn">
+                    <span class="emoji">🇺🇸</span>
+                    <span class="text">English</span>
+                </button>
+                <div class="dropdown-menu" id="langMenu">
+                    <a href="dive-in-creation.html" class="dropdown-item active">English</a>
+                    <a href="dive-in-creation-es.html" class="dropdown-item">Español</a>
+                </div>
+            </div>
+        </div>
+
+        <header>
+            <h1>🌊 Dive In: Creation</h1>
+            <p class="subtitle">Seeing Christ in the Beginning</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">The Foundation: In the Beginning Was the Word</h2>
+            <p>The Creation account in <a href="https://www.biblegateway.com/passage/?search=Genesis%201%3A1-2%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 1-2</a> is not merely a historical record of how the universe came into being—it is the opening act of a grand narrative that finds its ultimate meaning and fulfillment in Jesus Christ. The New Testament explicitly reveals that the One who spoke creation into existence is the same One who would come to redeem it.</p>
+            
+            <div class="verse-callout">
+                In the beginning was the Word, and the Word was with God, and the Word was God. He was in the beginning with God. All things were made through Him, and without Him nothing was made that was made.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%201%3A1-3&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 1:1-3</a>
+                </span>
+            </div>
+
+            <p>When Genesis opens with "In the beginning, God created," it points forward to the One who would be revealed as the Creator Himself—Jesus Christ. The apostle John deliberately echoes <a href="https://www.biblegateway.com/passage/?search=Genesis%201%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 1:1</a> to show that the Word who became flesh (<a href="https://www.biblegateway.com/passage/?search=John%201%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 1:14</a>) is the same Word through whom all things were created.</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Jesus: The Agent of Creation</h2>
+            <p>The New Testament makes it abundantly clear that Jesus Christ was not only present at creation but was the active agent through whom God created everything. This truth is stated explicitly in multiple passages:</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Creator in Colossians</div>
+                <p>Paul writes that Jesus is "the image of the invisible God, the firstborn over all creation. For by Him all things were created that are in heaven and that are on earth, visible and invisible" (<a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A15-16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 1:15-16</a>). The phrase "firstborn" here doesn't mean Jesus was created—it means He has the rights and privileges of the firstborn, the preeminent position over all creation.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A15-17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 1:15-17</a>
+                </div>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">The Sustainer of All Things</div>
+                <p>Not only did Jesus create all things, but He also sustains them. The writer of Hebrews declares that God "has in these last days spoken to us by His Son, whom He has appointed heir of all things, through whom also He made the worlds" (<a href="https://www.biblegateway.com/passage/?search=Hebrews%201%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 1:2</a>). The same One who spoke the universe into existence continues to hold it together by His powerful word.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%201%3A2-3&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 1:2-3</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Image of God: From Adam to Christ</h2>
+            <p><a href="https://www.biblegateway.com/passage/?search=Genesis%201%3A27&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 1:27</a> declares that God created humanity "in His own image; in the image of God He created him; male and female He created them." This profound truth finds its ultimate expression in Jesus Christ, who is described as "the image of the invisible God" (<a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 1:15</a>) and "the express image of His person" (<a href="https://www.biblegateway.com/passage/?search=Hebrews%201%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 1:3</a>).</p>
+
+            <div class="verse-callout">
+                For whom He foreknew, He also predestined to be conformed to the image of His Son, that He might be the firstborn among many brethren.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%208%3A29&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 8:29</a>
+                </span>
+            </div>
+
+            <p>Where Adam failed to reflect God's image perfectly, Jesus perfectly reveals what it means to be the image of God. Through Christ, believers are being restored to the image that was marred by sin, ultimately to be conformed to the image of the Son.</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The First Adam and the Last Adam</h2>
+            <p>Paul explicitly draws the connection between Adam and Christ, calling Jesus "the last Adam" (<a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2015%3A45&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 15:45</a>). This typology reveals how the story of creation and fall points forward to redemption:</p>
+
+            <div class="verse-callout">
+                For as in Adam all die, even so in Christ all shall be made alive.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2015%3A22&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 15:22</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">The Contrast</div>
+                <p><a href="https://www.biblegateway.com/passage/?search=Romans%205%3A12-21&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 5:12-21</a> provides a detailed comparison: "Therefore, just as through one man sin entered the world, and death through sin, and thus death spread to all men, because all sinned... But the free gift is not like the offense. For if by the one man's offense many died, much more the grace of God and the gift by the grace of the one Man, Jesus Christ, abounded to many" (<a href="https://www.biblegateway.com/passage/?search=Romans%205%3A12%2C15&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 5:12, 15</a>).</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%205%3A12-21&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 5:12-21</a>
+                </div>
+            </div>
+
+            <p>Adam brought death and separation from God; Christ brings life and reconciliation. Adam's disobedience brought condemnation; Christ's obedience brings justification. The first creation through Adam was corrupted; the new creation through Christ is being restored.</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Light of the World</h2>
+            <p>On the first day of creation, God said, "Let there be light" (<a href="https://www.biblegateway.com/passage/?search=Genesis%201%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 1:3</a>), and light was separated from darkness. This physical light points to a greater spiritual reality—Jesus Christ, who declared Himself to be "the light of the world" (<a href="https://www.biblegateway.com/passage/?search=John%208%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 8:12</a>).</p>
+
+            <div class="verse-callout">
+                In Him was life, and the life was the light of men. And the light shines in the darkness, and the darkness did not comprehend it.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%201%3A4-5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 1:4-5</a>
+                </span>
+            </div>
+
+            <p>Just as God's first creative act was to bring light into darkness, so Christ came as the true Light to dispel the spiritual darkness that had covered the earth. Those who follow Him "shall not walk in darkness, but have the light of life" (<a href="https://www.biblegateway.com/passage/?search=John%208%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 8:12</a>).</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Sabbath Rest: Finding Rest in Christ</h2>
+            <p>On the seventh day, God rested from all His work, blessing and sanctifying that day (<a href="https://www.biblegateway.com/passage/?search=Genesis%202%3A2-3&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 2:2-3</a>). This Sabbath rest was not because God was tired, but because His work of creation was complete. This pattern of rest points forward to the ultimate rest found in Christ.</p>
+
+            <div class="verse-callout">
+                Come to Me, all you who labor and are heavy laden, and I will give you rest. Take My yoke upon you and learn from Me, for I am gentle and lowly in heart, and you will find rest for your souls.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2011%3A28-30&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 11:28-30</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">The True Sabbath Rest</div>
+                <p>The book of Hebrews explains that the Sabbath rest of creation points to a greater rest: "There remains therefore a rest for the people of God. For he who has entered His rest has himself also ceased from his works as God did from His" (<a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A9-10&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 4:9-10</a>). This rest is found in Christ, who completed the work of redemption, just as God completed the work of creation.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A1-11&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 4:1-11</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">New Creation: The Ultimate Fulfillment</h2>
+            <p>The story that begins with "In the beginning, God created" finds its ultimate fulfillment in the promise of a new creation. Just as God created the heavens and the earth in the beginning, so He promises to create "new heavens and a new earth" (<a href="https://www.biblegateway.com/passage/?search=Isaiah%2065%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Isaiah 65:17</a>, <a href="https://www.biblegateway.com/passage/?search=Revelation%2021%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Revelation 21:1</a>).</p>
+
+            <div class="verse-callout">
+                Therefore, if anyone is in Christ, he is a new creation; old things have passed away; behold, all things have become new.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%205%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Corinthians 5:17</a>
+                </span>
+            </div>
+
+            <div class="verse-callout">
+                Now I saw a new heaven and a new earth, for the first heaven and the first earth had passed away. Also there was no more sea. Then I, John, saw the holy city, New Jerusalem, coming down out of heaven from God, prepared as a bride adorned for her husband.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%2021%3A1-5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Revelation 21:1-5</a>
+                </span>
+            </div>
+
+            <p>Through Christ, believers become part of this new creation. The old order, corrupted by sin, is passing away. The new order, redeemed and restored through the work of Christ, is already breaking in and will be fully realized when He returns. The creation that began in Genesis finds its completion in the new creation that Christ brings.</p>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Christ in the Beginning</h2>
+            <p>The Creation account is not a standalone story but the opening chapter of a narrative that finds its center and meaning in Jesus Christ. He is the Word through whom all things were created, the true Image of God, the Last Adam who reverses the curse of the first, the Light that dispels darkness, the Rest for the weary, and the Author of the new creation.</p>
+
+            <p>When we read <a href="https://www.biblegateway.com/passage/?search=Genesis%201%3A1-2%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 1-2</a>, we are not just reading about how the world began—we are reading about the One who was there in the beginning, who came to redeem what was lost, and who will one day make all things new. The story of creation is, from the very first verse, the story of Christ.</p>
+        </div>
+    </div>
+
+    <script>
+        // Dropdown functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdowns = document.querySelectorAll('.dropdown');
+            
+            dropdowns.forEach(dropdown => {
+                const btn = dropdown.querySelector('.dropdown-btn');
+                const menu = dropdown.querySelector('.dropdown-menu');
+                
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isOpen = menu.classList.contains('open');
+                    
+                    // Close all other dropdowns
+                    document.querySelectorAll('.dropdown-menu').forEach(m => {
+                        m.classList.remove('open');
+                        m.previousElementSibling.classList.remove('open');
+                    });
+                    
+                    // Toggle current dropdown
+                    if (!isOpen) {
+                        menu.classList.add('open');
+                        btn.classList.add('open');
+                    }
+                });
+            });
+            
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function() {
+                document.querySelectorAll('.dropdown-menu').forEach(menu => {
+                    menu.classList.remove('open');
+                    menu.previousElementSibling.classList.remove('open');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
