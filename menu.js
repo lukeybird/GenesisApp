@@ -12,6 +12,7 @@
         'exodus.html': { book: 'exodus', type: 'characters', lang: 'en' },
         'exodus-events.html': { book: 'exodus', type: 'events', lang: 'en' },
         'dive-in-creation.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-fall.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         
         // Spanish pages
         'index-es.html': { book: 'genesis', type: 'characters', lang: 'es' },

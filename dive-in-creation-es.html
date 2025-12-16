@@ -328,6 +328,67 @@
             font-weight: 600;
         }
 
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 1.8em;
@@ -403,6 +464,7 @@
             </div>
 
             <p>Cuando Génesis comienza con "En el principio, creó Dios," apunta hacia Aquel que sería revelado como el Creador mismo—Jesucristo. El apóstol Juan deliberadamente hace eco de <a href="https://www.biblegateway.com/passage/?search=Génesis%201%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 1:1</a> para mostrar que el Verbo que se hizo carne (<a href="https://www.biblegateway.com/passage/?search=Juan%201%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 1:14</a>) es el mismo Verbo por quien todas las cosas fueron creadas.</p>
+            <button class="audio-btn" data-section="foundation">Escuchar Sección</button>
         </div>
 
         <div class="content-section">
@@ -424,6 +486,7 @@
                     <a href="https://www.biblegateway.com/passage/?search=Hebreos%201%3A2-3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 1:2-3</a>
                 </div>
             </div>
+            <button class="audio-btn" data-section="agent">Escuchar Sección</button>
         </div>
 
         <div class="content-section">
@@ -438,6 +501,7 @@
             </div>
 
             <p>Donde Adán falló en reflejar perfectamente la imagen de Dios, Jesús revela perfectamente lo que significa ser la imagen de Dios. A través de Cristo, los creyentes están siendo restaurados a la imagen que fue desfigurada por el pecado, finalmente para ser conformados a la imagen del Hijo.</p>
+            <button class="audio-btn" data-section="image">Escuchar Sección</button>
         </div>
 
         <div class="content-section">
@@ -460,6 +524,7 @@
             </div>
 
             <p>Adán trajo muerte y separación de Dios; Cristo trae vida y reconciliación. La desobediencia de Adán trajo condenación; la obediencia de Cristo trae justificación. La primera creación a través de Adán fue corrompida; la nueva creación a través de Cristo está siendo restaurada.</p>
+            <button class="audio-btn" data-section="adam">Escuchar Sección</button>
         </div>
 
         <div class="content-section">
@@ -474,6 +539,7 @@
             </div>
 
             <p>Así como el primer acto creativo de Dios fue traer luz a las tinieblas, así Cristo vino como la verdadera Luz para disipar las tinieblas espirituales que habían cubierto la tierra. Los que le siguen "no andarán en tinieblas, sino que tendrán la luz de la vida" (<a href="https://www.biblegateway.com/passage/?search=Juan%208%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 8:12</a>).</p>
+            <button class="audio-btn" data-section="light">Escuchar Sección</button>
         </div>
 
         <div class="content-section">
@@ -494,6 +560,7 @@
                     <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A1-11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:1-11</a>
                 </div>
             </div>
+            <button class="audio-btn" data-section="sabbath">Escuchar Sección</button>
         </div>
 
         <div class="content-section">
@@ -515,6 +582,7 @@
             </div>
 
             <p>A través de Cristo, los creyentes se convierten en parte de esta nueva creación. El viejo orden, corrompido por el pecado, está pasando. El nuevo orden, redimido y restaurado a través de la obra de Cristo, ya está irrumpiendo y será completamente realizado cuando Él regrese. La creación que comenzó en Génesis encuentra su cumplimiento en la nueva creación que Cristo trae.</p>
+            <button class="audio-btn" data-section="newcreation">Escuchar Sección</button>
         </div>
 
         <div class="content-section">
@@ -522,12 +590,133 @@
             <p>El relato de la Creación no es una historia independiente sino el capítulo inicial de una narrativa que encuentra su centro y significado en Jesucristo. Él es el Verbo por quien todas las cosas fueron creadas, la verdadera Imagen de Dios, el Último Adán que revierte la maldición del primero, la Luz que disipa las tinieblas, el Descanso para los cansados, y el Autor de la nueva creación.</p>
 
             <p>Cuando leemos <a href="https://www.biblegateway.com/passage/?search=Génesis%201%3A1-2%3A25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 1-2</a>, no solo estamos leyendo sobre cómo comenzó el mundo—estamos leyendo sobre Aquel que estuvo allí en el principio, que vino a redimir lo que se perdió, y que un día hará nuevas todas las cosas. La historia de la creación es, desde el primer versículo, la historia de Cristo.</p>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
         </div>
     </div>
 
     <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
         
-                    
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (excluding buttons and verse references)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove buttons, verse callouts, and verse references
+            clone.querySelectorAll('.audio-btn, .verse-callout, .verse-reference').forEach(el => el.remove());
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
     </script>
     <script src="menu.js"></script>
 </body>

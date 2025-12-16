@@ -821,12 +821,18 @@
                 const content = document.createElement('div');
                 content.className = 'timeline-content';
                 
-                // Check if this is the Creation event to add Dive In button
+                // Check if this is the Creation or Fall event to add Dive In button
                 const isCreation = event.name === "Creation";
+                const isFall = event.name === "The Fall";
                 const buttonsHTML = isCreation 
                     ? `<div class="button-container">
                         <button class="audio-btn">Listen to Story</button>
                         <a href="dive-in-creation.html" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : isFall
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="dive-in-fall.html" class="dive-in-btn">Dive In!</a>
                     </div>`
                     : `<button class="audio-btn">Listen to Story</button>`;
 
