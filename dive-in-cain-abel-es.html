@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumérgete: Caín y Abel - Línea de Tiempo de Génesis</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: Caín y Abel</h1>
+            <p class="subtitle">Viendo a Cristo en el Primer Sacrificio y el Primer Asesinato</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">El Sacrificio Aceptable: La Ofrenda de Abel Apunta a Cristo</h2>
+            <p>La historia de Caín y Abel en <a href="https://www.biblegateway.com/passage/?search=Génesis%204%3A1-16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 4:1-16</a> revela una verdad fundamental sobre la adoración y el sacrificio que encuentra su expresión definitiva en Jesucristo. El sacrificio de Abel fue aceptado porque era un sacrificio de sangre—los primogénitos de su rebaño—apuntando hacia el sacrificio de sangre definitivo de Cristo.</p>
+            
+            <div class="verse-callout">
+                Por la fe Abel ofreció a Dios más excelente sacrificio que Caín, por lo cual alcanzó testimonio de que era justo, dando Dios testimonio de sus ofrendas; y muerto, aún habla por ella.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2011%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 11:4</a>
+                </span>
+            </div>
+
+            <p>El sacrificio de Abel fue aceptado no por el animal en sí, sino porque fue ofrecido en fe y porque era un sacrificio de sangre. Este patrón—que "sin derramamiento de sangre no se hace remisión" (<a href="https://www.biblegateway.com/passage/?search=Hebreos%209%3A22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 9:22</a>)—apunta directamente a Cristo, quien se ofreció a Sí mismo como el sacrificio perfecto, una vez para siempre, por el pecado.</p>
+            <button class="audio-btn" data-section="sacrifice">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Rechazo de Caín: Obras vs. Fe</h2>
+            <p>La ofrenda de Caín fue rechazada porque representaba un enfoque basado en obras hacia Dios—trayendo el fruto de su propio trabajo en lugar de un sacrificio de sangre. Este contraste entre Caín y Abel presagia el contraste entre aquellos que intentan ganar el favor de Dios a través de obras y aquellos que lo reciben por fe en el sacrificio de Cristo.</p>
+
+            <div class="verse-callout">
+                No por obras de justicia que nosotros hubiéramos hecho, sino por su misericordia, nos salvó, por el lavamiento de la regeneración y por la renovación en el Espíritu Santo.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Tito%203%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Tito 3:5</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">El Camino de Caín</div>
+                <p>El Nuevo Testamento advierte contra "el camino de Caín" (<a href="https://www.biblegateway.com/passage/?search=Judas%2011&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Judas 11</a>), que representa la justicia propia y el rechazo del camino de salvación de Dios. Caín intentó acercarse a Dios en sus propios términos, con sus propias obras, en lugar de a través del sacrificio de sangre que Dios requería. Este mismo error continúa hoy cuando las personas intentan ganar la salvación a través de buenas obras en lugar de confiar en la obra terminada de Cristo en la cruz.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%202%3A8-9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Efesios 2:8-9</a>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="works">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Abel: Un Tipo de Cristo</h2>
+            <p>Abel sirve como un tipo, o presagio, de Cristo de varias maneras significativas. Él fue el justo que fue asesinado por su propio hermano, así como Cristo fue asesinado por Su propio pueblo. Su sangre clamó desde la tierra, apuntando a la sangre de Cristo que habla una palabra mejor.</p>
+
+            <div class="verse-callout">
+                A Jesús el Mediador del nuevo pacto, y a la sangre rociada que habla mejor que la de Abel.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2012%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 12:24</a>
+                </span>
+            </div>
+
+            <p>La sangre de Abel clamó por venganza desde la tierra (<a href="https://www.biblegateway.com/passage/?search=Génesis%204%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 4:10</a>), pero la sangre de Cristo habla de misericordia, perdón y reconciliación. Donde la sangre de Abel demandaba justicia, la sangre de Cristo provee gracia. Donde la sangre de Abel clamaba por retribución, la sangre de Cristo clama por redención.</p>
+            <button class="audio-btn" data-section="type">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Primer Asesinato: El Pecado se Intensifica</h2>
+            <p>El asesinato de Abel por Caín demuestra cómo el pecado se intensifica cuando no se trata. Dios advirtió a Caín que "el pecado está a la puerta; te acecha, pero tú debes dominarlo" (<a href="https://www.biblegateway.com/passage/?search=Génesis%204%3A7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 4:7</a>). En lugar de dominar el pecado, Caín lo dejó dominarlo, llevando al primer asesinato.</p>
+
+            <div class="verse-callout">
+                Porque no tenemos un sumo sacerdote que no pueda compadecerse de nuestras debilidades, sino uno que fue tentado en todo según nuestra semejanza, pero sin pecado.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:15</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">La Intensificación del Pecado</div>
+                <p>La historia de Caín muestra la progresión del pecado: los celos llevaron a la ira, la ira llevó al asesinato. Este patrón revela la incapacidad de la humanidad para dominar el pecado por nuestra cuenta. Necesitamos un Salvador que no solo resistió el pecado perfectamente sino que también pagó la pena por nuestro pecado. Jesús, a diferencia de Caín, fue tentado en todo pero no pecó. Dominó el pecado completamente y ofrece esa victoria a todos los que confían en Él.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2010%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 10:13</a>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="murder">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Marca de Caín: Misericordia en el Juicio</h2>
+            <p>Después de que Caín asesinó a Abel, Dios pronunció juicio pero también mostró misericordia al colocar una marca en Caín para protegerlo de ser asesinado (<a href="https://www.biblegateway.com/passage/?search=Génesis%204%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 4:15</a>). Esta marca, aunque era una señal del juicio de Dios, también era una señal de la protección y misericordia de Dios.</p>
+
+            <div class="verse-callout">
+                Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%203%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 3:16</a>
+                </span>
+            </div>
+
+            <p>Mientras que la marca de Caín era una señal de protección en el juicio, los creyentes en Cristo reciben una marca diferente—el sello del Espíritu Santo (<a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Efesios 1:13</a>), que es una señal de salvación, no de juicio. Este sello nos marca como propiedad de Dios, protegidos no del daño físico sino del juicio eterno, asegurados en Cristo para siempre.</p>
+            <button class="audio-btn" data-section="mark">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Justo que Sufre</h2>
+            <p>Abel fue la primera persona justa que sufrió y murió injustamente. Su muerte a manos de su propio hermano presagia la muerte de Cristo, quien también fue justo y murió a manos de Su propio pueblo. El patrón del justo que sufre a manos del injusto encuentra su expresión definitiva en la cruz.</p>
+
+            <div class="verse-callout">
+                Porque también Cristo padeció una sola vez por los pecados, el justo por los injustos, para llevarnos a Dios, siendo a la verdad muerto en la carne, pero vivificado en espíritu.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%203%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Pedro 3:18</a>
+                </span>
+            </div>
+
+            <p>La muerte de Abel fue trágica e injusta, pero en última instancia fue impotente para salvar. La muerte de Cristo, aunque también injusta desde una perspectiva humana, fue el mismo medio por el cual Dios logró la salvación. Donde la muerte de Abel trajo solo tristeza, la muerte de Cristo trae gozo eterno. Donde la muerte de Abel mostró el poder del pecado, la muerte de Cristo muestra el poder del amor de Dios para vencer el pecado.</p>
+            <button class="audio-btn" data-section="sufferer">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Mejor Sacrificio</h2>
+            <p>El Nuevo Testamento compara explícitamente el sacrificio de Abel con el de Cristo, mostrando que aunque el de Abel era bueno, el de Cristo es infinitamente mejor. El sacrificio de Abel era temporal y tenía que repetirse; el sacrificio de Cristo es eterno y una vez para siempre.</p>
+
+            <div class="verse-callout">
+                Pero este, habiendo ofrecido una vez para siempre un solo sacrificio por los pecados, se sentó a la diestra de Dios.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2010%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 10:12</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">Una Vez para Siempre</div>
+                <p>El sacrificio de Abel, aunque aceptable, era solo una sombra de lo que vendría. Apuntaba hacia el sacrificio perfecto que sería ofrecido una vez para siempre. El sacrificio de Cristo es superior en todos los aspectos: es el sacrificio de Dios mismo, es perfecto y sin pecado, es eterno y nunca necesita repetirse, y provee perdón completo y reconciliación con Dios.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2010%3A10-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 10:10-14</a>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="better">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: De Abel a Cristo</h2>
+            <p>La historia de Caín y Abel no es solo un relato histórico del primer asesinato—es un fundamento teológico que apunta al sacrificio definitivo de Cristo. El sacrificio aceptable de Abel, ofrecido en fe, apunta al sacrificio perfecto de Cristo. La muerte injusta de Abel apunta a la muerte redentora de Cristo. El contraste entre las obras de Caín y la fe de Abel apunta al contraste entre la justicia propia y la fe en Cristo.</p>
+
+            <p>Cuando leemos <a href="https://www.biblegateway.com/passage/?search=Génesis%204%3A1-16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 4</a>, vemos la primera demostración de una verdad que recorre toda la Escritura: la salvación viene no a través de nuestras obras sino por fe en el sacrificio de sangre que Dios provee. El sacrificio de Abel era una sombra; el sacrificio de Cristo es la realidad. La sangre de Abel clamaba por venganza; la sangre de Cristo habla de misericordia. La historia de Caín y Abel es, de principio a fin, la historia de Cristo.</p>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (including verse callouts, excluding only buttons)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove only the audio button - keep verse callouts and references
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            
+            // Get all text content (this will include verse callouts and references)
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

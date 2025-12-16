@@ -13,13 +13,16 @@
         'exodus-events.html': { book: 'exodus', type: 'events', lang: 'en' },
         'dive-in-creation.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-fall.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-cain-abel.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         
         // Spanish pages
         'index-es.html': { book: 'genesis', type: 'characters', lang: 'es' },
         'events-es.html': { book: 'genesis', type: 'events', lang: 'es' },
         'exodus-es.html': { book: 'exodus', type: 'characters', lang: 'es' },
         'exodus-events-es.html': { book: 'exodus', type: 'events', lang: 'es' },
-        'dive-in-creation-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' }
+        'dive-in-creation-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-fall-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-cain-abel-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' }
     };
 
     // Book configuration

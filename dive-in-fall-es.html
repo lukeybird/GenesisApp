@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumérgete: La Caída - Línea de Tiempo de Génesis</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: La Caída</h1>
+            <p class="subtitle">Viendo a Cristo en la Primera Promesa de Redención</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">El Primer Evangelio: El Protoevangelio</h2>
+            <p>La Caída en <a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A1-24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3</a> no es meramente la historia de cómo el pecado entró al mundo—es la historia que inmediatamente apunta hacia la solución. Incluso en el momento del juicio, Dios habla la primera promesa de redención, una promesa que encuentra su cumplimiento en Jesucristo.</p>
+            
+            <div class="verse-callout">
+                Y pondré enemistad entre ti y la mujer, y entre tu simiente y la simiente suya; ésta te herirá en la cabeza, y tú le herirás en el calcañar.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3:15</a>
+                </span>
+            </div>
+
+            <p>Este versículo, conocido como el Protoevangelio (primer evangelio), contiene la primera promesa de un Redentor venidero. La "Simiente de la mujer" que aplastará la cabeza de la serpiente apunta directamente a Jesucristo, quien derrotaría a Satanás a través de Su muerte y resurrección.</p>
+            <button class="audio-btn" data-section="protoevangelium">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Serpiente y el Salvador</h2>
+            <p>La serpiente en el Jardín representa a Satanás, el engañador. El Nuevo Testamento identifica explícitamente a la serpiente con el diablo: "Y fue lanzado fuera el gran dragón, la serpiente antigua, que se llama diablo y Satanás, el cual engaña al mundo entero" (<a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2012%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Apocalipsis 12:9</a>). Jesús vino a destruir las obras del diablo y revertir la maldición de la Caída.</p>
+
+            <div class="verse-callout">
+                El que practica el pecado es del diablo; porque el diablo peca desde el principio. Para esto apareció el Hijo de Dios, para deshacer las obras del diablo.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%203%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Juan 3:8</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">La Derrota de la Serpiente</div>
+                <p>La victoria de Jesús sobre Satanás se describe a lo largo del Nuevo Testamento. Cuando Jesús fue tentado en el desierto (<a href="https://www.biblegateway.com/passage/?search=Mateo%204%3A1-11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 4:1-11</a>), venció al mismo tentador que engañó a Eva. A través de Su perfecta obediencia, Jesús revirtió la desobediencia de Adán. En la cruz, Jesús aplastó la cabeza de la serpiente, derrotando el pecado, la muerte y el poder del diablo.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%202%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Colosenses 2:15</a>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="serpent">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Primera Muerte: Cubierta de Pieles</h2>
+            <p>Después de la Caída, Dios hizo túnicas de piel para Adán y Eva (<a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3:21</a>). Esto requirió la muerte de un animal—la primera muerte en la Escritura. Este acto presagia la cubierta definitiva que vendría a través de la muerte de Cristo, el Cordero de Dios que quita el pecado del mundo.</p>
+
+            <div class="verse-callout">
+                El siguiente día vio Juan a Jesús que venía a él, y dijo: ¡He aquí el Cordero de Dios, que quita el pecado del mundo!
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%201%3A29&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 1:29</a>
+                </span>
+            </div>
+
+            <p>Las pieles de animales que cubrieron la vergüenza de Adán y Eva eran una solución temporal que apuntaba a la solución permanente: el sacrificio perfecto de Cristo, cuya sangre cubre nuestro pecado y elimina nuestra vergüenza delante de Dios.</p>
+            <button class="audio-btn" data-section="skins">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Maldición y la Cruz</h2>
+            <p>Dios pronunció maldiciones como consecuencias de la Caída: sobre la serpiente, sobre la mujer y sobre el hombre (<a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A14-19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3:14-19</a>). Estas maldiciones afectaron toda la creación. Pero el Nuevo Testamento revela que Cristo tomó la maldición sobre Sí mismo para redimirnos de ella.</p>
+
+            <div class="verse-callout">
+                Cristo nos redimió de la maldición de la ley, hecho por nosotros maldición (porque está escrito: Maldito todo el que es colgado en un madero).
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%203%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Gálatas 3:13</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">Soportando la Maldición</div>
+                <p>En la cruz, Jesús soportó todo el peso de la maldición. Experimentó las espinas (parte de la maldición sobre la tierra), el dolor (parte de la maldición sobre la humanidad) y finalmente la muerte misma. Al convertirse en maldición por nosotros, nos liberó de la maldición de la Caída y abrió el camino de regreso al árbol de la vida.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2022%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Apocalipsis 22:2</a>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="curse">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Desobediencia y Obediencia</h2>
+            <p>El acto de desobediencia de Adán trajo el pecado y la muerte al mundo. El Nuevo Testamento contrasta explícitamente esto con el acto de obediencia de Cristo que trae justicia y vida.</p>
+
+            <div class="verse-callout">
+                Porque así como por la desobediencia de un hombre los muchos fueron constituidos pecadores, así también por la obediencia de uno, los muchos serán constituidos justos.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%205%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 5:19</a>
+                </span>
+            </div>
+
+            <p>Donde Adán eligió su propia voluntad sobre la voluntad de Dios, Jesús eligió la voluntad de Dios incluso cuando significaba la cruz. En el Huerto de Getsemaní, Jesús enfrentó la prueba definitiva y dijo: "No se haga mi voluntad, sino la tuya" (<a href="https://www.biblegateway.com/passage/?search=Lucas%2022%3A42&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Lucas 22:42</a>). Su perfecta obediencia revirtió los efectos de la desobediencia de Adán.</p>
+            <button class="audio-btn" data-section="obedience">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Separación y Reconciliación</h2>
+            <p>Después de la Caída, Adán y Eva fueron expulsados del Jardín y separados de la presencia de Dios (<a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A23-24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3:23-24</a>). Esta separación representa la muerte espiritual que vino a través del pecado. Pero a través de Cristo, somos reconciliados de vuelta a Dios.</p>
+
+            <div class="verse-callout">
+                Porque si siendo enemigos, fuimos reconciliados con Dios por la muerte de su Hijo, mucho más, estando reconciliados, seremos salvos por su vida.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%205%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 5:10</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">Acceso Restaurado</div>
+                <p>A través de Su muerte y resurrección, Jesús derribó la barrera que nos separaba de Dios. El velo del templo se rasgó en dos (<a href="https://www.biblegateway.com/passage/?search=Mateo%2027%3A51&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 27:51</a>), simbolizando que el acceso a la presencia de Dios ahora está abierto. Nosotros que una vez estábamos lejos hemos sido acercados por la sangre de Cristo (<a href="https://www.biblegateway.com/passage/?search=Efesios%202%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Efesios 2:13</a>).</p>
+            </div>
+            <button class="audio-btn" data-section="reconciliation">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Muerte y Vida</h2>
+            <p>La Caída trajo la muerte al mundo: "Polvo eres, y al polvo volverás" (<a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3:19</a>). Pero Cristo vino a destruir la muerte y traer vida.</p>
+
+            <div class="verse-callout">
+                Y el postrer enemigo que será destruido es la muerte.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A26&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 15:26</a>
+                </span>
+            </div>
+
+            <div class="verse-callout">
+                Le dijo Jesús: Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2011%3A25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 11:25</a>
+                </span>
+            </div>
+
+            <p>A través de Su propia muerte y resurrección, Jesús conquistó la muerte. Él es las primicias de los que durmieron (<a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 15:20</a>), garantizando que todos los que están en Él también serán resucitados a vida eterna.</p>
+            <button class="audio-btn" data-section="death">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Árbol de la Vida: Acceso Restaurado</h2>
+            <p>Después de la Caída, Dios colocó querubines y una espada encendida para guardar el camino al árbol de la vida (<a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3:24</a>). La humanidad fue cortada de la vida eterna. Pero el libro de Apocalipsis revela que a través de Cristo, el acceso al árbol de la vida es restaurado.</p>
+
+            <div class="verse-callout">
+                Bienaventurados los que lavan sus ropas, para tener derecho al árbol de la vida, y para entrar por las puertas en la ciudad.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2022%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Apocalipsis 22:14</a>
+                </span>
+            </div>
+
+            <p>En la nueva creación, el árbol de la vida estará disponible para todos los que están en Cristo. El camino que estaba bloqueado en Edén ahora está abierto a través de la cruz. Jesús mismo es el camino, la verdad y la vida (<a href="https://www.biblegateway.com/passage/?search=Juan%2014%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 14:6</a>), y a través de Él tenemos acceso a la vida eterna.</p>
+            <button class="audio-btn" data-section="tree">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: De la Caída a la Redención</h2>
+            <p>La Caída no es el final de la historia—es el comienzo del plan de redención de Dios. Cada elemento de la Caída apunta hacia Cristo: la derrota de la serpiente, la cubierta para el pecado, el soportar la maldición, la reversión de la desobediencia, la restauración de la relación, la derrota de la muerte y la restauración del acceso a la vida.</p>
+
+            <p>Cuando leemos <a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A1-24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3</a>, estamos leyendo sobre el problema que Cristo vino a resolver. La Caída nos muestra nuestra necesidad de un Salvador, y la primera promesa de redención (<a href="https://www.biblegateway.com/passage/?search=Génesis%203%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 3:15</a>) nos apunta al que la cumpliría. La historia de la Caída es, desde la primera promesa, la historia de Cristo.</p>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (including verse callouts, excluding only buttons)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove only the audio button - keep verse callouts and references
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            
+            // Get all text content (this will include verse callouts and references)
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // Stop any current speech
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // If already playing, stop
+            if (button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                return;
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

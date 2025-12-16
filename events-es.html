@@ -821,12 +821,24 @@
                 const content = document.createElement('div');
                 content.className = 'timeline-content';
                 
-                // Check if this is the Creation event to add Dive In button
+                // Check if this is the Creation, Fall, or Cain and Abel event to add Dive In button
                 const isCreation = event.name === "La Creación";
+                const isFall = event.name === "La Caída";
+                const isCainAbel = event.name === "Caín y Abel";
                 const buttonsHTML = isCreation 
                     ? `<div class="button-container">
                         <button class="audio-btn">Escuchar Historia</button>
                         <a href="dive-in-creation-es.html" class="dive-in-btn">Sumérgete!</a>
+                    </div>`
+                    : isFall
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                        <a href="dive-in-fall-es.html" class="dive-in-btn">Sumérgete!</a>
+                    </div>`
+                    : isCainAbel
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                        <a href="dive-in-cain-abel-es.html" class="dive-in-btn">Sumérgete!</a>
                     </div>`
                     : `<button class="audio-btn">Escuchar Historia</button>`;
                 
