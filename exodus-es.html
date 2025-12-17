@@ -759,6 +759,7 @@
 
         // Speech synthesis setup
         let currentUtterance = null;
+        let currentButton = null;
         let jarvisVoice = null;
 
         // Find Spanish voice
@@ -802,19 +803,21 @@
         // Play audio function
         function playAudio(button, text) {
             
-            // Stop any current speech
-            if (currentUtterance) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
                 speechSynthesis.cancel();
                 button.classList.remove('playing');
                 button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+                return;
             }
 
-            // If already playing, stop
-            if (button.classList.contains('playing')) {
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
                 speechSynthesis.cancel();
-                button.classList.remove('playing');
-                button.textContent = 'Escuchar Historia';
-                return;
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Escuchar Historia';
             }
 
             // Create new utterance
@@ -832,12 +835,14 @@
             // Update button state
             button.classList.add('playing');
             button.textContent = 'Reproduciendo...';
+            currentButton = button;
 
             // Handle speech end
             currentUtterance.onend = () => {
                 button.classList.remove('playing');
                 button.textContent = 'Escuchar Historia';
                 currentUtterance = null;
+                currentButton = null;
             };
 
             // Handle speech error
@@ -845,6 +850,7 @@
                 button.classList.remove('playing');
                 button.textContent = 'Escuchar Historia';
                 currentUtterance = null;
+                currentButton = null;
             };
 
             // Start speaking

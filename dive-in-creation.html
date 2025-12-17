@@ -771,6 +771,7 @@
     <script>
         // Speech Synthesis Setup
         let currentUtterance = null;
+        let currentButton = null;
         let jarvisVoice = null;
 
         // Find Jarvis-like voice
@@ -821,21 +822,23 @@
 
         // Play audio function
         function playAudio(button, text) {
-            // Stop any current speech
-            if (currentUtterance) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
                 speechSynthesis.cancel();
                 document.querySelectorAll('.audio-btn').forEach(btn => {
                     btn.classList.remove('playing');
                     btn.textContent = 'Listen to Section';
                 });
-            }
-
-            // If already playing, stop
-            if (button.classList.contains('playing')) {
-                speechSynthesis.cancel();
-                button.classList.remove('playing');
-                button.textContent = 'Listen to Section';
-                return;
             }
 
             // Create new utterance
@@ -858,12 +861,14 @@
             
             button.classList.add('playing');
             button.textContent = 'Playing...';
+            currentButton = button;
 
             // Handle speech end
             currentUtterance.onend = () => {
                 button.classList.remove('playing');
                 button.textContent = 'Listen to Section';
                 currentUtterance = null;
+                currentButton = null;
             };
 
             // Handle speech error
@@ -871,6 +876,7 @@
                 button.classList.remove('playing');
                 button.textContent = 'Listen to Section';
                 currentUtterance = null;
+                currentButton = null;
             };
 
             // Start speaking
