@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumérgete: Agua de la Roca - Línea de Tiempo de Éxodo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: Agua de la Roca</h1>
+            <p class="subtitle">Viendo a Cristo como el Agua Viva</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Cristo: La Roca que Fue Golpeada</h2>
+            <p>Cuando Moisés golpeó la roca en Horeb y el agua fluyó para que Israel bebiera (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2017%3A1-7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 17:1-7</a>), esta fue una imagen poderosa de Cristo, quien fue "golpeado" en la cruz para que el agua viva pudiera fluir a todos los que creen. El apóstol Pablo identifica explícitamente la roca como Cristo.</p>
+            
+            <div class="verse-callout">
+                Y todos bebieron la misma bebida espiritual; porque bebían de la roca espiritual que los seguía, y la roca era Cristo.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2010%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 10:4</a>
+                </span>
+            </div>
+
+            <p>Pablo nos dice explícitamente que la roca que proveyó agua para Israel era Cristo. Así como la roca fue golpeada y el agua fluyó, así Cristo fue golpeado en la cruz y el agua viva del Espíritu Santo fluye a todos los que creen. La roca que fue golpeada apunta a Cristo quien fue crucificado, y el agua que fluyó apunta al Espíritu Santo que da vida.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%207%3A37-39&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 7:37-39</a>
+                    <div class="ref-explanation">"Si alguno tiene sed, venga a mí y beba... Esto dijo del Espíritu"—el agua viva es el Espíritu Santo, fluyendo de la Roca golpeada.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%204%3A13-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 4:13-14</a>
+                    <div class="ref-explanation">"Cualquiera que bebiere del agua que yo le daré, no tendrá sed jamás; sino que el agua que yo le daré será en él una fuente de agua que salte para vida eterna"—Cristo da agua viva que nunca se agota.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaías%2053%3A4-5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Isaías 53:4-5</a>
+                    <div class="ref-explanation">"Herido fue por nuestras rebeliones, molido por nuestros pecados... y por su llaga fuimos nosotros curados"—Cristo fue golpeado por nosotros, así como la roca fue golpeada.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="rock">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Agua Viva: El Espíritu Santo</h2>
+            <p>Cuando el agua fluyó de la roca, dio vida al pueblo en el desierto. Esta agua apunta al agua viva que Cristo da—el Espíritu Santo. Así como el agua de la roca sustentaba a Israel físicamente, así el Espíritu Santo nos sustenta espiritualmente.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">El Agua de la Vida</div>
+                <p>Jesús declaró que aquellos que creen en Él tendrían ríos de agua viva fluyendo desde dentro de ellos. Juan explica que esto se refiere al Espíritu Santo. El agua de la roca era un tipo del Espíritu Santo, quien da vida eterna y satisface nuestra sed espiritual para siempre.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%207%3A37-39&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 7:37-39</a>
+                </div>
+            </div>
+
+            <p>Así como la roca fue golpeada y el agua fluyó, así Cristo fue golpeado en la cruz y el Espíritu Santo fluye a todos los que creen. El agua de la roca era temporal; el Espíritu Santo es eterno. El agua satisfacía la sed física; el Espíritu Santo satisface la sed espiritual para siempre.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%207%3A37-39&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 7:37-39</a>
+                    <div class="ref-explanation">"Si alguno tiene sed, venga a mí y beba... Esto dijo del Espíritu"—el agua viva es el Espíritu Santo, fluyendo de la Roca golpeada.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%204%3A13-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 4:13-14</a>
+                    <div class="ref-explanation">"Cualquiera que bebiere del agua que yo le daré, no tendrá sed jamás; sino que el agua que yo le daré será en él una fuente de agua que salte para vida eterna"—Cristo da agua viva que nunca se agota.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2022%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 22:1</a>
+                    <div class="ref-explanation">"Y me mostró un río limpio de agua de vida, resplandeciente como cristal, que salía del trono de Dios y del Cordero"—el agua eterna de la vida, fluyendo de Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="livingwater">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Roca Golpeada: Cristo Crucificado</h2>
+            <p>Moisés recibió la orden de golpear la roca, y el agua fluiría. Este golpear de la roca apunta a Cristo siendo golpeado en la cruz. Así como la roca tenía que ser golpeada para que el agua fluyera, así Cristo tenía que ser crucificado para que el Espíritu Santo fuera dado.</p>
+
+            <div class="verse-callout">
+                Mas él herido fue por nuestras rebeliones, molido por nuestros pecados; el castigo de nuestra paz fue sobre él, y por su llaga fuimos nosotros curados.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaías%2053%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Isaías 53:5</a>
+                </span>
+            </div>
+
+            <p>Cristo fue golpeado por nosotros en la cruz, así como la roca fue golpeada por Israel. La roca tenía que ser golpeada una vez; Cristo fue golpeado una vez para siempre. El agua fluyó de la roca golpeada; el Espíritu Santo fluye del Cristo crucificado. El golpear era necesario para que el agua fluyera; la cruz era necesaria para que el Espíritu fuera dado.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2019%3A34&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 19:34</a>
+                    <div class="ref-explanation">"Pero uno de los soldados le abrió el costado con una lanza, y al instante salió sangre y agua"—agua y sangre del Cristo golpeado, así como el agua salió de la roca golpeada.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%205%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Juan 5:6</a>
+                    <div class="ref-explanation">"Este es Jesucristo, que vino mediante agua y sangre; no mediante agua solamente, sino mediante agua y sangre"—agua y sangre de Cristo, apuntando al Espíritu y la sangre de expiación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%209%3A28&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 9:28</a>
+                    <div class="ref-explanation">"Así también Cristo fue ofrecido una sola vez para llevar los pecados de muchos"—Cristo fue golpeado una vez, así como la roca fue golpeada una vez.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="struck">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Satisfaciendo Nuestra Sed para Siempre</h2>
+            <p>El agua de la roca satisfacía la sed física de Israel temporalmente, pero volverían a tener sed. Cristo ofrece agua que satisface nuestra sed espiritual para siempre. Así como el agua de la roca era una provisión temporal, así todas las provisiones terrenales son temporales. Pero Cristo nos da el Espíritu Santo, quien satisface nuestras necesidades espirituales más profundas eternamente.</p>
+
+            <div class="verse-callout">
+                Respondió Jesús y le dijo: Cualquiera que bebiere de esta agua, volverá a tener sed; pero el que bebiere del agua que yo le daré, no tendrá sed jamás; sino que el agua que yo le daré será en él una fuente de agua que salte para vida eterna.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%204%3A13-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 4:13-14</a>
+                </span>
+            </div>
+
+            <p>Así como el agua de la roca era temporal, así todas las provisiones físicas son temporales. Pero Cristo nos da el Espíritu Santo, quien es eterno. El agua de la roca tenía que ser recogida diariamente; el Espíritu Santo mora en nosotros permanentemente. El agua satisfacía la sed física; el Espíritu Santo satisface la sed espiritual para siempre.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:35</a>
+                    <div class="ref-explanation">"Yo soy el pan de vida; el que a mí viene, nunca tendrá hambre; y el que en mí cree, no tendrá sed jamás"—Cristo satisface para siempre, a diferencia de las provisiones temporales.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2021%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 21:6</a>
+                    <div class="ref-explanation">"Al que tuviere sed, yo le daré gratuitamente de la fuente del agua de la vida"—el agua eterna de la vida, dada gratuitamente por Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2022%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 22:17</a>
+                    <div class="ref-explanation">"Y el Espíritu y la Esposa dicen: Ven. Y el que oye, diga: Ven. Y el que tiene sed, venga; y el que quiera, tome del agua de la vida gratuitamente"—la invitación a beber el agua viva.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="thirst">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Roca que los Siguió</h2>
+            <p>Pablo nos dice que la roca "los seguía" a través del desierto (<a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2010%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 10:4</a>). Esto habla de la presencia continua de Cristo con Su pueblo. Así como la roca siempre estaba disponible para proveer agua, así Cristo siempre está disponible para proveer el Espíritu Santo a todos los que creen.</p>
+
+            <div class="verse-callout">
+                Y todos bebieron la misma bebida espiritual; porque bebían de la roca espiritual que los seguía, y la roca era Cristo.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2010%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 10:4</a>
+                </span>
+            </div>
+
+            <p>La roca que siguió a Israel apunta a Cristo, quien siempre está con Su pueblo. Así como la roca siempre estaba disponible para proveer agua, así Cristo siempre está disponible para proveer el Espíritu Santo. La roca los siguió a través del desierto; Cristo está con nosotros a través de toda la vida. La roca fue golpeada una vez; Cristo fue crucificado una vez, y el Espíritu Santo fluye de Él para siempre.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2028%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 28:20</a>
+                    <div class="ref-explanation">"He aquí yo estoy con vosotros todos los días, hasta el fin del mundo"—Cristo siempre está con nosotros, así como la roca siguió a Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2013%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 13:5</a>
+                    <div class="ref-explanation">"No te desampararé, ni te dejaré"—la promesa de Dios de estar siempre con nosotros, cumplida en Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2014%3A16-17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 14:16-17</a>
+                    <div class="ref-explanation">"Y yo rogaré al Padre, y os dará otro Consolador, para que esté con vosotros para siempre: el Espíritu de verdad"—el Espíritu Santo mora con nosotros para siempre, fluyendo de la Roca.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="followed">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: La Roca que Da Agua Viva</h2>
+            <p>El agua de la roca era una provisión milagrosa que sustentaba a Israel en el desierto, pero era temporal y no podía dar vida eterna. Cristo es la verdadera Roca que da el Espíritu Santo, el agua viva que da vida eterna. La roca que fue golpeada apunta a Cristo quien fue crucificado, y el agua que fluyó apunta al Espíritu Santo que da vida.</p>
+
+            <p>Así como la roca tenía que ser golpeada para que el agua fluyera, así Cristo tenía que ser crucificado para que el Espíritu Santo fuera dado. Así como el agua de la roca satisfacía la sed física temporalmente, así el Espíritu Santo satisface la sed espiritual para siempre. Y así como la roca siguió a Israel a través del desierto, así Cristo siempre está con nosotros, proveyendo el agua viva del Espíritu Santo a todos los que creen.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2010%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 10:4</a>
+                    <div class="ref-explanation">"Y todos bebieron la misma bebida espiritual; porque bebían de la roca espiritual que los seguía, y la roca era Cristo"—la identificación explícita de la roca como Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%207%3A37-39&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 7:37-39</a>
+                    <div class="ref-explanation">"Si alguno tiene sed, venga a mí y beba... Esto dijo del Espíritu"—el agua viva es el Espíritu Santo, fluyendo de la Roca golpeada.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%204%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 4:14</a>
+                    <div class="ref-explanation">"Sino que el agua que yo le daré será en él una fuente de agua que salte para vida eterna"—vida eterna a través del agua viva, el Espíritu Santo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (excluding buttons and verse references)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove buttons, verse callouts, and verse references
+            clone.querySelectorAll('.audio-btn, .verse-callout, .verse-reference').forEach(el => el.remove());
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

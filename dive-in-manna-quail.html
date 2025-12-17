@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dive In: Manna and Quail - Exodus Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: Manna and Quail</h1>
+            <p class="subtitle">Seeing Christ as the Bread from Heaven</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Christ: The True Bread from Heaven</h2>
+            <p>When God provided manna from heaven for Israel in the wilderness (<a href="https://www.biblegateway.com/passage/?search=Exodus%2016%3A1-36&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 16:1-36</a>), He was providing daily bread to sustain His people. This manna points to Christ, who declared Himself to be "the bread of life" that came down from heaven to give eternal life to all who believe in Him.</p>
+            
+            <div class="verse-callout">
+                Then Jesus said to them, "Most assuredly, I say to you, Moses did not give you the bread from heaven, but My Father gives you the true bread from heaven. For the bread of God is He who comes down from heaven and gives life to the world."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A32-33&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 6:32-33</a>
+                </span>
+            </div>
+
+            <p>Jesus explicitly connects Himself with the manna from heaven. Just as the manna came down from heaven to sustain Israel in the wilderness, so Christ came down from heaven to give eternal life to the world. The manna was a temporary provision that perished; Christ is the eternal provision that gives everlasting life. The manna satisfied physical hunger for a day; Christ satisfies spiritual hunger forever.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A35&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:35</a>
+                    <div class="ref-explanation">"I am the bread of life. He who comes to Me shall never hunger, and he who believes in Me shall never thirst"—Christ satisfies forever, unlike manna that perished.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A48-51&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:48-51</a>
+                    <div class="ref-explanation">"I am the bread of life. Your fathers ate the manna in the wilderness, and are dead. This is the bread which comes down from heaven, that one may eat of it and not die"—Christ gives eternal life, unlike manna that could not prevent death.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A58&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:58</a>
+                    <div class="ref-explanation">"This is the bread which came down from heaven—not as your fathers ate the manna, and are dead. He who eats this bread will live forever"—eternal life through Christ, the true bread.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="bread">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Daily Bread: Sustenance from Heaven</h2>
+            <p>The manna appeared each morning, and the people were to gather only enough for that day (<a href="https://www.biblegateway.com/passage/?search=Exodus%2016%3A4%2C16-20&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 16:4, 16-20</a>). If they tried to save it for the next day, it would rot. This daily provision points to our need to daily feed on Christ through His Word, prayer, and communion. We cannot live on yesterday's manna; we need fresh bread from heaven each day.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Daily Need</div>
+                <p>Just as Israel needed to gather manna fresh each morning, so we need to feed on Christ daily. The manna that was saved for the next day rotted, teaching us that we cannot live on past experiences with Christ. We need daily fellowship with Him, daily feeding on His Word, daily communion with Him. Christ is our daily bread, and we must come to Him each day for fresh sustenance.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%206%3A11&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 6:11</a>
+                </div>
+            </div>
+
+            <p>The daily provision of manna teaches us about our daily need for Christ. We cannot store up enough spiritual food to last us for days or weeks. We need to come to Christ each day, to feed on Him through His Word, to commune with Him in prayer, to remember Him in the Lord's Supper. Just as the manna sustained Israel day by day, so Christ sustains us day by day.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%206%3A11&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 6:11</a>
+                    <div class="ref-explanation">"Give us this day our daily bread"—we need daily bread, pointing to our daily need for Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A27&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:27</a>
+                    <div class="ref-explanation">"Do not labor for the food which perishes, but for the food which endures to everlasting life"—we need the food that lasts, which is Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Luke%2011%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Luke 11:3</a>
+                    <div class="ref-explanation">"Give us day by day our daily bread"—daily provision, pointing to daily fellowship with Christ.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="daily">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Feeding on Christ: The Bread of Life</h2>
+            <p>Jesus declared that we must "eat His flesh and drink His blood" to have eternal life (<a href="https://www.biblegateway.com/passage/?search=John%206%3A53-54&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 6:53-54</a>). This shocking statement points to the necessity of feeding on Christ by faith. Just as Israel had to eat the manna to live, so we must feed on Christ to have eternal life.</p>
+
+            <div class="verse-callout">
+                Then Jesus said to them, "Most assuredly, I say to you, unless you eat the flesh of the Son of Man and drink His blood, you have no life in you. Whoever eats My flesh and drinks My blood has eternal life, and I will raise him up at the last day."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A53-54&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 6:53-54</a>
+                </span>
+            </div>
+
+            <p>To "eat the flesh" and "drink the blood" of Christ means to receive Him by faith, to feed on Him spiritually, to make Him our sustenance. Just as the manna was the food that sustained Israel in the wilderness, so Christ is the food that sustains us in our spiritual journey. We must feed on Him daily through His Word, through prayer, through communion, through fellowship with Him.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A56-57&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:56-57</a>
+                    <div class="ref-explanation">"He who eats My flesh and drinks My blood abides in Me, and I in him. As the living Father sent Me, and I live because of the Father, so he who feeds on Me will live because of Me"—feeding on Christ brings union with Him and life through Him.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2011%3A23-26&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 11:23-26</a>
+                    <div class="ref-explanation">The Lord's Supper reminds us to feed on Christ, to remember His body broken and blood shed for us—the true bread and drink that give life.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A63&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:63</a>
+                    <div class="ref-explanation">"It is the Spirit who gives life; the flesh profits nothing. The words that I speak to you are spirit, and they are life"—we feed on Christ through His words, which are spirit and life.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="feeding">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Bread That Perishes vs. The Bread That Endures</h2>
+            <p>The manna that God provided in the wilderness was miraculous, but it was temporary. It perished if kept overnight, and those who ate it eventually died. This points to the contrast between temporary, physical provision and eternal, spiritual provision in Christ.</p>
+
+            <div class="verse-callout">
+                Do not labor for the food which perishes, but for the food which endures to everlasting life, which the Son of Man will give you, because God the Father has set His seal on Him.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A27&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 6:27</a>
+                </span>
+            </div>
+
+            <p>Jesus contrasts the manna that perished with Himself, the bread that endures to everlasting life. The manna satisfied physical hunger temporarily; Christ satisfies spiritual hunger eternally. The manna could not prevent death; Christ gives eternal life. The manna was a type pointing to the true bread; Christ is the fulfillment of that type.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A48-51&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:48-51</a>
+                    <div class="ref-explanation">"I am the bread of life. Your fathers ate the manna in the wilderness, and are dead. This is the bread which comes down from heaven, that one may eat of it and not die"—Christ gives eternal life, unlike manna.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A58&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:58</a>
+                    <div class="ref-explanation">"This is the bread which came down from heaven—not as your fathers ate the manna, and are dead. He who eats this bread will live forever"—eternal life through the true bread.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%204%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 4:13-14</a>
+                    <div class="ref-explanation">"Whoever drinks of this water will thirst again, but whoever drinks of the water that I shall give him will never thirst"—Christ satisfies forever, unlike temporary provisions.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="endures">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">God's Faithful Provision</h2>
+            <p>God provided manna for Israel every single day for forty years (<a href="https://www.biblegateway.com/passage/?search=Exodus%2016%3A35&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 16:35</a>). This daily provision demonstrated God's faithfulness to sustain His people. This points to God's faithfulness to provide for us through Christ, who is our daily bread and our eternal sustenance.</p>
+
+            <div class="verse-callout">
+                And my God shall supply all your need according to His riches in glory by Christ Jesus.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%204%3A19&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Philippians 4:19</a>
+                </span>
+            </div>
+
+            <p>Just as God faithfully provided manna for Israel every day, so He faithfully provides for us through Christ. The manna was a daily reminder of God's provision; Christ is the eternal reminder of God's provision. We can trust that God will provide for all our needs—both physical and spiritual—through Christ, who is the bread of life that satisfies forever.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%206%3A25-34&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 6:25-34</a>
+                    <div class="ref-explanation">"Do not worry about your life, what you will eat... But seek first the kingdom of God and His righteousness, and all these things shall be added to you"—God provides, just as He provided manna.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%209%3A8&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 9:8</a>
+                    <div class="ref-explanation">"God is able to make all grace abound toward you, that you, always having all sufficiency in all things, may have an abundance for every good work"—God's abundant provision through Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2013%3A8&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 13:8</a>
+                    <div class="ref-explanation">"Jesus Christ is the same yesterday, today, and forever"—Christ's unchanging provision, just as the manna came every day.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="provision">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Christ the Bread of Life</h2>
+            <p>The manna from heaven was a miraculous provision that sustained Israel in the wilderness, but it was temporary and could not give eternal life. Christ is the true bread from heaven who gives eternal life to all who feed on Him. The manna points to Christ, who is the fulfillment of all that the manna represented—provision, sustenance, and life from heaven.</p>
+
+            <p>Just as Israel had to gather manna daily to live, so we must feed on Christ daily to have spiritual life. Just as the manna perished if kept overnight, so we cannot live on past experiences with Christ—we need daily fellowship with Him. And just as the manna came down from heaven, so Christ came down from heaven to give life to the world. The manna was a type; Christ is the reality. The manna sustained temporarily; Christ sustains eternally.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A32-35&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:32-35</a>
+                    <div class="ref-explanation">"Moses did not give you the bread from heaven, but My Father gives you the true bread from heaven... I am the bread of life"—Christ is the true bread, the fulfillment of the manna.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A48-51&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:48-51</a>
+                    <div class="ref-explanation">"I am the bread of life. Your fathers ate the manna in the wilderness, and are dead. This is the bread which comes down from heaven, that one may eat of it and not die"—eternal life through Christ, the true bread.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%202%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 2:17</a>
+                    <div class="ref-explanation">"To him who overcomes I will give some of the hidden manna to eat"—the promise of eternal fellowship with Christ, the true manna.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (including verse callouts, excluding only buttons)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumérgete: El Becerro de Oro - Línea de Tiempo de Éxodo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: El Becerro de Oro</h1>
+            <p class="subtitle">Viendo a Cristo en la Intercesión y el Perdón</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">La Intercesión de Moisés: Un Tipo de la Intercesión de Cristo</h2>
+            <p>Cuando Israel adoró el becerro de oro en <a href="https://www.biblegateway.com/passage/?search=Éxodo%2032%3A1-35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 32:1-35</a>, Dios amenazó con destruirlos. Pero Moisés intercedió por el pueblo, suplicando a Dios que los perdonara. Esta intercesión de Moisés apunta a Cristo, nuestro gran Intercesor que se interpone entre nosotros y el juicio de Dios.</p>
+            
+            <div class="verse-callout">
+                Por lo cual puede también salvar perpetuamente a los que por él se acercan a Dios, viviendo siempre para interceder por ellos.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%207%3A25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 7:25</a>
+                </span>
+            </div>
+
+            <p>La intercesión de Moisés fue limitada—él solo podía suplicar. Pero la intercesión de Cristo es ilimitada—Él realmente nos salva del juicio a través de Su sacrificio y continúa intercediendo por nosotros. Moisés intercedió por Israel, pero Cristo intercede por todos los que vienen a Él en fe.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A34&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:34</a>
+                    <div class="ref-explanation">"¿Quién es el que condenará? Cristo es el que murió; más aun, el que también resucitó, el que además está a la diestra de Dios, el que también intercede por nosotros."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%202%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Juan 2:1</a>
+                    <div class="ref-explanation">"Y si alguno hubiere pecado, abogado tenemos para con el Padre, a Jesucristo el justo."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaías%2053%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Isaías 53:12</a>
+                    <div class="ref-explanation">El Siervo Sufriente "intercedió por los transgresores"—apuntando a Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="mosesintercession">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Pecado de la Idolatría</h2>
+            <p>Mientras Moisés estaba en el monte recibiendo la Ley, el pueblo de Israel se volvió a la idolatría, creando un becerro de oro para adorar (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2032%3A1-4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 32:1-4</a>). Este pecado de idolatría rompió el pacto que acababan de hacer con Dios y revela la tendencia del corazón humano a adorar ídolos en lugar del verdadero Dios.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">El Corazón Idólatra</div>
+                <p>La idolatría no es solo adorar estatuas—es poner cualquier cosa en el lugar que solo Dios debe ocupar. El becerro de oro representa nuestra tendencia a crear dioses a nuestra propia imagen, dioses que podemos controlar y que nos dan lo que queremos, en lugar del Dios verdadero que exige nuestra obediencia y adoración.</p>
+            </div>
+
+            <p>Este pecado apunta a nuestra necesidad de Cristo, quien es el verdadero objeto de adoración. No necesitamos crear ídolos porque tenemos al verdadero Dios, quien se hizo hombre en Cristo para que pudiéramos conocerle y adorarle.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2010%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 10:14</a>
+                    <div class="ref-explanation">"Por tanto, amados míos, huid de la idolatría."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%203%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 3:5</a>
+                    <div class="ref-explanation">"Haced morir, pues, lo terrenal en vosotros: fornicación, impureza, pasiones desordenadas, malos deseos y avaricia, que es idolatría."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%204%3A23-24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 4:23-24</a>
+                    <div class="ref-explanation">"Mas la hora viene, y ahora es, cuando los verdaderos adoradores adorarán al Padre en espíritu y en verdad; porque también el Padre tales adoradores busca que le adoren."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="idolatry">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Juicio y la Misericordia de Dios</h2>
+            <p>Cuando Dios vio el pecado de Israel, Su justicia demandaba juicio. Él le dijo a Moisés: "Déjame, para que se encienda mi furor contra ellos y los consuma" (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2032%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 32:10</a>). Pero a través de la intercesión de Moisés, Dios mostró misericordia y no destruyó completamente al pueblo.</p>
+
+            <div class="verse-callout">
+                Entonces Jehová se arrepintió del mal que dijo que había de hacer a su pueblo.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Éxodo%2032%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 32:14</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">Justicia y Misericordia</div>
+                <p>Esta historia muestra tanto la justicia de Dios (que demanda juicio por el pecado) como Su misericordia (que perdona a través de la intercesión). Esto apunta a Cristo, quien satisfizo la justicia de Dios a través de Su muerte, permitiendo que la misericordia de Dios fluya hacia nosotros.</p>
+            </div>
+
+            <p>Dios no puede simplemente ignorar el pecado—Su justicia debe ser satisfecha. Pero a través de Cristo, Su justicia es satisfecha y Su misericordia puede extenderse a todos los que creen.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%203%3A25-26&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 3:25-26</a>
+                    <div class="ref-explanation">Cristo fue "propiciación por medio de la fe en su sangre, para manifestar su justicia... a fin de que él sea el justo, y el que justifica al que es de la fe de Jesús."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmo%2085%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmo 85:10</a>
+                    <div class="ref-explanation">"La misericordia y la verdad se encontraron; la justicia y la paz se besaron."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%201%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Juan 1:9</a>
+                    <div class="ref-explanation">"Si confesamos nuestros pecados, él es fiel y justo para perdonar nuestros pecados, y limpiarnos de toda maldad."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="judgmentmercy">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Moisés Ofrece Su Vida</h2>
+            <p>En un momento de intercesión aún más profundo, Moisés ofreció su propia vida por el pueblo: "Pero ahora, si quitas su pecado; y si no, ráeme ahora de tu libro que has escrito" (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2032%3A32&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 32:32</a>). Moisés estaba dispuesto a ser borrado del libro de la vida si eso significaba que el pueblo podría ser perdonado.</p>
+
+            <div class="verse-callout">
+                Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%203%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 3:16</a>
+                </span>
+            </div>
+
+            <p>Moisés ofreció su vida, pero no podía realmente dar su vida por el pueblo de manera efectiva. Pero Cristo sí pudo y lo hizo. Él fue borrado del libro de la vida, muriendo en nuestro lugar, para que nosotros pudiéramos ser perdonados y tener vida eterna.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2010%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 10:11</a>
+                    <div class="ref-explanation">"Yo soy el buen pastor; el buen pastor su vida da por las ovejas."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%203%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 3:13</a>
+                    <div class="ref-explanation">"Cristo nos redimió de la maldición de la ley, hecho por nosotros maldición (porque está escrito: Maldito todo el que es colgado en un madero)."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%202%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Pedro 2:24</a>
+                    <div class="ref-explanation">"Quien llevó él mismo nuestros pecados en su cuerpo sobre el madero, para que nosotros, estando muertos a los pecados, vivamos a la justicia."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="mosesoffers">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Cristo, el Intercesor Perfecto</h2>
+            <p>Mientras que la intercesión de Moisés fue poderosa, tenía limitaciones. Moisés solo podía suplicar—no podía realmente pagar el precio del pecado. Pero Cristo es el Intercesor perfecto que no solo suplica, sino que realmente pagó el precio completo de nuestro pecado.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">La Intercesión Efectiva de Cristo</div>
+                <p>Cristo no solo intercede por nosotros—Él ya ha hecho la obra completa de salvación. Su muerte en la cruz pagó el precio de nuestro pecado, y Su resurrección aseguró nuestra justificación. Ahora Él intercede continuamente por nosotros, asegurando que Su obra salvadora se aplique a nuestras vidas.</p>
+            </div>
+
+            <p>La intercesión de Moisés apuntaba hacia algo mayor—la intercesión perfecta de Cristo, que no solo suplica, sino que realmente salva.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%209%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 9:24</a>
+                    <div class="ref-explanation">"Porque no entró Cristo en el santuario hecho de mano... sino en el cielo mismo para presentarse ahora por nosotros ante Dios."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%207%3A25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 7:25</a>
+                    <div class="ref-explanation">"Por lo cual puede también salvar perpetuamente a los que por él se acercan a Dios, viviendo siempre para interceder por ellos."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A33-34&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:33-34</a>
+                    <div class="ref-explanation">"¿Quién acusará a los escogidos de Dios? Dios es el que justifica. ¿Quién es el que condenará? Cristo es el que murió; más aun, el que también resucitó, el que además está a la diestra de Dios, el que también intercede por nosotros."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="perfectintercessor">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: El Intercesor y el Perdón</h2>
+            <p>La historia del becerro de oro muestra tanto el juicio de Dios sobre el pecado como Su poder para perdonar a través de la intercesión. La intercesión de Moisés apunta a Cristo, nuestro Intercesor perfecto. El perdón que Dios mostró a Israel apunta al perdón que recibimos a través de Cristo.</p>
+
+            <p>Pero hay una diferencia crucial: la intercesión de Moisés no podía realmente salvar al pueblo—solo podía suplicar. Pero la intercesión de Cristo sí puede y salva a todos los que vienen a Él en fe, porque Él no solo intercede, sino que realmente pagó el precio de nuestro pecado con Su propia vida.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2010%3A19-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 10:19-22</a>
+                    <div class="ref-explanation">"Así que, hermanos, teniendo libertad para entrar en el Lugar Santísimo por la sangre de Jesucristo... acerquémonos con corazón sincero, en plena certidumbre de fe."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 1:7</a>
+                    <div class="ref-explanation">"En quien tenemos redención por su sangre, el perdón de pecados según las riquezas de su gracia."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 1:14</a>
+                    <div class="ref-explanation">"En quien tenemos redención por su sangre, el perdón de pecados."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (excluding buttons and verse references)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove buttons, verse callouts, and verse references
+            clone.querySelectorAll('.audio-btn, .verse-callout, .verse-reference').forEach(el => el.remove());
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

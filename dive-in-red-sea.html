@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dive In: The Red Sea Crossing - Exodus Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Red Sea Crossing</h1>
+            <p class="subtitle">Seeing Christ in Salvation Through the Waters</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Baptism: Death to the Old Life</h2>
+            <p>The crossing of the Red Sea in <a href="https://www.biblegateway.com/passage/?search=Exodus%2014%3A1-31&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 14:1-31</a> is a powerful picture of baptism. Just as Israel passed through the waters of the Red Sea, leaving behind their old life of slavery in Egypt, so we pass through the waters of baptism, leaving behind our old life of sin and entering into new life in Christ.</p>
+            
+            <div class="verse-callout">
+                Moreover, brethren, I do not want you to be unaware that all our fathers were under the cloud, all passed through the sea, all were baptized into Moses in the cloud and in the sea.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2010%3A1-2&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 10:1-2</a>
+                </span>
+            </div>
+
+            <p>The apostle Paul explicitly connects the Red Sea crossing with baptism. Just as Israel was "baptized into Moses" by passing through the sea, so we are baptized into Christ by passing through the waters of baptism. The Red Sea crossing marked the end of Israel's old life in Egypt and the beginning of their new life as God's free people. Baptism marks the end of our old life in sin and the beginning of our new life in Christ.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A3-4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 6:3-4</a>
+                    <div class="ref-explanation">"Do you not know that as many of us as were baptized into Christ Jesus were baptized into His death? Therefore we were buried with Him through baptism into death"—baptism is death to the old life.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%202%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Colossians 2:12</a>
+                    <div class="ref-explanation">"Buried with Him in baptism, in which you also were raised with Him through faith"—baptism is burial and resurrection with Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%203%3A27&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 3:27</a>
+                    <div class="ref-explanation">"For as many of you as were baptized into Christ have put on Christ"—baptism unites us with Christ, just as the sea crossing united Israel with Moses.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="baptism">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">From Death to Life: New Life in Christ</h2>
+            <p>When Israel crossed the Red Sea, they left behind death (the Egyptian army) and entered into new life (freedom in the wilderness). The sea that was a barrier became a pathway, and the enemy that pursued them was destroyed. This points to how Christ brings us from death to life, from slavery to freedom.</p>
+
+            <div class="verse-callout">
+                Therefore we were buried with Him through baptism into death, that just as Christ was raised from the dead by the glory of the Father, even so we also should walk in newness of life.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 6:4</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">The Waters of Death and Life</div>
+                <p>The Red Sea was both a barrier and a pathway. For Israel, it was a pathway to freedom. For the Egyptians, it was a barrier to destruction. So baptism is both death to the old life and entrance into new life. We die to sin and self, and we rise to new life in Christ. The waters that represent death to our old life also represent the new life we have in Christ.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A4-5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 6:4-5</a>
+                </div>
+            </div>
+
+            <p>Just as Israel passed through the sea and emerged on the other side as a free people, so we pass through baptism and emerge as new creations in Christ. The old life of slavery is behind us; the new life of freedom is before us. Through Christ, we have passed from death to life, from the kingdom of darkness to the kingdom of light.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%205%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 5:17</a>
+                    <div class="ref-explanation">"If anyone is in Christ, he is a new creation; old things have passed away; behold, all things have become new"—new life through Christ, just as Israel had new life after the sea.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A1-5&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:1-5</a>
+                    <div class="ref-explanation">"You He made alive, who were dead in trespasses and sins... But God, who is rich in mercy... made us alive together with Christ"—from death to life through Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A13&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Colossians 1:13</a>
+                    <div class="ref-explanation">God "has delivered us from the power of darkness and conveyed us into the kingdom of the Son of His love"—delivered from Egypt (sin) into the kingdom (new life).</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="newlife">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Enemy Destroyed: Victory Through Christ</h2>
+            <p>When the waters of the Red Sea closed over the Egyptian army, the enemy that had pursued Israel was completely destroyed (<a href="https://www.biblegateway.com/passage/?search=Exodus%2014%3A26-28&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 14:26-28</a>). Not one Egyptian soldier survived. This complete destruction of the enemy points to Christ's complete victory over our enemies—sin, death, and the devil.</p>
+
+            <div class="verse-callout">
+                Having disarmed principalities and powers, He made a public spectacle of them, triumphing over them in it.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%202%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 2:15</a>
+                </span>
+            </div>
+
+            <p>Just as the Egyptian army was completely destroyed in the Red Sea, so our spiritual enemies are completely defeated through Christ's death and resurrection. The enemy that pursued us—sin and death—has been destroyed. We are no longer slaves to sin; we are free in Christ. The victory is complete, just as the destruction of Egypt was complete.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2015%3A54-57&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 15:54-57</a>
+                    <div class="ref-explanation">"Death is swallowed up in victory... thanks be to God, who gives us the victory through our Lord Jesus Christ"—complete victory over death, just as Egypt was completely defeated.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%202%3A14-15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 2:14-15</a>
+                    <div class="ref-explanation">Christ came "that through death He might destroy him who had the power of death, that is, the devil"—the enemy destroyed, just as Egypt was destroyed.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A6-7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 6:6-7</a>
+                    <div class="ref-explanation">"Our old man was crucified with Him... that we should no longer be slaves of sin. For he who has died has been freed from sin"—freedom from the enemy of sin.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="victory">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Waters of Salvation</h2>
+            <p>The Red Sea was the means of salvation for Israel. It was through the waters that they were saved from their enemy. This points to how the waters of baptism are the means by which we are saved and identified with Christ. The sea that was a barrier to Egypt became a pathway to freedom for Israel.</p>
+
+            <div class="verse-callout">
+                The like figure whereunto even baptism doth also now save us (not the putting away of the filth of the flesh, but the answer of a good conscience toward God,) by the resurrection of Jesus Christ.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Peter%203%3A21&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Peter 3:21</a>
+                </span>
+            </div>
+
+            <p>Peter explicitly connects baptism with the waters of the flood and, by extension, the Red Sea. Baptism saves us not by washing away physical dirt, but by being the answer of a good conscience toward God—the outward expression of our faith in Christ's resurrection. Just as the Red Sea was the means of salvation for Israel, so baptism is the means by which we publicly identify with Christ's death and resurrection.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mark%2016%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Mark 16:16</a>
+                    <div class="ref-explanation">"He who believes and is baptized will be saved"—baptism is connected with salvation, just as the sea crossing was connected with Israel's deliverance.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Acts%2022%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Acts 22:16</a>
+                    <div class="ref-explanation">"Arise and be baptized, and wash away your sins, calling on the name of the Lord"—baptism washes away sins, just as the sea washed away the enemy.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Titus%203%3A5&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Titus 3:5</a>
+                    <div class="ref-explanation">"He saved us, through the washing of regeneration and renewing of the Holy Spirit"—salvation through washing, pointing to baptism.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="salvation">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">God's Power to Save</h2>
+            <p>The Red Sea crossing demonstrated God's power to save His people in an impossible situation. With the sea before them and the Egyptian army behind them, Israel had no way of escape—except through God's miraculous power. This points to God's power to save us through Christ, even when our situation seems impossible.</p>
+
+            <div class="verse-callout">
+                For the message of the cross is foolishness to those who are perishing, but to us who are being saved it is the power of God.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 1:18</a>
+                </span>
+            </div>
+
+            <p>Just as God's power was displayed in the impossible situation at the Red Sea, so God's power is displayed in the cross—what seems like foolishness to the world is the power of God for salvation. The sea that seemed like an insurmountable barrier became the means of deliverance. The cross that seemed like defeat became the means of victory. God's power is made perfect in our weakness, and His salvation comes through what seems impossible.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%201%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 1:16</a>
+                    <div class="ref-explanation">"For I am not ashamed of the gospel of Christ, for it is the power of God to salvation for everyone who believes"—the power of God for salvation, just as the sea was the power of God for Israel's deliverance.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%201%3A19-20&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 1:19-20</a>
+                    <div class="ref-explanation">"The exceeding greatness of His power toward us who believe... which He worked in Christ when He raised Him from the dead"—God's power displayed in the resurrection, just as it was displayed in the sea.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%2012%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 12:9</a>
+                    <div class="ref-explanation">"My grace is sufficient for you, for My strength is made perfect in weakness"—God's power in impossible situations, just as at the Red Sea.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="power">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Salvation Through the Waters</h2>
+            <p>The Red Sea crossing is one of the most powerful pictures of salvation in all of Scripture. It shows us how God saves His people through the waters—from death to life, from slavery to freedom, from the enemy's pursuit to complete victory. This points to how Christ saves us through baptism—we die to the old life and rise to new life in Him.</p>
+
+            <p>Just as Israel passed through the sea and left Egypt behind forever, so we pass through baptism and leave our old life of sin behind forever. Just as the Egyptian army was destroyed in the sea, so our spiritual enemies are destroyed through Christ. And just as Israel emerged on the other side as a free people, so we emerge from baptism as new creations in Christ, free from sin and death.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2010%3A1-2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 10:1-2</a>
+                    <div class="ref-explanation">"All our fathers were under the cloud, all passed through the sea, all were baptized into Moses in the cloud and in the sea"—the explicit connection between the sea crossing and baptism.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 6:4</a>
+                    <div class="ref-explanation">"We were buried with Him through baptism into death, that just as Christ was raised from the dead... even so we also should walk in newness of life"—baptism as death and resurrection, just as the sea was death to the old life and entrance to new life.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%202%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Colossians 2:15</a>
+                    <div class="ref-explanation">"Having disarmed principalities and powers, He made a public spectacle of them, triumphing over them in it"—Christ's victory over enemies, just as Egypt was defeated in the sea.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (including verse callouts, excluding only buttons)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

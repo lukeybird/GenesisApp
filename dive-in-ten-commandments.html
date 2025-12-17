@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dive In: The Ten Commandments - Exodus Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Ten Commandments</h1>
+            <p class="subtitle">Seeing Christ as the Fulfillment of the Law</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">I AM: The Divine Name Revealed</h2>
+            <p>The story of the burning bush in <a href="https://www.biblegateway.com/passage/?search=Exodus%203%3A1-4%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 3:1-4:17</a> marks a pivotal moment in redemptive history. When God reveals His name as "I AM WHO I AM" (<a href="https://www.biblegateway.com/passage/?search=Exodus%203%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 3:14</a>), He is revealing His eternal, self-existent nature. This name finds its ultimate fulfillment in Jesus Christ, who declared Himself to be the great "I AM."</p>
+            
+            <div class="verse-callout">
+                Jesus said to them, "Most assuredly, I say to you, before Abraham was, I AM."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%208%3A58&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 8:58</a>
+                </span>
+            </div>
+
+            <p>When Jesus declared "I AM," He was claiming to be the same eternal God who appeared to Moses in the burning bush. The Jews understood this claim perfectly—they picked up stones to kill Him for blasphemy, because He was claiming to be God. Christ is the true "I AM," the eternal God who came down to deliver His people.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A35&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:35</a>
+                    <div class="ref-explanation">Jesus said "I am the bread of life"—using the divine "I AM" to reveal His identity.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2011%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 11:25</a>
+                    <div class="ref-explanation">"I am the resurrection and the life"—Christ is the eternal I AM who gives life.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2014%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 14:6</a>
+                    <div class="ref-explanation">"I am the way, the truth, and the life"—the I AM is the only way to the Father.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="iam">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Burning Bush: Divine Presence Without Consumption</h2>
+            <p>The burning bush that was not consumed (<a href="https://www.biblegateway.com/passage/?search=Exodus%203%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 3:2</a>) is a powerful picture of Christ's incarnation. The bush burned with fire yet was not consumed, just as Christ is fully God (the fire of divine presence) yet fully man (the bush that was not destroyed). This mystery points to the greatest mystery of all—God becoming man without ceasing to be God.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Mystery of the Incarnation</div>
+                <p>The burning bush reveals a truth about God's nature that finds its ultimate expression in Christ: God can be present in the material world without being consumed by it or consuming it. In Christ, "all the fullness of the Deity lives in bodily form" (<a href="https://www.biblegateway.com/passage/?search=Colossians%202%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 2:9</a>), yet He remained fully human.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%202%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 2:9</a>
+                </div>
+            </div>
+
+            <p>Just as the bush was not consumed by the fire, so Christ's humanity was not consumed by His divinity. He remained fully human while being fully divine—a mystery that the burning bush helps us to understand. The fire of God's presence dwelt in the bush without destroying it, just as the fullness of God dwelt in Christ's human body.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%201%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 1:14</a>
+                    <div class="ref-explanation">"The Word became flesh and dwelt among us"—God became man, just as the fire dwelt in the bush.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%202%3A6-7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Philippians 2:6-7</a>
+                    <div class="ref-explanation">Christ "made Himself of no reputation, taking the form of a bondservant, and coming in the likeness of men"—the divine fire taking the form of a bush.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Timothy%203%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Timothy 3:16</a>
+                    <div class="ref-explanation">"God was manifested in the flesh"—the great mystery of the incarnation, prefigured in the burning bush.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="bush">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Moses the Deliverer: A Type of Christ the Deliverer</h2>
+            <p>God called Moses to deliver Israel from slavery in Egypt (<a href="https://www.biblegateway.com/passage/?search=Exodus%203%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 3:10</a>). Moses was sent by God to bring God's people out of bondage, just as Christ was sent by the Father to deliver us from the bondage of sin.</p>
+
+            <div class="verse-callout">
+                For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life. For God did not send His Son into the world to condemn the world, but that the world through Him might be saved.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%203%3A16-17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 3:16-17</a>
+                </span>
+            </div>
+
+            <p>Moses was a deliverer sent by God, but he was only a type pointing to the greater Deliverer. Christ came to deliver us from a greater slavery—the slavery to sin and death. Just as Moses led Israel out of Egypt, so Christ leads us out of the kingdom of darkness into the kingdom of light.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Acts%207%3A35&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Acts 7:35</a>
+                    <div class="ref-explanation">Stephen calls Moses "a ruler and a deliverer," pointing to Christ who is the ultimate Ruler and Deliverer.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A13&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Colossians 1:13</a>
+                    <div class="ref-explanation">God "has delivered us from the power of darkness and conveyed us into the kingdom of the Son of His love"—Christ delivers us from spiritual Egypt.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%202%3A14-15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 2:14-15</a>
+                    <div class="ref-explanation">Christ came "that through death He might destroy him who had the power of death... and release those who through fear of death were all their lifetime subject to bondage."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="deliverer">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Holy Ground: The Presence of God</h2>
+            <p>When God appeared in the burning bush, He told Moses to remove his sandals because he was standing on holy ground (<a href="https://www.biblegateway.com/passage/?search=Exodus%203%3A5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 3:5</a>). The ground was holy because God was present there. This points to the truth that wherever Christ is, that place becomes holy.</p>
+
+            <div class="verse-callout">
+                And the Word became flesh and dwelt among us, and we beheld His glory, the glory as of the only begotten of the Father, full of grace and truth.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%201%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 1:14</a>
+                </span>
+            </div>
+
+            <p>When Christ came to earth, He made the ground holy wherever He walked. But more than that, through His death and resurrection, He makes us holy. We who were once far from God are now brought near through Christ, and we become the temple of the Holy Spirit—holy ground where God dwells.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%206%3A19&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 6:19</a>
+                    <div class="ref-explanation">"Do you not know that your body is the temple of the Holy Spirit who is in you?"—we are now holy ground, the dwelling place of God.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A19-22&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:19-22</a>
+                    <div class="ref-explanation">We are "being built together for a dwelling place of God in the Spirit"—the church is holy ground where God dwells.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2010%3A19-22&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 10:19-22</a>
+                    <div class="ref-explanation">Through Christ, we have "boldness to enter the Holiest"—we can now approach the holy ground of God's presence.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="holyground">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">God's Promise: "I Will Be With You"</h2>
+            <p>When Moses expressed his inadequacy, God promised "I will certainly be with you" (<a href="https://www.biblegateway.com/passage/?search=Exodus%203%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Exodus 3:12</a>). This promise of God's presence finds its ultimate fulfillment in Christ, who is called "Immanuel," meaning "God with us" (<a href="https://www.biblegateway.com/passage/?search=Matthew%201%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 1:23</a>).</p>
+
+            <div class="verse-callout">
+                Behold, the virgin shall be with child, and bear a Son, and they shall call His name Immanuel, which is translated, "God with us."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%201%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 1:23</a>
+                </span>
+            </div>
+
+            <p>God's promise to be with Moses was fulfilled in a limited way, but Christ is the ultimate fulfillment—God Himself came to be with us. And through the Holy Spirit, Christ continues to be with us always, even to the end of the age. The burning bush was a temporary manifestation of God's presence; Christ is the permanent, eternal presence of God with His people.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2028%3A20&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 28:20</a>
+                    <div class="ref-explanation">"Lo, I am with you always, even to the end of the age"—Christ's promise to be with us forever.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2014%3A16-18&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 14:16-18</a>
+                    <div class="ref-explanation">Christ promises the Holy Spirit, "that He may abide with you forever... I will not leave you orphans; I will come to you."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%2021%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 21:3</a>
+                    <div class="ref-explanation">"Behold, the tabernacle of God is with men, and He will dwell with them"—the ultimate fulfillment of God being with us.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="presence">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: The I AM Who Delivers</h2>
+            <p>The burning bush reveals the eternal God who came down to deliver His people. The "I AM" who appeared to Moses is the same "I AM" who came in the flesh as Jesus Christ. Just as God called Moses to deliver Israel from physical slavery, so Christ came to deliver us from spiritual slavery.</p>
+
+            <p>The burning bush that was not consumed points to Christ, who is fully God yet fully man. The holy ground where Moses stood points to the holiness we receive through Christ. And God's promise to be with Moses finds its ultimate fulfillment in Christ, who is "God with us" forever.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%208%3A58&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 8:58</a>
+                    <div class="ref-explanation">"Before Abraham was, I AM"—Christ's claim to be the eternal I AM who appeared to Moses.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2014%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 14:9</a>
+                    <div class="ref-explanation">"He who has seen Me has seen the Father"—seeing Christ is seeing the I AM who appeared in the burning bush.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%201%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 1:3</a>
+                    <div class="ref-explanation">Christ is "the brightness of His glory and the express image of His person"—the visible manifestation of the invisible I AM.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (including verse callouts, excluding only buttons)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

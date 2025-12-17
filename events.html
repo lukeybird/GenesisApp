@@ -432,6 +432,8 @@
             gap: 20px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
         }
 
         .character-date {
@@ -452,6 +454,9 @@
             font-weight: 400;
             opacity: 0.8;
             font-style: italic;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
         }
 
         .scripture-link {
@@ -459,6 +464,10 @@
             text-decoration: none;
             transition: all 0.3s ease;
             border-bottom: 1px solid transparent;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
         }
 
         .scripture-link:hover {
@@ -878,24 +887,29 @@
                 const content = document.createElement('div');
                 content.className = 'timeline-content';
                 
-                // Check if this is the Creation, Fall, or Cain and Abel event to add Dive In button
-                const isCreation = event.name === "Creation";
-                const isFall = event.name === "The Fall";
-                const isCainAbel = event.name === "Cain and Abel";
-                const buttonsHTML = isCreation 
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "Creation": "dive-in-creation.html",
+                    "The Fall": "dive-in-fall.html",
+                    "Cain and Abel": "dive-in-cain-abel.html",
+                    "The Flood": "dive-in-flood.html",
+                    "Tower of Babel": "dive-in-babel.html",
+                    "Call of Abraham": "dive-in-abraham.html",
+                    "Destruction of Sodom and Gomorrah": "dive-in-sodom.html",
+                    "Binding of Isaac": "dive-in-binding-of-isaac.html",
+                    "Jacob's Dream (Ladder to Heaven)": "dive-in-jacobs-dream.html",
+                    "Jacob Wrestles with God": "dive-in-jacob-wrestles.html",
+                    "Joseph Sold into Slavery": "dive-in-joseph-sold.html",
+                    "Joseph in Egypt": "dive-in-joseph-egypt.html",
+                    "Joseph Reveals Himself": "dive-in-joseph-reveals.html",
+                    "Jacob's Family Moves to Egypt": "dive-in-jacob-egypt.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
                     ? `<div class="button-container">
                         <button class="audio-btn">Listen to Story</button>
-                        <a href="dive-in-creation.html" class="dive-in-btn">Dive In!</a>
-                    </div>`
-                    : isFall
-                    ? `<div class="button-container">
-                        <button class="audio-btn">Listen to Story</button>
-                        <a href="dive-in-fall.html" class="dive-in-btn">Dive In!</a>
-                    </div>`
-                    : isCainAbel
-                    ? `<div class="button-container">
-                        <button class="audio-btn">Listen to Story</button>
-                        <a href="dive-in-cain-abel.html" class="dive-in-btn">Dive In!</a>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
                     </div>`
                     : `<button class="audio-btn">Listen to Story</button>`;
 
@@ -922,9 +936,18 @@
                         !e.target.classList.contains('dive-in-btn') &&
                         !e.target.closest('.dive-in-btn') &&
                         !e.target.classList.contains('scripture-link') &&
-                        !e.target.closest('.scripture-link')) {
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
                         content.classList.toggle('expanded');
                     }
+                });
+
+                // Ensure scripture links are clickable
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent toggling the expansion
+                    });
                 });
 
                 // Add audio button functionality

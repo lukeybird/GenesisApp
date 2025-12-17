@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumérgete: Maná y Codornices - Línea de Tiempo de Éxodo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: Maná y Codornices</h1>
+            <p class="subtitle">Viendo a Cristo como el Pan del Cielo</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Cristo: El Verdadero Pan del Cielo</h2>
+            <p>Cuando Dios proveyó maná del cielo para Israel en el desierto (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2016%3A1-36&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 16:1-36</a>), estaba proveyendo pan diario para sustentar a Su pueblo. Este maná apunta a Cristo, quien se declaró a sí mismo como "el pan de vida" que descendió del cielo para dar vida eterna a todos los que creen en Él.</p>
+            
+            <div class="verse-callout">
+                Jesús les dijo: De cierto, de cierto os digo: No os dio Moisés el pan del cielo, mas mi Padre os da el verdadero pan del cielo. Porque el pan de Dios es aquel que descendió del cielo y da vida al mundo.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A32-33&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 6:32-33</a>
+                </span>
+            </div>
+
+            <p>Jesús conecta explícitamente a Sí mismo con el maná del cielo. Así como el maná descendió del cielo para sustentar a Israel en el desierto, así Cristo descendió del cielo para dar vida eterna al mundo. El maná era una provisión temporal que perecía; Cristo es la provisión eterna que da vida eterna. El maná satisfacía el hambre física por un día; Cristo satisface el hambre espiritual para siempre.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:35</a>
+                    <div class="ref-explanation">"Yo soy el pan de vida; el que a mí viene, nunca tendrá hambre; y el que en mí cree, no tendrá sed jamás"—Cristo satisface para siempre, a diferencia del maná que perecía.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A48-51&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:48-51</a>
+                    <div class="ref-explanation">"Yo soy el pan de vida. Vuestros padres comieron el maná en el desierto, y murieron. Este es el pan que desciende del cielo, para que el que de él come, no muera"—Cristo da vida eterna, a diferencia del maná que no podía prevenir la muerte.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A58&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:58</a>
+                    <div class="ref-explanation">"Este es el pan que descendió del cielo; no como el que comieron vuestros padres, y murieron; el que come de este pan, vivirá eternamente"—vida eterna a través de Cristo, el verdadero pan.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="bread">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Pan Diario: Sustento del Cielo</h2>
+            <p>El maná aparecía cada mañana, y el pueblo debía recoger solo lo suficiente para ese día (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2016%3A4%2C16-20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 16:4, 16-20</a>). Si intentaban guardarlo para el día siguiente, se pudría. Esta provisión diaria apunta a nuestra necesidad de alimentarnos diariamente de Cristo a través de Su Palabra, la oración y la comunión. No podemos vivir del maná de ayer; necesitamos pan fresco del cielo cada día.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">La Necesidad Diaria</div>
+                <p>Así como Israel necesitaba recoger maná fresco cada mañana, así nosotros necesitamos alimentarnos de Cristo diariamente. El maná que se guardaba para el día siguiente se pudría, enseñándonos que no podemos vivir de experiencias pasadas con Cristo. Necesitamos comunión diaria con Él, alimentarnos diariamente de Su Palabra, comunión diaria con Él. Cristo es nuestro pan diario, y debemos venir a Él cada día para sustento fresco.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%206%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 6:11</a>
+                </div>
+            </div>
+
+            <p>La provisión diaria del maná nos enseña sobre nuestra necesidad diaria de Cristo. No podemos almacenar suficiente alimento espiritual para que nos dure días o semanas. Necesitamos venir a Cristo cada día, alimentarnos de Él a través de Su Palabra, tener comunión con Él en oración, recordarle en la Cena del Señor. Así como el maná sustentaba a Israel día a día, así Cristo nos sustenta día a día.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%206%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 6:11</a>
+                    <div class="ref-explanation">"El pan nuestro de cada día, dánoslo hoy"—necesitamos pan diario, apuntando a nuestra necesidad diaria de Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A27&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:27</a>
+                    <div class="ref-explanation">"Trabajad, no por la comida que perece, sino por la comida que a vida eterna permanece"—necesitamos el alimento que dura, que es Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Lucas%2011%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Lucas 11:3</a>
+                    <div class="ref-explanation">"El pan nuestro de cada día, dánoslo día tras día"—provisión diaria, apuntando a comunión diaria con Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="daily">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Alimentarse de Cristo: El Pan de Vida</h2>
+            <p>Jesús declaró que debemos "comer Su carne y beber Su sangre" para tener vida eterna (<a href="https://www.biblegateway.com/passage/?search=Juan%206%3A53-54&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 6:53-54</a>). Esta declaración impactante apunta a la necesidad de alimentarse de Cristo por fe. Así como Israel tenía que comer el maná para vivir, así nosotros debemos alimentarnos de Cristo para tener vida eterna.</p>
+
+            <div class="verse-callout">
+                Jesús les dijo: De cierto, de cierto os digo: Si no coméis la carne del Hijo del Hombre, y bebéis su sangre, no tenéis vida en vosotros. El que come mi carne y bebe mi sangre, tiene vida eterna; y yo le resucitaré en el día postrero.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A53-54&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 6:53-54</a>
+                </span>
+            </div>
+
+            <p>"Comer la carne" y "beber la sangre" de Cristo significa recibirle por fe, alimentarse de Él espiritualmente, hacerle nuestro sustento. Así como el maná era el alimento que sustentaba a Israel en el desierto, así Cristo es el alimento que nos sustenta en nuestro viaje espiritual. Debemos alimentarnos de Él diariamente a través de Su Palabra, a través de la oración, a través de la comunión, a través de la comunión con Él.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A56-57&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:56-57</a>
+                    <div class="ref-explanation">"El que come mi carne y bebe mi sangre, en mí permanece, y yo en él. Como me envió el Padre viviente, y yo vivo por el Padre, asimismo el que me come, él también vivirá por mí"—alimentarse de Cristo trae unión con Él y vida a través de Él.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2011%3A23-26&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 11:23-26</a>
+                    <div class="ref-explanation">La Cena del Señor nos recuerda alimentarnos de Cristo, recordar Su cuerpo quebrantado y sangre derramada por nosotros—el verdadero pan y bebida que dan vida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A63&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:63</a>
+                    <div class="ref-explanation">"El espíritu es el que da vida; la carne para nada aprovecha; las palabras que yo os he hablado son espíritu y son vida"—nos alimentamos de Cristo a través de Sus palabras, que son espíritu y vida.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="feeding">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Pan que Perece vs. El Pan que Perdura</h2>
+            <p>El maná que Dios proveyó en el desierto era milagroso, pero era temporal. Perecía si se guardaba durante la noche, y aquellos que lo comían eventualmente morían. Esto apunta al contraste entre la provisión temporal y física y la provisión eterna y espiritual en Cristo.</p>
+
+            <div class="verse-callout">
+                Trabajad, no por la comida que perece, sino por la comida que a vida eterna permanece, la cual el Hijo del Hombre os dará; porque a éste señaló Dios el Padre.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A27&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 6:27</a>
+                </span>
+            </div>
+
+            <p>Jesús contrasta el maná que perecía con Él mismo, el pan que perdura para vida eterna. El maná satisfacía el hambre física temporalmente; Cristo satisface el hambre espiritualmente eternamente. El maná no podía prevenir la muerte; Cristo da vida eterna. El maná era un tipo que apuntaba al verdadero pan; Cristo es el cumplimiento de ese tipo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A48-51&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:48-51</a>
+                    <div class="ref-explanation">"Yo soy el pan de vida. Vuestros padres comieron el maná en el desierto, y murieron. Este es el pan que desciende del cielo, para que el que de él come, no muera"—Cristo da vida eterna, a diferencia del maná.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A58&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:58</a>
+                    <div class="ref-explanation">"Este es el pan que descendió del cielo; no como el que comieron vuestros padres, y murieron; el que come de este pan, vivirá eternamente"—vida eterna a través del verdadero pan.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%204%3A13-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 4:13-14</a>
+                    <div class="ref-explanation">"Cualquiera que bebiere de esta agua, volverá a tener sed; mas el que bebiere del agua que yo le daré, no tendrá sed jamás"—Cristo satisface para siempre, a diferencia de las provisiones temporales.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="endures">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Provisión Fiel de Dios</h2>
+            <p>Dios proveyó maná para Israel cada día durante cuarenta años (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2016%3A35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 16:35</a>). Esta provisión diaria demostró la fidelidad de Dios para sustentar a Su pueblo. Esto apunta a la fidelidad de Dios para proveer para nosotros a través de Cristo, quien es nuestro pan diario y nuestro sustento eterno.</p>
+
+            <div class="verse-callout">
+                Mi Dios, pues, suplirá todo lo que os falta conforme a sus riquezas en gloria en Cristo Jesús.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Filipenses%204%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Filipenses 4:19</a>
+                </span>
+            </div>
+
+            <p>Así como Dios proveyó fielmente maná para Israel cada día, así Él provee fielmente para nosotros a través de Cristo. El maná era un recordatorio diario de la provisión de Dios; Cristo es el recordatorio eterno de la provisión de Dios. Podemos confiar en que Dios proveerá para todas nuestras necesidades—tanto físicas como espirituales—a través de Cristo, quien es el pan de vida que satisface para siempre.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%206%3A25-34&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 6:25-34</a>
+                    <div class="ref-explanation">"No os afanéis por vuestra vida, qué habéis de comer... Mas buscad primeramente el reino de Dios y su justicia, y todas estas cosas os serán añadidas"—Dios provee, así como proveyó el maná.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%209%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corintios 9:8</a>
+                    <div class="ref-explanation">"Y poderoso es Dios para hacer que abunde en vosotros toda gracia, a fin de que, teniendo siempre en todas las cosas todo lo suficiente, abundéis para toda buena obra"—la provisión abundante de Dios a través de Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2013%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 13:8</a>
+                    <div class="ref-explanation">"Jesucristo es el mismo ayer, y hoy, y por los siglos"—la provisión inmutable de Cristo, así como el maná venía cada día.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="provision">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Cristo el Pan de Vida</h2>
+            <p>El maná del cielo era una provisión milagrosa que sustentaba a Israel en el desierto, pero era temporal y no podía dar vida eterna. Cristo es el verdadero pan del cielo que da vida eterna a todos los que se alimentan de Él. El maná apunta a Cristo, quien es el cumplimiento de todo lo que el maná representaba—provisión, sustento y vida del cielo.</p>
+
+            <p>Así como Israel tenía que recoger maná diariamente para vivir, así nosotros debemos alimentarnos de Cristo diariamente para tener vida espiritual. Así como el maná perecía si se guardaba durante la noche, así nosotros no podemos vivir de experiencias pasadas con Cristo—necesitamos comunión diaria con Él. Y así como el maná descendió del cielo, así Cristo descendió del cielo para dar vida al mundo. El maná era un tipo; Cristo es la realidad. El maná sustentaba temporalmente; Cristo sustenta eternamente.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A32-35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:32-35</a>
+                    <div class="ref-explanation">"No os dio Moisés el pan del cielo, mas mi Padre os da el verdadero pan del cielo... Yo soy el pan de vida"—Cristo es el verdadero pan, el cumplimiento del maná.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A48-51&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:48-51</a>
+                    <div class="ref-explanation">"Yo soy el pan de vida. Vuestros padres comieron el maná en el desierto, y murieron. Este es el pan que desciende del cielo, para que el que de él come, no muera"—vida eterna a través de Cristo, el verdadero pan.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%202%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 2:17</a>
+                    <div class="ref-explanation">"Al que venciere, daré a comer del maná escondido"—la promesa de comunión eterna con Cristo, el verdadero maná.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (excluding buttons and verse references)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove buttons, verse callouts, and verse references
+            clone.querySelectorAll('.audio-btn, .verse-callout, .verse-reference').forEach(el => el.remove());
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dive In: The Flood - Genesis Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Flood</h1>
+            <p class="subtitle">Seeing Christ in Judgment and Salvation</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">The Ark: A Picture of Salvation</h2>
+            <p>The story of Noah and the Flood in <a href="https://www.biblegateway.com/passage/?search=Genesis%206%3A1-9%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 6-9</a> is one of the most powerful types and shadows of Christ in all of Scripture. The ark that saved Noah and his family from the floodwaters of judgment is a clear picture of how Christ saves us from the judgment we deserve.</p>
+            
+            <div class="verse-callout">
+                For Christ also suffered once for sins, the just for the unjust, that He might bring us to God, being put to death in the flesh but made alive by the Spirit, by whom also He went and preached to the spirits in prison, who formerly were disobedient, when once the Divine longsuffering waited in the days of Noah, while the ark was being prepared, in which a few, that is, eight souls, were saved through water. There is also an antitype which now saves us—baptism (not the removal of the filth of the flesh, but the answer of a good conscience toward God), through the resurrection of Jesus Christ.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Peter%203%3A18-21&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Peter 3:18-21</a>
+                </span>
+            </div>
+
+            <p>The apostle Peter explicitly connects the ark to our salvation in Christ. Just as only those inside the ark were saved from the flood, so only those who are "in Christ" are saved from the judgment to come. The ark was the only means of salvation from the flood—Christ is the only means of salvation from sin and judgment.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2011%3A7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 11:7</a>
+                    <div class="ref-explanation">Noah's faith in building the ark points to faith in Christ, the true ark of salvation.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Acts%204%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Acts 4:12</a>
+                    <div class="ref-explanation">"Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved"—just as the ark was the only way of salvation.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2014%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 14:6</a>
+                    <div class="ref-explanation">Jesus is "the way, the truth, and the life. No one comes to the Father except through Me"—the only door to salvation, like the door of the ark.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="ark">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Noah's Righteousness: A Type of Christ's Righteousness</h2>
+            <p><a href="https://www.biblegateway.com/passage/?search=Genesis%206%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 6:9</a> tells us that "Noah was a just man, perfect in his generations. Noah walked with God." This righteousness was not Noah's own—it was a righteousness that came through faith, pointing forward to the perfect righteousness of Christ that is credited to us through faith.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Righteousness Through Faith</div>
+                <p>The writer of Hebrews includes Noah in the great "Hall of Faith" chapter, showing that Noah's righteousness came through faith: "By faith Noah, being divinely warned of things not yet seen, moved with godly fear, prepared an ark for the saving of his household, by which he condemned the world and became heir of the righteousness which is according to faith" (<a href="https://www.biblegateway.com/passage/?search=Hebrews%2011%3A7&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 11:7</a>).</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2011%3A7&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 11:7</a>
+                </div>
+            </div>
+
+            <p>Noah's righteousness, though real, was imperfect. But it points to the perfect righteousness of Christ, who alone was truly "just" and "perfect" in every way. Through faith in Christ, we receive His perfect righteousness, just as Noah received God's favor through faith.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%203%3A21-22&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 3:21-22</a>
+                    <div class="ref-explanation">"But now the righteousness of God apart from the law is revealed... even the righteousness of God, through faith in Jesus Christ, to all and on all who believe."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%205%3A21&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 5:21</a>
+                    <div class="ref-explanation">"For He made Him who knew no sin to be sin for us, that we might become the righteousness of God in Him."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%203%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Philippians 3:9</a>
+                    <div class="ref-explanation">"And be found in Him, not having my own righteousness, which is from the law, but that which is through faith in Christ, the righteousness which is from God by faith."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="righteousness">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Door of the Ark: Christ the Only Way</h2>
+            <p>When the flood came, <a href="https://www.biblegateway.com/passage/?search=Genesis%207%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 7:16</a> tells us that "the Lord shut him in." There was only one door to the ark, and once God closed it, there was no other way to be saved. This powerfully points to Christ, who declared Himself to be "the door" (<a href="https://www.biblegateway.com/passage/?search=John%2010%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 10:9</a>).</p>
+
+            <div class="verse-callout">
+                I am the door. If anyone enters by Me, he will be saved, and will go in and out and find pasture.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2010%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 10:9</a>
+                </span>
+            </div>
+
+            <p>Just as there was only one door to the ark, there is only one way to salvation—through Jesus Christ. Those outside the ark perished; those outside of Christ face eternal judgment. The door of the ark was God's provision for salvation; Christ is God's provision for our salvation.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2010%3A7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 10:7</a>
+                    <div class="ref-explanation">"I am the door of the sheep"—Christ is the exclusive entrance to salvation and eternal life.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%207%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 7:13-14</a>
+                    <div class="ref-explanation">"Enter by the narrow gate... because narrow is the gate and difficult is the way which leads to life"—the way is narrow because there is only one door, one way.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Luke%2013%3A24-25&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Luke 13:24-25</a>
+                    <div class="ref-explanation">"Strive to enter through the narrow gate... when once the Master of the house has risen up and shut the door"—just as God shut the door of the ark, so the door of salvation will one day be shut.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="door">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Flood: Judgment and the Final Judgment</h2>
+            <p>The Flood was God's judgment on a world that had become completely corrupt. <a href="https://www.biblegateway.com/passage/?search=Genesis%206%3A5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 6:5</a> tells us that "every intent of the thoughts of [man's] heart was only evil continually." This judgment points forward to the final judgment that is coming, and to the only refuge from that judgment—Jesus Christ.</p>
+
+            <div class="verse-callout">
+                But as the days of Noah were, so also will the coming of the Son of Man be. For as in the days before the flood, they were eating and drinking, marrying and giving in marriage, until the day that Noah entered the ark, and did not know until the flood came and took them all away, so also will the coming of the Son of Man be.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2024%3A37-39&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 24:37-39</a>
+                </span>
+            </div>
+
+            <p>Jesus Himself used the Flood as a warning about the coming judgment. Just as the world was unprepared for the flood, so many will be unprepared for Christ's return. But just as the ark provided refuge from the flood, so Christ provides refuge from the coming judgment.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Peter%202%3A5&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Peter 2:5</a>
+                    <div class="ref-explanation">Peter mentions that God "did not spare the ancient world, but saved Noah, one of eight people, a preacher of righteousness, bringing in the flood on the world of the ungodly."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Peter%203%3A6-7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Peter 3:6-7</a>
+                    <div class="ref-explanation">"By which the world that then existed perished, being flooded with water. But the heavens and the earth which are now preserved by the same word, are reserved for fire until the day of judgment and perdition of ungodly men."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%2020%3A11-15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 20:11-15</a>
+                    <div class="ref-explanation">The final judgment is coming, but those who are in Christ (the true ark) will be saved from it.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="judgment">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Rainbow: The Covenant of Grace</h2>
+            <p>After the Flood, God made a covenant with Noah and all creation, promising never again to destroy the earth with a flood. The rainbow was given as a sign of this covenant (<a href="https://www.biblegateway.com/passage/?search=Genesis%209%3A12-17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Genesis 9:12-17</a>). This covenant points forward to the new covenant in Christ, sealed not with a rainbow but with His blood.</p>
+
+            <div class="verse-callout">
+                This is My blood of the new covenant, which is shed for many for the remission of sins.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2026%3A28&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 26:28</a>
+                </span>
+            </div>
+
+            <p>The rainbow covenant was a promise of God's mercy and faithfulness. The new covenant in Christ is the ultimate expression of God's mercy and faithfulness, providing not just protection from physical destruction, but salvation from sin and eternal death.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%208%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 8:6</a>
+                    <div class="ref-explanation">"But now He has obtained a more excellent ministry, inasmuch as He is also Mediator of a better covenant, which was established on better promises."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Jeremiah%2031%3A31-34&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Jeremiah 31:31-34</a>
+                    <div class="ref-explanation">The promise of a new covenant, fulfilled in Christ, which provides forgiveness of sins and a new heart.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%204%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 4:3</a>
+                    <div class="ref-explanation">In heaven, there is "a rainbow around the throne," reminding us of God's covenant faithfulness, ultimately fulfilled in Christ.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="rainbow">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Finding Refuge in Christ</h2>
+            <p>The story of the Flood is a powerful reminder that judgment is coming, but God has provided a way of escape. The ark that saved Noah points to Christ, the true ark of salvation. Just as Noah had to enter the ark to be saved, so we must enter into Christ through faith to be saved from the judgment to come.</p>
+
+            <p>Noah's righteousness through faith points to the righteousness we receive through faith in Christ. The one door of the ark points to Christ, the only door to salvation. The flood of judgment points to the final judgment, from which only Christ can save us. And the rainbow covenant points to the new covenant in Christ, sealed with His blood.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%2010%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 10:9</a>
+                    <div class="ref-explanation">"If you confess with your mouth the Lord Jesus and believe in your heart that God has raised Him from the dead, you will be saved"—this is how we enter the ark of salvation.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A8-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:8-9</a>
+                    <div class="ref-explanation">"For by grace you have been saved through faith, and that not of yourselves; it is the gift of God, not of works"—salvation is God's gift, like the ark was God's provision.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%203%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 3:16</a>
+                    <div class="ref-explanation">"For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life"—the ultimate provision for salvation from judgment.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (including verse callouts, excluding only buttons)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

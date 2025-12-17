@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumérgete: La Zarza Ardiente - Línea de Tiempo de Éxodo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: La Zarza Ardiente</h1>
+            <p class="subtitle">Viendo a Cristo en el Llamado de Dios y la Presencia Divina</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">YO SOY: El Nombre Divino Revelado</h2>
+            <p>La historia de la zarza ardiente en <a href="https://www.biblegateway.com/passage/?search=Éxodo%203%3A1-4%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 3:1-4:17</a> marca un momento crucial en la historia redentora. Cuando Dios revela Su nombre como "YO SOY EL QUE SOY" (<a href="https://www.biblegateway.com/passage/?search=Éxodo%203%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 3:14</a>), está revelando Su naturaleza eterna y autoexistente. Este nombre encuentra su cumplimiento definitivo en Jesucristo, quien se declaró a sí mismo como el gran "YO SOY."</p>
+            
+            <div class="verse-callout">
+                Jesús les dijo: De cierto, de cierto os digo: Antes que Abraham fuese, yo soy.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%208%3A58&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 8:58</a>
+                </span>
+            </div>
+
+            <p>Cuando Jesús declaró "YO SOY," estaba reclamando ser el mismo Dios eterno que se apareció a Moisés en la zarza ardiente. Los judíos entendieron perfectamente esta afirmación—tomaron piedras para matarlo por blasfemia, porque estaba reclamando ser Dios. Cristo es el verdadero "YO SOY," el Dios eterno que descendió para librar a Su pueblo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:35</a>
+                    <div class="ref-explanation">Jesús dijo "Yo soy el pan de vida"—usando el divino "YO SOY" para revelar Su identidad.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2011%3A25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 11:25</a>
+                    <div class="ref-explanation">"Yo soy la resurrección y la vida"—Cristo es el YO SOY eterno que da vida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2014%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 14:6</a>
+                    <div class="ref-explanation">"Yo soy el camino, y la verdad, y la vida"—el YO SOY es el único camino al Padre.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="iam">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Zarza Ardiente: Presencia Divina Sin Consumo</h2>
+            <p>La zarza ardiente que no se consumía (<a href="https://www.biblegateway.com/passage/?search=Éxodo%203%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 3:2</a>) es una imagen poderosa de la encarnación de Cristo. La zarza ardía con fuego pero no se consumía, así como Cristo es plenamente Dios (el fuego de la presencia divina) pero plenamente hombre (la zarza que no fue destruida). Este misterio apunta al mayor misterio de todos—Dios haciéndose hombre sin dejar de ser Dios.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">El Misterio de la Encarnación</div>
+                <p>La zarza ardiente revela una verdad sobre la naturaleza de Dios que encuentra su expresión definitiva en Cristo: Dios puede estar presente en el mundo material sin ser consumido por él o consumirlo. En Cristo, "habita corporalmente toda la plenitud de la Deidad" (<a href="https://www.biblegateway.com/passage/?search=Colosenses%202%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Colosenses 2:9</a>), sin embargo permaneció plenamente humano.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%202%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Colosenses 2:9</a>
+                </div>
+            </div>
+
+            <p>Así como la zarza no fue consumida por el fuego, así la humanidad de Cristo no fue consumida por Su divinidad. Permaneció plenamente humano mientras era plenamente divino—un misterio que la zarza ardiente nos ayuda a entender. El fuego de la presencia de Dios habitó en la zarza sin destruirla, así como la plenitud de Dios habitó en el cuerpo humano de Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%201%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 1:14</a>
+                    <div class="ref-explanation">"Y aquel Verbo fue hecho carne, y habitó entre nosotros"—Dios se hizo hombre, así como el fuego habitó en la zarza.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Filipenses%202%3A6-7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Filipenses 2:6-7</a>
+                    <div class="ref-explanation">Cristo "se despojó a sí mismo, tomando forma de siervo, hecho semejante a los hombres"—el fuego divino tomando la forma de una zarza.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Timoteo%203%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Timoteo 3:16</a>
+                    <div class="ref-explanation">"Dios fue manifestado en carne"—el gran misterio de la encarnación, prefigurado en la zarza ardiente.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="bush">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Moisés el Libertador: Un Tipo de Cristo el Libertador</h2>
+            <p>Dios llamó a Moisés para librar a Israel de la esclavitud en Egipto (<a href="https://www.biblegateway.com/passage/?search=Éxodo%203%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 3:10</a>). Moisés fue enviado por Dios para sacar al pueblo de Dios de la esclavitud, así como Cristo fue enviado por el Padre para librarnos de la esclavitud del pecado.</p>
+
+            <div class="verse-callout">
+                Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito, para que todo aquel que en él cree, no se pierda, mas tenga vida eterna. Porque no envió Dios a su Hijo al mundo para condenar al mundo, sino para que el mundo sea salvo por él.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%203%3A16-17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 3:16-17</a>
+                </span>
+            </div>
+
+            <p>Moisés fue un libertador enviado por Dios, pero solo era un tipo que apuntaba al Libertador mayor. Cristo vino para librarnos de una esclavitud mayor—la esclavitud al pecado y la muerte. Así como Moisés guió a Israel fuera de Egipto, así Cristo nos guía fuera del reino de las tinieblas al reino de la luz.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hechos%207%3A35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hechos 7:35</a>
+                    <div class="ref-explanation">Esteban llama a Moisés "gobernador y libertador," apuntando a Cristo quien es el Gobernador y Libertador definitivo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 1:13</a>
+                    <div class="ref-explanation">Dios "nos ha librado de la potestad de las tinieblas, y trasladado al reino de su amado Hijo"—Cristo nos libra del Egipto espiritual.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%202%3A14-15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 2:14-15</a>
+                    <div class="ref-explanation">Cristo vino "para destruir por medio de la muerte al que tenía el imperio de la muerte... y librar a todos los que por el temor de la muerte estaban durante toda la vida sujetos a servidumbre."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="deliverer">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Tierra Santa: La Presencia de Dios</h2>
+            <p>Cuando Dios se apareció en la zarza ardiente, le dijo a Moisés que se quitara las sandalias porque estaba de pie en tierra santa (<a href="https://www.biblegateway.com/passage/?search=Éxodo%203%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 3:5</a>). La tierra era santa porque Dios estaba presente allí. Esto apunta a la verdad de que dondequiera que está Cristo, ese lugar se vuelve santo.</p>
+
+            <div class="verse-callout">
+                Y aquel Verbo fue hecho carne, y habitó entre nosotros (y vimos su gloria, gloria como del unigénito del Padre), lleno de gracia y de verdad.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%201%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 1:14</a>
+                </span>
+            </div>
+
+            <p>Cuando Cristo vino a la tierra, hizo santa la tierra dondequiera que caminó. Pero más que eso, a través de Su muerte y resurrección, Él nos hace santos. Nosotros que una vez estábamos lejos de Dios ahora somos acercados a través de Cristo, y nos convertimos en el templo del Espíritu Santo—tierra santa donde Dios habita.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%206%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 6:19</a>
+                    <div class="ref-explanation">"¿O ignoráis que vuestro cuerpo es templo del Espíritu Santo, el cual está en vosotros?"—ahora somos tierra santa, la morada de Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%202%3A19-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 2:19-22</a>
+                    <div class="ref-explanation">Somos "edificados juntamente para morada de Dios en el Espíritu"—la iglesia es tierra santa donde Dios habita.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2010%3A19-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 10:19-22</a>
+                    <div class="ref-explanation">A través de Cristo, tenemos "entrada con confianza al Lugar Santísimo"—ahora podemos acercarnos a la tierra santa de la presencia de Dios.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="holyground">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Promesa de Dios: "Yo Estaré Contigo"</h2>
+            <p>Cuando Moisés expresó su insuficiencia, Dios prometió "ciertamente estaré contigo" (<a href="https://www.biblegateway.com/passage/?search=Éxodo%203%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 3:12</a>). Esta promesa de la presencia de Dios encuentra su cumplimiento definitivo en Cristo, quien es llamado "Emanuel," que significa "Dios con nosotros" (<a href="https://www.biblegateway.com/passage/?search=Mateo%201%3A23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 1:23</a>).</p>
+
+            <div class="verse-callout">
+                He aquí, una virgen concebirá y dará a luz un hijo, y llamarás su nombre Emanuel, que traducido es: Dios con nosotros.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%201%3A23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 1:23</a>
+                </span>
+            </div>
+
+            <p>La promesa de Dios de estar con Moisés se cumplió de manera limitada, pero Cristo es el cumplimiento definitivo—Dios mismo vino a estar con nosotros. Y a través del Espíritu Santo, Cristo continúa estando con nosotros siempre, hasta el fin del mundo. La zarza ardiente fue una manifestación temporal de la presencia de Dios; Cristo es la presencia permanente y eterna de Dios con Su pueblo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2028%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 28:20</a>
+                    <div class="ref-explanation">"He aquí yo estoy con vosotros todos los días, hasta el fin del mundo"—la promesa de Cristo de estar con nosotros para siempre.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2014%3A16-18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 14:16-18</a>
+                    <div class="ref-explanation">Cristo promete el Espíritu Santo, "para que esté con vosotros para siempre... No os dejaré huérfanos; vendré a vosotros."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2021%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 21:3</a>
+                    <div class="ref-explanation">"He aquí el tabernáculo de Dios con los hombres, y él morará con ellos"—el cumplimiento definitivo de Dios estando con nosotros.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="presence">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: El YO SOY Que Libera</h2>
+            <p>La zarza ardiente revela al Dios eterno que descendió para librar a Su pueblo. El "YO SOY" que se apareció a Moisés es el mismo "YO SOY" que vino en carne como Jesucristo. Así como Dios llamó a Moisés para librar a Israel de la esclavitud física, así Cristo vino para librarnos de la esclavitud espiritual.</p>
+
+            <p>La zarza ardiente que no se consumía apunta a Cristo, quien es plenamente Dios pero plenamente hombre. La tierra santa donde Moisés se paró apunta a la santidad que recibimos a través de Cristo. Y la promesa de Dios de estar con Moisés encuentra su cumplimiento definitivo en Cristo, quien es "Dios con nosotros" para siempre.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%208%3A58&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 8:58</a>
+                    <div class="ref-explanation">"Antes que Abraham fuese, yo soy"—la afirmación de Cristo de ser el YO SOY eterno que se apareció a Moisés.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2014%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 14:9</a>
+                    <div class="ref-explanation">"El que me ha visto a mí, ha visto al Padre"—ver a Cristo es ver al YO SOY que se apareció en la zarza ardiente.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%201%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 1:3</a>
+                    <div class="ref-explanation">Cristo es "el resplandor de su gloria, y la imagen misma de su sustancia"—la manifestación visible del YO SOY invisible.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (excluding buttons and verse references)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove buttons, verse callouts, and verse references
+            clone.querySelectorAll('.audio-btn, .verse-callout, .verse-reference').forEach(el => el.remove());
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

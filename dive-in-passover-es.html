@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumérgete: La Creación - Línea de Tiempo de Génesis</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: La Creación</h1>
+            <p class="subtitle">Viendo a Cristo en el Principio</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">El Fundamento: En el Principio Era el Verbo</h2>
+            <p>El relato de la Creación en <a href="https://www.biblegateway.com/passage/?search=Génesis%201%3A1-2%3A25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 1-2</a> no es meramente un registro histórico de cómo el universo llegó a existir—es el acto inicial de una gran narrativa que encuentra su significado y cumplimiento definitivos en Jesucristo. El Nuevo Testamento revela explícitamente que Aquel que habló la creación a la existencia es el mismo que vendría a redimirla.</p>
+            
+            <div class="verse-callout">
+                En el principio era el Verbo, y el Verbo era con Dios, y el Verbo era Dios. Este era en el principio con Dios. Todas las cosas por él fueron hechas, y sin él nada de lo que ha sido hecho, fue hecho.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%201%3A1-3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 1:1-3</a>
+                </span>
+            </div>
+
+            <p>Cuando Génesis comienza con "En el principio, creó Dios," apunta hacia Aquel que sería revelado como el Creador mismo—Jesucristo. El apóstol Juan deliberadamente hace eco de <a href="https://www.biblegateway.com/passage/?search=Génesis%201%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 1:1</a> para mostrar que el Verbo que se hizo carne (<a href="https://www.biblegateway.com/passage/?search=Juan%201%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 1:14</a>) es el mismo Verbo por quien todas las cosas fueron creadas.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2019%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 19:13</a>
+                    <div class="ref-explanation">Jesús es llamado "El Verbo de Dios" en Su regreso, confirmando Su identidad como el Verbo eterno.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%201%3A1-2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Juan 1:1-2</a>
+                    <div class="ref-explanation">Juan identifica a Jesús como "el Verbo de vida" que era "desde el principio," reforzando Su naturaleza eterna.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Proverbios%208%3A22-31&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Proverbios 8:22-31</a>
+                    <div class="ref-explanation">La sabiduría (personificada) estuvo presente en la creación, apuntando a Cristo como la sabiduría de Dios que estaba con Dios en el principio.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="foundation">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Jesús: El Agente de la Creación</h2>
+            <p>El Nuevo Testamento deja muy claro que Jesucristo no solo estuvo presente en la creación, sino que fue el agente activo a través del cual Dios creó todo. Esta verdad se declara explícitamente en múltiples pasajes:</p>
+
+            <div class="theme-box">
+                <div class="theme-title">El Creador en Colosenses</div>
+                <p>Pablo escribe que Jesús es "la imagen del Dios invisible, el primogénito de toda creación. Porque en él fueron creadas todas las cosas, las que hay en los cielos y las que hay en la tierra" (<a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A15-16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Colosenses 1:15-16</a>). La frase "primogénito" aquí no significa que Jesús fue creado—significa que Él tiene los derechos y privilegios del primogénito, la posición preeminente sobre toda la creación.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A15-17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Colosenses 1:15-17</a>
+                </div>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">El Sustentador de Todas las Cosas</div>
+                <p>No solo Jesús creó todas las cosas, sino que también las sustenta. El escritor de Hebreos declara que Dios "en estos postreros días nos ha hablado por el Hijo, a quien constituyó heredero de todo, y por quien asimismo hizo el universo" (<a href="https://www.biblegateway.com/passage/?search=Hebreos%201%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 1:2</a>). El mismo que habló el universo a la existencia continúa sosteniéndolo por Su palabra poderosa.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%201%3A2-3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 1:2-3</a>
+                </div>
+            </div>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%208%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 8:6</a>
+                    <div class="ref-explanation">Pablo declara "un Señor, Jesucristo, por quien son todas las cosas," afirmando explícitamente el papel de Cristo en la creación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%203%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 3:9</a>
+                    <div class="ref-explanation">Dios "creó todas las cosas por Jesucristo," confirmando a Cristo como el agente de la creación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%204%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 4:11</a>
+                    <div class="ref-explanation">Todas las cosas fueron creadas por la voluntad de Dios, y Cristo es la expresión de esa voluntad a través de quien la creación llegó a ser.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="agent">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Imagen de Dios: De Adán a Cristo</h2>
+            <p><a href="https://www.biblegateway.com/passage/?search=Génesis%201%3A27&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 1:27</a> declara que Dios creó a la humanidad "a su imagen; a imagen de Dios lo creó; varón y hembra los creó." Esta verdad profunda encuentra su expresión definitiva en Jesucristo, quien es descrito como "la imagen del Dios invisible" (<a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Colosenses 1:15</a>) y "la imagen misma de su sustancia" (<a href="https://www.biblegateway.com/passage/?search=Hebreos%201%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 1:3</a>).</p>
+
+            <div class="verse-callout">
+                Porque a los que antes conoció, también los predestinó para que fuesen hechos conformes a la imagen de su Hijo, para que él sea el primogénito entre muchos hermanos.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A29&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 8:29</a>
+                </span>
+            </div>
+
+            <p>Donde Adán falló en reflejar perfectamente la imagen de Dios, Jesús revela perfectamente lo que significa ser la imagen de Dios. A través de Cristo, los creyentes están siendo restaurados a la imagen que fue desfigurada por el pecado, finalmente para ser conformados a la imagen del Hijo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%204%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corintios 4:4</a>
+                    <div class="ref-explanation">Cristo es "la imagen de Dios," la revelación perfecta de cómo es Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A49&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 15:49</a>
+                    <div class="ref-explanation">Los creyentes llevarán "la imagen del celestial" (Cristo), siendo restaurados a la imagen perdida en Adán.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Filipenses%202%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Filipenses 2:6</a>
+                    <div class="ref-explanation">Cristo existía "en forma de Dios," siendo la expresión perfecta de la naturaleza e imagen de Dios.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="image">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Primer Adán y el Último Adán</h2>
+            <p>Pablo explícitamente traza la conexión entre Adán y Cristo, llamando a Jesús "el postrer Adán" (<a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A45&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 15:45</a>). Esta tipología revela cómo la historia de la creación y la caída apunta hacia la redención:</p>
+
+            <div class="verse-callout">
+                Porque así como en Adán todos mueren, también en Cristo todos serán vivificados.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 15:22</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">El Contraste</div>
+                <p><a href="https://www.biblegateway.com/passage/?search=Romanos%205%3A12-21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 5:12-21</a> proporciona una comparación detallada: "Por tanto, como el pecado entró en el mundo por un hombre, y por el pecado la muerte, así la muerte pasó a todos los hombres, por cuanto todos pecaron... Pero el don no fue como la transgresión; porque si por la transgresión de aquel uno murieron los muchos, abundaron mucho más para los muchos la gracia de Dios y el don por la gracia de un hombre, Jesucristo" (<a href="https://www.biblegateway.com/passage/?search=Romanos%205%3A12%2C15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 5:12, 15</a>).</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%205%3A12-21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 5:12-21</a>
+                </div>
+            </div>
+
+            <p>Adán trajo muerte y separación de Dios; Cristo trae vida y reconciliación. La desobediencia de Adán trajo condenación; la obediencia de Cristo trae justificación. La primera creación a través de Adán fue corrompida; la nueva creación a través de Cristo está siendo restaurada.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A21-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 15:21-22</a>
+                    <div class="ref-explanation">"Porque por cuanto la muerte entró por un hombre, también por un hombre la resurrección de los muertos. Porque así como en Adán todos mueren, también en Cristo todos serán vivificados."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Filipenses%202%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Filipenses 2:8</a>
+                    <div class="ref-explanation">La obediencia de Cristo "hasta la muerte" contrasta con la desobediencia de Adán, mostrando perfecta sumisión a la voluntad de Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%205%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 5:18</a>
+                    <div class="ref-explanation">"Así que, como por la transgresión de uno vino la condenación a todos los hombres, de la misma manera por la justicia de uno vino a todos los hombres la justificación de vida."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="adam">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Luz del Mundo</h2>
+            <p>En el primer día de la creación, Dios dijo: "Sea la luz" (<a href="https://www.biblegateway.com/passage/?search=Génesis%201%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 1:3</a>), y la luz fue separada de las tinieblas. Esta luz física apunta a una realidad espiritual mayor—Jesucristo, quien se declaró a sí mismo como "la luz del mundo" (<a href="https://www.biblegateway.com/passage/?search=Juan%208%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 8:12</a>).</p>
+
+            <div class="verse-callout">
+                En él estaba la vida, y la vida era la luz de los hombres. La luz en las tinieblas resplandece, y las tinieblas no prevalecieron contra ella.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%201%3A4-5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 1:4-5</a>
+                </span>
+            </div>
+
+            <p>Así como el primer acto creativo de Dios fue traer luz a las tinieblas, así Cristo vino como la verdadera Luz para disipar las tinieblas espirituales que habían cubierto la tierra. Los que le siguen "no andarán en tinieblas, sino que tendrán la luz de la vida" (<a href="https://www.biblegateway.com/passage/?search=Juan%208%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 8:12</a>).</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%201%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Juan 1:5</a>
+                    <div class="ref-explanation">"Dios es luz, y no hay ningunas tinieblas en él," mostrando que Cristo como la luz revela la naturaleza de Dios mismo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%204%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corintios 4:6</a>
+                    <div class="ref-explanation">Dios "mandó que de las tinieblas resplandeciese la luz" en la creación, y "resplandeció en nuestros corazones, para iluminación del conocimiento de la gloria de Dios en la faz de Jesucristo."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%205%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 5:8</a>
+                    <div class="ref-explanation">"Erais tinieblas, mas ahora sois luz en el Señor," mostrando que los creyentes se convierten en partícipes de la naturaleza de luz de Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="light">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Reposo del Sábado: Encontrando Descanso en Cristo</h2>
+            <p>En el séptimo día, Dios reposó de toda Su obra, bendiciendo y santificando ese día (<a href="https://www.biblegateway.com/passage/?search=Génesis%202%3A2-3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 2:2-3</a>). Este reposo del sábado no fue porque Dios estuviera cansado, sino porque Su obra de creación estaba completa. Este patrón de reposo apunta hacia el descanso definitivo que se encuentra en Cristo.</p>
+
+            <div class="verse-callout">
+                Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar. Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2011%3A28-30&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 11:28-30</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">El Verdadero Reposo del Sábado</div>
+                <p>El libro de Hebreos explica que el reposo del sábado de la creación apunta a un descanso mayor: "Por tanto, queda un reposo para el pueblo de Dios. Porque el que ha entrado en su reposo, también ha reposado de sus obras, como Dios de las suyas" (<a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A9-10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:9-10</a>). Este descanso se encuentra en Cristo, quien completó la obra de redención, así como Dios completó la obra de creación.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A1-11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:1-11</a>
+                </div>
+            </div>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Marcos%202%3A27-28&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Marcos 2:27-28</a>
+                    <div class="ref-explanation">Jesús se declara "Señor aun del día de reposo," mostrando que el reposo del sábado encuentra su cumplimiento en Él.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:3</a>
+                    <div class="ref-explanation">"Los que hemos creído entramos en el reposo," mostrando que la fe en Cristo nos lleva al verdadero reposo del sábado.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2011%3A28&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 11:28</a>
+                    <div class="ref-explanation">La invitación de Cristo "venid a mí... y yo os haré descansar" cumple la promesa del reposo del sábado encontrada en la creación.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="sabbath">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Nueva Creación: El Cumplimiento Definitivo</h2>
+            <p>La historia que comienza con "En el principio, creó Dios" encuentra su cumplimiento definitivo en la promesa de una nueva creación. Así como Dios creó los cielos y la tierra en el principio, así Él promete crear "cielos nuevos y tierra nueva" (<a href="https://www.biblegateway.com/passage/?search=Isaías%2065%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Isaías 65:17</a>, <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2021%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Apocalipsis 21:1</a>).</p>
+
+            <div class="verse-callout">
+                De modo que si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron; he aquí todas son hechas nuevas.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%205%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Corintios 5:17</a>
+                </span>
+            </div>
+
+            <div class="verse-callout">
+                Vi un cielo nuevo y una tierra nueva; porque el primer cielo y la primera tierra pasaron, y el mar ya no existía más. Y yo Juan vi la santa ciudad, la nueva Jerusalén, descender del cielo, de Dios, dispuesta como una esposa ataviada para su marido.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2021%3A1-5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Apocalipsis 21:1-5</a>
+                </span>
+            </div>
+
+            <p>A través de Cristo, los creyentes se convierten en parte de esta nueva creación. El viejo orden, corrompido por el pecado, está pasando. El nuevo orden, redimido y restaurado a través de la obra de Cristo, ya está irrumpiendo y será completamente realizado cuando Él regrese. La creación que comenzó en Génesis encuentra su cumplimiento en la nueva creación que Cristo trae.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%206%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 6:15</a>
+                    <div class="ref-explanation">"Porque en Cristo Jesús ni la circuncisión vale nada, ni la incircuncisión, sino una nueva creación," mostrando que la nueva creación es la esencia de la salvación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%204%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 4:24</a>
+                    <div class="ref-explanation">Los creyentes deben "vestiros del nuevo hombre, creado según Dios en la justicia y santidad de la verdad," reflejando la naturaleza de la nueva creación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaías%2043%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Isaías 43:19</a>
+                    <div class="ref-explanation">"He aquí que yo hago cosa nueva," apuntando hacia la nueva creación que Dios traería a través de Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="newcreation">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Cristo en el Principio</h2>
+            <p>El relato de la Creación no es una historia independiente sino el capítulo inicial de una narrativa que encuentra su centro y significado en Jesucristo. Él es el Verbo por quien todas las cosas fueron creadas, la verdadera Imagen de Dios, el Último Adán que revierte la maldición del primero, la Luz que disipa las tinieblas, el Descanso para los cansados, y el Autor de la nueva creación.</p>
+
+            <p>Cuando leemos <a href="https://www.biblegateway.com/passage/?search=Génesis%201%3A1-2%3A25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Génesis 1-2</a>, no solo estamos leyendo sobre cómo comenzó el mundo—estamos leyendo sobre Aquel que estuvo allí en el principio, que vino a redimir lo que se perdió, y que un día hará nuevas todas las cosas. La historia de la creación es, desde el primer versículo, la historia de Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2021%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 21:5</a>
+                    <div class="ref-explanation">"He aquí, yo hago nuevas todas las cosas," hablado por Aquel que estuvo allí en el principio, completando la historia que comenzó en Génesis.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 1:18</a>
+                    <div class="ref-explanation">Cristo es "el primogénito de los muertos," el principio de la nueva creación, así como Él fue el principio de la primera creación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%201%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 1:18</a>
+                    <div class="ref-explanation">"A Dios nadie le vio jamás; el unigénito Hijo... le ha dado a conocer," mostrando que Cristo revela al Dios que creó todas las cosas.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (excluding buttons and verse references)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove buttons, verse callouts, and verse references
+            clone.querySelectorAll('.audio-btn, .verse-callout, .verse-reference').forEach(el => el.remove());
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

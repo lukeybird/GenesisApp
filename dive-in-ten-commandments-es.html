@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumérgete: Los Diez Mandamientos - Línea de Tiempo de Éxodo</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: Los Diez Mandamientos</h1>
+            <p class="subtitle">Viendo a Cristo como el Cumplimiento de la Ley</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">La Ley Revela Nuestro Pecado</h2>
+            <p>Cuando Dios dio los Diez Mandamientos en el Monte Sinaí (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2020%3A1-17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 20:1-17</a>), estableció un estándar perfecto de justicia que ningún ser humano puede cumplir completamente. La Ley no fue dada para que pudiéramos salvarnos guardándola, sino para revelar nuestra necesidad de un Salvador.</p>
+            
+            <div class="verse-callout">
+                Porque por las obras de la ley ningún ser humano será justificado delante de él; pues por medio de la ley es el conocimiento del pecado.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%203%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 3:20</a>
+                </span>
+            </div>
+
+            <p>La Ley actúa como un espejo que nos muestra nuestra condición pecaminosa. Cuando miramos los Diez Mandamientos, vemos que hemos fallado en guardarlos perfectamente. Esto nos lleva a reconocer que necesitamos algo más que nuestros propios esfuerzos—necesitamos a Cristo, quien cumplió la Ley perfectamente en nuestro lugar.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%203%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 3:24</a>
+                    <div class="ref-explanation">"De manera que la ley ha sido nuestro ayo, para llevarnos a Cristo, a fin de que fuésemos justificados por la fe."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%207%3A7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 7:7</a>
+                    <div class="ref-explanation">"Pero yo no conocí el pecado sino por la ley; porque tampoco conociera la codicia, si la ley no dijera: No codiciarás."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Santiago%202%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Santiago 2:10</a>
+                    <div class="ref-explanation">"Porque cualquiera que guardare toda la ley, pero ofendiere en un punto, se hace culpable de todos."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="lawreveals">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Cristo Cumplió la Ley Perfectamente</h2>
+            <p>Mientras que nosotros hemos fallado en guardar los Diez Mandamientos, Jesucristo los cumplió perfectamente. Él vino no para abolir la Ley, sino para cumplirla completamente en nuestro lugar.</p>
+
+            <div class="verse-callout">
+                No penséis que he venido para abrogar la ley o los profetas; no he venido para abrogar, sino para cumplir.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%205%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 5:17</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">La Obediencia Perfecta de Cristo</div>
+                <p>Cristo guardó cada uno de los Diez Mandamientos perfectamente durante toda Su vida. Nunca adoró a otro dios, nunca tomó el nombre de Dios en vano, siempre honró el día de reposo, honró a Sus padres, nunca mató, nunca cometió adulterio, nunca robó, nunca mintió, y nunca codició. Su obediencia perfecta es acreditada a todos los que creen en Él.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%205%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 5:19</a>
+                </div>
+            </div>
+
+            <p>Por Su perfecta obediencia a la Ley, Cristo ganó la justicia que necesitamos. Cuando ponemos nuestra fe en Él, Su justicia se nos acredita, y somos declarados justos delante de Dios, no por nuestras obras, sino por la obra perfecta de Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%203%3A21-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 3:21-22</a>
+                    <div class="ref-explanation">"Pero ahora, aparte de la ley, se ha manifestado la justicia de Dios... la justicia de Dios por medio de la fe en Jesucristo."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Filipenses%203%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Filipenses 3:9</a>
+                    <div class="ref-explanation">"Y ser hallado en él, no teniendo mi propia justicia, que es por la ley, sino la que es por la fe de Cristo, la justicia que es de Dios por la fe."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%205%3A21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corintios 5:21</a>
+                    <div class="ref-explanation">"Al que no conoció pecado, por nosotros lo hizo pecado, para que nosotros fuésemos hechos justicia de Dios en él."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="fulfilled">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Un Reino de Sacerdotes y una Nación Santa</h2>
+            <p>Cuando Dios dio los Diez Mandamientos, Él declaró a Israel: "Vosotros me seréis un reino de sacerdotes, y gente santa" (<a href="https://www.biblegateway.com/passage/?search=Éxodo%2019%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Éxodo 19:6</a>). Esta promesa encuentra su cumplimiento definitivo a través de Cristo, quien nos hace un reino de sacerdotes y una nación santa.</p>
+
+            <div class="verse-callout">
+                Mas vosotros sois linaje escogido, real sacerdocio, nación santa, pueblo adquirido por Dios, para que anunciéis las virtudes de aquel que os llamó de las tinieblas a su luz admirable.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%202%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Pedro 2:9</a>
+                </span>
+            </div>
+
+            <div class="theme-box">
+                <div class="theme-title">Sacerdotes en Cristo</div>
+                <p>A través de la obra de Cristo, todos los creyentes se convierten en sacerdotes. Ya no necesitamos un sacerdote terrenal para interceder por nosotros, porque Cristo es nuestro Sumo Sacerdote perfecto. Y como sacerdotes, tenemos acceso directo a Dios y el privilegio de servirle y adorarle.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%201%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Apocalipsis 1:6</a>
+                </div>
+            </div>
+
+            <p>La promesa de ser un reino de sacerdotes y una nación santa que se dio en el Monte Sinaí encuentra su cumplimiento en todos los que están en Cristo. A través de Él, somos hechos santos y recibimos el privilegio de servir como sacerdotes del Dios Altísimo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%205%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 5:10</a>
+                    <div class="ref-explanation">"Y nos has hecho para nuestro Dios reyes y sacerdotes, y reinaremos sobre la tierra."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A14-16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:14-16</a>
+                    <div class="ref-explanation">Tenemos un Sumo Sacerdote que puede compadecerse de nuestras debilidades, y podemos acercarnos con confianza al trono de la gracia.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%202%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 2:19</a>
+                    <div class="ref-explanation">"Ya no sois extranjeros ni advenedizos, sino conciudadanos de los santos, y miembros de la familia de Dios."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="priests">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Ley Escrita en Nuestros Corazones</h2>
+            <p>Los Diez Mandamientos fueron escritos en tablas de piedra, pero a través de Cristo, la Ley es escrita en nuestros corazones. El nuevo pacto que Cristo estableció no anula la Ley, sino que la cumple y la internaliza en nosotros.</p>
+
+            <div class="verse-callout">
+                He aquí que vienen días, dice Jehová, en los cuales haré nuevo pacto con la casa de Israel y con la casa de Judá... Daré mi ley en su mente, y la escribiré en su corazón; y yo seré a ellos por Dios, y ellos me serán por pueblo.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Jeremías%2031%3A31%2C33&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Jeremías 31:31, 33</a>
+                </span>
+            </div>
+
+            <p>En el nuevo pacto, no solo conocemos la Ley externamente, sino que el Espíritu Santo la escribe en nuestros corazones. Esto no significa que ahora podemos guardar la Ley perfectamente por nosotros mismos, sino que el Espíritu nos da el deseo y el poder para obedecer, y cuando fallamos, tenemos a Cristo como nuestro abogado y justicia.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%203%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corintios 3:3</a>
+                    <div class="ref-explanation">"Siendo manifiesto que sois carta de Cristo... escrita no con tinta, sino con el Espíritu del Dios vivo; no en tablas de piedra, sino en tablas de carne del corazón."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ezequiel%2036%3A26-27&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Ezequiel 36:26-27</a>
+                    <div class="ref-explanation">"Os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros... Y pondré dentro de vosotros mi Espíritu, y haré que andéis en mis estatutos."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%208%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 8:10</a>
+                    <div class="ref-explanation">"Pondré mis leyes en la mente de ellos, y sobre su corazón las escribiré; y seré a ellos por Dios, y ellos me serán a mí por pueblo."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="heart">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Cristo, el Cumplimiento de la Ley</h2>
+            <p>Los Diez Mandamientos revelan nuestra necesidad de un Salvador, y Cristo es ese Salvador. Él cumplió la Ley perfectamente en nuestro lugar, ganando la justicia que necesitamos. A través de Él, somos hechos un reino de sacerdotes y una nación santa, y la Ley es escrita en nuestros corazones por el Espíritu Santo.</p>
+
+            <p>La Ley no fue dada para que pudiéramos salvarnos guardándola, sino para llevarnos a Cristo. Y ahora que estamos en Cristo, la Ley ya no nos condena, sino que nos guía en una vida de amor y obediencia a Dios, no por temor, sino por gratitud por lo que Cristo ha hecho por nosotros.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:1</a>
+                    <div class="ref-explanation">"Ahora, pues, ninguna condenación hay para los que están en Cristo Jesús."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%203%3A24-25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 3:24-25</a>
+                    <div class="ref-explanation">"De manera que la ley ha sido nuestro ayo, para llevarnos a Cristo, a fin de que fuésemos justificados por la fe. Pero venida la fe, ya no estamos bajo ayo."</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2022%3A37-40&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 22:37-40</a>
+                    <div class="ref-explanation">Jesús resumió toda la Ley en dos mandamientos: amar a Dios y amar al prójimo, mostrando que el amor es el cumplimiento de la Ley.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (excluding buttons and verse references)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove buttons, verse callouts, and verse references
+            clone.querySelectorAll('.audio-btn, .verse-callout, .verse-reference').forEach(el => el.remove());
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

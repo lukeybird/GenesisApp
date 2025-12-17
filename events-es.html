@@ -432,6 +432,8 @@
             gap: 20px;
             margin-bottom: 20px;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
         }
 
         .character-date {
@@ -452,6 +454,9 @@
             font-weight: 400;
             opacity: 0.8;
             font-style: italic;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
         }
 
         .scripture-link {
@@ -459,6 +464,10 @@
             text-decoration: none;
             transition: all 0.3s ease;
             border-bottom: 1px solid transparent;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
         }
 
         .scripture-link:hover {
@@ -878,24 +887,29 @@
                 const content = document.createElement('div');
                 content.className = 'timeline-content';
                 
-                // Check if this is the Creation, Fall, or Cain and Abel event to add Dive In button
-                const isCreation = event.name === "La Creación";
-                const isFall = event.name === "La Caída";
-                const isCainAbel = event.name === "Caín y Abel";
-                const buttonsHTML = isCreation 
+                // Map event names to their dive-in page URLs (Spanish versions)
+                const diveInPages = {
+                    "La Creación": "dive-in-creation-es.html",
+                    "La Caída": "dive-in-fall-es.html",
+                    "Caín y Abel": "dive-in-cain-abel-es.html",
+                    "El Diluvio": "dive-in-flood-es.html",
+                    "La Torre de Babel": "dive-in-babel-es.html",
+                    "El Llamado de Abraham": "dive-in-abraham-es.html",
+                    "Destrucción de Sodoma y Gomorra": "dive-in-sodom-es.html",
+                    "El Sacrificio de Isaac": "dive-in-binding-of-isaac-es.html",
+                    "El Sueño de Jacob (Escalera al Cielo)": "dive-in-jacobs-dream-es.html",
+                    "Jacob Lucha con Dios": "dive-in-jacob-wrestles-es.html",
+                    "José Vendido como Esclavo": "dive-in-joseph-sold-es.html",
+                    "José en Egipto": "dive-in-joseph-egypt-es.html",
+                    "José Se Revela": "dive-in-joseph-reveals-es.html",
+                    "La Familia de Jacob Se Muda a Egipto": "dive-in-jacob-egypt-es.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
                     ? `<div class="button-container">
                         <button class="audio-btn">Escuchar Historia</button>
-                        <a href="dive-in-creation-es.html" class="dive-in-btn">Sumérgete!</a>
-                    </div>`
-                    : isFall
-                    ? `<div class="button-container">
-                        <button class="audio-btn">Escuchar Historia</button>
-                        <a href="dive-in-fall-es.html" class="dive-in-btn">Sumérgete!</a>
-                    </div>`
-                    : isCainAbel
-                    ? `<div class="button-container">
-                        <button class="audio-btn">Escuchar Historia</button>
-                        <a href="dive-in-cain-abel-es.html" class="dive-in-btn">Sumérgete!</a>
+                        <a href="${diveInPage}" class="dive-in-btn">Sumérgete!</a>
                     </div>`
                     : `<button class="audio-btn">Escuchar Historia</button>`;
                 
@@ -922,9 +936,18 @@
                         !e.target.classList.contains('dive-in-btn') &&
                         !e.target.closest('.dive-in-btn') &&
                         !e.target.classList.contains('scripture-link') &&
-                        !e.target.closest('.scripture-link')) {
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
                         content.classList.toggle('expanded');
                     }
+                });
+
+                // Ensure scripture links are clickable
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation(); // Prevent toggling the expansion
+                    });
                 });
 
                 // Add audio button functionality
