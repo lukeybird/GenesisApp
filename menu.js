@@ -11,6 +11,8 @@
         'events.html': { book: 'genesis', type: 'events', lang: 'en' },
         'exodus.html': { book: 'exodus', type: 'characters', lang: 'en' },
         'exodus-events.html': { book: 'exodus', type: 'events', lang: 'en' },
+        'leviticus.html': { book: 'leviticus', type: 'characters', lang: 'en' },
+        'leviticus-events.html': { book: 'leviticus', type: 'events', lang: 'en' },
         'dive-in-creation.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-fall.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-cain-abel.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
@@ -20,6 +22,8 @@
         'events-es.html': { book: 'genesis', type: 'events', lang: 'es' },
         'exodus-es.html': { book: 'exodus', type: 'characters', lang: 'es' },
         'exodus-events-es.html': { book: 'exodus', type: 'events', lang: 'es' },
+        'leviticus-es.html': { book: 'leviticus', type: 'characters', lang: 'es' },
+        'leviticus-events-es.html': { book: 'leviticus', type: 'events', lang: 'es' },
         'dive-in-creation-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
         'dive-in-fall-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
         'dive-in-cain-abel-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' }
@@ -34,6 +38,10 @@
         exodus: { 
             en: { name: 'Exodus', emoji: '📖' },
             es: { name: 'Éxodo', emoji: '📖' }
+        },
+        leviticus: { 
+            en: { name: 'Leviticus', emoji: '📖' },
+            es: { name: 'Levítico', emoji: '📖' }
         }
     };
 
@@ -95,11 +103,17 @@
             } else { // events
                 return lang === 'es' ? 'events-es.html' : 'events.html';
             }
-        } else { // exodus
+        } else if (book === 'exodus') {
             if (type === 'characters') {
                 return lang === 'es' ? 'exodus-es.html' : 'exodus.html';
             } else { // events
                 return lang === 'es' ? 'exodus-events-es.html' : 'exodus-events.html';
+            }
+        } else { // leviticus
+            if (type === 'characters') {
+                return lang === 'es' ? 'leviticus-es.html' : 'leviticus.html';
+            } else { // events
+                return lang === 'es' ? 'leviticus-events-es.html' : 'leviticus-events.html';
             }
         }
     }

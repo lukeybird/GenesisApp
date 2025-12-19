@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: The Holiness Code - Leviticus Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Holiness Code</h1>
+            <p class="subtitle">Be holy, for I am holy</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">The Call to Holiness: Be Holy, For I Am Holy</h2>
+            <p>The Holiness Code in <a href="https://www.biblegateway.com/passage/?search=Leviticus%2019%3A1-37&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Leviticus 19</a> begins with God's foundational command: "Be holy, for I am holy." This call to holiness was not merely about following external rules—it was about reflecting God's character in every aspect of life. The commands covered worship, family relationships, business ethics, treatment of the poor, and justice. This comprehensive call to holiness points forward to Christ, who perfectly fulfilled God's law and enables us to be holy through His work.</p>
+            
+            <div class="verse-callout">
+                But as He who called you is holy, you also be holy in all your conduct, because it is written: "Be holy, for I am holy."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Peter%201%3A15-16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Peter 1:15-16</a>
+                </span>
+            </div>
+
+            <p>The Holiness Code revealed God's standard of holiness and Israel's need to reflect that holiness in their daily lives. But this standard was impossible to perfectly keep, revealing the need for a Savior who could both fulfill the law and provide the holiness we need. Christ is that Savior, who lived a perfectly holy life and provides His holiness to us.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Peter%201%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Peter 1:2</a>
+                    <div class="ref-explanation">We are "elect according to the foreknowledge of God the Father, in sanctification of the Spirit," showing that holiness comes through the Spirit's work, made possible by Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2012%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 12:14</a>
+                    <div class="ref-explanation">"Pursue peace with all people, and holiness, without which no one will see the Lord," showing that holiness is still required, but now through Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%207%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 7:1</a>
+                    <div class="ref-explanation">"Let us cleanse ourselves from all filthiness of the flesh and spirit, perfecting holiness in the fear of God," showing that holiness is now of the heart and spirit through Christ.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="call">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Christ Our Holiness: The Perfect Fulfillment</h2>
+            <p>We cannot achieve holiness on our own. The Holiness Code showed Israel what holiness looked like, but it also revealed their inability to perfectly keep it. Christ came as the perfect fulfillment of the law, living a life of complete holiness in thought, word, and deed. Through His work, we are not only declared holy (justified) but are also being made holy (sanctified).</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Holiness Through Christ</div>
+                <p>Christ is our holiness. He perfectly kept every command of the Holiness Code, never failing in any area. Through His death and resurrection, He provides His holiness to us. We are declared holy in Him, and the Holy Spirit works in us to make us holy in practice.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A30&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 1:30</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                But of Him you are in Christ Jesus, who became for us wisdom from God—and righteousness and sanctification and redemption.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A30&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 1:30</a>
+                </span>
+            </div>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2010%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 10:10</a>
+                    <div class="ref-explanation">"By that will we have been sanctified through the offering of the body of Jesus Christ once for all," showing that Christ's sacrifice makes us holy.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%205%3A25-27&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 5:25-27</a>
+                    <div class="ref-explanation">Christ "gave Himself for her, that He might sanctify and cleanse her," showing that Christ makes His people holy.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Thessalonians%204%3A7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Thessalonians 4:7</a>
+                    <div class="ref-explanation">"For God did not call us to uncleanness, but in holiness," showing that through Christ we are called to holiness.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="christ-holiness">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Love Your Neighbor as Yourself</h2>
+            <p>The Holiness Code culminates with the command to "love your neighbor as yourself" (<a href="https://www.biblegateway.com/passage/?search=Leviticus%2019%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Leviticus 19:18</a>). This command, which Jesus called the second greatest commandment, shows that holiness is not just about avoiding sin but about actively loving others. Christ perfectly demonstrated this love, laying down His life for us, and through His Spirit, we are enabled to love others as He loved us.</p>
+
+            <div class="verse-callout">
+                A new commandment I give to you, that you love one another; as I have loved you, that you also love one another. By this all will know that you are My disciples, if you have love for one another.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2013%3A34-35&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 13:34-35</a>
+                </span>
+            </div>
+
+            <p>Christ elevated the command to love your neighbor, showing that true holiness is expressed through love. He loved us first, even when we were enemies, and calls us to love others in the same way. The Holiness Code's command to love points forward to Christ's perfect love, which enables us to love others.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2022%3A37-40&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 22:37-40</a>
+                    <div class="ref-explanation">Jesus said the greatest commandments are to love God and love your neighbor, showing that love is the essence of holiness.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%2013%3A8-10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 13:8-10</a>
+                    <div class="ref-explanation">"Love is the fulfillment of the law," showing that love fulfills the requirements of the Holiness Code.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%204%3A19&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 John 4:19</a>
+                    <div class="ref-explanation">"We love Him because He first loved us," showing that our ability to love comes from Christ's love for us.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="love">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Holiness in Daily Life</h2>
+            <p>The Holiness Code applied holiness to every area of life—from how to treat parents and the elderly, to how to conduct business honestly, to how to care for the poor and foreigner. This shows that holiness is not just for special occasions but for everyday life. Christ lived this kind of comprehensive holiness, and through Him, we are called to live holy lives in all we do.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Comprehensive Holiness</div>
+                <p>The Holiness Code covered every aspect of life, showing that holiness is not compartmentalized but comprehensive. Christ lived this way, being holy in every area of His life. Through Him, we are called to the same comprehensive holiness, not by our own strength, but through the power of the Holy Spirit.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%203%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 3:17</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                And whatever you do in word or deed, do all in the name of the Lord Jesus, giving thanks to God the Father through Him.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%203%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 3:17</a>
+                </span>
+            </div>
+
+            <p>Every aspect of our lives is to be lived in holiness, just as the Holiness Code required. But now, through Christ, we have the power to live this way. His holiness is worked in us by the Holy Spirit, enabling us to reflect God's character in every area of life.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2010%3A31&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 10:31</a>
+                    <div class="ref-explanation">"Therefore, whether you eat or drink, or whatever you do, do all to the glory of God," showing that all of life is to be lived in holiness.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%204%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 4:1</a>
+                    <div class="ref-explanation">"Walk worthy of the calling with which you were called," showing that we are to live holy lives in response to Christ's work.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Titus%202%3A11-12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Titus 2:11-12</a>
+                    <div class="ref-explanation">"The grace of God... teaches us to deny ungodliness and worldly lusts, and to live soberly, righteously, and godly," showing that grace enables holiness.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="daily">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Holiness Through Christ</h2>
+            <p>The Holiness Code reveals God's standard of holiness and our need for a Savior. Christ perfectly fulfilled the law's requirements and provides the holiness we need through His work. We are called to be holy, not by our own efforts, but through Christ who is our holiness.</p>
+
+            <p>As we abide in Him, His holiness is worked in us by the Holy Spirit, enabling us to live lives that reflect God's character. The Holiness Code that showed what holiness looks like points forward to Christ, who is our holiness and who enables us to live holy lives.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2015%3A4-5&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 15:4-5</a>
+                    <div class="ref-explanation">"Abide in Me, and I in you... for without Me you can do nothing," showing that holiness comes through abiding in Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%205%3A22-23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 5:22-23</a>
+                    <div class="ref-explanation">"The fruit of the Spirit is love, joy, peace... against such there is no law," showing that the Spirit produces holiness in us.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%201%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Philippians 1:6</a>
+                    <div class="ref-explanation">"He who has begun a good work in you will complete it," showing that Christ will complete the work of holiness in us.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Leviticus Timeline - Major Events</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .christ-connection {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .christ-connection {
+            max-height: 500px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+            opacity: 1;
+        }
+
+        .christ-connection-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .christ-connection-text {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .christ-connection-text .scripture-link {
+            color: #88d0ff;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dive-in-btn {
+            display: none;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.3), rgba(0, 200, 255, 0.2));
+            border: 1px solid rgba(0, 180, 255, 0.6);
+            color: #88d0ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 15px rgba(0, 180, 255, 0.3),
+                inset 0 0 10px rgba(0, 200, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .timeline-content.expanded .dive-in-btn {
+            display: inline-block;
+        }
+
+        .dive-in-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .dive-in-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .dive-in-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.4), rgba(0, 200, 255, 0.3));
+            border-color: rgba(0, 180, 255, 0.9);
+            box-shadow: 
+                0 0 25px rgba(0, 180, 255, 0.5),
+                inset 0 0 20px rgba(0, 200, 255, 0.2);
+            transform: translateY(-2px);
+            color: #66d9ff;
+        }
+
+        .dive-in-btn:hover::after {
+            left: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button-container .audio-btn {
+            margin-top: 0;
+        }
+
+        .button-container .dive-in-btn {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>📖 Leviticus Events</h1>
+            <p class="subtitle">Major Events in Chronological Order</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in chronological order
+        const mainEvents = [
+            {
+                name: "The Burnt Offering Laws",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 1:1-17",
+                intro: "God gives detailed instructions for the burnt offering, a sacrifice completely consumed by fire representing total dedication to God. This offering atones for sin and expresses the worshiper's complete surrender.",
+                tagline: "Complete surrender to God",
+                summary: "The Lord called to Moses and spoke to him from the tent of meeting, giving instructions for the burnt offering. If the offering is from the herd, it must be a male without defect. The worshiper is to lay his hand on the animal's head, and it will be accepted on his behalf to make atonement. The animal is slaughtered before the Lord, and the priests sprinkle the blood against the altar on all sides. The offering is then cut into pieces, and the priests arrange them on the burning wood. The entire animal is burned on the altar as a food offering, an aroma pleasing to the Lord. Instructions are also given for offerings from the flock (sheep or goats) and for birds (doves or pigeons) for those who cannot afford larger animals. In each case, the offering must be without defect, representing the best given to God.",
+                christConnection: "The burnt offering points to Christ's complete sacrifice on the cross, offering Himself wholly to God on our behalf (<a href='https://www.biblegateway.com/passage/?search=Hebrews%2010%3A10&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 10:10</a>). Christ was without defect, the perfect Lamb of God (<a href='https://www.biblegateway.com/passage/?search=1%20Peter%201%3A19&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Peter 1:19</a>). His sacrifice is a fragrant offering to God (<a href='https://www.biblegateway.com/passage/?search=Ephesians%205%3A2&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Ephesians 5:2</a>)."
+            },
+            {
+                name: "The Sin Offering Laws",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 4:1-5:13",
+                intro: "God establishes the sin offering for unintentional sins. Different animals are required based on who sinned—priest, congregation, leader, or common person. The blood is applied in specific ways to make atonement.",
+                tagline: "Atonement for sin",
+                summary: "The Lord spoke to Moses about the sin offering for when anyone sins unintentionally. If the anointed priest sins, bringing guilt on the people, he must offer a young bull without defect. He lays his hand on its head, slaughters it before the Lord, and takes some of the blood into the tent of meeting. He sprinkles blood seven times before the veil of the sanctuary, puts blood on the horns of the altar of incense, and pours out the rest at the base of the altar of burnt offering. The fat is burned on the altar, but the rest of the bull is taken outside the camp and burned. If the whole congregation sins, they offer a bull. If a leader sins, he offers a male goat. If a common person sins, they offer a female goat or lamb. In each case, the blood is applied, the fat is burned, and atonement is made. For those who cannot afford an animal, two doves or pigeons may be offered, or even fine flour without oil or incense.",
+                christConnection: "The sin offering foreshadows Christ, who became sin for us that we might become the righteousness of God (<a href='https://www.biblegateway.com/passage/?search=2%20Corinthians%205%3A21&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>2 Corinthians 5:21</a>). Christ suffered 'outside the camp' like the sin offering (<a href='https://www.biblegateway.com/passage/?search=Hebrews%2013%3A11-12&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 13:11-12</a>). His blood cleanses us from all sin (<a href='https://www.biblegateway.com/passage/?search=1%20John%201%3A7&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 John 1:7</a>)."
+            },
+            {
+                name: "The Ordination of Priests",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 8:1-36",
+                intro: "Moses consecrates Aaron and his sons as priests before the entire congregation. The elaborate seven-day ceremony involves washing, clothing, anointing, and sacrifices, setting them apart for holy service.",
+                tagline: "Set apart for God's service",
+                summary: "The Lord commanded Moses to gather the assembly at the entrance to the tent of meeting for the ordination of Aaron and his sons. Moses washed Aaron and his sons with water, then dressed Aaron in the priestly garments: the tunic, sash, robe, ephod, breastpiece, turban, and the sacred emblem. Moses anointed the tabernacle and everything in it with the anointing oil, then poured oil on Aaron's head to consecrate him. He dressed Aaron's sons in tunics, sashes, and caps. Moses then offered a bull as a sin offering, a ram as a burnt offering, and another ram as the ordination offering. Blood from this ram was put on the right ear, thumb, and big toe of Aaron and his sons, symbolizing their complete dedication. Moses sprinkled blood and oil on Aaron and his sons and their garments. They were commanded to stay at the entrance of the tent of meeting for seven days, completing their ordination. 'Do what the Lord requires, so you will not die.'",
+                christConnection: "The priesthood points to Christ, our great High Priest who was consecrated forever (<a href='https://www.biblegateway.com/passage/?search=Hebrews%207%3A26-28&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 7:26-28</a>). Christ needed no sin offering for Himself, being without sin (<a href='https://www.biblegateway.com/passage/?search=Hebrews%204%3A15&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 4:15</a>). Through Christ, all believers are now priests (<a href='https://www.biblegateway.com/passage/?search=1%20Peter%202%3A9&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Peter 2:9</a>)."
+            },
+            {
+                name: "The Death of Nadab and Abihu",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 10:1-7",
+                intro: "Aaron's sons Nadab and Abihu offer unauthorized fire before the Lord and are immediately consumed by fire from His presence. This sobering event demonstrates God's holiness and the importance of approaching Him according to His commands.",
+                tagline: "The cost of irreverence",
+                summary: "Aaron's sons Nadab and Abihu each took his censer, put fire in it, added incense, and offered unauthorized fire before the Lord, contrary to His command. Fire came out from the presence of the Lord and consumed them, and they died before the Lord. Moses said to Aaron, 'This is what the Lord spoke of when He said: Among those who approach me I will be proved holy; in the sight of all the people I will be honored.' Aaron remained silent. Moses summoned Mishael and Elzaphan, sons of Aaron's uncle Uzziel, and told them to carry their cousins outside the camp, away from the front of the sanctuary. They carried them, still in their tunics, outside the camp. Moses told Aaron and his remaining sons, Eleazar and Ithamar, not to let their hair become unkempt or tear their clothes, or they would die and the Lord would be angry with the whole community. They were not to leave the tent of meeting because the Lord's anointing oil was on them. This event established a permanent warning about the holiness of God's presence and proper worship.",
+                christConnection: "This event reveals God's holiness and our need for a perfect mediator. Christ alone can bring us safely into God's presence (<a href='https://www.biblegateway.com/passage/?search=Hebrews%2010%3A19-22&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 10:19-22</a>). Through Christ's blood, we can approach God's throne with confidence (<a href='https://www.biblegateway.com/passage/?search=Hebrews%204%3A16&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 4:16</a>). Christ is the only way to the Father (<a href='https://www.biblegateway.com/passage/?search=John%2014%3A6&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>John 14:6</a>)."
+            },
+            {
+                name: "The Clean and Unclean Animals",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 11:1-47",
+                intro: "God gives Israel detailed dietary laws distinguishing clean from unclean animals. These laws set Israel apart from other nations and taught them to make distinctions between holy and unholy in all areas of life.",
+                tagline: "Holiness in daily life",
+                summary: "The Lord spoke to Moses and Aaron, giving them regulations about clean and unclean animals. Among land animals, they may eat any that has a divided hoof and chews the cud. Animals like the camel, rabbit, and pig are unclean because they lack one of these characteristics. Of water creatures, they may eat anything with fins and scales. All others are detestable. Among birds, various predators and scavengers are listed as unclean, including eagles, vultures, ravens, owls, and bats. Flying insects that walk on all fours are unclean, except those with jointed legs for hopping like locusts and grasshoppers. Various swarming creatures on the ground are unclean. Anyone who touches the carcass of an unclean animal becomes unclean until evening. The Lord concludes: 'I am the Lord who brought you up out of Egypt to be your God; therefore be holy, because I am holy.' These laws taught Israel to distinguish between clean and unclean, holy and common.",
+                christConnection: "Christ declared all foods clean, showing that true purity is of the heart (<a href='https://www.biblegateway.com/passage/?search=Mark%207%3A18-19&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Mark 7:18-19</a>). The vision to Peter showed that the Gentiles are not unclean (<a href='https://www.biblegateway.com/passage/?search=Acts%2010%3A15&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Acts 10:15</a>). In Christ, we are called to holiness that goes beyond external observance (<a href='https://www.biblegateway.com/passage/?search=1%20Peter%201%3A15-16&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Peter 1:15-16</a>)."
+            },
+            {
+                name: "The Day of Atonement",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 16:1-34",
+                intro: "The most sacred day in Israel's calendar, when the high priest enters the Most Holy Place to make atonement for the nation's sins. Two goats are used—one sacrificed and one sent into the wilderness as the scapegoat.",
+                tagline: "The holiest day",
+                summary: "The Lord spoke to Moses after the death of Aaron's two sons, giving instructions for the Day of Atonement—the only day the high priest could enter the Most Holy Place. Aaron must first wash and put on the sacred linen garments. He offers a bull as a sin offering for himself and his household. He takes two goats: one is sacrificed as a sin offering for the people, and one becomes the scapegoat. Aaron takes a censer of burning coals and incense behind the curtain into the Most Holy Place, where the cloud of incense covers the atonement cover so he will not die. He sprinkles blood from the bull and the goat on and before the atonement cover. He then lays both hands on the live goat, confesses all Israel's sins over it, and sends it into the wilderness, carrying away their sins. The goat is released in a remote place. This is to be a lasting ordinance: on the tenth day of the seventh month, you must deny yourselves and not do any work. On this day atonement will be made for you to cleanse you from all your sins before the Lord.",
+                christConnection: "The Day of Atonement is fulfilled in Christ, who entered heaven itself as our High Priest (<a href='https://www.biblegateway.com/passage/?search=Hebrews%209%3A11-12&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 9:11-12</a>). Christ is both the sacrifice and the scapegoat, bearing our sins away (<a href='https://www.biblegateway.com/passage/?search=Hebrews%209%3A28&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 9:28</a>). His sacrifice was once for all, never needing repetition (<a href='https://www.biblegateway.com/passage/?search=Hebrews%2010%3A10&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 10:10</a>)."
+            },
+            {
+                name: "The Holiness Code",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 19:1-37",
+                intro: "God calls Israel to be holy as He is holy, giving practical commands covering every area of life—from worship to business ethics, from family relationships to treatment of the poor and foreigners.",
+                tagline: "Be holy, for I am holy",
+                summary: "The Lord spoke to Moses: 'Speak to the entire assembly of Israel and say to them: Be holy because I, the Lord your God, am holy.' The commands include: respect your mother and father, keep the Sabbath, do not turn to idols or make metal gods. When you reap your harvest, leave the corners and gleanings for the poor and the foreigner. Do not steal, lie, or deceive. Do not defraud your neighbor or rob them. Do not hold back wages overnight. Do not curse the deaf or put a stumbling block before the blind. Do not pervert justice; show no partiality to the poor or favoritism to the great. Do not go about spreading slander. Do not hate your brother in your heart; rebuke your neighbor frankly so you will not share in their guilt. Do not seek revenge or bear a grudge, but love your neighbor as yourself. Keep my decrees. Do not mate different kinds of animals, plant two kinds of seed in your field, or wear clothing woven of two kinds of material. Rise in the presence of the aged. When a foreigner resides among you, do not mistreat them; love them as yourself, for you were foreigners in Egypt. Use honest scales and measures. I am the Lord your God.",
+                christConnection: "Christ summarized the law as loving God and loving neighbor (<a href='https://www.biblegateway.com/passage/?search=Matthew%2022%3A37-40&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Matthew 22:37-40</a>). 'Love your neighbor as yourself' is the royal law fulfilled in Christ (<a href='https://www.biblegateway.com/passage/?search=James%202%3A8&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>James 2:8</a>). Through Christ, we are empowered to live holy lives (<a href='https://www.biblegateway.com/passage/?search=Galatians%205%3A16&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Galatians 5:16</a>)."
+            },
+            {
+                name: "The Feasts of the Lord",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 23:1-44",
+                intro: "God establishes the sacred calendar of Israel with seven appointed feasts: Sabbath, Passover, Unleavened Bread, Firstfruits, Pentecost, Trumpets, Day of Atonement, and Tabernacles. Each feast teaches spiritual truths and points to God's redemptive plan.",
+                tagline: "Sacred appointments with God",
+                summary: "The Lord spoke to Moses about the appointed festivals. The Sabbath is the weekly holy day of rest. Passover is on the fourteenth day of the first month, followed by the Feast of Unleavened Bread for seven days. The Feast of Firstfruits celebrates the beginning of harvest—a sheaf of the first grain is waved before the Lord. Fifty days later comes the Feast of Weeks (Pentecost), when two loaves of bread from the new grain are presented. The Feast of Trumpets on the first day of the seventh month is announced by trumpet blasts, a day of sacred assembly. The Day of Atonement on the tenth day is a day of fasting and no work, when atonement is made for all sins. The Feast of Tabernacles begins on the fifteenth day and lasts seven days, when Israel lives in temporary shelters remembering their wilderness journey. On the eighth day is a sacred assembly. These are the Lord's appointed festivals, proclaimed as sacred assemblies for bringing food offerings—burnt offerings, grain offerings, sacrifices, and drink offerings, each on its proper day.",
+                christConnection: "Christ fulfilled the spring feasts at His first coming: He is our Passover Lamb, the unleavened Bread of Life, the Firstfruits of resurrection (<a href='https://www.biblegateway.com/passage/?search=1%20Corinthians%2015%3A20&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Corinthians 15:20</a>). Pentecost was fulfilled when the Spirit came (<a href='https://www.biblegateway.com/passage/?search=Acts%202%3A1-4&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Acts 2:1-4</a>). The fall feasts await fulfillment at Christ's return (<a href='https://www.biblegateway.com/passage/?search=1%20Thessalonians%204%3A16&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Thessalonians 4:16</a>)."
+            },
+            {
+                name: "The Sabbath Year and Jubilee",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 25:1-55",
+                intro: "God establishes the Sabbath year (every seventh year) and the Year of Jubilee (every fiftieth year). These laws provide rest for the land, freedom for slaves, and return of ancestral property, demonstrating God's concern for justice and restoration.",
+                tagline: "Freedom and restoration",
+                summary: "The Lord spoke to Moses on Mount Sinai about the Sabbath year and Jubilee. For six years sow your fields and prune your vineyards, but in the seventh year the land must have a sabbath rest. Do not sow or reap; eat only what grows of itself. Count off seven sabbath years—forty-nine years—then consecrate the fiftieth year and proclaim liberty throughout the land. This is the Year of Jubilee. Each of you is to return to your family property and to your own clan. In the Jubilee, do not sow or reap; eat only what the land produces. Property sold must be returned in the Jubilee; the price is based on the number of years until Jubilee. The land must not be sold permanently, for the land is God's—you are only foreigners and strangers. If your brother becomes poor and sells himself, do not make him work as a slave but as a hired worker until the Jubilee, when he and his children are to be released. The Israelites are God's servants whom He brought out of Egypt; they must not be sold as slaves.",
+                christConnection: "Christ proclaimed the year of the Lord's favor, the ultimate Jubilee (<a href='https://www.biblegateway.com/passage/?search=Luke%204%3A18-19&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Luke 4:18-19</a>). In Christ, we are set free from the slavery of sin (<a href='https://www.biblegateway.com/passage/?search=John%208%3A36&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>John 8:36</a>). We receive our eternal inheritance through Him (<a href='https://www.biblegateway.com/passage/?search=1%20Peter%201%3A4&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Peter 1:4</a>)."
+            },
+            {
+                name: "Blessings and Curses",
+                date: "c. 1445 BC",
+                scripture: "Leviticus 26:1-46",
+                intro: "God concludes the law with promises of blessing for obedience and warnings of judgment for disobedience. These covenant sanctions demonstrate that Israel's prosperity depends entirely on their faithfulness to God.",
+                tagline: "Obedience brings blessing",
+                summary: "The Lord declares the consequences of obedience and disobedience. If Israel walks in His decrees and obeys His commands: rain will come in season, the land will yield crops, they will eat to satisfaction and live in safety. God will grant peace, remove wild beasts, and give victory over enemies. He will look on them with favor, make them fruitful, and keep His covenant. He will put His dwelling place among them and walk among them as their God. But if they reject His decrees and break His covenant: He will bring sudden terror, wasting diseases, and defeat by enemies. If they continue in hostility, He will multiply their afflictions seven times. He will send wild animals, plague, and famine. If they still refuse to listen, He will scatter them among the nations and devastate their land. Yet even then, if they confess their sins and humble themselves, God will remember His covenant with Abraham, Isaac, and Jacob. He will not reject them or destroy them completely. He will remember the covenant made when He brought them out of Egypt.",
+                christConnection: "Christ bore the curse of the law for us (<a href='https://www.biblegateway.com/passage/?search=Galatians%203%3A13&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Galatians 3:13</a>). In Christ, we receive every spiritual blessing (<a href='https://www.biblegateway.com/passage/?search=Ephesians%201%3A3&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Ephesians 1:3</a>). God's promise to never forsake His people is fulfilled in Christ (<a href='https://www.biblegateway.com/passage/?search=Hebrews%2013%3A5&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 13:5</a>)."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "The Burnt Offering Laws": "dive-in-burnt-offering.html",
+                    "The Sin Offering Laws": "dive-in-sin-offering.html",
+                    "The Ordination of Priests": "dive-in-ordination.html",
+                    "The Death of Nadab and Abihu": "dive-in-nadab-abihu.html",
+                    "The Clean and Unclean Animals": "dive-in-clean-unclean.html",
+                    "The Day of Atonement": "dive-in-day-of-atonement.html",
+                    "The Holiness Code": "dive-in-holiness-code.html",
+                    "The Feasts of the Lord": "dive-in-feasts.html",
+                    "The Sabbath Year and Jubilee": "dive-in-jubilee.html",
+                    "Blessings and Curses": "dive-in-blessings-curses.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        renderTimeline();
+
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Línea de Tiempo de Levítico - Personajes Principales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>📖 Personajes de Levítico</h1>
+            <p class="subtitle">Figuras Clave en el Libro de la Ley</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Personajes principales en Levítico
+        const mainCharacters = [
+            {
+                name: "Moisés",
+                date: "c. 1526-1406 a.C.",
+                scripture: "Levítico 1:1, 4:1, 6:1, 8:1",
+                intro: "El mediador entre Dios e Israel, Moisés recibe y transmite todas las leyes en Levítico. Dios le habla desde el tabernáculo de reunión, y Moisés fielmente entrega estas instrucciones al pueblo y a los sacerdotes.",
+                tagline: "Legislador y mediador",
+                summary: "A lo largo de Levítico, Moisés sirve como el receptor principal de las instrucciones de Dios. El libro abre con 'Llamó Jehová a Moisés, y habló con él desde el tabernáculo de reunión.' Casi cada capítulo comienza con 'Habló Jehová a Moisés.' Moisés no solo recibe las leyes sino que también realiza la ordenación de Aarón y sus hijos como sacerdotes, siguiendo las instrucciones exactas de Dios. Sirve como intermediario, llevando las palabras de Dios al pueblo y las ofrendas del pueblo a Dios. Cuando Nadab y Abiú mueren por ofrecer fuego extraño, Moisés interpreta el evento a Aarón, explicando la santidad de Dios. Moisés representa el patrón del verdadero Mediador que vendría—Jesucristo, quien media perfectamente entre Dios y la humanidad."
+            },
+            {
+                name: "Aarón",
+                date: "c. 1529-1407 a.C.",
+                scripture: "Levítico 8-10, 16, 21-22",
+                intro: "El primer sumo sacerdote de Israel, Aarón es ordenado por Moisés y recibe la responsabilidad sagrada de ofrecer sacrificios y entrar al Lugar Santísimo en el Día de la Expiación. Su papel establece el sacerdocio aarónico.",
+                tagline: "Primer sumo sacerdote de Israel",
+                summary: "El papel de Aarón en Levítico es central para el sistema sacrificial. En el capítulo 8, Moisés lava, viste y unge a Aarón con aceite, apartándolo como sumo sacerdote. Aarón recibe las vestiduras sagradas: el pectoral, el efod, el manto, la túnica, el turbante y la lámina de oro inscrita 'Santidad a Jehová.' Solo él puede entrar al Lugar Santísimo, y solo en el Día de la Expiación. Cuando sus hijos Nadab y Abiú mueren por ofrecer fuego extraño, Aarón permanece en silencio en dolor y sumisión al juicio de Dios. A pesar de esta tragedia, Aarón continúa sus deberes sacerdotales. Las leyes en los capítulos 21-22 establecen requisitos especiales para los sacerdotes, con estándares aún más altos para el sumo sacerdote. El sacerdocio de Aarón, aunque imperfecto, apunta a Cristo, el Sumo Sacerdote perfecto."
+            },
+            {
+                name: "Nadab",
+                date: "c. 1450 a.C.",
+                scripture: "Levítico 10:1-2",
+                intro: "El primogénito de Aarón quien, junto con su hermano Abiú, ofreció fuego extraño delante del Señor y fue inmediatamente consumido por fuego de la presencia de Dios. Su muerte sirve como advertencia solemne sobre acercarse a Dios irreverentemente.",
+                tagline: "Consumido por irreverencia",
+                summary: "Nadab era uno de los cuatro hijos de Aarón, apartado para el servicio sacerdotal. Había presenciado la gloria de Dios en el monte Sinaí, siendo uno de los setenta ancianos que comieron y bebieron en la presencia de Dios. Fue ordenado junto con su padre y hermanos en la elaborada ceremonia de siete días. Sin embargo, poco después, Nadab y su hermano Abiú tomaron sus incensarios, pusieron fuego en ellos, añadieron incienso, y ofrecieron fuego extraño delante del Señor—algo que Él no había mandado. Salió fuego de la presencia del Señor y los consumió. Sus cuerpos fueron llevados fuera del campamento aún vistiendo sus túnicas sacerdotales. La muerte de Nadab demuestra que incluso aquellos más cercanos al servicio de Dios deben acercarse a Él con reverencia y según Sus mandamientos."
+            },
+            {
+                name: "Abiú",
+                date: "c. 1450 a.C.",
+                scripture: "Levítico 10:1-2",
+                intro: "El segundo hijo de Aarón quien se unió a su hermano Nadab en ofrecer fuego extraño delante del Señor. Juntos fueron heridos de muerte, demostrando que el privilegio y la posición no eximen a nadie de los estándares de santidad de Dios.",
+                tagline: "Juzgado por desobediencia",
+                summary: "Abiú, como su hermano Nadab, había recibido privilegios extraordinarios. Había ascendido al monte Sinaí con Moisés, Aarón, Nadab y los setenta ancianos, donde vieron al Dios de Israel y comieron y bebieron en Su presencia. Fue ordenado como sacerdote, apartado para el servicio santo. Sin embargo, estos privilegios no lo protegieron cuando él, junto con Nadab, ofreció fuego extraño delante del Señor. La naturaleza exacta de su pecado se debate—si fue usar fuego de una fuente impropia, ofrecer en un tiempo impropio, o entrar donde no debían—pero el resultado fue juicio inmediato. Su muerte estableció un principio duradero: la santidad de Dios demanda obediencia, y quienes le sirven deben hacerlo según Sus mandamientos, no sus propias innovaciones."
+            },
+            {
+                name: "Eleazar",
+                date: "c. 1450-1370 a.C.",
+                scripture: "Levítico 10:6, 10:12, 10:16",
+                intro: "El tercer hijo de Aarón quien, junto con Itamar, continuó en el servicio sacerdotal después de la muerte de Nadab y Abiú. Eventualmente sucedería a Aarón como sumo sacerdote y serviría fielmente a Israel.",
+                tagline: "Sacerdote fiel, sucesor de Aarón",
+                summary: "Eleazar aparece en Levítico en las secuelas de las muertes de sus hermanos. Moisés le instruye a él y a Itamar que no hagan duelo públicamente ni salgan del tabernáculo de reunión, para que no mueran y la ira de Dios caiga sobre toda la comunidad. A pesar de presenciar esta tragedia, Eleazar permanece fiel a su llamado. Cuando Moisés descubre que el macho cabrío de la ofrenda por el pecado había sido quemado en vez de comido, se enoja con Eleazar e Itamar. Aarón explica las circunstancias, y Moisés acepta la explicación. Eleazar más tarde sucedería a su padre como sumo sacerdote, sirviendo a Israel fielmente. Ayudaría en el censo, ayudaría a distribuir la Tierra Prometida, y sería sepultado en la región montañosa de Efraín. Su línea continuaría el sumo sacerdocio hasta el tiempo de Elí."
+            },
+            {
+                name: "Itamar",
+                date: "c. 1450 a.C.",
+                scripture: "Levítico 10:6, 10:12, 10:16",
+                intro: "El hijo menor de Aarón quien sirvió fielmente como sacerdote después de la muerte de sus hermanos mayores. Se le dio supervisión de los gersonitas y meraritas en el transporte del tabernáculo.",
+                tagline: "Fiel en el servicio",
+                summary: "Itamar, el menor de los cuatro hijos de Aarón, presenció las dramáticas muertes de sus hermanos mayores Nadab y Abiú. Junto con Eleazar, se le ordenó por Moisés no hacer duelo públicamente ni salir del tabernáculo de reunión. A pesar del trauma, Itamar continuó en fiel servicio sacerdotal. Estuvo involucrado en el incidente donde el macho cabrío de la ofrenda por el pecado fue quemado en vez de comido, llevando a la ira de Moisés, aunque la explicación de Aarón fue aceptada. En Números, a Itamar se le da supervisión de los gersonitas y meraritas que llevaban las cubiertas y el armazón del tabernáculo. Sus descendientes más tarde incluirían al sacerdote Elí y servirían junto a la línea de Eleazar. Itamar representa el servicio fiel incluso en medio de tragedia familiar y circunstancias difíciles."
+            },
+            {
+                name: "El Señor (YHWH)",
+                date: "Eterno",
+                scripture: "Levítico 1:1, 11:44-45, 19:2, 20:26",
+                intro: "La figura central de Levítico es el Señor mismo, quien habla desde el tabernáculo de reunión, establece el sistema sacrificial, y repetidamente llama a Israel a ser santo porque Él es santo. Su presencia mora entre Su pueblo.",
+                tagline: "El Santo de Israel",
+                summary: "Aunque no es un personaje humano, el Señor es la voz dominante a lo largo de Levítico. Habla directamente a Moisés más de cincuenta veces, estableciendo cada aspecto de la adoración y vida diaria de Israel. Su santidad es el fundamento de todas las leyes: 'Santos seréis, porque santo soy yo Jehová vuestro Dios.' Provee el sistema sacrificial como una manera para que gente pecadora se acerque a Él. Establece el sacerdocio para mediar entre Él mismo y el pueblo. Da el Día de la Expiación para que los pecados de Israel puedan ser cubiertos. Promete andar entre Su pueblo y ser su Dios. Sin embargo, Su santidad también demanda juicio—como se ve en las muertes de Nadab y Abiú. El Señor de Levítico es tanto trascendentemente santo como íntimamente presente, tanto justo como misericordioso, apuntando finalmente a Su plena revelación en Jesucristo."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=RVR1960`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainCharacters.forEach((character, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${character.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${character.date}</div>
+                        ${character.scripture ? `<div class="character-scripture">${createBibleGatewayLink(character.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${character.intro}</div>
+                    <div class="character-tagline">${character.tagline}</div>
+                    <div class="character-summary">${character.summary}</div>
+                    <button class="audio-btn">Escuchar Historia</button>
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+            return spanishVoice || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Escuchar Historia';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        renderTimeline();
+
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+
