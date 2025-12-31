@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: Joshua Chosen as Successor - Numbers Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: Joshua Chosen as Successor</h1>
+            <p class="subtitle">Leadership Transition and the Greater Joshua</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Moses' Request: A Shepherd for God's People</h2>
+            <p>As Moses' death approached, he recognized that Israel needed a leader to guide them into the Promised Land. He pleaded with God: "May the Lord, the God who gives breath to all living things, appoint a man over this community... so that the Lord's people will not be like sheep without a shepherd" (<a href="https://www.biblegateway.com/passage/?search=Numbers%2027%3A15-17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 27:15-17</a>). This request shows the importance of godly leadership and points forward to Christ, the ultimate Good Shepherd.</p>
+            
+            <div class="verse-callout">
+                I am the good shepherd. The good shepherd gives His life for the sheep.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2010%3A11&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 10:11</a>
+                </span>
+            </div>
+
+            <p>Moses' concern for Israel after his death reveals his heart as a true shepherd. He didn't want God's people to be left without guidance. This points forward to how Christ is the perfect Shepherd who never leaves His sheep. He leads us, protects us, and gives His life for us, ensuring we are never without a shepherd.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Psalm%2023%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Psalm 23:1</a>
+                    <div class="ref-explanation">"The Lord is my shepherd; I shall not want," showing that God is the ultimate Shepherd of His people.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2013%3A20&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 13:20</a>
+                    <div class="ref-explanation">"The God of peace... brought again from the dead our Lord Jesus, that great Shepherd of the sheep," showing that Christ is the great Shepherd.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Peter%205%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Peter 5:4</a>
+                    <div class="ref-explanation">"When the Chief Shepherd appears, you will receive the crown of glory," showing that Christ is the Chief Shepherd who will return.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="shepherd">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Joshua Chosen: A Man with the Spirit</h2>
+            <p>God chose Joshua, son of Nun, to succeed Moses. The Lord said: "Take Joshua the son of Nun with you, a man in whom is the Spirit, and lay your hand on him" (<a href="https://www.biblegateway.com/passage/?search=Numbers%2027%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 27:18</a>). Joshua was uniquely qualified—he had the Spirit of God, he had been Moses' assistant, and he had demonstrated faith when he and Caleb trusted God at Kadesh Barnea.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Spirit-Filled Leadership</div>
+                <p>Joshua was chosen because he had the Spirit of God. This points forward to how Christ, our greater Joshua, was anointed with the Holy Spirit without measure. All true leadership in God's kingdom comes from being filled with and led by the Spirit, just as Joshua was.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=John%203%3A34&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 3:34</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For He whom God has sent speaks the words of God, for God does not give the Spirit by measure.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%203%3A34&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 3:34</a>
+                </span>
+            </div>
+            
+            <p>Joshua's selection shows that God chooses leaders based on their spiritual qualifications, not just their natural abilities. Joshua had proven his faith and was filled with the Spirit. This points forward to how Christ, filled with the Spirit, leads us perfectly into our spiritual inheritance.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Acts%2010%3A38&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Acts 10:38</a>
+                    <div class="ref-explanation">"God anointed Jesus of Nazareth with the Holy Spirit and with power," showing that Christ was filled with the Spirit, just as Joshua was.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaiah%2011%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Isaiah 11:2</a>
+                    <div class="ref-explanation">"The Spirit of the Lord shall rest upon Him," prophesying that the Messiah would be filled with the Spirit, just as Joshua was.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%205%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 5:18</a>
+                    <div class="ref-explanation">"Be filled with the Spirit," showing that believers are also to be Spirit-filled, following the example of Joshua and Christ.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="chosen">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Joshua's Name: A Foreshadowing of Jesus</h2>
+            <p>Joshua's name is significant—it means "Yahweh saves" or "Yahweh is salvation." In Hebrew, Joshua is "Yehoshua," which is the same name as "Jesus" in Greek. This is not coincidental. Joshua, who led Israel into the physical Promised Land, foreshadows Jesus, who leads us into our spiritual inheritance.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Greater Joshua</div>
+                <p>Joshua led Israel into Canaan, but Christ leads us into the ultimate rest and inheritance. Moses, representing the Law, could not bring Israel into the land, but Joshua, representing grace and leadership, could. Similarly, the Law cannot save us, but Jesus, our greater Joshua, can and does.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A8-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 4:8-9</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For if Joshua had given them rest, then He would not afterward have spoken of another day. There remains therefore a rest for the people of God.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A8-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 4:8-9</a>
+                </span>
+            </div>
+
+            <p>Joshua's name pointing to Jesus shows that God's plan of salvation was consistent throughout history. Just as Joshua was chosen to lead Israel into their inheritance, Jesus was chosen to lead us into ours. The name itself testifies to God's saving purpose.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%201%3A21&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 1:21</a>
+                    <div class="ref-explanation">"You shall call His name Jesus, for He will save His people from their sins," showing that Jesus' name means "Yahweh saves," just as Joshua's name does.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Acts%204%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Acts 4:12</a>
+                    <div class="ref-explanation">"Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved," showing that Jesus is the only way to salvation, just as Joshua was the only leader who could bring Israel into the land.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%202%3A9-11&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Philippians 2:9-11</a>
+                    <div class="ref-explanation">"God also has highly exalted Him and given Him the name which is above every name... that every tongue should confess that Jesus Christ is Lord," showing that Jesus' name is above all, just as Joshua's leadership was above all others.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="name">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Leading into the Inheritance</h2>
+            <p>Joshua's primary task was to lead Israel into the Promised Land that Moses could not enter. Moses represented the Law, which could guide and instruct but could not bring people into God's rest. Joshua, filled with the Spirit, would lead them into their inheritance (<a href="https://www.biblegateway.com/passage/?search=Numbers%2027%3A18-23&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 27:18-23</a>). This points forward to how Christ, our greater Joshua, leads us into our spiritual inheritance.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">From Law to Grace</div>
+                <p>Moses, representing the Law, could not bring Israel into the land because of his sin at Meribah. Joshua, representing grace and Spirit-filled leadership, could. This pattern points to how the Law cannot save us, but Christ, our greater Joshua, can and does lead us into eternal life and rest.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 4:10</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For he who has entered His rest has himself also ceased from his works as God did from His.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 4:10</a>
+                </span>
+            </div>
+
+            <p>Just as Joshua led Israel into the physical Promised Land, Christ leads us into the spiritual Promised Land of eternal rest and inheritance. Through faith in Him, we enter God's rest, not by works of the Law, but by grace. Joshua's leadership points forward to Christ's perfect leadership.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%201%3A11&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 1:11</a>
+                    <div class="ref-explanation">"In Him also we have obtained an inheritance," showing that in Christ we receive our inheritance, just as Israel received theirs through Joshua.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Peter%201%3A3-4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Peter 1:3-4</a>
+                    <div class="ref-explanation">"An inheritance incorruptible and undefiled and that does not fade away, reserved in heaven for you," showing that we have an eternal inheritance, just as Israel had a physical one.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Colossians 1:12</a>
+                    <div class="ref-explanation">"Giving thanks to the Father who has qualified us to be partakers of the inheritance of the saints," showing that we share in the inheritance through Christ, just as Israel shared in theirs through Joshua.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="inheritance">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Our Greater Joshua</h2>
+            <p>The appointment of Joshua as Moses' successor teaches us profound truths about leadership, salvation, and God's plan. Joshua, whose name means "Yahweh saves," foreshadows Jesus, our greater Joshua, who saves us and leads us into our eternal inheritance.</p>
+
+            <p>Just as Moses could not bring Israel into the Promised Land, the Law cannot save us. But Joshua, filled with the Spirit, led Israel into their inheritance. Similarly, Christ, filled with the Spirit, leads us into our spiritual inheritance. He is our Good Shepherd, our perfect Leader, and our eternal Savior. Through faith in Him, we enter God's rest and receive our inheritance, not by works, but by grace.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:14</a>
+                    <div class="ref-explanation">"Seeing then that we have a great High Priest who has passed through the heavens, Jesus the Son of God," showing that Christ is our perfect Leader, just as Joshua was Israel's leader.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2010%3A14-15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 10:14-15</a>
+                    <div class="ref-explanation">"I am the good shepherd; and I know My sheep, and am known by My own," showing that Christ is our perfect Shepherd, just as Moses prayed for a shepherd for Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2012%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 12:2</a>
+                    <div class="ref-explanation">"Looking unto Jesus, the author and finisher of our faith," showing that we are to follow Christ, our greater Joshua, just as Israel followed Joshua.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

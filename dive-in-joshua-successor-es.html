@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: Josué Elegido como Sucesor - Línea de Tiempo de Números</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: Josué Elegido como Sucesor</h1>
+            <p class="subtitle">Transición de Liderazgo y el Mayor Josué</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">La Petición de Moisés: Un Pastor para el Pueblo de Dios</h2>
+            <p>Cuando se acercaba la muerte de Moisés, reconoció que Israel necesitaba un líder para guiarlos a la Tierra Prometida. Suplicó a Dios: "Jehová, el Dios de los espíritus de toda carne, ponga un varón sobre la congregación... para que la congregación de Jehová no sea como ovejas sin pastor" (<a href="https://www.biblegateway.com/passage/?search=Números%2027%3A15-17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 27:15-17</a>). Esta petición muestra la importancia del liderazgo piadoso y apunta hacia Cristo, el Pastor Perfecto supremo.</p>
+            
+            <div class="verse-callout">
+                Yo soy el buen pastor; el buen pastor su vida da por las ovejas.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2010%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 10:11</a>
+                </span>
+            </div>
+
+            <p>La preocupación de Moisés por Israel después de su muerte revela su corazón como un verdadero pastor. No quería que el pueblo de Dios se quedara sin guía. Esto apunta hacia cómo Cristo es el Pastor Perfecto que nunca deja a Sus ovejas. Él nos guía, nos protege, y da Su vida por nosotros, asegurando que nunca estemos sin pastor.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%2023%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 23:1</a>
+                    <div class="ref-explanation">"Jehová es mi pastor; nada me faltará," mostrando que Dios es el Pastor supremo de Su pueblo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2013%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 13:20</a>
+                    <div class="ref-explanation">"El Dios de paz... resucitó de los muertos a nuestro Señor Jesucristo, el gran pastor de las ovejas," mostrando que Cristo es el gran Pastor.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%205%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Pedro 5:4</a>
+                    <div class="ref-explanation">"Cuando aparezca el Príncipe de los pastores, vosotros recibiréis la corona incorruptible de gloria," mostrando que Cristo es el Príncipe de los pastores que regresará.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="shepherd">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Josué Elegido: Un Hombre con el Espíritu</h2>
+            <p>Dios eligió a Josué, hijo de Nun, para suceder a Moisés. El Señor dijo: "Toma a Josué hijo de Nun, varón en el cual hay espíritu, y pondrás tu mano sobre él" (<a href="https://www.biblegateway.com/passage/?search=Números%2027%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 27:18</a>). Josué estaba únicamente calificado—tenía el Espíritu de Dios, había sido asistente de Moisés, y había demostrado fe cuando él y Caleb confiaron en Dios en Cades-barnea.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Liderazgo Lleno del Espíritu</div>
+                <p>Josué fue elegido porque tenía el Espíritu de Dios. Esto apunta hacia cómo Cristo, nuestro mayor Josué, fue ungido con el Espíritu Santo sin medida. Todo verdadero liderazgo en el reino de Dios viene de estar lleno y guiado por el Espíritu, así como Josué lo estaba.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%203%3A34&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 3:34</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Porque el que Dios envió, las palabras de Dios habla; pues Dios no da el Espíritu por medida.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%203%3A34&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 3:34</a>
+                </span>
+            </div>
+            
+            <p>La selección de Josué muestra que Dios elige líderes basándose en sus calificaciones espirituales, no solo en sus habilidades naturales. Josué había probado su fe y estaba lleno del Espíritu. Esto apunta hacia cómo Cristo, lleno del Espíritu, nos guía perfectamente a nuestra herencia espiritual.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hechos%2010%3A38&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hechos 10:38</a>
+                    <div class="ref-explanation">"Dios ungió con el Espíritu Santo y con poder a Jesús de Nazaret," mostrando que Cristo estaba lleno del Espíritu, así como Josué lo estaba.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaías%2011%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Isaías 11:2</a>
+                    <div class="ref-explanation">"Reposará sobre él el Espíritu de Jehová," profetizando que el Mesías estaría lleno del Espíritu, así como Josué lo estaba.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%205%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 5:18</a>
+                    <div class="ref-explanation">"Sed llenos del Espíritu," mostrando que los creyentes también deben estar llenos del Espíritu, siguiendo el ejemplo de Josué y Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="chosen">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Nombre de Josué: Una Sombra de Jesús</h2>
+            <p>El nombre de Josué es significativo—significa "Yahweh salva" o "Yahweh es salvación." En hebreo, Josué es "Yehoshua," que es el mismo nombre que "Jesús" en griego. Esto no es coincidencia. Josué, que guió a Israel a la Tierra Prometida física, prefigura a Jesús, que nos guía a nuestra herencia espiritual.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">El Mayor Josué</div>
+                <p>Josué guió a Israel a Canaán, pero Cristo nos guía al reposo y herencia supremos. Moisés, representando la Ley, no pudo llevar a Israel a la tierra, pero Josué, representando la gracia y el liderazgo, pudo. De manera similar, la Ley no puede salvarnos, pero Jesús, nuestro mayor Josué, puede y lo hace.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A8-9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:8-9</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Porque si Josué les hubiera dado el reposo, no hablaría después de otro día. Por tanto, queda un reposo para el pueblo de Dios.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A8-9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:8-9</a>
+                </span>
+            </div>
+
+            <p>El nombre de Josué apuntando a Jesús muestra que el plan de salvación de Dios fue consistente a lo largo de la historia. Así como Josué fue elegido para guiar a Israel a su herencia, Jesús fue elegido para guiarnos a la nuestra. El nombre mismo testifica del propósito salvador de Dios.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%201%3A21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 1:21</a>
+                    <div class="ref-explanation">"Llamarás su nombre Jesús, porque él salvará a su pueblo de sus pecados," mostrando que el nombre de Jesús significa "Yahweh salva," así como el nombre de Josué lo hace.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hechos%204%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hechos 4:12</a>
+                    <div class="ref-explanation">"Y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos," mostrando que Jesús es el único camino a la salvación, así como Josué era el único líder que podía llevar a Israel a la tierra.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Filipenses%202%3A9-11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Filipenses 2:9-11</a>
+                    <div class="ref-explanation">"Dios también le exaltó hasta lo sumo, y le dio un nombre que es sobre todo nombre... y toda lengua confiese que Jesucristo es el Señor," mostrando que el nombre de Jesús está sobre todos, así como el liderazgo de Josué estaba sobre todos los demás.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="name">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Guiando a la Herencia</h2>
+            <p>La tarea principal de Josué era guiar a Israel a la Tierra Prometida que Moisés no pudo entrar. Moisés representaba la Ley, que podía guiar e instruir pero no podía llevar a las personas al reposo de Dios. Josué, lleno del Espíritu, los guiaría a su herencia (<a href="https://www.biblegateway.com/passage/?search=Números%2027%3A18-23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 27:18-23</a>). Esto apunta hacia cómo Cristo, nuestro mayor Josué, nos guía a nuestra herencia espiritual.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">De la Ley a la Gracia</div>
+                <p>Moisés, representando la Ley, no pudo llevar a Israel a la tierra debido a su pecado en Meriba. Josué, representando la gracia y el liderazgo lleno del Espíritu, pudo. Este patrón apunta hacia cómo la Ley no puede salvarnos, pero Cristo, nuestro mayor Josué, puede y nos guía a la vida eterna y al reposo.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:10</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Porque el que ha entrado en su reposo, también ha reposado de sus obras, como Dios de las suyas.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:10</a>
+                </span>
+            </div>
+
+            <p>Así como Josué guió a Israel a la Tierra Prometida física, Cristo nos guía a la Tierra Prometida espiritual de reposo eterno y herencia. A través de la fe en Él, entramos en el reposo de Dios, no por obras de la Ley, sino por gracia. El liderazgo de Josué apunta hacia el liderazgo perfecto de Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 1:11</a>
+                    <div class="ref-explanation">"En él asimismo tuvimos herencia," mostrando que en Cristo recibimos nuestra herencia, así como Israel recibió la suya a través de Josué.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%201%3A3-4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Pedro 1:3-4</a>
+                    <div class="ref-explanation">"Una herencia incorruptible, incontaminada e inmarcesible, reservada en los cielos para vosotros," mostrando que tenemos una herencia eterna, así como Israel tenía una física.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 1:12</a>
+                    <div class="ref-explanation">"Con gozo dando gracias al Padre que nos hizo aptos para participar de la herencia de los santos en luz," mostrando que compartimos en la herencia a través de Cristo, así como Israel compartió en la suya a través de Josué.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="inheritance">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Nuestro Mayor Josué</h2>
+            <p>El nombramiento de Josué como sucesor de Moisés nos enseña verdades profundas sobre el liderazgo, la salvación y el plan de Dios. Josué, cuyo nombre significa "Yahweh salva," prefigura a Jesús, nuestro mayor Josué, que nos salva y nos guía a nuestra herencia eterna.</p>
+
+            <p>Así como Moisés no pudo llevar a Israel a la Tierra Prometida, la Ley no puede salvarnos. Pero Josué, lleno del Espíritu, guió a Israel a su herencia. De manera similar, Cristo, lleno del Espíritu, nos guía a nuestra herencia espiritual. Él es nuestro Buen Pastor, nuestro Líder Perfecto, y nuestro Salvador Eterno. A través de la fe en Él, entramos en el reposo de Dios y recibimos nuestra herencia, no por obras, sino por gracia.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:14</a>
+                    <div class="ref-explanation">"Por tanto, teniendo un gran sumo sacerdote que traspasó los cielos, Jesús el Hijo de Dios," mostrando que Cristo es nuestro Líder Perfecto, así como Josué era el líder de Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2010%3A14-15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 10:14-15</a>
+                    <div class="ref-explanation">"Yo soy el buen pastor; y conozco mis ovejas, y las mías me conocen," mostrando que Cristo es nuestro Pastor Perfecto, así como Moisés oró por un pastor para Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2012%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 12:2</a>
+                    <div class="ref-explanation">"Puestos los ojos en Jesús, el autor y consumador de la fe," mostrando que debemos seguir a Cristo, nuestro mayor Josué, así como Israel siguió a Josué.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        // Find Spanish voice
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

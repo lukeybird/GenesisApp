@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: El Voto Nazareo - Línea de Tiempo de Números</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: El Voto Nazareo</h1>
+            <p class="subtitle">Una Vida Apartada para Dios</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Consagración Completa: El Voto Nazareo</h2>
+            <p>El voto nazareo en <a href="https://www.biblegateway.com/passage/?search=Números%206%3A1-21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 6</a> era un acto especial de consagración a Dios. Los que tomaban este voto se abstenían del vino, evitaban cortarse el cabello, y se mantenían alejados de los cadáveres por un período determinado. Esta separación completa de la vida normal apunta hacia cómo Cristo fue completamente apartado para los propósitos de Dios, y cómo somos llamados a ser apartados en Él.</p>
+            
+            <div class="verse-callout">
+                Porque tal sumo sacerdote nos convenía: santo, inocente, sin mancha, apartado de los pecadores, y hecho más sublime que los cielos.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%207%3A26&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 7:26</a>
+                </span>
+            </div>
+
+            <p>Cristo fue el nazareo supremo—completamente apartado para los propósitos de Dios. Él era santo, inocente, sin mancha, y apartado de los pecadores. Así como el nazareo fue apartado de la vida normal por un período de consagración especial, Cristo fue apartado desde la eternidad para la obra de redención. A través de Él, ahora somos apartados como el pueblo santo de Dios.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2017%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 17:19</a>
+                    <div class="ref-explanation">"Por ellos yo me santifico a mí mismo," mostrando que Cristo se apartó a sí mismo para los propósitos de Dios, como el voto nazareo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%201%3A15-16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Pedro 1:15-16</a>
+                    <div class="ref-explanation">"Sed santos, porque yo soy santo," llamándonos a ser apartados como el nazareo, a través de la obra de Cristo en nosotros.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%206%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corintios 6:17</a>
+                    <div class="ref-explanation">"Salid de en medio de ellos, y apartaos," mostrando que somos llamados a ser apartados, así como el nazareo fue separado de la vida normal.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="consecration">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Abstenerse del Vino: Separación de los Placeres Mundanos</h2>
+            <p>El nazareo estaba obligado a abstenerse del vino y de todos los productos de la vid (<a href="https://www.biblegateway.com/passage/?search=Números%206%3A3-4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 6:3-4</a>). Esta separación de los placeres normales simbolizaba dedicación completa a Dios. Esto apunta hacia cómo Cristo vivió en completa dedicación al Padre, y cómo somos llamados a separarnos de los placeres mundanos que obstaculizarían nuestra devoción a Dios.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">La Dedicación Completa de Cristo</div>
+                <p>Cristo vivió en completa dedicación al Padre, nunca permitiendo que los placeres mundanos o las distracciones interfirieran con Su misión. Fue tentado en todo, pero sin pecado (<a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 4:15</a>). La abstinencia del nazareo del vino apunta hacia la separación completa de Cristo de cualquier cosa que obstaculizaría Su dedicación a los propósitos de Dios.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%204%3A34&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 4:34</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Jesús les dijo: "Mi comida es que haga la voluntad del que me envió, y que acabe su obra."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%204%3A34&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 4:34</a>
+                </span>
+            </div>
+            
+            <p>Así como el nazareo se abstenía del vino para mostrar dedicación completa, la dedicación completa de Cristo al Padre era Su sustento. Encontró Su satisfacción no en los placeres mundanos, sino en hacer la voluntad del Padre. A través de Cristo, somos habilitados para separarnos de los placeres mundanos y encontrar nuestra satisfacción solo en Dios.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%202%3A15-17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Juan 2:15-17</a>
+                    <div class="ref-explanation">"No améis al mundo, ni las cosas que están en el mundo," llamándonos a separarnos de los placeres mundanos, como el nazareo se abstenía del vino.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%2012%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 12:2</a>
+                    <div class="ref-explanation">"No os conforméis a este siglo," mostrando que debemos ser separados de las maneras mundanas, así como el nazareo era separado de la vida normal.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Filipenses%203%3A7-8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Filipenses 3:7-8</a>
+                    <div class="ref-explanation">Pablo contó todas las cosas como pérdida por Cristo, mostrando separación completa de los valores mundanos, como la separación del nazareo del vino.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="wine">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Cabello Sin Cortar: Señal Visible de Consagración</h2>
+            <p>El nazareo no debía cortarse el cabello durante el período del voto (<a href="https://www.biblegateway.com/passage/?search=Números%206%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 6:5</a>). El cabello sin cortar era una señal visible de la consagración del nazareo a Dios, un testimonio público de su dedicación especial. Esto apunta hacia cómo nuestras vidas deben ser testimonios visibles de nuestra consagración a Cristo.</p>
+
+            <div class="verse-callout">
+                Vosotros sois la luz del mundo; una ciudad asentada sobre un monte no se puede esconder. Ni se enciende una lámpara y se pone debajo de un almud, sino sobre el candelero, y alumbra a todos los que están en casa. Así alumbre vuestra luz delante de los hombres, para que vean vuestras buenas obras, y glorifiquen a vuestro Padre que está en los cielos.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%205%3A14-16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 5:14-16</a>
+                </span>
+            </div>
+
+            <p>Así como el cabello sin cortar del nazareo era una señal visible de consagración, nuestras vidas deben ser testimonios visibles de nuestra consagración a Cristo. Somos llamados a dejar que nuestra luz brille ante otros, mostrando que pertenecemos a Dios. La señal visible del nazareo apunta hacia cómo nuestra consagración a Cristo debe ser evidente en nuestras vidas diarias.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Filipenses%202%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Filipenses 2:15</a>
+                    <div class="ref-explanation">"Para que seáis irreprensibles y sencillos, hijos de Dios sin mancha en medio de una generación maligna y perversa, en medio de la cual resplandecéis como luminares en el mundo," mostrando que nuestra consagración debe ser visible, como el cabello sin cortar del nazareo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%202%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Pedro 2:12</a>
+                    <div class="ref-explanation">"Manteniendo buena vuestra manera de vivir entre los gentiles; para que en lo que murmuran de vosotros como de malhechores, glorifiquen a Dios en el día de la visitación, al considerar vuestras buenas obras," mostrando que nuestra consagración debe ser evidente para otros.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Tito%202%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Tito 2:10</a>
+                    <div class="ref-explanation">"Adornando la doctrina de Dios nuestro Salvador en todo," mostrando que nuestras vidas deben ser testimonios visibles de nuestra consagración a Cristo, como el cabello sin cortar del nazareo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="hair">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Evitar los Cadáveres: Separación de la Muerte</h2>
+            <p>El nazareo no debía acercarse a un cadáver, ni siquiera al de un familiar cercano (<a href="https://www.biblegateway.com/passage/?search=Números%206%3A6-7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 6:6-7</a>). Esta separación de la muerte simbolizaba separación del reino del pecado y la muerte. Esto apunta hacia cómo Cristo fue completamente separado del pecado y la muerte, y cómo a través de Él somos separados del poder de la muerte y se nos da vida eterna.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">La Victoria de Cristo Sobre la Muerte</div>
+                <p>Cristo fue completamente separado de la muerte—Él tenía poder sobre ella. Resucitó a los muertos, y Él mismo conquistó la muerte a través de Su resurrección. La separación del nazareo de los cadáveres apunta hacia cómo Cristo fue separado del reino de la muerte, y cómo a través de Él se nos da la victoria sobre la muerte.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A54-55&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 15:54-55</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Y cuando esto corruptible se haya vestido de incorrupción, y esto mortal se haya vestido de inmortalidad, entonces se cumplirá la palabra que está escrita: Sorbida es la muerte en victoria. ¿Dónde está, oh muerte, tu aguijón? ¿Dónde, oh sepulcro, tu victoria?
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A54-55&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corintios 15:54-55</a>
+                </span>
+            </div>
+
+            <p>Así como el nazareo fue separado de los cadáveres, a través de Cristo somos separados del poder de la muerte. Cristo conquistó la muerte, y a través de la fe en Él, tenemos vida eterna. La separación del nazareo de la muerte apunta hacia cómo somos separados del poder de la muerte a través de la victoria de Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2011%3A25-26&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 11:25-26</a>
+                    <div class="ref-explanation">"Yo soy la resurrección y la vida; el que cree en mí, aunque esté muerto, vivirá," mostrando que a través de Cristo somos separados del poder de la muerte, como el nazareo fue separado de los cadáveres.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%206%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 6:9</a>
+                    <div class="ref-explanation">"Cristo, habiendo resucitado de los muertos, ya no muere; la muerte no se enseñoreará más de él," mostrando la separación de Cristo de la muerte, como la separación del nazareo de los cadáveres.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Timoteo%201%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Timoteo 1:10</a>
+                    <div class="ref-explanation">Cristo "quitó la muerte y sacó a luz la vida y la inmortalidad por el evangelio," mostrando que a través de Cristo somos separados de la muerte, como el nazareo fue separado de los cadáveres.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="death">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Apartados en Cristo</h2>
+            <p>El voto nazareo nos enseña sobre la consagración completa a Dios—una verdad perfectamente cumplida en Cristo. Él fue completamente apartado para los propósitos de Dios, separado del pecado, separado de los placeres mundanos, y separado de la muerte. A través de Él, ahora somos apartados como el pueblo santo de Dios.</p>
+
+            <p>En Cristo, somos llamados a ser apartados—no a través de votos externos como el nazareo, sino a través de la obra interna del Espíritu Santo. Debemos separarnos de los placeres mundanos, vivir como testimonios visibles de nuestra consagración, y caminar en la victoria sobre la muerte que Cristo ha ganado. El voto nazareo que apartó a individuos por un período apunta hacia cómo estamos permanentemente apartados en Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%2012%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 12:1</a>
+                    <div class="ref-explanation">"Presentad vuestros cuerpos en sacrificio vivo, santo, agradable a Dios," mostrando que debemos ser apartados como el nazareo, a través de la obra de Cristo en nosotros.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%206%3A19-20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 6:19-20</a>
+                    <div class="ref-explanation">"No sois vuestros... habéis sido comprados por precio; glorificad, pues, a Dios," mostrando que estamos apartados para Dios, como el nazareo fue apartado.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 1:4</a>
+                    <div class="ref-explanation">"Nos escogió en él antes de la fundación del mundo, para que fuésemos santos y sin mancha delante de él," mostrando que estamos apartados en Cristo, como el nazareo fue apartado.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        // Find Spanish voice
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

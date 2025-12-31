@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: Los Espías y la Incredulidad - Línea de Tiempo de Números</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: Los Espías y la Incredulidad</h1>
+            <p class="subtitle">Fe vs. Miedo en el Desierto</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">El Informe de Incredulidad</h2>
+            <p>Cuando los doce espías regresaron de explorar Canaán, diez de ellos trajeron un informe de incredulidad (<a href="https://www.biblegateway.com/passage/?search=Números%2013%3A25-33&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 13:25-33</a>). Vieron la misma tierra que Caleb y Josué vieron—una tierra que fluía leche y miel—pero se enfocaron en los obstáculos en lugar de en la promesa de Dios. Su incredulidad se extendió por el campamento, causando que toda la nación se rebelara contra Dios.</p>
+            
+            <div class="verse-callout">
+                Mirad, hermanos, que no haya en ninguno de vosotros corazón malo de incredulidad para apartarse del Dios vivo; antes exhortaos los unos a los otros cada día, entre tanto que se dice: Hoy; para que ninguno de vosotros se endurezca por el engaño del pecado.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%203%3A12-13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 3:12-13</a>
+                </span>
+            </div>
+
+            <p>La incredulidad de los diez espías se erige como una advertencia para nosotros. Vieron las promesas de Dios, pero eligieron enfocarse en los obstáculos en lugar de en el poder de Dios. Su incredulidad les costó la tierra prometida. Debemos guardarnos contra la misma incredulidad, eligiendo confiar en las promesas de Dios incluso cuando vemos obstáculos, sabiendo que a través de Cristo podemos entrar en el reposo de Dios.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%203%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 3:19</a>
+                    <div class="ref-explanation">"Y vemos que no pudieron entrar a causa de incredulidad," mostrando el terrible costo de la incredulidad, así como Israel no pudo entrar a la tierra prometida a causa de la incredulidad.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Marcos%209%3A23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Marcos 9:23</a>
+                    <div class="ref-explanation">"Si puedes creer, al que cree todo le es posible," mostrando el poder de la fe, en contraste con la incredulidad de los espías.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%204%3A20-21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 4:20-21</a>
+                    <div class="ref-explanation">Abraham "no se debilitó en la fe... sino que se fortaleció en fe," mostrando el contraste entre la fe y la incredulidad.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="report">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Caleb y Josué: Ejemplos de Fe</h2>
+            <p>Mientras diez espías trajeron un informe de incredulidad, Caleb y Josué trajeron un informe de fe (<a href="https://www.biblegateway.com/passage/?search=Números%2014%3A6-9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 14:6-9</a>). Vieron los mismos obstáculos, pero confiaron en el poder y la promesa de Dios. Su fe se destaca en marcado contraste con la incredulidad de los demás, y Dios recompensó su fe permitiéndoles entrar a la tierra prometida.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">La Fe Vence los Obstáculos</div>
+                <p>Caleb y Josué vieron los mismos gigantes y ciudades fortificadas que los otros espías vieron, pero eligieron enfocarse en la promesa de Dios en lugar de en los obstáculos. Su fe en el poder de Dios les permitió ver la victoria donde otros vieron derrota. Esto apunta hacia cómo la fe en Cristo nos permite vencer obstáculos y entrar en las promesas de Dios.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%205%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Juan 5:4</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Porque todo lo que es nacido de Dios vence al mundo; y esta es la victoria que ha vencido al mundo, nuestra fe.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Juan%205%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Juan 5:4</a>
+                </span>
+            </div>
+            
+            <p>Así como la fe de Caleb y Josué les permitió entrar a la tierra prometida, nuestra fe en Cristo nos permite entrar en el reposo de Dios y recibir Sus promesas. Su ejemplo nos muestra que la fe, no la incredulidad, es el camino a la victoria. A través de la fe en Cristo, vencemos al mundo y entramos en todo lo que Dios ha prometido.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2011%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 11:6</a>
+                    <div class="ref-explanation">"Sin fe es imposible agradar a Dios," mostrando la importancia de la fe, así como la fe de Caleb y Josué agradó a Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%201%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 1:17</a>
+                    <div class="ref-explanation">"El justo por la fe vivirá," mostrando que la fe es la forma de vida para el pueblo de Dios, así como Caleb y Josué vivieron por fe.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%202%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 2:8</a>
+                    <div class="ref-explanation">"Por gracia sois salvos por medio de la fe," mostrando que la fe es el medio por el cual recibimos la salvación de Dios, así como la fe permitió a Caleb y Josué entrar a la tierra prometida.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="faith">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Juicio de la Incredulidad</h2>
+            <p>La respuesta de Dios a la incredulidad de Israel fue severa: toda esa generación moriría en el desierto, y solo sus hijos entrarían a la tierra prometida (<a href="https://www.biblegateway.com/passage/?search=Números%2014%3A20-35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 14:20-35</a>). El juicio fue justo—habían visto el poder de Dios en Egipto y en el desierto, sin embargo se negaron a creer. Esto se erige como una advertencia sobre las graves consecuencias de la incredulidad.</p>
+
+            <div class="verse-callout">
+                Y vemos que no pudieron entrar a causa de incredulidad. Temamos, pues, no sea que permaneciendo aún la promesa de entrar en su reposo, alguno de vosotros parezca no haberlo alcanzado.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%203%3A19-4%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 3:19-4:1</a>
+                </span>
+            </div>
+
+            <p>El juicio sobre la incredulidad de Israel sirve como una advertencia para nosotros. Así como la incredulidad impidió que esa generación entrara a la tierra prometida, la incredulidad puede impedirnos entrar en el reposo de Dios. Debemos guardarnos contra la incredulidad, eligiendo confiar en las promesas de Dios a través de la fe en Cristo, para que podamos entrar en todo lo que Dios ha prometido.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:2</a>
+                    <div class="ref-explanation">"La palabra que oyeron no les aprovechó por no ir acompañada de fe," mostrando que la incredulidad nos impide recibir las promesas de Dios, así como impidió a Israel entrar a la tierra prometida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%203%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 3:18</a>
+                    <div class="ref-explanation">"El que no cree, ya ha sido condenado," mostrando las graves consecuencias de la incredulidad, así como Israel fue juzgado por incredulidad.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Marcos%2016%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Marcos 16:16</a>
+                    <div class="ref-explanation">"El que no creyere, será condenado," mostrando que la incredulidad tiene consecuencias eternas, así como la incredulidad de Israel tuvo consecuencias temporales.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="judgment">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Entrando en el Reposo de Dios a Través de la Fe</h2>
+            <p>La tierra prometida representaba el reposo de Dios para Israel—un lugar de bendición, provisión y paz. La incredulidad impidió que esa generación entrara en este reposo. Pero a través de la fe en Cristo, podemos entrar en el reposo de Dios—no una tierra física, sino un reposo espiritual que está disponible para todos los que creen.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Reposo en Cristo</div>
+                <p>Así como la tierra prometida era un lugar de reposo para Israel, Cristo nos ofrece reposo para nuestras almas. Él invita a todos los que están cansados y cargados a venir a Él y encontrar reposo. El reposo que Israel perdió a causa de la incredulidad está disponible para nosotros a través de la fe en Cristo.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2011%3A28&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 11:28</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Venid a mí todos los que estáis trabajados y cargados, y yo os haré descansar. Llevad mi yugo sobre vosotros, y aprended de mí, que soy manso y humilde de corazón; y hallaréis descanso para vuestras almas.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2011%3A28-29&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 11:28-29</a>
+                </span>
+            </div>
+
+            <p>Así como la incredulidad impidió a Israel entrar a la tierra prometida, la incredulidad puede impedirnos entrar en el reposo de Dios. Pero a través de la fe en Cristo, entramos en reposo—reposo de nuestras obras, reposo en Su obra terminada, y reposo para nuestras almas. El reposo que Israel perdió está disponible para nosotros a través de la fe en Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:3</a>
+                    <div class="ref-explanation">"Los que hemos creído entramos en el reposo," mostrando que a través de la fe entramos en el reposo de Dios, así como la fe habría permitido a Israel entrar a la tierra prometida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A9-10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:9-10</a>
+                    <div class="ref-explanation">"Por tanto, queda un reposo para el pueblo de Dios. Porque el que ha entrado en su reposo, también ha reposado de sus obras," mostrando que entramos en reposo a través de la fe en Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%206%3A35&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 6:35</a>
+                    <div class="ref-explanation">"Yo soy el pan de vida; el que a mí viene, nunca tendrá hambre; y el que en mí cree, no tendrá sed jamás," mostrando que Cristo provee el reposo y la satisfacción que la tierra prometida representaba.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="rest">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: La Elección Entre Fe e Incredulidad</h2>
+            <p>La historia de los espías nos presenta una elección clara: fe o incredulidad. Los diez espías eligieron la incredulidad y perdieron la tierra prometida. Caleb y Josué eligieron la fe y entraron a la tierra prometida. Enfrentamos la misma elección hoy—¿confiaremos en las promesas de Dios a través de la fe en Cristo, o permitiremos que la incredulidad nos impida entrar en todo lo que Dios tiene para nosotros?</p>
+
+            <p>A través de la fe en Cristo, podemos entrar en el reposo de Dios y recibir todas Sus promesas. Debemos guardarnos contra la incredulidad, eligiendo confiar en Dios incluso cuando vemos obstáculos, sabiendo que a través de Cristo podemos vencer. La historia de los espías se erige tanto como una advertencia contra la incredulidad como un estímulo a la fe—fe que nos permite entrar en todo lo que Dios ha prometido.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:11</a>
+                    <div class="ref-explanation">"Procuremos, pues, entrar en aquel reposo, para que ninguno caiga en semejante ejemplo de desobediencia," advirtiéndonos contra la incredulidad que impidió a Israel entrar a la tierra prometida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%205%3A7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corintios 5:7</a>
+                    <div class="ref-explanation">"Porque por fe andamos, no por vista," mostrando que debemos confiar en las promesas de Dios incluso cuando vemos obstáculos, así como Caleb y Josué lo hicieron.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2011%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 11:1</a>
+                    <div class="ref-explanation">"Es, pues, la fe la certeza de lo que se espera, la convicción de lo que no se ve," mostrando que la fe nos permite ver más allá de los obstáculos hacia las promesas de Dios, así como Caleb y Josué lo hicieron.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        // Find Spanish voice
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: The Census of Israel - Numbers Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Census of Israel</h1>
+            <p class="subtitle">God's Care for Each Individual</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">God's Care for Each Individual</h2>
+            <p>The census in <a href="https://www.biblegateway.com/passage/?search=Numbers%201%3A1-2%3A34&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 1-2</a> reveals something profound about God's character: He knows and cares for each individual in His people. The census counted "every man by name, one by one" (<a href="https://www.biblegateway.com/passage/?search=Numbers%201%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 1:2</a>), showing that God doesn't see Israel as a faceless mass, but as individuals, each known and valued. This points forward to how Christ knows each of His sheep by name.</p>
+            
+            <div class="verse-callout">
+                To him the doorkeeper opens, and the sheep hear his voice; and he calls his own sheep by name and leads them out. And when he brings out his own sheep, he goes before them; and the sheep follow him, for they know his voice.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2010%3A3-4&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 10:3-4</a>
+                </span>
+            </div>
+
+            <p>Just as the census counted each Israelite individually, Christ knows each of His followers by name. The Good Shepherd calls His sheep by name, showing the same personal care that God demonstrated in the census. We are not lost in a crowd—we are individually known, loved, and counted among God's people through faith in Christ.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Luke%2012%3A7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Luke 12:7</a>
+                    <div class="ref-explanation">"The very hairs of your head are all numbered," showing God's intimate knowledge of each individual, just as the census counted each person.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaiah%2043%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Isaiah 43:1</a>
+                    <div class="ref-explanation">"I have called you by your name; you are Mine," showing that God knows us individually, as the census demonstrated.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%2020%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 20:12</a>
+                    <div class="ref-explanation">"The books were opened," showing that God keeps records of each individual, just as the census recorded each person.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="individual">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Organization of God's People</h2>
+            <p>The census organized Israel into tribes, each with its own leader and specific number. This organization shows that God's people are not a chaotic mob, but an ordered community, each part having its place and purpose. This points forward to how the church is organized in Christ, with each member having a specific role and function.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Order in God's Kingdom</div>
+                <p>The census organized Israel by tribes, showing that God values order and structure. In the New Testament, the church is described as a body with many members, each having a specific function (<a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2012%3A12-27&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 12:12-27</a>). Just as each tribe had its place in Israel, each believer has their place in the body of Christ.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2012%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 12:18</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                But now God has set the members, each one of them, in the body just as He pleased.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2012%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 12:18</a>
+                </span>
+            </div>
+            
+            <p>The census's organization by tribes shows that God has a plan and purpose for His people. In Christ, we are organized as a body, with each member having a specific role. Just as each tribe was counted and given its place, each believer is counted among God's people and given their place in the body of Christ.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%204%3A11-16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 4:11-16</a>
+                    <div class="ref-explanation">Christ gave gifts to the church, organizing it with apostles, prophets, evangelists, pastors, and teachers, showing God's care for order in His people.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%2012%3A4-5&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 12:4-5</a>
+                    <div class="ref-explanation">"We, being many, are one body in Christ," showing that God's people are organized as a unified body, just as Israel was organized by tribes.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Peter%202%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Peter 2:9</a>
+                    <div class="ref-explanation">"You are a chosen generation, a royal priesthood, a holy nation," showing that believers are organized as God's people, just as Israel was organized in the census.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="organization">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Levites Set Apart</h2>
+            <p>In the census, the Levites were not counted with the other tribes because they were set apart for special service to God at the tabernacle (<a href="https://www.biblegateway.com/passage/?search=Numbers%201%3A47-54&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 1:47-54</a>). This separation points forward to how all believers in Christ are now set apart as priests, called to serve God in a special way.</p>
+
+            <div class="verse-callout">
+                But you are a chosen generation, a royal priesthood, a holy nation, His own special people, that you may proclaim the praises of Him who called you out of darkness into His marvelous light.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Peter%202%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Peter 2:9</a>
+                </span>
+            </div>
+
+            <p>Just as the Levites were set apart from the other tribes for special service, all believers in Christ are now set apart as a royal priesthood. We are called to serve God, not in a physical tabernacle, but in our daily lives, offering spiritual sacrifices acceptable to God through Jesus Christ.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%201%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 1:6</a>
+                    <div class="ref-explanation">Christ "has made us kings and priests to His God and Father," showing that all believers are set apart for service, just as the Levites were.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%2012%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 12:1</a>
+                    <div class="ref-explanation">"Present your bodies a living sacrifice, holy, acceptable to God," showing that we are set apart for God's service, like the Levites.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2013%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 13:15</a>
+                    <div class="ref-explanation">"Let us continually offer the sacrifice of praise to God," showing that we serve as priests, offering spiritual sacrifices, just as the Levites served at the tabernacle.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="levites">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Arranged Around the Tabernacle</h2>
+            <p>The tribes were arranged in a specific order around the tabernacle, with each tribe having its assigned position (<a href="https://www.biblegateway.com/passage/?search=Numbers%202%3A1-34&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 2:1-34</a>). The tabernacle was at the center, with the tribes positioned on all sides. This arrangement shows that God's presence is central to His people, and all are oriented toward Him.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Christ at the Center</div>
+                <p>Just as the tabernacle was at the center of Israel's camp, Christ is at the center of the church. All believers are oriented toward Him, and He is the focal point of our worship and service. The arrangement around the tabernacle points to how we are to live with Christ at the center of our lives.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 1:18</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                And He is the head of the body, the church, who is the beginning, the firstborn from the dead, that in all things He may have the preeminence.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 1:18</a>
+                </span>
+            </div>
+
+            <p>Just as the tribes were arranged around the tabernacle with God's presence at the center, we are to arrange our lives around Christ, giving Him preeminence in all things. The tabernacle's central position in the camp points to how Christ should be central in our lives, our families, and our churches.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%206%3A33&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 6:33</a>
+                    <div class="ref-explanation">"Seek first the kingdom of God and His righteousness," showing that God should be at the center of our priorities, just as the tabernacle was at the center of the camp.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2012%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 12:2</a>
+                    <div class="ref-explanation">"Looking unto Jesus, the author and finisher of our faith," showing that we are to keep Christ at the center of our focus, just as the tribes were oriented toward the tabernacle.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%201%3A22-23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 1:22-23</a>
+                    <div class="ref-explanation">God "put all things under His feet, and gave Him to be head over all things to the church," showing Christ's central position in the church, just as the tabernacle was central to Israel.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="arrangement">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Our Place in God's People</h2>
+            <p>The census of Israel teaches us profound truths about God's care for His people—truths perfectly fulfilled in Christ. God knows each of us individually, has organized us as His people, has set us apart for service, and calls us to center our lives around Him.</p>
+
+            <p>Through faith in Christ, we are counted among God's people. We are known by name, given our place in the body of Christ, set apart as priests to serve God, and called to live with Christ at the center of our lives. The census that counted Israel points forward to how we are numbered among God's people through Christ.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%207%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 7:9</a>
+                    <div class="ref-explanation">"A great multitude which no one could number," showing that all who believe in Christ are counted among God's people, just as the census counted Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%204%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Philippians 4:3</a>
+                    <div class="ref-explanation">"Whose names are in the Book of Life," showing that God keeps a record of His people, just as the census recorded each Israelite.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Luke%2010%3A20&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Luke 10:20</a>
+                    <div class="ref-explanation">"Rejoice because your names are written in heaven," showing that we are counted among God's people, just as the census counted each Israelite.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

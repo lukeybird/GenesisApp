@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: The Spies and Unbelief - Numbers Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Spies and Unbelief</h1>
+            <p class="subtitle">The Cost of Unbelief</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">The Report of Unbelief</h2>
+            <p>When the twelve spies returned from exploring Canaan, ten of them brought back a report of unbelief (<a href="https://www.biblegateway.com/passage/?search=Numbers%2013%3A25-33&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 13:25-33</a>). They saw the same land that Caleb and Joshua saw—a land flowing with milk and honey—but they focused on the obstacles rather than on God's promise. Their unbelief spread through the camp, causing the entire nation to rebel against God.</p>
+            
+            <div class="verse-callout">
+                Beware, brethren, lest there be in any of you an evil heart of unbelief in departing from the living God; but exhort one another daily, while it is called "Today," lest any of you be hardened through the deceitfulness of sin.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%203%3A12-13&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 3:12-13</a>
+                </span>
+            </div>
+
+            <p>The unbelief of the ten spies stands as a warning to us. They saw God's promises, but they chose to focus on the obstacles instead of on God's power. Their unbelief cost them the promised land. We must guard against the same unbelief, choosing to trust God's promises even when we see obstacles, knowing that through Christ we can enter God's rest.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%203%3A19&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 3:19</a>
+                    <div class="ref-explanation">"So we see that they could not enter in because of unbelief," showing the terrible cost of unbelief, just as Israel could not enter the promised land because of unbelief.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mark%209%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Mark 9:23</a>
+                    <div class="ref-explanation">"If you can believe, all things are possible to him who believes," showing the power of faith, in contrast to the unbelief of the spies.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%204%3A20-21&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 4:20-21</a>
+                    <div class="ref-explanation">Abraham "did not waver at the promise of God through unbelief, but was strengthened in faith," showing the contrast between faith and unbelief.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="report">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Caleb and Joshua: Examples of Faith</h2>
+            <p>While ten spies brought back a report of unbelief, Caleb and Joshua brought back a report of faith (<a href="https://www.biblegateway.com/passage/?search=Numbers%2014%3A6-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 14:6-9</a>). They saw the same obstacles, but they trusted in God's power and promise. Their faith stands in stark contrast to the unbelief of the others, and God rewarded their faith by allowing them to enter the promised land.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Faith Overcomes Obstacles</div>
+                <p>Caleb and Joshua saw the same giants and fortified cities that the other spies saw, but they chose to focus on God's promise rather than on the obstacles. Their faith in God's power enabled them to see victory where others saw defeat. This points forward to how faith in Christ enables us to overcome obstacles and enter into God's promises.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%205%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 John 5:4</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For whatever is born of God overcomes the world. And this is the victory that has overcome the world—our faith.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%205%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 John 5:4</a>
+                </span>
+            </div>
+            
+            <p>Just as Caleb and Joshua's faith enabled them to enter the promised land, our faith in Christ enables us to enter into God's rest and receive His promises. Their example shows us that faith, not unbelief, is the path to victory. Through faith in Christ, we overcome the world and enter into all that God has promised.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2011%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 11:6</a>
+                    <div class="ref-explanation">"Without faith it is impossible to please Him," showing the importance of faith, just as Caleb and Joshua's faith pleased God.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%201%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 1:17</a>
+                    <div class="ref-explanation">"The just shall live by faith," showing that faith is the way of life for God's people, just as Caleb and Joshua lived by faith.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A8&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:8</a>
+                    <div class="ref-explanation">"By grace you have been saved through faith," showing that faith is the means by which we receive God's salvation, just as faith enabled Caleb and Joshua to enter the promised land.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="faith">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Judgment of Unbelief</h2>
+            <p>God's response to Israel's unbelief was severe: that entire generation would die in the wilderness, and only their children would enter the promised land (<a href="https://www.biblegateway.com/passage/?search=Numbers%2014%3A20-35&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Numbers 14:20-35</a>). The judgment was just—they had seen God's power in Egypt and the wilderness, yet they refused to believe. This stands as a warning about the serious consequences of unbelief.</p>
+
+            <div class="verse-callout">
+                So we see that they could not enter in because of unbelief. Therefore, since a promise remains of entering His rest, let us fear lest any of you seem to have come short of it.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%203%3A19-4%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 3:19-4:1</a>
+                </span>
+            </div>
+
+            <p>The judgment on Israel's unbelief serves as a warning to us. Just as unbelief prevented that generation from entering the promised land, unbelief can prevent us from entering into God's rest. We must guard against unbelief, choosing to trust God's promises through faith in Christ, so that we may enter into all that God has promised.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:2</a>
+                    <div class="ref-explanation">"The word which they heard did not profit them, not being mixed with faith," showing that unbelief prevents us from receiving God's promises, just as it prevented Israel from entering the promised land.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%203%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 3:18</a>
+                    <div class="ref-explanation">"He who does not believe is condemned already," showing the serious consequences of unbelief, just as Israel was judged for unbelief.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mark%2016%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Mark 16:16</a>
+                    <div class="ref-explanation">"He who does not believe will be condemned," showing that unbelief has eternal consequences, just as Israel's unbelief had temporal consequences.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="judgment">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Entering God's Rest Through Faith</h2>
+            <p>The promised land represented God's rest for Israel—a place of blessing, provision, and peace. Unbelief prevented that generation from entering this rest. But through faith in Christ, we can enter into God's rest—not a physical land, but a spiritual rest that is available to all who believe.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Rest in Christ</div>
+                <p>Just as the promised land was a place of rest for Israel, Christ offers us rest for our souls. He invites all who are weary and burdened to come to Him and find rest. The rest that Israel missed because of unbelief is available to us through faith in Christ.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2011%3A28&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 11:28</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Come to Me, all you who labor and are heavy laden, and I will give you rest. Take My yoke upon you and learn from Me, for I am gentle and lowly in heart, and you will find rest for your souls.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2011%3A28-29&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 11:28-29</a>
+                </span>
+            </div>
+
+            <p>Just as unbelief prevented Israel from entering the promised land, unbelief can prevent us from entering into God's rest. But through faith in Christ, we enter into rest—rest from our works, rest in His finished work, and rest for our souls. The rest that Israel missed is available to us through faith in Christ.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:3</a>
+                    <div class="ref-explanation">"We who have believed do enter that rest," showing that through faith we enter God's rest, just as faith would have enabled Israel to enter the promised land.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A9-10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:9-10</a>
+                    <div class="ref-explanation">"There remains therefore a rest for the people of God. For he who has entered His rest has himself also ceased from his works," showing that we enter rest through faith in Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%206%3A35&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 6:35</a>
+                    <div class="ref-explanation">"I am the bread of life. He who comes to Me shall never hunger, and he who believes in Me shall never thirst," showing that Christ provides the rest and satisfaction that the promised land represented.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="rest">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: The Choice Between Faith and Unbelief</h2>
+            <p>The story of the spies presents us with a clear choice: faith or unbelief. The ten spies chose unbelief and missed the promised land. Caleb and Joshua chose faith and entered the promised land. We face the same choice today—will we trust God's promises through faith in Christ, or will we allow unbelief to prevent us from entering into all that God has for us?</p>
+
+            <p>Through faith in Christ, we can enter into God's rest and receive all His promises. We must guard against unbelief, choosing to trust God even when we see obstacles, knowing that through Christ we can overcome. The story of the spies stands as both a warning against unbelief and an encouragement to faith—faith that enables us to enter into all that God has promised.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A11&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:11</a>
+                    <div class="ref-explanation">"Let us therefore be diligent to enter that rest, lest anyone fall according to the same example of disobedience," warning us against the unbelief that prevented Israel from entering the promised land.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%205%3A7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 5:7</a>
+                    <div class="ref-explanation">"We walk by faith, not by sight," showing that we are to trust God's promises even when we see obstacles, just as Caleb and Joshua did.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2011%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 11:1</a>
+                    <div class="ref-explanation">"Faith is the substance of things hoped for, the evidence of things not seen," showing that faith enables us to see beyond obstacles to God's promises, just as Caleb and Joshua did.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: Balaam y Balac - Línea de Tiempo de Números</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: Balaam y Balac</h1>
+            <p class="subtitle">Dios Convierte Maldiciones en Bendiciones</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">La Maldición Intentada: La Protección de Dios</h2>
+            <p>Balac, rey de Moab, contrató a Balaam para maldecir a Israel porque temía su poder (<a href="https://www.biblegateway.com/passage/?search=Números%2022%3A1-6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 22:1-6</a>). Pero Dios no permitiría que Balaam maldijera lo que Él había bendecido. A pesar de los repetidos intentos de Balac y las ofertas de recompensa, Balaam solo pudo bendecir a Israel. Esto muestra la protección soberana de Dios de Su pueblo, apuntando hacia cómo nada puede separarnos del amor de Dios en Cristo.</p>
+            
+            <div class="verse-callout">
+                ¿Cómo maldeciré al que Dios no ha maldecido? ¿Y cómo denunciaré al que Jehová no ha denunciado?
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Números%2023%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 23:8</a>
+                </span>
+            </div>
+
+            <p>Balaam descubrió que no podía maldecir lo que Dios había bendecido. Ninguna cantidad de dinero, ningún número de intentos, podía cambiar la bendición de Dios sobre Israel. Esto apunta hacia cómo nada puede separarnos del amor de Dios en Cristo. Estamos bendecidos en Él, y ninguna maldición puede vencer la bendición de Dios.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A38-39&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:38-39</a>
+                    <div class="ref-explanation">"Ni la muerte, ni la vida... podrá separarnos del amor de Dios," mostrando que nada puede maldecir lo que Dios ha bendecido, así como Balaam no pudo maldecir a Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 1:3</a>
+                    <div class="ref-explanation">"Bendito sea el Dios y Padre de nuestro Señor Jesucristo, que nos bendijo con toda bendición espiritual," mostrando que estamos bendecidos en Cristo, así como Israel fue bendecido por Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%203%3A13-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 3:13-14</a>
+                    <div class="ref-explanation">"Cristo nos redimió de la maldición de la ley... para que en Cristo Jesús la bendición de Abraham alcanzase a los gentiles," mostrando que en Cristo recibimos la bendición de Dios, así como Israel fue bendecido.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="curse">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Estrella y el Cetro: Profecía Mesiánica</h2>
+            <p>En su cuarto oráculo, Balaam profetizó sobre un gobernante venidero: "Saldrá estrella de Jacob, y se levantará cetro de Israel" (<a href="https://www.biblegateway.com/passage/?search=Números%2024%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 24:17</a>). Esta es una de las profecías mesiánicas más claras en el Antiguo Testamento, apuntando hacia Cristo, que vendría de la línea de Jacob y gobernaría sobre todas las naciones.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Cristo la Estrella y el Cetro</div>
+                <p>La profecía de Balaam sobre una Estrella y un Cetro que vendrían de Jacob apunta directamente a Cristo. Él es la Estrella que trae luz al mundo, y Él es el Cetro que gobierna sobre todos. Esta profecía, hablada por un profeta pagano, muestra que Dios estaba revelando Su plan de salvación incluso a través de medios poco probables.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2022%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Apocalipsis 22:16</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Yo Jesús he enviado mi ángel para daros testimonio de estas cosas en las iglesias. Yo soy la raíz y el linaje de David, la estrella resplandeciente de la mañana.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%2022%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Apocalipsis 22:16</a>
+                </span>
+            </div>
+            
+            <p>La profecía de Balaam sobre la Estrella y el Cetro encuentra su cumplimiento en Cristo. Él es la Estrella Resplandeciente de la Mañana, trayendo luz a un mundo oscuro. Él es el Cetro, gobernando sobre todas las naciones. Esta profecía, hablada por un profeta pagano contratado para maldecir a Israel, se convirtió en una de las profecías más hermosas del Mesías venidero.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%202%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 2:2</a>
+                    <div class="ref-explanation">Los sabios vieron "su estrella en el oriente," mostrando que Cristo es la Estrella profetizada por Balaam.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%201%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 1:8</a>
+                    <div class="ref-explanation">"Tu trono, oh Dios, por el siglo del siglo; cetro de equidad es el cetro de tu reino," mostrando que Cristo es el Cetro que gobierna.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%20110%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 110:2</a>
+                    <div class="ref-explanation">"Jehová enviará desde Sion la vara de tu poder; domina en medio de tus enemigos," mostrando que Cristo gobernará como el Cetro.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="prophecy">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Asna que Habla: El Control Soberano de Dios</h2>
+            <p>En su camino para encontrarse con Balac, la asna de Balaam vio un ángel de Jehová bloqueando el camino y se desvió tres veces. Cuando Balaam golpeó a la asna, Dios abrió su boca para hablar (<a href="https://www.biblegateway.com/passage/?search=Números%2022%3A21-30&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 22:21-30</a>). Este evento milagroso muestra la soberanía absoluta de Dios—Él puede usar incluso una asna para cumplir Sus propósitos y proteger a Su pueblo.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">La Protección Soberana de Dios</div>
+                <p>Dios usó una asna para proteger a Balaam de la espada del ángel y para recordarle que solo podía hablar lo que Dios permitía. Esto muestra que Dios tiene control completo, incluso sobre aquellos que se oponen a Él. Él protege a Su pueblo y asegura que Sus propósitos se cumplan, sin importar qué obstáculos surjan.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Proverbios%2021%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Proverbios 21:1</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Como los repartimientos de las aguas, así está el corazón del rey en la mano de Jehová; a todo lo que quiere lo inclina.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Proverbios%2021%3A1&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Proverbios 21:1</a>
+                </span>
+            </div>
+
+            <p>Así como Dios controló la asna de Balaam y le impidió maldecir a Israel, Dios controla todas las cosas para el bien de Su pueblo. Nada puede frustrar Sus propósitos. La asna que habla es un recordatorio poderoso de que Dios es soberano sobre toda la creación y protegerá y bendecirá a aquellos a quienes Él ha elegido.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A28&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:28</a>
+                    <div class="ref-explanation">"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien," mostrando que Dios controla todas las circunstancias para el bien de Su pueblo, así como controló las palabras de Balaam.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaías%2046%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Isaías 46:10</a>
+                    <div class="ref-explanation">"Mi consejo permanecerá, y haré todo lo que quiero," mostrando que los propósitos de Dios no pueden ser frustrados, así como Balaam no pudo maldecir lo que Dios había bendecido.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%2033%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 33:11</a>
+                    <div class="ref-explanation">"El consejo de Jehová permanecerá para siempre; los pensamientos de su corazón por todas las generaciones," mostrando que los planes de Dios son inmutables, así como Su bendición sobre Israel era inmutable.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="donkey">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Bendiciones en Lugar de Maldiciones: El Propósito Inmutable de Dios</h2>
+            <p>A pesar de los repetidos intentos de Balac de hacer que Balaam maldijera a Israel, Balaam solo pudo bendecirlos. En cuatro oráculos separados, Balaam pronunció bendiciones sobre Israel, declarando su estatus único, su grandeza futura, y profetizando sobre el Mesías venidero (<a href="https://www.biblegateway.com/passage/?search=Números%2023%3A7-10%2C%2023%3A18-24%2C%2024%3A3-9%2C%2024%3A15-24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Números 23-24</a>). Esto muestra que los propósitos de Dios no pueden ser cambiados—lo que Él ha bendecido permanece bendecido.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">La Bendición Inmutable de Dios</div>
+                <p>La incapacidad de Balaam de maldecir a Israel demuestra que la bendición de Dios es inmutable. En Cristo, estamos bendecidos con toda bendición espiritual, y nada puede separarnos del amor de Dios. Así como Balaam solo pudo bendecir a Israel, así la bendición de Dios sobre nosotros en Cristo es segura y eterna.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Efesios 1:3</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Bendito sea el Dios y Padre de nuestro Señor Jesucristo, que nos bendijo con toda bendición espiritual en los lugares celestiales en Cristo.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Efesios 1:3</a>
+                </span>
+            </div>
+
+            <p>Así como Balaam no pudo maldecir lo que Dios había bendecido, nada puede maldecir lo que Dios ha bendecido en Cristo. Estamos bendecidos con toda bendición espiritual, y ningún enemigo, ninguna circunstancia, ningún poder puede cambiar eso. La bendición de Dios sobre Su pueblo es tan inmutable como Su bendición sobre Israel era inmutable.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%203%3A13-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 3:13-14</a>
+                    <div class="ref-explanation">"Cristo nos redimió de la maldición de la ley... para que en Cristo Jesús la bendición de Abraham alcanzase a los gentiles," mostrando que en Cristo recibimos la bendición de Dios, así como Israel fue bendecido.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A31&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:31</a>
+                    <div class="ref-explanation">"Si Dios es por nosotros, ¿quién contra nosotros?" mostrando que la bendición de Dios sobre nosotros significa que nada puede oponerse exitosamente a nosotros, así como nada pudo maldecir a Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Números%2023%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Números 23:20</a>
+                    <div class="ref-explanation">"He aquí, he recibido orden de bendecir; él bendijo, y no podré revocarlo," mostrando que la bendición de Dios es inmutable.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="blessings">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Dios Convierte Maldiciones en Bendiciones</h2>
+            <p>La historia de Balaam y Balac nos enseña verdades profundas sobre la soberanía de Dios y la protección de Su pueblo. A pesar de los intentos de Balac de maldecir a Israel, Dios convirtió cada maldición intentada en una bendición. Balaam, contratado para maldecir, terminó profetizando sobre el Mesías venidero—la Estrella y el Cetro que traería bendición suprema a todas las naciones.</p>
+
+            <p>Para los creyentes en Cristo, esta historia nos recuerda que Dios es soberano sobre todas las circunstancias. Él puede usar incluso medios poco probables para cumplir Sus propósitos y proteger a Su pueblo. En Cristo, estamos bendecidos con toda bendición espiritual, y nada puede separarnos del amor de Dios. Así como Balaam no pudo maldecir lo que Dios había bendecido, así nada puede maldecir lo que Dios ha bendecido en Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A28&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:28</a>
+                    <div class="ref-explanation">"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien," mostrando que Dios puede convertir incluso el daño intentado en bien, así como convirtió las maldiciones intentadas de Balaam en bendiciones.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Génesis%2050%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Génesis 50:20</a>
+                    <div class="ref-explanation">"Vosotros pensasteis mal contra mí, mas Dios lo encaminó a bien," mostrando que Dios puede convertir el daño intentado en bien, así como lo hizo con las maldiciones intentadas de Balaam.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A38-39&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:38-39</a>
+                    <div class="ref-explanation">"Ni la muerte, ni la vida... podrá separarnos del amor de Dios," mostrando que nada puede maldecir lo que Dios ha bendecido, así como nada pudo maldecir a Israel.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        // Find Spanish voice
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

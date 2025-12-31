@@ -13,9 +13,18 @@
         'exodus-events.html': { book: 'exodus', type: 'events', lang: 'en' },
         'leviticus.html': { book: 'leviticus', type: 'characters', lang: 'en' },
         'leviticus-events.html': { book: 'leviticus', type: 'events', lang: 'en' },
+        'numbers.html': { book: 'numbers', type: 'characters', lang: 'en' },
+        'numbers-events.html': { book: 'numbers', type: 'events', lang: 'en' },
         'dive-in-creation.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-fall.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-cain-abel.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-census.html': { book: 'numbers', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-nazirite.html': { book: 'numbers', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-spies.html': { book: 'numbers', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-korah.html': { book: 'numbers', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-bronze-serpent.html': { book: 'numbers', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-balaam.html': { book: 'numbers', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-joshua-successor.html': { book: 'numbers', type: 'events', lang: 'en', special: 'dive-in' },
         
         // Spanish pages
         'index-es.html': { book: 'genesis', type: 'characters', lang: 'es' },
@@ -24,9 +33,18 @@
         'exodus-events-es.html': { book: 'exodus', type: 'events', lang: 'es' },
         'leviticus-es.html': { book: 'leviticus', type: 'characters', lang: 'es' },
         'leviticus-events-es.html': { book: 'leviticus', type: 'events', lang: 'es' },
+        'numbers-es.html': { book: 'numbers', type: 'characters', lang: 'es' },
+        'numbers-events-es.html': { book: 'numbers', type: 'events', lang: 'es' },
         'dive-in-creation-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
         'dive-in-fall-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
-        'dive-in-cain-abel-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' }
+        'dive-in-cain-abel-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-census-es.html': { book: 'numbers', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-nazirite-es.html': { book: 'numbers', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-spies-es.html': { book: 'numbers', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-korah-es.html': { book: 'numbers', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-bronze-serpent-es.html': { book: 'numbers', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-balaam-es.html': { book: 'numbers', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-joshua-successor-es.html': { book: 'numbers', type: 'events', lang: 'es', special: 'dive-in' }
     };
 
     // Book configuration
@@ -42,6 +60,10 @@
         leviticus: { 
             en: { name: 'Leviticus', emoji: '📖' },
             es: { name: 'Levítico', emoji: '📖' }
+        },
+        numbers: { 
+            en: { name: 'Numbers', emoji: '📖' },
+            es: { name: 'Números', emoji: '📖' }
         }
     };
 
@@ -109,11 +131,17 @@
             } else { // events
                 return lang === 'es' ? 'exodus-events-es.html' : 'exodus-events.html';
             }
-        } else { // leviticus
+        } else if (book === 'leviticus') {
             if (type === 'characters') {
                 return lang === 'es' ? 'leviticus-es.html' : 'leviticus.html';
             } else { // events
                 return lang === 'es' ? 'leviticus-events-es.html' : 'leviticus-events.html';
+            }
+        } else { // numbers
+            if (type === 'characters') {
+                return lang === 'es' ? 'numbers-es.html' : 'numbers.html';
+            } else { // events
+                return lang === 'es' ? 'numbers-events-es.html' : 'numbers-events.html';
             }
         }
     }
@@ -129,10 +157,11 @@
         const currentSpecial = context.special || null;
 
         // Build book dropdown
+        // When changing books, don't preserve special pages (like dive-in) - go to that book's events/characters page
         const bookItems = Object.keys(books).map(bookKey => {
             const book = books[bookKey][currentLang];
             const isActive = bookKey === currentBook;
-            const url = generateURL(bookKey, currentType, currentLang, currentSpecial);
+            const url = generateURL(bookKey, currentType, currentLang, null);
             return `<a href="${url}" class="dropdown-item ${isActive ? 'active' : ''}" data-book="${bookKey}">${book.name}</a>`;
         }).join('');
 
