@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="shortcut icon" type="image/png" href="favicon.png">
-    <title>Numbers Timeline - Main Characters</title>
+    <title>Línea de Tiempo de Rut - Personajes Principales</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
         
@@ -180,6 +180,7 @@
             color: #00c3ff;
             border-left: 3px solid rgba(0, 195, 255, 0.8);
         }
+
         .dropdown-item.category-item {
             display: flex;
             align-items: center;
@@ -213,7 +214,6 @@
         .submenu-item:hover {
             padding-left: 40px !important;
         }
-
 
         header {
             background: rgba(10, 14, 39, 0.7);
@@ -626,95 +626,56 @@
         <div class="nav-menu"></div>
 
         <header>
-            <h1>📖 Numbers Characters</h1>
-            <p class="subtitle">Main Characters in the Wilderness Journey</p>
+            <h1>📖 Personajes de Rut</h1>
+            <p class="subtitle">Personajes Principales en el Libro de Rut</p>
         </header>
 
         <div class="timeline" id="timeline"></div>
     </div>
 
     <script>
-        // Main characters in Numbers
+        // Main characters in Ruth
         const mainCharacters = [
             {
-                name: "Moses",
-                date: "c. 1526-1406 BC",
-                scripture: "Numbers 1:1, 12:3, 20:7-13, 27:12-23",
-                intro: "The leader of Israel throughout their wilderness journey, Moses continues to serve as God's mediator. In Numbers, he faces rebellion, intercedes for the people, and is told he will not enter the Promised Land due to his sin at Meribah.",
-                tagline: "Faithful leader, humble servant",
-                summary: "Throughout Numbers, Moses remains the central human figure, leading Israel through the wilderness. He conducts the census, organizes the camp, and continues to receive God's instructions. When Miriam and Aaron challenge his authority, God defends Moses, calling him the most humble man on earth. Moses intercedes for the people repeatedly—when they complain about food, when the spies bring a bad report, and when Korah rebels. At Meribah, Moses strikes the rock instead of speaking to it as God commanded, and for this disobedience, God tells him he will not enter the Promised Land. Despite this, Moses continues to lead faithfully, appointing Joshua as his successor. Moses represents the Law, which could guide but not save—pointing to the need for a greater Leader, Jesus Christ."
+                name: "Rut",
+                date: "c. 1100 a.C.",
+                scripture: "Rut 1:1-4:22",
+                intro: "Una mujer moabita que demuestra extraordinaria lealtad y fe. Después de la muerte de su esposo, elige seguir a Noemí y al Dios de Israel en lugar de regresar a su propio pueblo. Su fidelidad la lleva a convertirse en la bisabuela del rey David y antepasada de Cristo.",
+                tagline: "Nuera fiel, antepasada de Cristo",
+                summary: "Rut es una mujer moabita que se casa con Mahlón, uno de los hijos de Noemí. Cuando su esposo, cuñado y suegro mueren, Noemí anima a Rut y a su cuñada Orfa a regresar a sus familias moabitas. Orfa regresa, pero Rut se aferra a Noemí, declarando sus famosas palabras: 'A donde tú vayas, iré yo, y donde tú vivas, viviré yo. Tu pueblo será mi pueblo, y tu Dios será mi Dios.' El compromiso de Rut con Noemí y con el Dios de Israel demuestra una fe y lealtad extraordinarias. Acompaña a Noemí de regreso a Belén, donde espiga en los campos de Booz, un pariente del difunto esposo de Noemí. Booz muestra bondad a Rut, y ella eventualmente se convierte en su esposa. A través de su matrimonio, Rut da a luz a Obed, quien se convierte en el padre de Isaí, quien se convierte en el padre de David. La historia de Rut demuestra que la gracia de Dios se extiende a todos los que creen, independientemente de su origen. Como moabita, estaba fuera del pueblo del pacto, pero a través de la fe, se convierte en parte de la línea de Cristo. La fidelidad de Rut apunta hacia adelante a cómo nosotros, como gentiles, somos traídos a la familia de Dios a través de la fe en Cristo. Su inclusión en la genealogía de Cristo (Mateo 1:5) muestra que el plan de redención de Dios incluye a todos los que creen, independientemente de su pasado u origen."
             },
             {
-                name: "Aaron",
-                date: "c. 1529-1407 BC",
-                scripture: "Numbers 3:1-4, 12:1-15, 16:1-50, 20:22-29",
-                intro: "Israel's high priest continues his service in Numbers, but faces challenges including rebellion from Korah and his own death on Mount Hor. His priesthood is established and tested throughout the wilderness journey.",
-                tagline: "High priest, tested by rebellion",
-                summary: "Aaron's role in Numbers includes both service and testing. He joins Miriam in challenging Moses' authority, and Miriam is struck with leprosy. Aaron pleads with Moses for her healing, showing his love for his sister. When Korah leads a rebellion against Moses and Aaron, God vindicates Aaron by causing his staff to bud, blossom, and produce almonds—confirming his priestly calling. Aaron's sons Eleazar and Ithamar continue in priestly service. At Mount Hor, Aaron is stripped of his priestly garments, which are placed on his son Eleazar, and Aaron dies there. Aaron's priesthood, though imperfect, points to Christ, the perfect High Priest who lives forever."
+                name: "Noemí",
+                date: "c. 1100 a.C.",
+                scripture: "Rut 1:1-4:22",
+                intro: "Una mujer que experimenta gran pérdida pero encuentra redención a través de la providencia de Dios. Su amargura se convierte en gozo cuando Dios provee un pariente-redentor para su línea familiar.",
+                tagline: "De la amargura a la bendición",
+                summary: "Noemí, cuyo nombre significa 'agradable', experimenta gran tragedia cuando ella, su esposo Elimelec y sus dos hijos se mudan a Moab durante una hambruna. Mientras están en Moab, su esposo muere, y sus dos hijos se casan con mujeres moabitas, Orfa y Rut. Luego ambos hijos mueren, dejando a Noemí sin esposo y sin hijos. Noemí decide regresar a Belén y anima a sus nueras a regresar a sus familias. Orfa regresa, pero Rut insiste en quedarse con Noemí. Cuando llegan a Belén, Noemí les dice a las mujeres que la llamen 'Mara' (amarga) en lugar de Noemí, diciendo: 'El Todopoderoso ha hecho mi vida muy amarga. Me fui llena, pero el Señor me ha traído de vuelta vacía.' Sin embargo, a través de la providencia de Dios, Rut conoce a Booz, un pariente que puede actuar como pariente-redentor. A través de la redención de Booz de la línea familiar, Noemí encuentra gozo nuevamente. Cuando Rut da a luz a Obed, las mujeres le dicen a Noemí: '¡Bendito sea el Señor, que este día no te ha dejado sin un guardián-redentor! Que él se haga famoso en todo Israel. Él renovará tu vida y te sustentará en tu vejez. Porque tu nuera, que te ama y que es mejor para ti que siete hijos, le ha dado a luz.' La historia de Noemí demuestra cómo Dios puede convertir la amargura en bendición y cómo provee para Su pueblo incluso en sus momentos más oscuros. Su historia apunta hacia adelante a cómo Dios provee redención para nosotros a través de Cristo, nuestro Pariente-Redentor supremo."
             },
             {
-                name: "Joshua",
-                date: "c. 1490-1380 BC",
-                scripture: "Numbers 11:28, 13:1-14:38, 27:18-23",
-                intro: "Moses' assistant who becomes one of only two spies to trust God's promise. He is chosen as Moses' successor and will lead Israel into the Promised Land. His name means 'Yahweh saves'—the same as Jesus.",
-                tagline: "Faithful spy, chosen successor",
-                summary: "Joshua first appears in Numbers as Moses' assistant and one of the twelve spies sent into Canaan. While ten spies bring back a fearful report, Joshua and Caleb trust God's promise and urge the people to take the land. For this faith, they alone of that generation will enter the Promised Land. Joshua demonstrates courage and faith throughout Numbers, standing with Caleb against the entire congregation. When Moses is told he will not enter the land, he asks God to appoint a successor, and God chooses Joshua—a man in whom is the Spirit. Joshua is commissioned before Eleazar the priest and the whole assembly. His name, meaning 'Yahweh saves,' is the Hebrew form of 'Jesus,' pointing to how Jesus, our greater Joshua, leads us into our eternal inheritance."
+                name: "Booz",
+                date: "c. 1100 a.C.",
+                scripture: "Rut 2:1-4:22",
+                intro: "Un terrateniente rico que actúa como pariente-redentor, demostrando la provisión de Dios y apuntando hacia Cristo, nuestro Redentor supremo.",
+                tagline: "Pariente-redentor, tipo de Cristo",
+                summary: "Booz es un terrateniente rico de Belén y pariente del difunto esposo de Noemí, Elimelec. Cuando Rut viene a espigar en sus campos, Booz le muestra bondad extraordinaria, instruyendo a sus trabajadores a dejar grano extra para ella y asegurando su seguridad. Booz reconoce la lealtad de Rut hacia Noemí y su fe en el Dios de Israel. Cuando Noemí instruye a Rut a acercarse a Booz en la era para pedirle que actúe como pariente-redentor, Booz está de acuerdo pero nota que hay un pariente más cercano que tiene el primer derecho de redimir. Booz maneja la situación con integridad, acercándose primero al pariente más cercano. Cuando ese pariente se niega a redimir porque pondría en peligro su propia propiedad, Booz redime la propiedad familiar y se casa con Rut. A través de su matrimonio, Booz y Rut tienen un hijo, Obed, quien se convierte en el abuelo del rey David. El papel de Booz como pariente-redentor apunta hacia adelante a Cristo, quien nos redime del pecado y la muerte. Así como Booz redimió a Rut y la línea familiar de Noemí, Cristo nos redime y nos trae a la familia de Dios. La bondad, integridad y disposición de Booz para redimir demuestran el carácter de nuestro Redentor supremo, Jesucristo."
             },
             {
-                name: "Caleb",
-                date: "c. 1490-1380 BC",
-                scripture: "Numbers 13:6, 13:30, 14:6-9, 14:24",
-                intro: "The other faithful spy who, along with Joshua, trusts God's promise and urges Israel to take the Promised Land. God promises that he will enter the land because he has a different spirit and follows God wholeheartedly.",
-                tagline: "Wholehearted faith, different spirit",
-                summary: "Caleb, from the tribe of Judah, is chosen as one of the twelve spies. When the other ten spies bring back a report of fear and unbelief, Caleb silences the people and declares, 'We should go up and take possession of the land, for we can certainly do it!' He and Joshua tear their clothes in grief over the people's rebellion. God declares that because Caleb has a different spirit and follows Him wholeheartedly, he will enter the Promised Land. Caleb represents the faith that God rewards—not based on circumstances or obstacles, but on trust in God's promises. His wholehearted devotion points to how we are called to follow Christ with complete faith and trust."
-            },
-            {
-                name: "Korah",
-                date: "c. 1443 BC",
-                scripture: "Numbers 16:1-50",
-                intro: "A Levite who leads a rebellion against Moses and Aaron, challenging their authority. God judges him by causing the earth to swallow him and his followers, demonstrating the seriousness of rejecting God's appointed leadership.",
-                tagline: "Rebel against God's authority",
-                summary: "Korah, a Levite from the Kohathite clan, joins with Dathan, Abiram, and 250 community leaders to challenge Moses and Aaron. They claim that the whole community is holy and question why Moses and Aaron set themselves above the Lord's assembly. Moses responds by saying that God will show who belongs to Him. The next day, the earth opens and swallows Korah, Dathan, Abiram, and their families, while fire consumes the 250 leaders. Korah's rebellion demonstrates the danger of rejecting God's appointed authority. His challenge to Moses and Aaron points to how people reject Christ, God's appointed High Priest and King. Korah's judgment serves as a warning about the consequences of rebellion against God's authority."
-            },
-            {
-                name: "Balaam",
-                date: "c. 1407 BC",
-                scripture: "Numbers 22:1-24:25",
-                intro: "A pagan prophet hired by Balak to curse Israel, but God forces him to bless Israel instead. He prophesies about a coming star and scepter—pointing to the Messiah. Despite blessing Israel, he later leads them into sin.",
-                tagline: "Prophet who blesses instead of curses",
-                summary: "Balaam is summoned by Balak, king of Moab, to curse Israel because Balak fears their power. Despite being offered great rewards, Balaam discovers he can only speak what God puts in his mouth. On his way to meet Balak, his donkey sees an angel and speaks to Balaam. When Balaam attempts to curse Israel, he instead pronounces four blessings, including a prophecy about a star and scepter coming from Jacob—a clear messianic prophecy. However, Balaam later advises Balak to entice Israel into sin through Moabite women, leading to God's judgment. Balaam's story shows that God cannot be manipulated and that His purposes will stand. His prophecy points directly to Christ, the Star and Scepter who would come from Israel."
-            },
-            {
-                name: "Balak",
-                date: "c. 1407 BC",
-                scripture: "Numbers 22:1-24:25",
-                intro: "The king of Moab who hires Balaam to curse Israel because he fears their power. Despite multiple attempts and offers of reward, he cannot get Balaam to curse what God has blessed.",
-                tagline: "King who tries to curse God's people",
-                summary: "Balak, son of Zippor, becomes terrified when he sees what Israel has done to the Amorites. He sends messengers to Balaam, offering payment to curse Israel. When Balaam refuses, Balak sends more distinguished officials with greater promises. Balaam eventually comes but can only bless Israel. Balak takes Balaam to three different locations, hoping a different perspective will allow a curse, but each time Balaam blesses Israel instead. Balak's frustration grows as he realizes he cannot curse what God has blessed. His story demonstrates that no human power can overcome God's blessing on His people. In Christ, we are blessed, and nothing can separate us from God's love."
-            },
-            {
-                name: "Miriam",
-                date: "c. 1529-1407 BC",
-                scripture: "Numbers 12:1-15, 20:1",
-                intro: "Moses and Aaron's sister who, along with Aaron, challenges Moses' authority. She is struck with leprosy but is healed after Moses intercedes. She dies at Kadesh before Israel enters the Promised Land.",
-                tagline: "Prophetess, sister, challenger",
-                summary: "Miriam, the sister who watched over baby Moses in the Nile, appears in Numbers when she and Aaron speak against Moses because of his Cushite wife. They question whether God has spoken only through Moses, asking, 'Hasn't he also spoken through us?' God calls the three of them to the tent of meeting and defends Moses, calling him the most humble man on earth and saying He speaks with Moses face to face. God's anger burns against Miriam and Aaron, and Miriam is struck with leprosy. Aaron pleads with Moses, who cries out to God for her healing. God heals her but requires seven days of isolation outside the camp. Miriam's challenge demonstrates the importance of respecting God's appointed authority. She dies at Kadesh in the Desert of Zin, and the people mourn for her."
-            },
-            {
-                name: "Eleazar",
-                date: "c. 1450-1370 BC",
-                scripture: "Numbers 3:32, 4:16, 20:25-29, 26:1-3",
-                intro: "Aaron's son who succeeds him as high priest. He assists Moses in the census and will help Joshua distribute the Promised Land. His faithful service continues the Aaronic priesthood.",
-                tagline: "High priest, Aaron's successor",
-                summary: "Eleazar appears throughout Numbers, serving alongside his father Aaron. He is given oversight of the tabernacle and its furnishings. When Aaron dies on Mount Hor, Moses strips Aaron of his priestly garments and puts them on Eleazar, establishing him as the new high priest. Eleazar assists Moses in conducting the second census of Israel. He will later help Joshua distribute the land among the tribes. Eleazar's faithful succession of his father demonstrates the continuity of God's priestly order. His priesthood, though still pointing to the need for a perfect High Priest, continues the line that would eventually point to Christ, who is our perfect and eternal High Priest."
+                name: "El Señor (YHWH)",
+                date: "Eterno",
+                scripture: "Rut 1:6, 1:21, 2:20, 4:13-14",
+                intro: "El Dios invisible pero siempre presente que orquesta eventos para el bien de Su pueblo y el cumplimiento de Su plan redentor. Él provee para Rut y Noemí y trabaja a través de circunstancias ordinarias para lograr resultados extraordinarios.",
+                tagline: "El proveedor y redentor, trabajando detrás de escena",
+                summary: "A lo largo del libro de Rut, el Señor obra providencialmente detrás de escena. Él termina la hambruna en Belén, impulsando a Noemí a regresar. Él guía a Rut a espigar en el campo de Booz. Él provee a Booz como pariente-redentor. Él bendice a Rut y Booz con un hijo, Obed, quien se convierte en parte de la línea de David y finalmente de la línea de Cristo. La providencia del Señor en Rut demuestra que Él siempre está trabajando, incluso cuando no podemos verlo. Él usa personas ordinarias y circunstancias ordinarias para lograr Sus propósitos extraordinarios. El libro de Rut muestra que el plan de redención de Dios incluye a todos los que creen, independientemente de su origen. Rut, una moabita, se convierte en parte de la línea de Cristo a través de la gracia de Dios. La fidelidad del Señor al proveer para Rut y Noemí apunta hacia adelante a cómo Él provee para nosotros a través de Cristo, nuestro Redentor supremo. El libro de Rut finalmente apunta a cómo Dios trabaja a través de todas las circunstancias para lograr Sus propósitos redentores, culminando en Cristo, el Redentor más grande de todos."
             }
         ];
+
 
         // Helper function to create Bible Gateway link
         function createBibleGatewayLink(scripture) {
             if (!scripture) return '';
             const encodedScripture = encodeURIComponent(scripture);
-            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=RVR1960`;
             return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
         }
 
@@ -740,7 +701,7 @@
                     <div class="character-intro">${character.intro}</div>
                     <div class="character-tagline">${character.tagline}</div>
                     <div class="character-summary">${character.summary}</div>
-                    <button class="audio-btn">Listen to Story</button>
+                    <button class="audio-btn">Escuchar Historia</button>
                 `;
 
                 content.addEventListener('click', (e) => {
@@ -771,16 +732,16 @@
         // Speech synthesis setup
         let currentUtterance = null;
         let currentButton = null;
-        let jarvisVoice = null;
+        let spanishVoice = null;
 
-        function findJarvisVoice() {
+        function findSpanishVoice() {
             const voices = speechSynthesis.getVoices();
             const preferredVoices = [
-                'Google UK English Male',
-                'Microsoft Zira - English (United States)',
-                'Microsoft David - English (United States)',
-                'Alex',
-                'Daniel'
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
             ];
             
             for (const voiceName of preferredVoices) {
@@ -788,31 +749,31 @@
                 if (voice) return voice;
             }
             
-            const maleVoice = voices.find(v => 
-                v.lang.startsWith('en') && 
-                (v.name.toLowerCase().includes('male') || 
-                 v.name.toLowerCase().includes('david') ||
-                 v.name.toLowerCase().includes('daniel'))
+            const spanishVoice = voices.find(v => 
+                v.lang.startsWith('es') && 
+                (v.name.toLowerCase().includes('spanish') || 
+                 v.name.toLowerCase().includes('español') ||
+                 v.name.toLowerCase().includes('es-'))
             );
             
-            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+            return spanishVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
         }
 
         if (speechSynthesis.onvoiceschanged !== undefined) {
             speechSynthesis.onvoiceschanged = () => {
-                jarvisVoice = findJarvisVoice();
+                spanishVoice = findSpanishVoice();
             };
         }
 
         setTimeout(() => {
-            jarvisVoice = findJarvisVoice();
+            spanishVoice = findSpanishVoice();
         }, 100);
 
         function playAudio(button, text) {
             if (button === currentButton && button.classList.contains('playing')) {
                 speechSynthesis.cancel();
                 button.classList.remove('playing');
-                button.textContent = 'Listen to Story';
+                button.textContent = 'Escuchar Historia';
                 currentUtterance = null;
                 currentButton = null;
                 return;
@@ -821,33 +782,33 @@
             if (currentUtterance && currentButton) {
                 speechSynthesis.cancel();
                 currentButton.classList.remove('playing');
-                currentButton.textContent = 'Listen to Story';
+                currentButton.textContent = 'Escuchar Historia';
             }
 
             currentUtterance = new SpeechSynthesisUtterance(text);
             
-            if (jarvisVoice) {
-                currentUtterance.voice = jarvisVoice;
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
             }
             currentUtterance.rate = 0.9;
-            currentUtterance.pitch = 0.8;
+            currentUtterance.pitch = 0.85;
             currentUtterance.volume = 1;
-            currentUtterance.lang = 'en-GB';
+            currentUtterance.lang = 'es-ES';
 
             button.classList.add('playing');
-            button.textContent = 'Playing...';
+            button.textContent = 'Reproduciendo...';
             currentButton = button;
 
             currentUtterance.onend = () => {
                 button.classList.remove('playing');
-                button.textContent = 'Listen to Story';
+                button.textContent = 'Escuchar Historia';
                 currentUtterance = null;
                 currentButton = null;
             };
 
             currentUtterance.onerror = () => {
                 button.classList.remove('playing');
-                button.textContent = 'Listen to Story';
+                button.textContent = 'Escuchar Historia';
                 currentUtterance = null;
                 currentButton = null;
             };

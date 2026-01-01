@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="shortcut icon" type="image/png" href="favicon.png">
-    <title>Numbers Timeline - Main Characters</title>
+    <title>Nehemiah Timeline - Main Characters</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
         
@@ -180,6 +180,7 @@
             color: #00c3ff;
             border-left: 3px solid rgba(0, 195, 255, 0.8);
         }
+
         .dropdown-item.category-item {
             display: flex;
             align-items: center;
@@ -213,7 +214,6 @@
         .submenu-item:hover {
             padding-left: 40px !important;
         }
-
 
         header {
             background: rgba(10, 14, 39, 0.7);
@@ -626,89 +626,41 @@
         <div class="nav-menu"></div>
 
         <header>
-            <h1>📖 Numbers Characters</h1>
-            <p class="subtitle">Main Characters in the Wilderness Journey</p>
+            <h1>📖 Nehemiah Characters</h1>
+            <p class="subtitle">Main Characters in the Book of Nehemiah</p>
         </header>
 
         <div class="timeline" id="timeline"></div>
     </div>
 
     <script>
-        // Main characters in Numbers
-        const mainCharacters = [
+        // Main characters in Ruth
+                const mainCharacters = [
             {
-                name: "Moses",
-                date: "c. 1526-1406 BC",
-                scripture: "Numbers 1:1, 12:3, 20:7-13, 27:12-23",
-                intro: "The leader of Israel throughout their wilderness journey, Moses continues to serve as God's mediator. In Numbers, he faces rebellion, intercedes for the people, and is told he will not enter the Promised Land due to his sin at Meribah.",
-                tagline: "Faithful leader, humble servant",
-                summary: "Throughout Numbers, Moses remains the central human figure, leading Israel through the wilderness. He conducts the census, organizes the camp, and continues to receive God's instructions. When Miriam and Aaron challenge his authority, God defends Moses, calling him the most humble man on earth. Moses intercedes for the people repeatedly—when they complain about food, when the spies bring a bad report, and when Korah rebels. At Meribah, Moses strikes the rock instead of speaking to it as God commanded, and for this disobedience, God tells him he will not enter the Promised Land. Despite this, Moses continues to lead faithfully, appointing Joshua as his successor. Moses represents the Law, which could guide but not save—pointing to the need for a greater Leader, Jesus Christ."
+                name: "Nehemiah",
+                date: "c. 445 BC",
+                scripture: "Nehemiah 1:1-13:31",
+                intro: "A cupbearer to the Persian king who becomes governor of Judah and leads the rebuilding of Jerusalem's walls. His leadership points forward to Christ, the ultimate Leader.",
+                tagline: "Wall rebuilder, faithful leader",
+                summary: "Nehemiah is a cupbearer to King Artaxerxes who hears that Jerusalem's walls are broken down. He prays and fasts, then asks the king for permission to go to Jerusalem to rebuild the walls. Despite opposition, Nehemiah leads the people in rebuilding the walls in just 52 days. He also leads a spiritual reformation, having Ezra read the Law to the people. Nehemiah's leadership points forward to how Christ leads us in building the kingdom of God and in spiritual renewal."
             },
             {
-                name: "Aaron",
-                date: "c. 1529-1407 BC",
-                scripture: "Numbers 3:1-4, 12:1-15, 16:1-50, 20:22-29",
-                intro: "Israel's high priest continues his service in Numbers, but faces challenges including rebellion from Korah and his own death on Mount Hor. His priesthood is established and tested throughout the wilderness journey.",
-                tagline: "High priest, tested by rebellion",
-                summary: "Aaron's role in Numbers includes both service and testing. He joins Miriam in challenging Moses' authority, and Miriam is struck with leprosy. Aaron pleads with Moses for her healing, showing his love for his sister. When Korah leads a rebellion against Moses and Aaron, God vindicates Aaron by causing his staff to bud, blossom, and produce almonds—confirming his priestly calling. Aaron's sons Eleazar and Ithamar continue in priestly service. At Mount Hor, Aaron is stripped of his priestly garments, which are placed on his son Eleazar, and Aaron dies there. Aaron's priesthood, though imperfect, points to Christ, the perfect High Priest who lives forever."
+                name: "Ezra",
+                date: "c. 445 BC",
+                scripture: "Nehemiah 8:1-18",
+                intro: "The priest who reads the Law to the people, leading to repentance and renewal. His teaching points forward to Christ, the ultimate Teacher.",
+                tagline: "Teacher of the Law, bringer of renewal",
+                summary: "Ezra reads the Book of the Law to all the people, and they respond with repentance and celebration. This leads to a great spiritual renewal. Ezra's teaching points forward to how Christ teaches us and brings spiritual renewal through His Word and Spirit."
             },
             {
-                name: "Joshua",
-                date: "c. 1490-1380 BC",
-                scripture: "Numbers 11:28, 13:1-14:38, 27:18-23",
-                intro: "Moses' assistant who becomes one of only two spies to trust God's promise. He is chosen as Moses' successor and will lead Israel into the Promised Land. His name means 'Yahweh saves'—the same as Jesus.",
-                tagline: "Faithful spy, chosen successor",
-                summary: "Joshua first appears in Numbers as Moses' assistant and one of the twelve spies sent into Canaan. While ten spies bring back a fearful report, Joshua and Caleb trust God's promise and urge the people to take the land. For this faith, they alone of that generation will enter the Promised Land. Joshua demonstrates courage and faith throughout Numbers, standing with Caleb against the entire congregation. When Moses is told he will not enter the land, he asks God to appoint a successor, and God chooses Joshua—a man in whom is the Spirit. Joshua is commissioned before Eleazar the priest and the whole assembly. His name, meaning 'Yahweh saves,' is the Hebrew form of 'Jesus,' pointing to how Jesus, our greater Joshua, leads us into our eternal inheritance."
+                name: "The Lord (YHWH)",
+                date: "Eternal",
+                scripture: "Nehemiah 1:1-13:31 (throughout)",
+                intro: "The God who enables the rebuilding of Jerusalem and brings spiritual renewal. His work points forward to Christ's work of building the kingdom.",
+                tagline: "The builder and renewer",
+                summary: "Throughout Nehemiah, the Lord demonstrates His power in enabling the rebuilding of Jerusalem's walls and bringing spiritual renewal. He answers Nehemiah's prayers and protects the people from their enemies. The Lord's work points forward to how Christ builds the kingdom of God and brings spiritual renewal to all who believe."
             },
-            {
-                name: "Caleb",
-                date: "c. 1490-1380 BC",
-                scripture: "Numbers 13:6, 13:30, 14:6-9, 14:24",
-                intro: "The other faithful spy who, along with Joshua, trusts God's promise and urges Israel to take the Promised Land. God promises that he will enter the land because he has a different spirit and follows God wholeheartedly.",
-                tagline: "Wholehearted faith, different spirit",
-                summary: "Caleb, from the tribe of Judah, is chosen as one of the twelve spies. When the other ten spies bring back a report of fear and unbelief, Caleb silences the people and declares, 'We should go up and take possession of the land, for we can certainly do it!' He and Joshua tear their clothes in grief over the people's rebellion. God declares that because Caleb has a different spirit and follows Him wholeheartedly, he will enter the Promised Land. Caleb represents the faith that God rewards—not based on circumstances or obstacles, but on trust in God's promises. His wholehearted devotion points to how we are called to follow Christ with complete faith and trust."
-            },
-            {
-                name: "Korah",
-                date: "c. 1443 BC",
-                scripture: "Numbers 16:1-50",
-                intro: "A Levite who leads a rebellion against Moses and Aaron, challenging their authority. God judges him by causing the earth to swallow him and his followers, demonstrating the seriousness of rejecting God's appointed leadership.",
-                tagline: "Rebel against God's authority",
-                summary: "Korah, a Levite from the Kohathite clan, joins with Dathan, Abiram, and 250 community leaders to challenge Moses and Aaron. They claim that the whole community is holy and question why Moses and Aaron set themselves above the Lord's assembly. Moses responds by saying that God will show who belongs to Him. The next day, the earth opens and swallows Korah, Dathan, Abiram, and their families, while fire consumes the 250 leaders. Korah's rebellion demonstrates the danger of rejecting God's appointed authority. His challenge to Moses and Aaron points to how people reject Christ, God's appointed High Priest and King. Korah's judgment serves as a warning about the consequences of rebellion against God's authority."
-            },
-            {
-                name: "Balaam",
-                date: "c. 1407 BC",
-                scripture: "Numbers 22:1-24:25",
-                intro: "A pagan prophet hired by Balak to curse Israel, but God forces him to bless Israel instead. He prophesies about a coming star and scepter—pointing to the Messiah. Despite blessing Israel, he later leads them into sin.",
-                tagline: "Prophet who blesses instead of curses",
-                summary: "Balaam is summoned by Balak, king of Moab, to curse Israel because Balak fears their power. Despite being offered great rewards, Balaam discovers he can only speak what God puts in his mouth. On his way to meet Balak, his donkey sees an angel and speaks to Balaam. When Balaam attempts to curse Israel, he instead pronounces four blessings, including a prophecy about a star and scepter coming from Jacob—a clear messianic prophecy. However, Balaam later advises Balak to entice Israel into sin through Moabite women, leading to God's judgment. Balaam's story shows that God cannot be manipulated and that His purposes will stand. His prophecy points directly to Christ, the Star and Scepter who would come from Israel."
-            },
-            {
-                name: "Balak",
-                date: "c. 1407 BC",
-                scripture: "Numbers 22:1-24:25",
-                intro: "The king of Moab who hires Balaam to curse Israel because he fears their power. Despite multiple attempts and offers of reward, he cannot get Balaam to curse what God has blessed.",
-                tagline: "King who tries to curse God's people",
-                summary: "Balak, son of Zippor, becomes terrified when he sees what Israel has done to the Amorites. He sends messengers to Balaam, offering payment to curse Israel. When Balaam refuses, Balak sends more distinguished officials with greater promises. Balaam eventually comes but can only bless Israel. Balak takes Balaam to three different locations, hoping a different perspective will allow a curse, but each time Balaam blesses Israel instead. Balak's frustration grows as he realizes he cannot curse what God has blessed. His story demonstrates that no human power can overcome God's blessing on His people. In Christ, we are blessed, and nothing can separate us from God's love."
-            },
-            {
-                name: "Miriam",
-                date: "c. 1529-1407 BC",
-                scripture: "Numbers 12:1-15, 20:1",
-                intro: "Moses and Aaron's sister who, along with Aaron, challenges Moses' authority. She is struck with leprosy but is healed after Moses intercedes. She dies at Kadesh before Israel enters the Promised Land.",
-                tagline: "Prophetess, sister, challenger",
-                summary: "Miriam, the sister who watched over baby Moses in the Nile, appears in Numbers when she and Aaron speak against Moses because of his Cushite wife. They question whether God has spoken only through Moses, asking, 'Hasn't he also spoken through us?' God calls the three of them to the tent of meeting and defends Moses, calling him the most humble man on earth and saying He speaks with Moses face to face. God's anger burns against Miriam and Aaron, and Miriam is struck with leprosy. Aaron pleads with Moses, who cries out to God for her healing. God heals her but requires seven days of isolation outside the camp. Miriam's challenge demonstrates the importance of respecting God's appointed authority. She dies at Kadesh in the Desert of Zin, and the people mourn for her."
-            },
-            {
-                name: "Eleazar",
-                date: "c. 1450-1370 BC",
-                scripture: "Numbers 3:32, 4:16, 20:25-29, 26:1-3",
-                intro: "Aaron's son who succeeds him as high priest. He assists Moses in the census and will help Joshua distribute the Promised Land. His faithful service continues the Aaronic priesthood.",
-                tagline: "High priest, Aaron's successor",
-                summary: "Eleazar appears throughout Numbers, serving alongside his father Aaron. He is given oversight of the tabernacle and its furnishings. When Aaron dies on Mount Hor, Moses strips Aaron of his priestly garments and puts them on Eleazar, establishing him as the new high priest. Eleazar assists Moses in conducting the second census of Israel. He will later help Joshua distribute the land among the tribes. Eleazar's faithful succession of his father demonstrates the continuity of God's priestly order. His priesthood, though still pointing to the need for a perfect High Priest, continues the line that would eventually point to Christ, who is our perfect and eternal High Priest."
-            }
-        ];
+        ]
 
         // Helper function to create Bible Gateway link
         function createBibleGatewayLink(scripture) {
