@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Deuteronomy Timeline - Major Events</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .christ-connection {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .christ-connection {
+            max-height: 500px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+            opacity: 1;
+        }
+
+        .christ-connection-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .christ-connection-text {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .christ-connection-text .scripture-link {
+            color: #88d0ff;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dive-in-btn {
+            display: none;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.3), rgba(0, 200, 255, 0.2));
+            border: 1px solid rgba(0, 180, 255, 0.6);
+            color: #88d0ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 15px rgba(0, 180, 255, 0.3),
+                inset 0 0 10px rgba(0, 200, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .timeline-content.expanded .dive-in-btn {
+            display: inline-block;
+        }
+
+        .dive-in-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .dive-in-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .dive-in-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.4), rgba(0, 200, 255, 0.3));
+            border-color: rgba(0, 180, 255, 0.9);
+            box-shadow: 
+                0 0 25px rgba(0, 180, 255, 0.5),
+                inset 0 0 20px rgba(0, 200, 255, 0.2);
+            transform: translateY(-2px);
+            color: #66d9ff;
+        }
+
+        .dive-in-btn:hover::after {
+            left: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button-container .audio-btn {
+            margin-top: 0;
+        }
+
+        .button-container .dive-in-btn {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>📖 Deuteronomy Events</h1>
+            <p class="subtitle">Major Events in Moses' Final Words</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in Deuteronomy
+        const mainEvents = [
+            {
+                name: "The Ten Commandments Repeated",
+                date: "c. 1406 BC",
+                scripture: "Deuteronomy 5:1-33",
+                intro: "Moses restates the Ten Commandments to the new generation of Israelites who are about to enter the Promised Land. This repetition emphasizes the importance of God's law for life in the land.",
+                tagline: "God's law for life in the land",
+                summary: "Moses summoned all Israel and said: 'Hear, Israel, the decrees and laws I declare in your hearing today. Learn them and be sure to follow them. The Lord our God made a covenant with us at Horeb. It was not with our ancestors that the Lord made this covenant, but with us, with all of us who are alive here today. The Lord spoke to you face to face out of the fire on the mountain. At that time I stood between the Lord and you to declare to you the word of the Lord, because you were afraid of the fire and did not go up the mountain.' Then Moses restated the Ten Commandments: 'I am the Lord your God, who brought you out of Egypt, out of the land of slavery. You shall have no other gods before me. You shall not make for yourself an image in the form of anything in heaven above or on the earth beneath or in the waters below. You shall not misuse the name of the Lord your God, for the Lord will not hold anyone guiltless who misuses his name. Observe the Sabbath day by keeping it holy, as the Lord your God has commanded you. Honor your father and your mother, as the Lord your God has commanded you, so that you may live long and that it may go well with you in the land the Lord your God is giving you. You shall not murder. You shall not commit adultery. You shall not steal. You shall not give false testimony against your neighbor. You shall not covet your neighbor's wife. You shall not set your desire on your neighbor's house or land, his male or female servant, his ox or donkey, or anything that belongs to your neighbor.' These are the commandments the Lord proclaimed in a loud voice to your whole assembly there on the mountain from out of the fire, the cloud and the deep darkness; and he added nothing more. Then he wrote them on two stone tablets and gave them to me.",
+                christConnection: "The Ten Commandments reveal God's holy standard, which we cannot keep perfectly. Christ fulfilled the law perfectly (<a href='https://www.biblegateway.com/passage/?search=Matthew%205%3A17&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Matthew 5:17</a>). Through faith in Christ, the law is written on our hearts (<a href='https://www.biblegateway.com/passage/?search=Jeremiah%2031%3A33&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Jeremiah 31:33</a>), and we are enabled to obey by the Holy Spirit (<a href='https://www.biblegateway.com/passage/?search=Romans%208%3A4&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Romans 8:4</a>)."
+            },
+            {
+                name: "The Shema",
+                date: "c. 1406 BC",
+                scripture: "Deuteronomy 6:4-9",
+                intro: "Moses gives Israel the greatest commandment: to love the Lord with all their heart, soul, and strength. This passage, known as the Shema, becomes the central confession of Jewish faith and is quoted by Jesus as the greatest commandment.",
+                tagline: "Love the Lord with all your heart",
+                summary: "Hear, O Israel: The Lord our God, the Lord is one. Love the Lord your God with all your heart and with all your soul and with all your strength. These commandments that I give you today are to be on your hearts. Impress them on your children. Talk about them when you sit at home and when you walk along the road, when you lie down and when you get up. Tie them as symbols on your hands and bind them on your foreheads. Write them on the doorframes of your houses and on your gates.",
+                christConnection: "Jesus identified the Shema as the greatest commandment (<a href='https://www.biblegateway.com/passage/?search=Mark%2012%3A29-30&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Mark 12:29-30</a>). Through Christ, we are enabled to love God with all our heart, soul, and strength by the power of the Holy Spirit (<a href='https://www.biblegateway.com/passage/?search=Romans%205%3A5&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Romans 5:5</a>). The Shema points to the unity of God, which is fully revealed in the Trinity—one God in three persons."
+            },
+            {
+                name: "The Blessings and Curses",
+                date: "c. 1406 BC",
+                scripture: "Deuteronomy 27:1-28:68",
+                intro: "Moses sets before Israel the consequences of obedience and disobedience. If they obey, they will be blessed in the land. If they disobey, they will face severe curses and ultimately exile.",
+                tagline: "Choose life or death",
+                summary: "Moses and the elders of Israel commanded the people: 'Keep all these commands that I give you today. When you have crossed the Jordan into the land the Lord your God is giving you, set up some large stones and coat them with plaster. Write on them all the words of this law when you have crossed over to enter the land the Lord your God is giving you, a land flowing with milk and honey, just as the Lord, the God of your ancestors, promised you. And when you have crossed the Jordan, set up these stones on Mount Ebal, as I command you today, and coat them with plaster. Build there an altar to the Lord your God, an altar of stones. Do not use any iron tool on them. Build the altar of the Lord your God with fieldstones and offer burnt offerings on it to the Lord your God.' Moses then pronounced the blessings: 'If you fully obey the Lord your God and carefully follow all his commands I give you today, the Lord your God will set you high above all the nations on earth. All these blessings will come on you and accompany you if you obey the Lord your God: You will be blessed in the city and blessed in the country. The fruit of your womb will be blessed, and the crops of your land and the young of your livestock—the calves of your herds and the lambs of your flocks. Your basket and your kneading trough will be blessed. You will be blessed when you come in and blessed when you go out.' Then Moses pronounced the curses: 'However, if you do not obey the Lord your God and do not carefully follow all his commands and decrees I am giving you today, all these curses will come on you and overtake you: You will be cursed in the city and cursed in the country. Your basket and your kneading trough will be cursed. The fruit of your womb will be cursed, and the crops of your land, and the calves of your herds and the lambs of your flocks. You will be cursed when you come in and cursed when you go out. The Lord will send on you curses, confusion and rebuke in everything you put your hand to, until you are destroyed and come to sudden ruin because of the evil you have done in forsaking him.'",
+                christConnection: "The blessings and curses reveal that we cannot earn God's favor through obedience—we all fall under the curse (<a href='https://www.biblegateway.com/passage/?search=Galatians%203%3A10&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Galatians 3:10</a>). Christ became a curse for us, redeeming us from the curse of the law (<a href='https://www.biblegateway.com/passage/?search=Galatians%203%3A13&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Galatians 3:13</a>). Through faith in Christ, we receive all the blessings of God (<a href='https://www.biblegateway.com/passage/?search=Ephesians%201%3A3&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Ephesians 1:3</a>)."
+            },
+            {
+                name: "Joshua's Commissioning",
+                date: "c. 1406 BC",
+                scripture: "Deuteronomy 31:1-8, 14-23",
+                intro: "Moses commissions Joshua as his successor to lead Israel into the Promised Land. God Himself speaks to Joshua, promising to be with him and encouraging him to be strong and courageous.",
+                tagline: "Preparing the next leader",
+                summary: "Then Moses went out and spoke these words to all Israel: 'I am now a hundred and twenty years old and I am no longer able to lead you. The Lord has said to me, \"You shall not cross the Jordan.\" The Lord your God himself will cross over ahead of you. He will destroy these nations before you, and you will take possession of their land. Joshua also will cross over ahead of you, as the Lord said. And the Lord will do to them what he did to Sihon and Og, the kings of the Amorites, whom he destroyed along with their land. The Lord will deliver them to you, and you must do to them all that I have commanded you. Be strong and courageous. Do not be afraid or terrified because of them, for the Lord your God goes with you; he will never leave you nor forsake you.' Then Moses summoned Joshua and said to him in the presence of all Israel, 'Be strong and courageous, for you must go with this people into the land that the Lord swore to their ancestors to give them, and you must divide it among them as their inheritance. The Lord himself goes before you and will be with you; he will never leave you nor forsake you. Do not be afraid; do not be discouraged.' The Lord said to Moses, 'Now the day of your death is near. Call Joshua and present yourselves at the tent of meeting, where I will commission him.' So Moses and Joshua came and presented themselves at the tent of meeting. Then the Lord appeared at the tent in a pillar of cloud, and the cloud stood over the entrance to the tent. And the Lord said to Moses: 'You are going to rest with your ancestors, and these people will soon prostitute themselves to the foreign gods of the land they are entering. They will forsake me and break the covenant I made with them. On that day I will become angry with them and forsake them; I will hide my face from them, and they will be destroyed. Many disasters and calamities will come on them, and on that day they will ask, \"Have not these disasters come on us because our God is not with us?\" And I will certainly hide my face on that day because of all their wickedness in turning to other gods. Now write down this song and teach it to the Israelites and have them sing it, so that it may be a witness for me against them. When I have brought them into the land flowing with milk and honey, the land I promised on oath to their ancestors, and when they eat their fill and thrive, they will turn to other gods and worship them, rejecting me and breaking my covenant. And when many disasters and calamities come on them, this song will testify against them, because it will not be forgotten by their descendants. I know what they are disposed to do, even before I bring them into the land I promised them on oath.' So Moses wrote down this song that day and taught it to the Israelites. The Lord gave this command to Joshua son of Nun: 'Be strong and courageous, for you will bring the Israelites into the land I promised them on oath, and I myself will be with you.'",
+                christConnection: "Joshua's commissioning points forward to Jesus (Joshua and Jesus share the same Hebrew name). Just as Joshua led Israel into the physical Promised Land, Jesus leads us into our eternal inheritance (<a href='https://www.biblegateway.com/passage/?search=Hebrews%204%3A8-10&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 4:8-10</a>). Christ is our perfect leader who promises to be with us always (<a href='https://www.biblegateway.com/passage/?search=Matthew%2028%3A20&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Matthew 28:20</a>)."
+            },
+            {
+                name: "The Song of Moses",
+                date: "c. 1406 BC",
+                scripture: "Deuteronomy 32:1-52",
+                intro: "Moses teaches Israel a song that will serve as a witness against them when they turn away from God. The song recounts God's faithfulness, Israel's unfaithfulness, and God's future judgment and restoration.",
+                tagline: "A song of witness",
+                summary: "Moses recited the words of this song from beginning to end in the hearing of the whole assembly of Israel: 'Listen, you heavens, and I will speak; hear, you earth, the words of my mouth. Let my teaching fall like rain and my words descend like dew, like showers on new grass, like abundant rain on tender plants. I will proclaim the name of the Lord. Oh, praise the greatness of our God! He is the Rock, his works are perfect, and all his ways are just. A faithful God who does no wrong, upright and just is he. They are corrupt and not his children; to their shame they are a warped and crooked generation. Is this the way you repay the Lord, you foolish and unwise people? Is he not your Father, your Creator, who made you and formed you? Remember the days of old; consider the generations long past. Ask your father and he will tell you, your elders, and they will explain to you. When the Most High gave the nations their inheritance, when he divided all mankind, he set up boundaries for the peoples according to the number of the sons of Israel. For the Lord's portion is his people, Jacob his allotted inheritance. In a desert land he found him, in a barren and howling waste. He shielded him and cared for him; he guarded him as the apple of his eye, like an eagle that stirs up its nest and hovers over its young, that spreads its wings to catch them and carries them aloft. The Lord alone led him; no foreign god was with him. He made him ride on the heights of the land and fed him with the fruit of the fields. He nourished him with honey from the rock, and with oil from the flinty crag, with curds and milk from herd and flock and with fattened lambs and goats, with choice rams of Bashan and the finest kernels of wheat. You drank the foaming blood of the grape. Jeshurun grew fat and kicked; filled with food, they became heavy and sleek. They abandoned the God who made them and rejected the Rock their Savior. They made him jealous with their foreign gods and angered him with their detestable idols. They sacrificed to false gods, which are not God—gods they had not known, gods that recently appeared, gods your ancestors did not fear. You deserted the Rock, who fathered you; you forgot the God who gave you birth. The Lord saw this and rejected them because he was angered by his sons and daughters. \"I will hide my face from them,\" he said, \"and see what their end will be; for they are a perverse generation, children who are unfaithful. They made me jealous by what is no god and angered me with their worthless idols. I will make them jealous by those who are not a people; I will make them angry by a nation that has no understanding. For a fire will be kindled by my wrath, one that burns down to the realm of the dead below. It will devour the earth and its harvests and set afire the foundations of the mountains. I will heap calamities on them and spend my arrows against them. I will send wasting famine against them, consuming pestilence and deadly plague; I will send against them the fangs of wild beasts, the venom of vipers that glide in the dust. In the street the sword will make them childless; in their homes terror will reign. The young men and young women will perish, the infants and those with gray hair. I said I would scatter them and erase their name from human memory, but I dreaded the taunt of the enemy, lest the adversary misunderstand and say, \"Our hand has triumphed; the Lord has not done all this.\" They are a nation without sense, there is no discernment in them. If only they were wise and would understand this and discern what their end will be! How could one man chase a thousand, or two put ten thousand to flight, unless their Rock had sold them, unless the Lord had given them up? For their rock is not like our Rock, as even our enemies concede. Their vine comes from the vine of Sodom and from the fields of Gomorrah. Their grapes are filled with poison, and their clusters with bitterness. Their wine is the venom of serpents, the deadly poison of cobras. \"Have I not kept this in reserve and sealed it in my vaults? It is mine to avenge; I will repay. In due time their foot will slip; their day of disaster is near and their doom rushes upon them.\" The Lord will vindicate his people and relent concerning his servants when he sees their strength is gone and no one is left, slave or free. He will say: \"Now where are their gods, the rock they took refuge in, the gods who ate the fat of their sacrifices and drank the wine of their drink offerings? Let them rise up to help you! Let them give you shelter! See now that I myself am he! There is no god besides me. I put to death and I bring to life, I have wounded and I will heal, and no one can deliver out of my hand. I lift my hand to heaven and declare: As surely as I live forever, when I sharpen my flashing sword and my hand grasps it in judgment, I will take vengeance on my adversaries and repay those who hate me. I will make my arrows drunk with blood, while my sword devours flesh: the blood of the slain and the captives, the heads of the enemy leaders.\" Rejoice, you nations, with his people, for he will avenge the blood of his servants; he will take vengeance on his enemies and make atonement for his land and people.",
+                christConnection: "The Song of Moses reveals God's faithfulness despite human unfaithfulness. The song points forward to the Song of the Lamb in Revelation (<a href='https://www.biblegateway.com/passage/?search=Revelation%2015%3A3&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Revelation 15:3</a>), where both Moses and the Lamb are praised. Christ is the Rock who was rejected but who will ultimately vindicate His people. The song's themes of judgment and restoration find their ultimate fulfillment in Christ's work on the cross and His return."
+            },
+            {
+                name: "Moses' Death",
+                date: "c. 1406 BC",
+                scripture: "Deuteronomy 34:1-12",
+                intro: "Moses climbs Mount Nebo, where God shows him the Promised Land. Then Moses dies there, and God Himself buries him. No one knows where his grave is. Joshua succeeds him as leader of Israel.",
+                tagline: "The end of the lawgiver",
+                summary: "Then Moses climbed Mount Nebo from the plains of Moab to the top of Pisgah, across from Jericho. There the Lord showed him the whole land—from Gilead to Dan, all of Naphtali, the territory of Ephraim and Manasseh, all the land of Judah as far as the Mediterranean Sea, the Negev and the whole region from the Valley of Jericho, the City of Palms, as far as Zoar. Then the Lord said to him, 'This is the land I promised on oath to Abraham, Isaac and Jacob when I said, \"I will give it to your descendants.\" I have let you see it with your eyes, but you will not cross over into it.' And Moses the servant of the Lord died there in Moab, as the Lord had said. He buried him in Moab, in the valley opposite Beth Peor, but to this day no one knows where his grave is. Moses was a hundred and twenty years old when he died, yet his eyes were not weak nor his strength gone. The Israelites grieved for Moses in the plains of Moab thirty days, until the time of weeping and mourning was over. Now Joshua son of Nun was filled with the spirit of wisdom because Moses had laid his hands on him. So the Israelites listened to him and did what the Lord had commanded Moses. Since then, no prophet has risen in Israel like Moses, whom the Lord knew face to face, who did all those signs and wonders the Lord sent him to do in Egypt—to Pharaoh and to all his officials and to his whole land. For no one has ever shown the mighty power or performed the awesome deeds that Moses did in the sight of all Israel.",
+                christConnection: "Moses' death on Mount Nebo, seeing but not entering the Promised Land, illustrates that the Law cannot bring us into our inheritance. Moses represents the Law—it could guide and instruct, but it could not save. His death points to how the Law, though good and holy, could not bring us into our eternal inheritance. Only Jesus, our greater Joshua, can do that (<a href='https://www.biblegateway.com/passage/?search=Hebrews%203%3A1-6&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 3:1-6</a>). Christ is the greater Moses who leads us into the true Promised Land of eternal life."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "The Ten Commandments Repeated": "dive-in-ten-commandments.html",
+                    "The Shema": "dive-in-shema.html",
+                    "The Blessings and Curses": "dive-in-blessings-curses.html",
+                    "Joshua's Commissioning": "dive-in-joshua-commissioning.html",
+                    "The Song of Moses": "dive-in-song-moses.html",
+                    "Moses' Death": "dive-in-moses-death.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        renderTimeline();
+
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+
