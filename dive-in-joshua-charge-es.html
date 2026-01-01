@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: La Carga Final de Josué - Línea de Tiempo de Josué</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: La Carga Final de Josué</h1>
+            <p class="subtitle">Elige Este Día a Quién Servirás</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Elige a Quién Servirás</h2>
+            <p>En <a href="https://www.biblegateway.com/passage/?search=Josué%2024%3A1-33&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 24</a>, al final de su vida, Josué reúne a todo Israel y los desafía a elegir a quién servirán. Él relata la fidelidad de Dios a lo largo de su historia y los llama a permanecer fieles al Señor. La famosa declaración de Josué, "Yo y mi casa serviremos al Señor," se erige como un modelo de compromiso personal con Dios.</p>
+            
+            <div class="verse-callout">
+                Y si mal os parece servir a Jehová, escogeos hoy a quién sirváis; si a los dioses a quienes sirvieron vuestros padres, cuando estuvieron al otro lado del río, o a los dioses de los amorreos en cuya tierra habitáis; pero yo y mi casa serviremos a Jehová.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2024%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 24:15</a>
+                </span>
+            </div>
+
+            <p>El desafío de Josué de elegir a quién servir es un llamado a la decisión. No podemos servir tanto a Dios como al mundo—debemos elegir. El compromiso personal de Josué, "Yo y mi casa serviremos al Señor," muestra que cada persona debe hacer su propia elección de seguir a Dios. Esto apunta hacia adelante a cómo debemos elegir servir a Cristo, haciendo un compromiso personal de seguirle.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%206%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 6:24</a>
+                    <div class="ref-explanation">"Ninguno puede servir a dos señores," mostrando que debemos elegir, así como Josué llamó a Israel a elegir a quién servirían.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Reyes%2018%3A21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Reyes 18:21</a>
+                    <div class="ref-explanation">"¿Hasta cuándo claudicaréis vosotros entre dos pensamientos? Si Jehová es Dios, seguidle," mostrando que debemos elegir servir a Dios, así como Josué llamó a Israel a elegir.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Lucas%209%3A23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Lucas 9:23</a>
+                    <div class="ref-explanation">"Si alguno quiere venir en pos de Mí, niéguese a sí mismo, tome su cruz cada día, y sígame," mostrando que seguir a Cristo requiere una elección y compromiso, así como Josué llamó al compromiso con el Señor.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="choose">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Fidelidad de Dios Relatada</h2>
+            <p>Antes de llamar a Israel a elegir, Josué relata la fidelidad de Dios a lo largo de su historia. Les recuerda cómo Dios llamó a Abraham, los libró de Egipto, les dio victoria en batalla, y los trajo a la Tierra Prometida. Esta historia de la fidelidad de Dios sirve como fundamento para su compromiso de servirle.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Recuerda la Fidelidad de Dios</div>
+                <p>El relato de Josué sobre la fidelidad de Dios muestra que nuestro compromiso de servir a Dios se basa en Su fidelidad hacia nosotros. No servimos a Dios para ganar Su favor—le servimos porque Él ha sido fiel con nosotros. Su fidelidad en el pasado nos da confianza para comprometernos a servirle en el futuro.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2024%3A2-13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 24:2-13</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Y os di la tierra por la cual nada trabajasteis, las ciudades que no edificasteis, y en ellas habitáis; de las viñas y olivares que no plantasteis coméis.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2024%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 24:13</a>
+                </span>
+            </div>
+            
+            <p>El relato de Josué sobre la fidelidad de Dios recuerda a Israel todo lo que Dios ha hecho por ellos. Esta historia de fidelidad es la base de su compromiso de servirle. De la misma manera, nos comprometemos a servir a Cristo debido a Su fidelidad hacia nosotros—Él murió por nosotros, resucitó, y nos da vida eterna.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%20103%3A2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 103:2</a>
+                    <div class="ref-explanation">"Bendice, alma mía, a Jehová, y no olvides ninguno de Sus beneficios," mostrando que debemos recordar la fidelidad de Dios, así como Josué relató la fidelidad de Dios a Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Lamentaciones%203%3A22-23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Lamentaciones 3:22-23</a>
+                    <div class="ref-explanation">"Por la misericordia de Jehová no hemos sido consumidos, porque nunca decayeron Sus misericordias. Nuevas son cada mañana; grande es Tu fidelidad," mostrando que la fidelidad de Dios es constante, así como Josué relató.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%201%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 1:9</a>
+                    <div class="ref-explanation">"Fiel es Dios, por el cual fuisteis llamados a la comunión con Su Hijo Jesucristo nuestro Señor," mostrando que Dios es fiel, así como Josué relató Su fidelidad a Israel.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="faithfulness">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Llamado a la Fidelidad</h2>
+            <p>Josué llama a Israel a ser fieles al Señor, advirtiéndoles de las consecuencias de apartarse. Les recuerda que no pueden servir al Señor en su propia fuerza—necesitan la ayuda de Dios. Este llamado a la fidelidad apunta hacia adelante a cómo somos llamados a ser fieles a Cristo, no en nuestra propia fuerza, sino a través del poder del Espíritu Santo.</p>
+
+            <div class="verse-callout">
+                No podréis servir a Jehová, porque Él es Dios santo, y Él es Dios celoso; no sufrirá vuestras rebeliones ni vuestros pecados. Si dejareis a Jehová y sirviereis a dioses ajenos, Él se volverá y os hará mal, y os consumirá, después de haberos hecho bien.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2024%3A19-20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 24:19-20</a>
+                </span>
+            </div>
+
+            <p>La advertencia de Josué muestra que servir al Señor es un asunto serio. Dios es santo y celoso, y Él no tolerará la infidelidad. Pero la advertencia de Josué también apunta a nuestra necesidad de gracia—no podemos servir al Señor en nuestra propia fuerza. Necesitamos el Espíritu Santo para capacitarnos a ser fieles, así como necesitamos a Cristo para salvarnos.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2010%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 10:12</a>
+                    <div class="ref-explanation">"Así que, el que piensa estar firme, mire que no caiga," mostrando que debemos tener cuidado de permanecer fieles, así como Josué advirtió a Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%203%3A12-13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 3:12-13</a>
+                    <div class="ref-explanation">"Mirad, hermanos, que no haya en ninguno de vosotros corazón malo de incredulidad para apartarse del Dios vivo," mostrando que debemos guardarnos contra la infidelidad, así como Josué advirtió.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%202%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 2:10</a>
+                    <div class="ref-explanation">"Sé fiel hasta la muerte, y Yo te daré la corona de la vida," mostrando que somos llamados a ser fieles, así como Josué llamó a Israel a ser fieles.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="call">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Cristo Nuestra Elección</h2>
+            <p>El desafío de Josué de elegir a quién servir apunta hacia adelante a cómo debemos elegir servir a Cristo. Así como Josué llamó a Israel a elegir entre el Señor y otros dioses, debemos elegir entre Cristo y el mundo. La declaración de Josué, "Yo y mi casa serviremos al Señor," apunta a cómo cada persona debe hacer su propia elección de seguir a Cristo.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">No Hay Terreno Neutral</div>
+                <p>No hay terreno neutral—debemos elegir. No podemos servir tanto a Dios como al mundo. El desafío de Josué muestra que servir a Dios requiere una elección y compromiso deliberados. De la misma manera, seguir a Cristo requiere una elección deliberada de negarnos a nosotros mismos, tomar nuestra cruz, y seguirle.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2012%3A30&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 12:30</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                El que no está conmigo, contra Mí es; y el que conmigo no recoge, desparrama.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2012%3A30&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 12:30</a>
+                </span>
+            </div>
+
+            <p>Así como Josué llamó a Israel a elegir, Cristo nos llama a elegir. No hay término medio—estamos con Él o contra Él. El desafío de Josué de elegir a quién servir apunta hacia adelante a cómo debemos elegir servir a Cristo, haciendo un compromiso personal de seguirle, así como Josué hizo su compromiso personal de servir al Señor.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2014%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 14:6</a>
+                    <div class="ref-explanation">"Yo soy el camino, y la verdad, y la vida; nadie viene al Padre, sino por Mí," mostrando que debemos elegir a Cristo, así como Josué llamó a Israel a elegir al Señor.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hechos%204%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hechos 4:12</a>
+                    <div class="ref-explanation">"Y en ningún otro hay salvación; porque no hay otro nombre bajo el cielo, dado a los hombres, en que podamos ser salvos," mostrando que debemos elegir a Cristo, el único camino de salvación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%203%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 3:20</a>
+                    <div class="ref-explanation">"He aquí, Yo estoy a la puerta y llamo; si alguno oye Mi voz y abre la puerta, entraré a él," mostrando que debemos elegir abrir la puerta a Cristo, así como Josué llamó a Israel a elegir servir al Señor.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="christ">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Sirviendo a Cristo</h2>
+            <p>La carga final de Josué a Israel los llama a elegir a quién servirán. Él relata la fidelidad de Dios y los desafía a permanecer fieles al Señor. El compromiso personal de Josué, "Yo y mi casa serviremos al Señor," se erige como un modelo para todos los que seguirían a Dios.</p>
+
+            <p>El desafío de Josué apunta hacia adelante a cómo debemos elegir servir a Cristo. Así como Josué llamó a Israel a elegir entre el Señor y otros dioses, debemos elegir entre Cristo y el mundo. No hay terreno neutral—debemos tomar una decisión. La declaración de Josué muestra que cada persona debe hacer su propia elección de seguir a Cristo, comprometiéndose a sí mismos y a sus hogares a servirle. La elección que Josué presentó a Israel es la misma elección que enfrentamos hoy: ¿serviremos al Señor, o serviremos a los dioses de este mundo?</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Deuteronomio%2030%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Deuteronomio 30:19</a>
+                    <div class="ref-explanation">"A los cielos y a la tierra llamo por testigos hoy contra vosotros, que os he puesto delante la vida y la muerte, la bendición y la maldición; escoge, pues, la vida," mostrando que debemos elegir, así como Josué llamó a Israel a elegir.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%203%3A36&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 3:36</a>
+                    <div class="ref-explanation">"El que cree en el Hijo tiene vida eterna; pero el que rehúsa creer en el Hijo no verá la vida," mostrando que debemos elegir creer en Cristo, así como Josué llamó a Israel a elegir servir al Señor.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%2010%3A9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 10:9</a>
+                    <div class="ref-explanation">"Si confesares con tu boca que Jesús es el Señor, y creyeres en tu corazón que Dios le levantó de los muertos, serás salvo," mostrando que debemos elegir confesar y creer en Cristo, así como Josué llamó a Israel a elegir servir al Señor.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Spanish voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+            return spanishVoice || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

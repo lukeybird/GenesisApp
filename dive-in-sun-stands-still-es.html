@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: El Sol se Detiene - Línea de Tiempo de Josué</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: El Sol se Detiene</h1>
+            <p class="subtitle">Dios Pelea por Su Pueblo</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">El Poder de Dios Sobre la Creación</h2>
+            <p>En <a href="https://www.biblegateway.com/passage/?search=Josué%2010%3A1-15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 10</a>, durante la batalla contra los reyes amorreos, Josué ora y el sol se detiene, dando a Israel tiempo para completar la victoria. Este milagro demuestra el poder absoluto de Dios sobre la creación—Él controla el sol, la luna, y toda la naturaleza. El sol deteniéndose muestra que Dios no está limitado por las leyes naturales; Él es el Creador y Señor de toda la creación.</p>
+            
+            <div class="verse-callout">
+                Entonces Josué habló a Jehová el día en que Jehová entregó al amorreo delante de los hijos de Israel, y dijo en presencia de los israelitas: "Sol, detente en Gabaón; y tú, luna, en el valle de Ajalón." Y el sol se detuvo y la luna se paró, hasta que la gente se vengó de sus enemigos. ¿No está escrito esto en el libro de Jaser? Y el sol se paró en medio del cielo, y no se apresuró a ponerse casi un día entero.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2010%3A12-13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 10:12-13</a>
+                </span>
+            </div>
+
+            <p>El sol deteniéndose demuestra que Dios tiene autoridad absoluta sobre Su creación. Él creó el sol, la luna, y las estrellas, y los controla según Su voluntad. Este milagro muestra que nada es imposible para Dios, y que Él hará lo que sea necesario para cumplir Sus promesas y dar victoria a Su pueblo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Jeremías%2032%3A27&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Jeremías 32:27</a>
+                    <div class="ref-explanation">"He aquí que Yo soy Jehová, Dios de toda carne; ¿habrá algo que sea difícil para Mí?" mostrando que nada es imposible para Dios, quien controla toda la creación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%20135%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 135:6</a>
+                    <div class="ref-explanation">"Todo lo que Jehová quiere, lo hace, en los cielos y en la tierra, en los mares y en todos los abismos," mostrando que Dios tiene control completo sobre toda la creación.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2019%3A26&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 19:26</a>
+                    <div class="ref-explanation">"Para los hombres esto es imposible; mas para Dios todo es posible," mostrando que Dios puede hacer lo imposible, así como hizo que el sol se detuviera.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="power">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Dios Pelea por Su Pueblo</h2>
+            <p>El sol deteniéndose muestra que Dios pelea activamente por Su pueblo. Él no solo observa desde la distancia—Él interviene en la historia para dar victoria a Su pueblo. El Señor peleó por Israel en Gabaón, usando piedras de granizo y extendiendo el día para asegurar la victoria completa. Esto demuestra que Dios está comprometido con Su pueblo y hará lo que sea necesario para cumplir Sus promesas.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">El Señor de los Ejércitos</div>
+                <p>Dios es llamado "el Señor de los ejércitos" porque Él comanda todos los ejércitos del cielo y de la tierra. El sol deteniéndose muestra que Dios usa toda la creación para pelear por Su pueblo. Él no es un observador pasivo sino un guerrero activo que pelea por aquellos que confían en Él.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2010%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 10:14</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Y no hubo día como aquel, ni antes ni después de él, habiendo atendido Jehová a la voz de un hombre; porque Jehová peleaba por Israel.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2010%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 10:14</a>
+                </span>
+            </div>
+            
+            <p>Dios peleó por Israel, mostrando que Él está activamente involucrado en las batallas de Su pueblo. El Señor de los ejércitos comanda toda la creación para trabajar para el bien de aquellos que confían en Él. Esto apunta hacia adelante a cómo Dios pelea por nosotros a través de Cristo, asegurando nuestra victoria sobre el pecado y la muerte.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Éxodo%2014%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Éxodo 14:14</a>
+                    <div class="ref-explanation">"Jehová peleará por vosotros, y vosotros estaréis tranquilos," mostrando que Dios pelea por Su pueblo, así como lo hizo en Gabaón.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Deuteronomio%203%3A22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Deuteronomio 3:22</a>
+                    <div class="ref-explanation">"No los temáis; porque Jehová vuestro Dios, Él es el que pelea por vosotros," mostrando que Dios es quien pelea por Su pueblo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%2024%3A8&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 24:8</a>
+                    <div class="ref-explanation">"¿Quién es este Rey de gloria? Jehová el fuerte y valiente, Jehová el poderoso en batalla," mostrando que Dios es un guerrero que pelea por Su pueblo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="fights">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Señor de los Ejércitos</h2>
+            <p>Dios es llamado "el Señor de los ejércitos" porque Él comanda todos los ejércitos del cielo y de la tierra. El sol, la luna, las estrellas, y toda la creación están bajo Su mando. Cuando Josué oró, Dios ordenó al sol que se detuviera, mostrando que toda la creación obedece Su voz. Esto demuestra que Dios tiene autoridad absoluta sobre todo lo que Él ha hecho.</p>
+
+            <div class="verse-callout">
+                Porque tu marido es tu Hacedor; Jehová de los ejércitos es Su nombre; y tu Redentor, el Santo de Israel; Dios de toda la tierra será llamado.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaías%2054%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Isaías 54:5</a>
+                </span>
+            </div>
+
+            <p>El título "Señor de los ejércitos" significa que Dios comanda todos los ejércitos del cielo—los ángeles, las estrellas, y toda la creación. El sol deteniéndose muestra que incluso los cuerpos celestiales obedecen el mandato de Dios. Esto demuestra que Dios es soberano sobre todas las cosas y que nada sucede fuera de Su control.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%20103%3A20-21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 103:20-21</a>
+                    <div class="ref-explanation">"Bendecid a Jehová, vosotros Sus ángeles, poderosos en fortaleza, que ejecutáis Su palabra, obedeciendo a la voz de Su precepto. Bendecid a Jehová, vosotros todos Sus ejércitos," mostrando que todos los ejércitos del cielo obedecen el mandato de Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Isaías%2040%3A26&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Isaías 40:26</a>
+                    <div class="ref-explanation">"Alzad en alto vuestros ojos, y mirad quién creó estas cosas; Él saca y cuenta Su ejército," mostrando que Dios creó y comanda todos los ejércitos del cielo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Nehemías%209%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Nehemías 9:6</a>
+                    <div class="ref-explanation">"Tú solo eres Jehová; Tú hiciste los cielos, y los cielos de los cielos, con todo su ejército," mostrando que Dios creó y comanda todos los ejércitos del cielo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="hosts">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Autoridad de Cristo Sobre Todo</h2>
+            <p>El sol deteniéndose apunta hacia adelante a la autoridad de Cristo sobre toda la creación. Así como Dios ordenó al sol que se detuviera, Cristo tiene autoridad sobre todas las cosas en el cielo y en la tierra. Él calmó la tormenta, caminó sobre el agua, y un día creará un nuevo cielo y una nueva tierra. La autoridad de Cristo demuestra que Él es Dios, el Creador y Señor de todo.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Toda Autoridad en el Cielo y en la Tierra</div>
+                <p>Cristo tiene toda autoridad en el cielo y en la tierra. Así como Dios ordenó al sol que se detuviera, Cristo comanda toda la creación. Él es aquel por quien todas las cosas fueron creadas, y Él es aquel que sostiene todas las cosas por Su poder. Su autoridad sobre la creación demuestra Su deidad.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2028%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 28:18</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Y Jesús se acercó y les habló diciendo: "Toda potestad Me es dada en el cielo y en la tierra."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2028%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 28:18</a>
+                </span>
+            </div>
+
+            <p>Cristo tiene toda autoridad, así como Dios tiene toda autoridad. El sol deteniéndose muestra la autoridad de Dios sobre la creación, y los milagros de Cristo muestran Su autoridad sobre la creación. Él es el mismo Dios que hizo que el sol se detuviera, y Él tiene toda autoridad para obrar en favor de Su pueblo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A16-17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 1:16-17</a>
+                    <div class="ref-explanation">"Porque en Él fueron creadas todas las cosas... y todas las cosas en Él subsisten," mostrando que Cristo tiene autoridad sobre toda la creación, así como Dios ordenó al sol que se detuviera.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Marcos%204%3A39&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Marcos 4:39</a>
+                    <div class="ref-explanation">"Y levantándose, reprendió al viento, y dijo al mar: '¡Calla, enmudece!'" mostrando que Cristo tiene autoridad sobre la creación, así como Dios ordenó al sol que se detuviera.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%201%3A3&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 1:3</a>
+                    <div class="ref-explanation">"El cual, siendo el resplandor de Su gloria, y la imagen misma de Su sustancia, y quien sustenta todas las cosas con la palabra de Su poder," mostrando que Cristo sostiene toda la creación por Su poder.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="authority">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Victoria a Través del Poder de Dios</h2>
+            <p>El sol deteniéndose demuestra el poder absoluto de Dios sobre la creación y Su compromiso de dar victoria a Su pueblo. Dios peleó por Israel, usando toda la creación para asegurar su victoria. Este milagro muestra que nada es imposible para Dios y que Él hará lo que sea necesario para cumplir Sus promesas.</p>
+
+            <p>El sol deteniéndose apunta hacia adelante a Cristo, quien tiene toda autoridad en el cielo y en la tierra. Así como Dios ordenó al sol que se detuviera, Cristo comanda toda la creación. Él pelea por Su pueblo, asegurando la victoria sobre el pecado y la muerte. El milagro en Gabaón finalmente apunta a cómo Dios pelea por nosotros a través de Cristo, dándonos victoria sobre todos nuestros enemigos.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A37&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:37</a>
+                    <div class="ref-explanation">"Antes, en todas estas cosas somos más que vencedores por medio de aquel que nos amó," mostrando que a través de Cristo, tenemos victoria, así como Israel tuvo victoria en Gabaón a través del poder de Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2015%3A57&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 15:57</a>
+                    <div class="ref-explanation">"Gracias sean dadas a Dios, que nos da la victoria por medio de nuestro Señor Jesucristo," mostrando que la victoria viene de Dios a través de Cristo, así como la victoria en Gabaón vino de Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%206%3A10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 6:10</a>
+                    <div class="ref-explanation">"Por lo demás, hermanos míos, fortaleceos en el Señor, y en el poder de Su fuerza," mostrando que nuestra fuerza viene del poder de Dios, así como la victoria de Israel vino del poder de Dios en Gabaón.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Spanish voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+            return spanishVoice || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

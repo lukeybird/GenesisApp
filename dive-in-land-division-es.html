@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: División de la Tierra - Línea de Tiempo de Josué</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: División de la Tierra</h1>
+            <p class="subtitle">Cada Tribu Recibe Su Herencia</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Cada Tribu Recibe Su Herencia</h2>
+            <p>En <a href="https://www.biblegateway.com/passage/?search=Josué%2013%3A1-21%3A45&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 13-21</a>, después de la conquista, Josué divide la Tierra Prometida entre las doce tribus de Israel. Cada tribu recibe su porción por suerte, mostrando que la división es según la voluntad de Dios, no la preferencia humana. Esto cumple la promesa de Dios a Abraham de que sus descendientes heredarían la tierra de Canaán.</p>
+            
+            <div class="verse-callout">
+                Estas son las heredades que los hijos de Israel tomaron en la tierra de Canaán, las cuales les repartieron el sacerdote Eleazar, Josué hijo de Nun, y los jefes de los padres de las tribus de los hijos de Israel. Su heredad fue por suerte, como Jehová lo había mandado por medio de Moisés, para las nueve tribus y la media tribu.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2014%3A1-2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 14:1-2</a>
+                </span>
+            </div>
+
+            <p>La división de la tierra por suerte muestra que Dios determina la herencia de cada tribu. Esto demuestra que Dios es fiel a Sus promesas—Él prometió la tierra a Abraham, y se la dio a sus descendientes. Cada tribu recibió su porción, asegurando que todo Israel tuviera un lugar en la Tierra Prometida.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Génesis%2015%3A18&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Génesis 15:18</a>
+                    <div class="ref-explanation">"En aquel día hizo Jehová un pacto con Abram, diciendo: 'A tu descendencia daré esta tierra,'" mostrando que Dios prometió la tierra a Abraham, lo cual se cumplió en la división de la tierra.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%20105%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 105:11</a>
+                    <div class="ref-explanation">"Diciendo: 'A ti daré la tierra de Canaán como parte de tu heredad,'" mostrando que la tierra fue el regalo de Dios a Israel, cumplido en la división.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hechos%2017%3A26&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hechos 17:26</a>
+                    <div class="ref-explanation">"Y de una sangre ha hecho todo el linaje de los hombres, para que habiten sobre toda la faz de la tierra; y les ha prefijado el orden de los tiempos, y los límites de su habitación," mostrando que Dios determina los límites, así como determinó la herencia de cada tribu.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="inheritance">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Fidelidad de Dios a las Promesas</h2>
+            <p>La división de la tierra cumple la promesa de Dios a Abraham de que sus descendientes heredarían la tierra de Canaán. Dios hizo esta promesa siglos antes, y ahora la cumple completamente. Cada tribu recibe su herencia, mostrando que Dios es fiel para cumplir Sus promesas, sin importar cuánto tiempo tome.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Dios Cumple Su Palabra</div>
+                <p>Dios prometió la tierra a Abraham, y cumplió esa promesa. La división de la tierra muestra que Dios es fiel a Su palabra. Él no olvida Sus promesas ni deja de cumplirlas. Esto apunta hacia adelante a cómo Dios es fiel a todas Sus promesas en Cristo.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2021%3A43-45&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 21:43-45</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                De esta manera dio Jehová a Israel toda la tierra que había jurado dar a sus padres; y la poseyeron y habitaron en ella. Y Jehová les dio reposo alrededor, conforme a todo lo que había jurado a sus padres; y ninguno de todos sus enemigos pudo hacerles frente; Jehová entregó en sus manos a todos sus enemigos. No faltó palabra de todas las buenas promesas que Jehová había hecho a la casa de Israel; todo se cumplió.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2021%3A43-45&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 21:43-45</a>
+                </span>
+            </div>
+            
+            <p>La fidelidad de Dios al dar a Israel la tierra apunta hacia adelante a Su fidelidad al darnos nuestra herencia en Cristo. Así como Dios cumplió Su promesa de dar a Israel la tierra, Él cumple Su promesa de darnos vida eterna. Toda promesa que Dios ha hecho se cumplirá, así como la promesa de la tierra se cumplió.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corintios%201%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corintios 1:20</a>
+                    <div class="ref-explanation">"Porque todas las promesas de Dios son en Él Sí, y en Él Amén," mostrando que todas las promesas de Dios se cumplen en Cristo, así como la promesa de la tierra se cumplió.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%2010%3A23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 10:23</a>
+                    <div class="ref-explanation">"Mantengamos firme, sin fluctuar, la profesión de nuestra esperanza, porque fiel es el que prometió," mostrando que Dios es fiel para cumplir Sus promesas, así como cumplió Su promesa de la tierra.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Números%2023%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Números 23:19</a>
+                    <div class="ref-explanation">"Dios no es hombre, para que mienta, ni hijo de hombre para que se arrepienta. Él dijo, ¿y no hará? Habló, ¿y no lo ejecutará?" mostrando que Dios siempre cumple Su palabra.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="faithfulness">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Herencia Especial de los Levitas</h2>
+            <p>Los levitas no recibieron una herencia de tierra como las otras tribus. En cambio, el Señor mismo era su herencia. Recibieron ciudades para vivir, pero no tierra para cultivar o pastorear. Esto muestra que su servicio a Dios era su herencia, apuntando hacia adelante a cómo nuestra verdadera herencia no es terrenal sino celestial—es Cristo mismo.</p>
+
+            <div class="verse-callout">
+                Mas a la tribu de Leví no dio Moisés heredad; Jehová Dios de Israel es la heredad de ellos, como Él les había dicho.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%2013%3A33&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 13:33</a>
+                </span>
+            </div>
+
+            <p>Que la herencia de los levitas sea el Señor mismo apunta hacia adelante a cómo Cristo es nuestra verdadera herencia. Así como los levitas no tenían herencia de tierra pero tenían al Señor, nosotros tenemos a Cristo, que es mejor que cualquier posesión terrenal. Nuestra herencia no está en este mundo sino en el mundo venidero, y es Cristo mismo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%2016%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 16:5</a>
+                    <div class="ref-explanation">"Jehová es la porción de mi herencia y de mi copa," mostrando que el Señor es nuestra herencia, así como Él era la herencia de los levitas.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Lamentaciones%203%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Lamentaciones 3:24</a>
+                    <div class="ref-explanation">"'Jehová es mi porción,' dice mi alma; 'por tanto, en Él esperaré,'" mostrando que el Señor es nuestra porción, así como Él era la porción de los levitas.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%203%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 3:24</a>
+                    <div class="ref-explanation">"Sabiendo que del Señor recibiréis la recompensa de la herencia, porque a Cristo el Señor servís," mostrando que nuestra herencia viene del Señor, así como la herencia de los levitas era el Señor.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="levites">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Nuestra Herencia en Cristo</h2>
+            <p>La división de la tierra apunta hacia adelante a cómo todos los creyentes en Cristo reciben una herencia en el reino de Dios. Así como cada tribu recibió su porción de la Tierra Prometida, cada uno de nosotros recibe nuestra herencia en Cristo. Pero nuestra herencia no es terrenal—es eterna, incorruptible, y reservada en el cielo para nosotros.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Una Herencia Eterna</div>
+                <p>Nuestra herencia en Cristo no es como la tierra física que Israel recibió. Es eterna, incorruptible, y no puede desvanecerse. Está reservada en el cielo para nosotros, y es Cristo mismo. Así como los levitas tenían al Señor como su herencia, nosotros tenemos a Cristo como nuestra herencia.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%201%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Pedro 1:4</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Para una herencia incorruptible, incontaminada e inmarcesible, reservada en los cielos para vosotros.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%201%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Pedro 1:4</a>
+                </span>
+            </div>
+
+            <p>Nuestra herencia en Cristo es mucho mayor que la tierra física que Israel recibió. Es eterna, incorruptible, y no puede ser quitada. Es Cristo mismo, quien es nuestra porción y nuestra herencia. Así como cada tribu recibió su porción de la tierra, nosotros recibimos nuestra porción en Cristo, que es mucho mejor que cualquier herencia terrenal.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 1:11</a>
+                    <div class="ref-explanation">"En Él asimismo tuvimos herencia," mostrando que en Cristo, recibimos nuestra herencia, así como Israel recibió la Tierra Prometida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 1:12</a>
+                    <div class="ref-explanation">"Con gozo dando gracias al Padre que nos hizo aptos para participar de la herencia de los santos en luz," mostrando que compartimos en la herencia de los santos, así como cada tribu compartió en la tierra.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%209%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 9:15</a>
+                    <div class="ref-explanation">"Para que los llamados reciban la promesa de la herencia eterna," mostrando que recibimos una herencia eterna, a diferencia de la tierra temporal que Israel recibió.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="christ">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Herencia Eterna en Cristo</h2>
+            <p>La división de la tierra cumplió la promesa de Dios a Abraham de que sus descendientes heredarían la tierra de Canaán. Cada tribu recibió su porción, mostrando que Dios es fiel para cumplir Sus promesas. Que la herencia de los levitas sea el Señor mismo apunta hacia adelante a cómo Cristo es nuestra verdadera herencia.</p>
+
+            <p>Nuestra herencia en Cristo es mucho mayor que la tierra física que Israel recibió. Es eterna, incorruptible, y no puede desvanecerse. Es Cristo mismo, quien es nuestra porción y nuestra herencia. Así como cada tribu recibió su porción de la tierra, nosotros recibimos nuestra porción en Cristo, que es mucho mejor que cualquier herencia terrenal. La división de la tierra finalmente apunta a cómo recibimos nuestra herencia eterna en Cristo, nuestro mayor Josué que nos guía al reino de Dios.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A17&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:17</a>
+                    <div class="ref-explanation">"Y si hijos, también herederos; herederos de Dios y coherederos con Cristo," mostrando que somos herederos con Cristo, recibiendo nuestra herencia a través de Él.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%203%3A29&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 3:29</a>
+                    <div class="ref-explanation">"Y si vosotros sois de Cristo, ciertamente linaje de Abraham sois, y herederos según la promesa," mostrando que somos herederos de la promesa, así como Israel era heredero de la tierra.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Tito%203%3A7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Tito 3:7</a>
+                    <div class="ref-explanation">"Para que justificados por Su gracia, viniésemos a ser herederos conforme a la esperanza de la vida eterna," mostrando que somos herederos de la vida eterna, nuestra verdadera herencia en Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Spanish voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+            return spanishVoice || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

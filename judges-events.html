@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Judges Timeline - Major Events</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .christ-connection {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .christ-connection {
+            max-height: 500px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+            opacity: 1;
+        }
+
+        .christ-connection-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .christ-connection-text {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .christ-connection-text .scripture-link {
+            color: #88d0ff;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dive-in-btn {
+            display: none;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.3), rgba(0, 200, 255, 0.2));
+            border: 1px solid rgba(0, 180, 255, 0.6);
+            color: #88d0ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 15px rgba(0, 180, 255, 0.3),
+                inset 0 0 10px rgba(0, 200, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .timeline-content.expanded .dive-in-btn {
+            display: inline-block;
+        }
+
+        .dive-in-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .dive-in-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .dive-in-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.4), rgba(0, 200, 255, 0.3));
+            border-color: rgba(0, 180, 255, 0.9);
+            box-shadow: 
+                0 0 25px rgba(0, 180, 255, 0.5),
+                inset 0 0 20px rgba(0, 200, 255, 0.2);
+            transform: translateY(-2px);
+            color: #66d9ff;
+        }
+
+        .dive-in-btn:hover::after {
+            left: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button-container .audio-btn {
+            margin-top: 0;
+        }
+
+        .button-container .dive-in-btn {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>📖 Judges Events</h1>
+            <p class="subtitle">Major Events in the Period of the Judges</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in Judges
+        const mainEvents = [
+            {
+                name: "The Cycle Begins",
+                date: "c. 1375 BC",
+                scripture: "Judges 2:6-3:6",
+                intro: "After Joshua's death, Israel enters a cycle of sin, oppression, crying out, and deliverance. This pattern repeats throughout the book of Judges, demonstrating humanity's need for a permanent deliverer.",
+                tagline: "The cycle of sin and deliverance",
+                summary: "After Joshua had dismissed the Israelites, they went to take possession of the land, each to their own inheritance. The people served the Lord throughout the lifetime of Joshua and of the elders who outlived him and who had seen all the great things the Lord had done for Israel. Joshua son of Nun, the servant of the Lord, died at the age of a hundred and ten. And they buried him in the land of his inheritance, at Timnath Heres in the hill country of Ephraim, north of Mount Gaash. After that whole generation had been gathered to their ancestors, another generation grew up who knew neither the Lord nor what he had done for Israel. Then the Israelites did evil in the eyes of the Lord and served the Baals. They forsook the Lord, the God of their ancestors, who had brought them out of Egypt. They followed and worshiped various gods of the peoples around them. They aroused the Lord's anger because they forsook him and served Baal and the Ashtoreths. In his anger against Israel the Lord gave them into the hands of raiders who plundered them. He sold them into the hands of their enemies all around, whom they were no longer able to resist. Whenever Israel went out to fight, the hand of the Lord was against them to defeat them, just as he had sworn to them. They were in great distress. Then the Lord raised up judges, who saved them out of the hands of these raiders. Yet they would not listen to their judges but prostituted themselves to other gods and worshiped them. They quickly turned from the ways of their ancestors, who had been obedient to the Lord's commands. Whenever the Lord raised up a judge for them, he was with the judge and saved them out of the hands of their enemies as long as the judge lived; for the Lord relented because of their groaning under those who oppressed and afflicted them. But when the judge died, the people returned to ways even more corrupt than those of their ancestors, following other gods and serving and worshiping them. They refused to give up their evil practices and stubborn ways. Therefore the Lord was very angry with Israel and said, 'Because this nation has violated the covenant I ordained for their ancestors and has not listened to me, I will no longer drive out before them any of the nations Joshua left when he died. I will use them to test Israel and see whether they will keep the way of the Lord and walk in it as their ancestors did.' The Lord had allowed those nations to remain; he did not drive them out at once by giving them into the hands of Joshua. These are the nations the Lord left to test all those Israelites who had not experienced any of the wars in Canaan (he did this only to teach warfare to the descendants of the Israelites who had not had previous battle experience): the five rulers of the Philistines, all the Canaanites, the Sidonians, and the Hivites living in the Lebanon mountains from Mount Baal Hermon to Lebo Hamath. They were left to test the Israelites to see whether they would obey the Lord's commands, which he had given their ancestors through Moses. The Israelites lived among the Canaanites, Hittites, Amorites, Perizzites, Hivites and Jebusites. They took their daughters in marriage and gave their own daughters to their sons, and served their gods.",
+                christConnection: "The cycle of Judges demonstrates humanity's inability to save itself and the need for a permanent deliverer. The temporary deliverance of the judges points forward to Christ, who delivers us permanently from sin and death (<a href='https://www.biblegateway.com/passage/?search=Hebrews%207%3A25&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 7:25</a>). Just as the judges saved Israel temporarily, Christ saves us eternally."
+            },
+            {
+                name: "Gideon's Victory with 300 Men",
+                date: "c. 1150 BC",
+                scripture: "Judges 7:1-25",
+                intro: "Gideon defeats the vast Midianite army with only 300 men, demonstrating that victory comes from the Lord, not human strength. God reduces Gideon's army to show that He alone gives victory.",
+                tagline: "Victory through God's strength, not ours",
+                summary: "Early in the morning Joshua and all the Israelites set out from Shittim and went to the Jordan, where they camped before crossing over. After three days the officers went throughout the camp, giving orders to the people: 'When you see the ark of the covenant of the Lord your God, and the Levitical priests carrying it, you are to move out from your positions and follow it. Then you will know which way to go, since you have never been this way before. But keep a distance of about two thousand cubits between you and the ark; do not go near it.' Joshua told the people, 'Consecrate yourselves, for tomorrow the Lord will do amazing things among you.' Joshua said to the priests, 'Take up the ark of the covenant and pass on ahead of the people.' So they took it up and went ahead of them. And the Lord said to Joshua, 'Today I will begin to exalt you in the eyes of all Israel, so they may know that I am with you as I was with Moses. Tell the priests who carry the ark of the covenant: \"When you reach the edge of the Jordan's waters, go and stand in the river.\"' Joshua said to the Israelites, 'Come here and listen to the words of the Lord your God. This is how you will know that the living God is among you and that he will certainly drive out before you the Canaanites, Hittites, Hivites, Perizzites, Girgashites, Amorites and Jebusites. See, the ark of the covenant of the Lord of all the earth will go into the Jordan ahead of you. Now then, choose twelve men from the tribes of Israel, one from each tribe. And as soon as the priests who carry the ark of the Lord—the Lord of all the earth—set foot in the Jordan, its waters flowing downstream will be cut off and stand up in a heap.' So when the people broke camp to cross the Jordan, the priests carrying the ark of the covenant went ahead of them. Now the Jordan is in flood all during harvest. Yet as soon as the priests who carried the ark reached the Jordan and their feet touched the water's edge, the water from upstream stopped flowing. It piled up in a heap a great distance away, at a town called Adam in the vicinity of Zarethan, while the water flowing down to the Sea of the Arabah (that is, the Dead Sea) was completely cut off. So the people crossed over opposite Jericho. The priests who carried the ark of the covenant of the Lord stopped in the middle of the Jordan and stood on dry ground, while all Israel passed by until the whole nation had completed the crossing on dry ground. When the whole nation had finished crossing the Jordan, the Lord said to Joshua, 'Choose twelve men from among the people, one from each tribe, and tell them to take up twelve stones from the middle of the Jordan, from where the priests are standing, and carry them over with you and put them down at the place where you stay tonight.' So Joshua called together the twelve men he had appointed from the Israelites, one from each tribe, and said to them, 'Go over before the ark of the Lord your God into the middle of the Jordan. Each of you is to take up a stone on his shoulder, according to the number of the tribes of the Israelites, to serve as a sign among you. In the future, when your children ask you, \"What do these stones mean?\" tell them that the flow of the Jordan was cut off before the ark of the covenant of the Lord. When it crossed the Jordan, the waters of the Jordan were cut off. These stones are to be a memorial to the people of Israel forever.' The Israelites did as Joshua commanded them. They took twelve stones from the middle of the Jordan, according to the number of the tribes of the Israelites, as the Lord had told Joshua; and they carried them over with them to their camp, where they put them down. Joshua set up the twelve stones that had been in the middle of the Jordan at the spot where the priests who carried the ark of the covenant had stood. And they are there to this day. The priests who carried the ark remained standing in the middle of the Jordan until everything the Lord had commanded Joshua was done by the people, just as Moses had directed Joshua. The people hurried over, and as soon as all of them had crossed, the ark of the Lord and the priests came to the other side while the people watched. The men of Reuben, Gad and the half-tribe of Manasseh crossed over, ready for battle, in front of the Israelites, as Moses had directed them. About forty thousand armed for battle crossed over before the Lord to the plains of Jericho for war. That day the Lord exalted Joshua in the sight of all Israel; and for the rest of his life they held him in high regard, just as they had held Moses in high regard. The Lord said to Joshua, 'Command the priests carrying the ark of the covenant to come up out of the Jordan.' So Joshua commanded the priests, 'Come up out of the Jordan.' And the priests came up out of the river carrying the ark of the covenant of the Lord. No sooner had they set their feet on the dry ground than the waters of the Jordan returned to their place and ran at flood stage as before. On the tenth day of the first month the people went up from the Jordan and camped at Gilgal on the eastern border of Jericho. And Joshua set up at Gilgal the twelve stones they had taken out of the Jordan. He said to the Israelites, 'In the future when your descendants ask their parents, \"What do these stones mean?\" tell them, \"Israel crossed the Jordan on dry ground.\" For the Lord your God dried up the Jordan before you until you had crossed over. The Lord your God did to the Jordan what he had done to the Red Sea when he dried it up before us until we had crossed over. He did this so that all the peoples of the earth might know that the hand of the Lord is powerful and so that you might always fear the Lord your God.'",
+                christConnection: "The crossing of the Jordan points forward to baptism, where we pass through the waters of death into new life in Christ (<a href='https://www.biblegateway.com/passage/?search=Romans%206%3A3-4&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Romans 6:3-4</a>). Just as Israel crossed into the Promised Land, we cross into the kingdom of God through faith in Christ. The ark going before them points to Christ, who goes before us into our inheritance."
+            },
+            {
+                name: "The Fall of Jericho",
+                date: "c. 1406 BC",
+                scripture: "Joshua 6:1-27",
+                intro: "Joshua leads Israel in the conquest of Jericho through a miraculous battle plan. The walls fall down after the people march around the city for seven days, demonstrating that victory comes from the Lord.",
+                tagline: "Walls fall by faith",
+                summary: "Now the gates of Jericho were securely barred because of the Israelites. No one went out and no one came in. Then the Lord said to Joshua, 'See, I have delivered Jericho into your hands, along with its king and its fighting men. March around the city once with all the armed men. Do this for six days. Have seven priests carry trumpets of rams' horns in front of the ark. On the seventh day, march around the city seven times, with the priests blowing the trumpets. When you hear them sound a long blast on the trumpets, have the whole army give a loud shout; then the wall of the city will collapse and the army will go up, everyone straight in.' So Joshua son of Nun called the priests and said to them, 'Take up the ark of the covenant of the Lord and have seven priests carry trumpets in front of it.' And he ordered the army, 'Advance! March around the city, with an armed guard going ahead of the ark of the Lord.' When Joshua had spoken to the people, the seven priests carrying the seven trumpets before the Lord went forward, blowing their trumpets, and the ark of the Lord's covenant followed them. The armed guard marched ahead of the priests who blew the trumpets, and the rear guard followed the ark. All this time the trumpets were sounding. But Joshua had commanded the army, 'Do not give a war cry, do not raise your voices, do not say a word until the day I tell you to shout. Then shout!' So he had the ark of the Lord carried around the city, circling it once. Then the army returned to camp and spent the night there. Joshua got up early the next morning and the priests took up the ark of the Lord. The seven priests carrying the seven trumpets went forward, marching before the ark of the Lord and blowing the trumpets. The armed men went ahead of them and the rear guard followed the ark of the Lord, while the trumpets kept sounding. So on the second day they marched around the city once and returned to the camp. They did this for six days. On the seventh day, they got up at daybreak and marched around the city seven times in the same manner, except that on that day they circled the city seven times. The seventh time around, when the priests sounded the trumpet blast, Joshua commanded the army, 'Shout! For the Lord has given you the city! The city and all that is in it are to be devoted to the Lord. Only Rahab the prostitute and all who are with her in her house shall be spared, because she hid the spies we sent. But keep away from the devoted things, so that you will not bring about your own destruction by taking any of them. Otherwise you will make the camp of Israel liable to destruction and bring trouble on it. All the silver and gold and the articles of bronze and iron are sacred to the Lord and must go into his treasury.' When the trumpets sounded, the army shouted, and at the sound of the trumpet, when the men gave a loud shout, the wall collapsed; so everyone charged straight in, and they took the city. They devoted the city to the Lord and destroyed with the sword every living thing in it—men and women, young and old, cattle, sheep and donkeys. Joshua said to the two men who had spied out the land, 'Go into the prostitute's house and bring her out and all who belong to her, in accordance with your oath to her.' So the young men who had done the spying went in and brought out Rahab, her father and mother, her brothers and sisters and all who belonged to her. They brought out her entire family and put them in a place outside the camp of Israel. Then they burned the whole city and everything in it, but they put the silver and gold and the articles of bronze and iron into the treasury of the Lord's house. But Joshua spared Rahab the prostitute, with her family and all who belonged to her, because she hid the men Joshua had sent as spies to Jericho—and she lives among the Israelites to this day. At that time Joshua pronounced this solemn oath: 'Cursed before the Lord is the one who undertakes to rebuild this city, Jericho: \"At the cost of his firstborn son he will lay its foundations; at the cost of his youngest he will set up its gates.\"' So the Lord was with Joshua, and his fame spread throughout the land.",
+                christConnection: "The fall of Jericho demonstrates that victory comes through faith and obedience, not human strength. The walls falling down point to how Christ has torn down the walls that separate us from God (<a href='https://www.biblegateway.com/passage/?search=Ephesians%202%3A14&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Ephesians 2:14</a>). Just as Rahab was saved by faith, we are saved by faith in Christ (<a href='https://www.biblegateway.com/passage/?search=Hebrews%2011%3A31&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 11:31</a>)."
+            },
+            {
+                name: "Achan's Sin and Defeat at Ai",
+                date: "c. 1406 BC",
+                scripture: "Joshua 7:1-8:29",
+                intro: "After the victory at Jericho, Achan disobeys God by taking plunder. This sin causes Israel's defeat at Ai and demonstrates the seriousness of disobedience and the need for holiness.",
+                tagline: "Sin brings defeat",
+                summary: "But the Israelites were unfaithful in regard to the devoted things; Achan son of Karmi, the son of Zimri, the son of Zerah, of the tribe of Judah, took some of them. So the Lord's anger burned against Israel. Now Joshua sent men from Jericho to Ai, which is near Beth Aven to the east of Bethel, and told them, 'Go up and spy out the region.' So the men went up and spied out Ai. When they returned to Joshua, they said, 'Not all the army will have to go up against Ai. Send two or three thousand men to take it and do not weary the whole army, for only a few people live there.' So about three thousand went up; but they were routed by the men of Ai, who killed about thirty-six of them. They chased the Israelites from the city gate as far as the stone quarries and struck them down on the slopes. At this the hearts of the people melted in fear and became like water. Then Joshua tore his clothes and fell facedown to the ground before the ark of the Lord, remaining there till evening. The elders of Israel did the same, and sprinkled dust on their heads. And Joshua said, 'Alas, Sovereign Lord, why did you ever bring this people across the Jordan to deliver us into the hands of the Amorites to destroy us? If only we had been content to stay on the other side of the Jordan! Pardon your servant, Lord. What can I say, now that Israel has been routed by its enemies? The Canaanites and the other people of the country will hear about this and they will surround us and wipe out our name from the earth. What then will you do for your own great name?' The Lord said to Joshua, 'Stand up! What are you doing down on your face? Israel has sinned; they have violated my covenant, which I commanded them to keep. They have taken some of the devoted things; they have stolen, they have lied, they have put them with their own possessions. That is why the Israelites cannot stand against their enemies; they turn their backs and run because they have been made liable to destruction. I will not be with you anymore unless you destroy whatever among you is devoted to destruction. Go, consecrate the people. Tell them, \"Consecrate yourselves in preparation for tomorrow; for this is what the Lord, the God of Israel, says: There are devoted things among you, Israel. You cannot stand against your enemies until you remove them.\"' Early the next morning Joshua had Israel come forward by tribes, and Judah was chosen. The clans of Judah came forward, and the Zerahites were chosen. He had the clan of the Zerahites come forward by families, and Zimri was chosen. He had his family come forward by individuals, and Achan son of Karmi, the son of Zimri, the son of Zerah, of the tribe of Judah, was chosen. Then Joshua said to Achan, 'My son, give glory to the Lord, the God of Israel, and honor him. Tell me what you have done; do not hide it from me.' Achan replied, 'It is true! I have sinned against the Lord, the God of Israel. This is what I have done: When I saw in the plunder a beautiful robe from Babylonia, two hundred shekels of silver and a bar of gold weighing fifty shekels, I coveted them and took them. They are hidden in the ground inside my tent, with the silver underneath.' So Joshua sent messengers, and they ran to the tent, and there it was, hidden in his tent, with the silver underneath. They took the things from the tent, brought them to Joshua and all the Israelites and spread them out before the Lord. Then Joshua, together with all Israel, took Achan son of Zerah, the silver, the robe, the gold bar, his sons and daughters, his cattle, donkeys and sheep, his tent and all that he had, to the Valley of Achor. Joshua said, 'Why have you brought this trouble on us? The Lord will bring trouble on you today.' Then all Israel stoned him, and after they had stoned the rest, they burned them. Over Achan they heaped up a large pile of rocks, which remains to this day. Then the Lord turned from his fierce anger. Therefore that place has been called the Valley of Achor ever since. Then the Lord said to Joshua, 'Do not be afraid; do not be discouraged. Take the whole army with you, and go up and attack Ai. For I have delivered into your hands the king of Ai, his people, his city and his land. You shall do to Ai and its king as you did to Jericho and its king, except that you may carry off their plunder and livestock for yourselves. Set an ambush behind the city.' So Joshua and the whole army moved out to attack Ai. He chose thirty thousand of his best fighting men and sent them out at night with these orders: 'Listen carefully. You are to set an ambush behind the city. Don't go very far from it. All of you be on the alert. I and all those with me will advance on the city, and when the men come out against us, as they did before, we will flee from them. They will pursue us until we have drawn them away from the city, for they will say, \"They are running away from us as they did before.\" So when we flee from them, you are to rise up from ambush and take the city. The Lord your God will give it into your hand. When you have taken the city, set it on fire. Do what the Lord has commanded. See to it; you have my orders.' Then Joshua sent them off, and they went to the place of ambush and lay in wait between Bethel and Ai, to the west of Ai—but Joshua spent that night with the people. Early the next morning Joshua mustered his army, and he and the leaders of Israel marched before them to Ai. The entire force that was with him marched up and approached the city and arrived in front of it. They set up camp north of Ai, with the valley between them and the city. Joshua had taken about five thousand men and set them in ambush between Bethel and Ai, to the west of the city. So the soldiers took up their positions—with the main camp to the north of the city and the ambush to the west of it. That night Joshua went into the valley. When the king of Ai saw this, he and all the men of the city hurried out early in the morning to meet Israel in battle at a certain place overlooking the Arabah. But he did not know that an ambush had been set against him behind the city. Joshua and all Israel let themselves be driven back before them, and they fled toward the wilderness. All the men of Ai were called to pursue them, and they pursued Joshua and were lured away from the city. Not a man remained in Ai or Bethel who did not go after Israel. They left the city open and went in pursuit of Israel. Then the Lord said to Joshua, 'Hold out toward Ai the javelin that is in your hand, for into your hand I will deliver the city.' So Joshua held out toward the city the javelin that was in his hand. As soon as he did this, the men in the ambush rose quickly from their position and rushed forward. They entered the city and captured it and quickly set it on fire. The men of Ai looked back and saw the smoke of the city rising against the sky, but they had no chance to escape in any direction; the Israelites who had been fleeing toward the wilderness had turned back against their pursuers. For when Joshua and all Israel saw that the ambush had taken the city and that smoke was going up from it, they turned around and attacked the men of Ai. The men of the ambush also came out of the city against them, so that they were caught in the middle, with Israelites on both sides. Israel cut them down, leaving them neither survivors nor fugitives. But they took the king of Ai alive and brought him to Joshua. When Israel had finished killing all the men of Ai in the fields and in the wilderness where they had chased them, and when every one of them had been put to the sword, all the Israelites returned to Ai and killed those who were in it. Twelve thousand men and women fell that day—all the people of Ai. For Joshua did not draw back the hand that held out his javelin until he had destroyed all who lived in Ai. But Israel did carry off for themselves the livestock and plunder of this city, as the Lord had instructed Joshua. So Joshua burned Ai and made it a permanent heap of ruins, a desolate place to this day.",
+                christConnection: "Achan's sin demonstrates that one person's disobedience affects the whole community, pointing to how Adam's sin affected all humanity (<a href='https://www.biblegateway.com/passage/?search=Romans%205%3A12&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Romans 5:12</a>). Achan's judgment points to how sin brings death, but Christ took the judgment for our sin so that we might be saved (<a href='https://www.biblegateway.com/passage/?search=2%20Corinthians%205%3A21&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>2 Corinthians 5:21</a>)."
+            },
+            {
+                name: "The Sun Stands Still",
+                date: "c. 1406 BC",
+                scripture: "Joshua 10:1-15",
+                intro: "During the battle against the Amorite kings, Joshua prays and the sun stands still, giving Israel time to complete the victory. This miracle demonstrates God's power over creation and His commitment to give Israel the land.",
+                tagline: "God fights for His people",
+                summary: "Now Adoni-Zedek king of Jerusalem heard that Joshua had taken Ai and totally destroyed it, doing to Ai and its king as he had done to Jericho and its king, and that the people of Gibeon had made a treaty of peace with Israel and had become their allies. He and his people were very much alarmed at this, because Gibeon was an important city, like one of the royal cities; it was larger than Ai, and all its men were good fighters. So Adoni-Zedek king of Jerusalem appealed to Hoham king of Hebron, Piram king of Jarmuth, Japhia king of Lachish and Debir king of Eglon. 'Come up and help me attack Gibeon,' he said, 'because it has made peace with Joshua and the Israelites.' Then the five kings of the Amorites—the kings of Jerusalem, Hebron, Jarmuth, Lachish and Eglon—joined forces. They moved up with all their troops and took up positions against Gibeon and attacked it. The Gibeonites then sent word to Joshua in the camp at Gilgal: 'Do not abandon your servants. Come up to us quickly and save us! Help us, because all the Amorite kings from the hill country have joined forces against us.' So Joshua marched up from Gilgal with his entire army, including all the best fighting men. The Lord said to Joshua, 'Do not be afraid of them; I have given them into your hand. Not one of them will be able to withstand you.' After an all-night march from Gilgal, Joshua took them by surprise. The Lord threw them into confusion before Israel, so Joshua and the Israelites defeated them completely at Gibeon. Israel pursued them along the road going up to Beth Horon and cut them down all the way to Azekah and Makkedah. As they fled before Israel on the road down from Beth Horon to Azekah, the Lord hurled large hailstones down on them, and more of them died from the hail than were killed by the swords of the Israelites. On the day the Lord gave the Amorites over to Israel, Joshua said to the Lord in the presence of Israel: 'Sun, stand still over Gibeon, and you, moon, over the Valley of Aijalon.' So the sun stood still, and the moon stopped, until the nation avenged itself on its enemies, as it is written in the Book of Jashar. The sun stopped in the middle of the sky and delayed going down about a full day. There has never been a day like it before or since, a day when the Lord listened to a human being. Surely the Lord was fighting for Israel! Then Joshua returned with all Israel to the camp at Gilgal.",
+                christConnection: "The sun standing still demonstrates God's absolute power over creation and His commitment to fulfill His promises. This miracle points forward to how Christ has all authority in heaven and on earth (<a href='https://www.biblegateway.com/passage/?search=Matthew%2028%3A18&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Matthew 28:18</a>). Just as God fought for Israel, He fights for us through Christ, ensuring our victory over sin and death."
+            },
+            {
+                name: "Division of the Land",
+                date: "c. 1400-1390 BC",
+                scripture: "Joshua 13:1-21:45",
+                intro: "After the conquest, Joshua divides the Promised Land among the twelve tribes of Israel. Each tribe receives its inheritance according to God's plan, fulfilling the promise made to Abraham.",
+                tagline: "Each tribe receives its inheritance",
+                summary: "When Joshua had grown old, the Lord said to him, 'You are now very old, and there are still very large areas of land to be taken over. This is the land that remains: all the regions of the Philistines and Geshurites, from the Shihor River on the east of Egypt to the territory of Ekron on the north, all of it counted as Canaanite though held by the five Philistine rulers in Gaza, Ashdod, Ashkelon, Gath and Ekron; the territory of the Avvites on the south; all the land of the Canaanites, from Arah of the Sidonians as far as Aphek and the border of the Amorites; the area of Byblos; and all Lebanon to the east, from Baal Gad below Mount Hermon to Lebo Hamath. As for all the inhabitants of the mountain regions from Lebanon to Misrephoth Maim, that is, all the Sidonians, I myself will drive them out before the Israelites. Be sure to allocate this land to Israel for an inheritance, as I have instructed you, and divide it as an inheritance among the nine tribes and half of the tribe of Manasseh.' The other half of Manasseh, the Reubenites and the Gadites had received their inheritance on the east side of the Jordan, as Moses the servant of the Lord had given them. Joshua then began to divide the land among the tribes. He gave the tribes of Judah, Ephraim, and the half-tribe of Manasseh their portions. The Levites did not receive a land inheritance because the Lord was their inheritance. The tribes received their portions by lot, showing that the division was according to God's will, not human preference. Each tribe received cities and surrounding lands, ensuring that all of Israel had a place in the Promised Land. The division of the land fulfilled God's promise to Abraham that his descendants would inherit the land of Canaan.",
+                christConnection: "The division of the land points forward to how all believers in Christ receive an inheritance in the kingdom of God (<a href='https://www.biblegateway.com/passage/?search=Ephesians%201%3A11&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Ephesians 1:11</a>). Just as each tribe received its portion, we each receive our inheritance in Christ. The Levites having no land inheritance but the Lord Himself points to how Christ is our true inheritance, better than any earthly possession."
+            },
+            {
+                name: "Joshua's Final Charge",
+                date: "c. 1390 BC",
+                scripture: "Joshua 23:1-24:33",
+                intro: "At the end of his life, Joshua gathers all Israel and challenges them to choose whom they will serve. He recounts God's faithfulness and calls the people to remain faithful to the Lord.",
+                tagline: "Choose this day whom you will serve",
+                summary: "After a long time had passed and the Lord had given Israel rest from all their enemies around them, Joshua, by then a very old man, summoned all Israel—their elders, leaders, judges and officials—and said to them: 'I am very old. You yourselves have seen everything the Lord your God has done to all these nations for your sake; it was the Lord your God who fought for you. Remember how I have allotted as an inheritance for your tribes all the land of the nations that remain—the nations I conquered—between the Jordan and the Mediterranean Sea in the west. The Lord your God himself will push them out for your sake. He will drive them out before you, and you will take possession of their land, as the Lord your God promised you. Be very strong; be careful to obey all that is written in the Book of the Law of Moses, without turning aside to the right or to the left. Do not associate with these nations that remain among you; do not invoke the names of their gods or swear by them. You must not serve them or bow down to them. But you are to hold fast to the Lord your God, as you have until now. The Lord has driven out before you great and powerful nations; to this day no one has been able to withstand you. One of you routs a thousand, because the Lord your God fights for you, just as he promised. So be very careful to love the Lord your God. But if you turn away and ally yourselves with the survivors of these nations that remain among you and if you intermarry with them and associate with them, then you may be sure that the Lord your God will no longer drive out these nations before you. Instead, they will become snares and traps for you, whips on your backs and thorns in your eyes, until you perish from this good land the Lord your God has given you. Now I am about to go the way of all the earth. You know with all your heart and soul that not one of all the good promises the Lord your God gave you has failed. Every promise has been fulfilled; not one has failed. But just as all the good things the Lord your God has promised you have come to you, so he will bring on you all the evil things he has threatened, until he has destroyed you from this good land the Lord your God has given you. If you violate the covenant of the Lord your God, which he commanded you, and go and serve other gods and bow down to them, the Lord's anger will burn against you, and you will quickly perish from the good land he has given you.' Then Joshua assembled all the tribes of Israel at Shechem. He summoned the elders, leaders, judges and officials of Israel, and they presented themselves before God. Joshua said to all the people, 'This is what the Lord, the God of Israel, says: \"Long ago your ancestors, including Terah the father of Abraham and Nahor, lived beyond the Euphrates River and worshiped other gods. But I took your father Abraham from the land beyond the Euphrates and led him throughout Canaan and gave him many descendants. I gave him Isaac, and to Isaac I gave Jacob and Esau. I assigned the hill country of Seir to Esau, but Jacob and his family went down to Egypt. Then I sent Moses and Aaron, and I afflicted the Egyptians by what I did there, and I brought you out. When I brought your people out of Egypt, you came to the sea, and the Egyptians pursued them with chariots and horsemen as far as the Red Sea. But they cried out to the Lord for help, and he put darkness between you and the Egyptians; he brought the sea over them and covered them. You saw with your own eyes what I did to the Egyptians. Then you lived in the wilderness for a long time. I brought you to the land of the Amorites who lived east of the Jordan. They fought against you, but I gave them into your hands. I destroyed them from before you, and you took possession of their land. When Balak son of Zippor, the king of Moab, prepared to fight against Israel, he sent for Balaam son of Beor to put a curse on you. But I would not listen to Balaam, so he blessed you again and again, and I delivered you out of his hand. Then you crossed the Jordan and came to Jericho. The citizens of Jericho fought against you, as did the Amorites, Perizzites, Canaanites, Hittites, Girgashites, Hivites and Jebusites, but I gave them into your hands. I sent the hornet ahead of you, which drove them out before you—also the two Amorite kings. You did not do it with your own sword and bow. So I gave you a land on which you did not toil and cities you did not build; and you live in them and eat from vineyards and olive groves that you did not plant.\" Now fear the Lord and serve him with all faithfulness. Throw away the gods your ancestors worshiped beyond the Euphrates River and in Egypt, and serve the Lord. But if serving the Lord seems undesirable to you, then choose for yourselves this day whom you will serve, whether the gods your ancestors served beyond the Euphrates, or the gods of the Amorites, in whose land you are living. But as for me and my household, we will serve the Lord.' Then the people answered, 'Far be it from us to forsake the Lord to serve other gods! It was the Lord our God himself who brought us and our parents up out of Egypt, from that land of slavery, and performed those great signs before our eyes. He protected us on our entire journey and among all the nations through which we traveled. And the Lord drove out before us all the nations, including the Amorites, who lived in the land. We too will serve the Lord, because he is our God.' Joshua said, 'You are not able to serve the Lord. He is a holy God; he is a jealous God. He will not forgive your rebellion and your sins. If you forsake the Lord and serve foreign gods, he will turn and bring disaster on you and make an end of you, after he has been good to you.' But the people said to Joshua, 'No! We will serve the Lord.' Then Joshua said, 'You are witnesses against yourselves that you have chosen to serve the Lord.' 'Yes, we are witnesses,' they replied. 'Now then,' said Joshua, 'throw away the foreign gods that are among you and yield your hearts to the Lord, the God of Israel.' And the people said to Joshua, 'We will serve the Lord our God and obey him.' On that day Joshua made a covenant for the people, and there at Shechem he reaffirmed for them decrees and laws. And Joshua recorded these things in the Book of the Law of God. Then he took a large stone and set it up there under the oak near the holy place of the Lord. 'See!' he said to all the people. 'This stone will be a witness against us. It has heard all the words the Lord has said to us. It will be a witness against you if you are untrue to your God.' Then Joshua dismissed the people, each to their own inheritance. After these things, Joshua son of Nun, the servant of the Lord, died at the age of a hundred and ten. And they buried him in the land of his inheritance, at Timnath Serah in the hill country of Ephraim, north of Mount Gaash.",
+                christConnection: "Joshua's challenge to choose whom to serve points forward to how we must choose to serve Christ (<a href='https://www.biblegateway.com/passage/?search=Matthew%206%3A24&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Matthew 6:24</a>). Just as Joshua called Israel to be faithful to the Lord, we are called to be faithful to Christ. Joshua's statement 'as for me and my household, we will serve the Lord' points to how each person must make their own choice to follow Christ."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "The Cycle Begins": "dive-in-cycle-begins.html",
+                    "Gideon's Victory with 300 Men": "dive-in-gideon-victory.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        renderTimeline();
+
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

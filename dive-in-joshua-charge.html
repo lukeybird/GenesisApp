@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: Joshua's Final Charge - Joshua Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: Joshua's Final Charge</h1>
+            <p class="subtitle">Choose This Day Whom You Will Serve</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Choose Whom You Will Serve</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=Joshua%2024%3A1-33&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Joshua 24</a>, at the end of his life, Joshua gathers all Israel and challenges them to choose whom they will serve. He recounts God's faithfulness throughout their history and calls them to remain faithful to the Lord. Joshua's famous declaration, "As for me and my household, we will serve the Lord," stands as a model of personal commitment to God.</p>
+            
+            <div class="verse-callout">
+                And if it seems evil to you to serve the Lord, choose for yourselves this day whom you will serve, whether the gods which your fathers served that were on the other side of the River, or the gods of the Amorites, in whose land you dwell. But as for me and my house, we will serve the Lord.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Joshua%2024%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Joshua 24:15</a>
+                </span>
+            </div>
+
+            <p>Joshua's challenge to choose whom to serve is a call to decision. We cannot serve both God and the world—we must choose. Joshua's personal commitment, "As for me and my house, we will serve the Lord," shows that each person must make their own choice to follow God. This points forward to how we must choose to serve Christ, making a personal commitment to follow Him.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%206%3A24&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 6:24</a>
+                    <div class="ref-explanation">"No one can serve two masters," showing that we must choose, just as Joshua called Israel to choose whom they would serve.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Kings%2018%3A21&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Kings 18:21</a>
+                    <div class="ref-explanation">"How long will you falter between two opinions? If the Lord is God, follow Him," showing that we must choose to serve God, just as Joshua called Israel to choose.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Luke%209%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Luke 9:23</a>
+                    <div class="ref-explanation">"If anyone desires to come after Me, let him deny himself, and take up his cross daily, and follow Me," showing that following Christ requires a choice and commitment, just as Joshua called for commitment to the Lord.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="choose">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">God's Faithfulness Recounted</h2>
+            <p>Before calling Israel to choose, Joshua recounts God's faithfulness throughout their history. He reminds them of how God called Abraham, delivered them from Egypt, gave them victory in battle, and brought them into the Promised Land. This history of God's faithfulness serves as the foundation for their commitment to serve Him.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Remember God's Faithfulness</div>
+                <p>Joshua's recounting of God's faithfulness shows that our commitment to serve God is based on His faithfulness to us. We don't serve God to earn His favor—we serve Him because He has been faithful to us. His faithfulness in the past gives us confidence to commit to serving Him in the future.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Joshua%2024%3A2-13&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Joshua 24:2-13</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                I gave you a land on which you did not labor and cities which you did not build, and you dwell in them; you eat of the vineyards and olive groves which you did not plant.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Joshua%2024%3A13&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Joshua 24:13</a>
+                </span>
+            </div>
+            
+            <p>Joshua's recounting of God's faithfulness reminds Israel of all that God has done for them. This history of faithfulness is the basis for their commitment to serve Him. In the same way, we commit to serve Christ because of His faithfulness to us—He died for us, rose again, and gives us eternal life.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Psalm%20103%3A2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Psalm 103:2</a>
+                    <div class="ref-explanation">"Bless the Lord, O my soul, and forget not all His benefits," showing that we should remember God's faithfulness, just as Joshua recounted God's faithfulness to Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Lamentations%203%3A22-23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Lamentations 3:22-23</a>
+                    <div class="ref-explanation">"Through the Lord's mercies we are not consumed, because His compassions fail not. They are new every morning; great is Your faithfulness," showing that God's faithfulness is constant, just as Joshua recounted.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 1:9</a>
+                    <div class="ref-explanation">"God is faithful, by whom you were called into the fellowship of His Son, Jesus Christ our Lord," showing that God is faithful, just as Joshua recounted His faithfulness to Israel.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="faithfulness">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Call to Faithfulness</h2>
+            <p>Joshua calls Israel to be faithful to the Lord, warning them of the consequences of turning away. He reminds them that they cannot serve the Lord in their own strength—they need God's help. This call to faithfulness points forward to how we are called to be faithful to Christ, not in our own strength, but through the power of the Holy Spirit.</p>
+
+            <div class="verse-callout">
+                You cannot serve the Lord, for He is a holy God. He is a jealous God; He will not forgive your transgressions nor your sins. If you forsake the Lord and serve foreign gods, then He will turn and do you harm and consume you, after He has done you good.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Joshua%2024%3A19-20&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Joshua 24:19-20</a>
+                </span>
+            </div>
+
+            <p>Joshua's warning shows that serving the Lord is serious business. God is holy and jealous, and He will not tolerate unfaithfulness. But Joshua's warning also points to our need for grace—we cannot serve the Lord in our own strength. We need the Holy Spirit to enable us to be faithful, just as we need Christ to save us.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2010%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 10:12</a>
+                    <div class="ref-explanation">"Therefore let him who thinks he stands take heed lest he fall," showing that we must be careful to remain faithful, just as Joshua warned Israel.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%203%3A12-13&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 3:12-13</a>
+                    <div class="ref-explanation">"Beware, brethren, lest there be in any of you an evil heart of unbelief in departing from the living God," showing that we must guard against unfaithfulness, just as Joshua warned.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%202%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 2:10</a>
+                    <div class="ref-explanation">"Be faithful until death, and I will give you the crown of life," showing that we are called to be faithful, just as Joshua called Israel to be faithful.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="call">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Christ Our Choice</h2>
+            <p>Joshua's challenge to choose whom to serve points forward to how we must choose to serve Christ. Just as Joshua called Israel to choose between the Lord and other gods, we must choose between Christ and the world. Joshua's declaration, "As for me and my house, we will serve the Lord," points to how each person must make their own choice to follow Christ.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">No Neutral Ground</div>
+                <p>There is no neutral ground—we must choose. We cannot serve both God and the world. Joshua's challenge shows that serving God requires a deliberate choice and commitment. In the same way, following Christ requires a deliberate choice to deny ourselves, take up our cross, and follow Him.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2012%3A30&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 12:30</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                He who is not with Me is against Me, and he who does not gather with Me scatters abroad.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%2012%3A30&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 12:30</a>
+                </span>
+            </div>
+
+            <p>Just as Joshua called Israel to choose, Christ calls us to choose. There is no middle ground—we are either with Him or against Him. Joshua's challenge to choose whom to serve points forward to how we must choose to serve Christ, making a personal commitment to follow Him, just as Joshua made his personal commitment to serve the Lord.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2014%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 14:6</a>
+                    <div class="ref-explanation">"I am the way, the truth, and the life. No one comes to the Father except through Me," showing that we must choose Christ, just as Joshua called Israel to choose the Lord.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Acts%204%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Acts 4:12</a>
+                    <div class="ref-explanation">"Nor is there salvation in any other, for there is no other name under heaven given among men by which we must be saved," showing that we must choose Christ, the only way of salvation.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%203%3A20&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 3:20</a>
+                    <div class="ref-explanation">"Behold, I stand at the door and knock. If anyone hears My voice and opens the door, I will come in to him," showing that we must choose to open the door to Christ, just as Joshua called Israel to choose to serve the Lord.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="christ">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Serving Christ</h2>
+            <p>Joshua's final charge to Israel calls them to choose whom they will serve. He recounts God's faithfulness and challenges them to remain faithful to the Lord. Joshua's personal commitment, "As for me and my house, we will serve the Lord," stands as a model for all who would follow God.</p>
+
+            <p>Joshua's challenge points forward to how we must choose to serve Christ. Just as Joshua called Israel to choose between the Lord and other gods, we must choose between Christ and the world. There is no neutral ground—we must make a decision. Joshua's declaration shows that each person must make their own choice to follow Christ, committing themselves and their households to serve Him. The choice Joshua presented to Israel is the same choice we face today: will we serve the Lord, or will we serve the gods of this world?</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Deuteronomy%2030%3A19&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Deuteronomy 30:19</a>
+                    <div class="ref-explanation">"I call heaven and earth as witnesses today against you, that I have set before you life and death, blessing and cursing; therefore choose life," showing that we must choose, just as Joshua called Israel to choose.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%203%3A36&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 3:36</a>
+                    <div class="ref-explanation">"He who believes in the Son has everlasting life; and he who does not believe the Son shall not see life," showing that we must choose to believe in Christ, just as Joshua called Israel to choose to serve the Lord.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%2010%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 10:9</a>
+                    <div class="ref-explanation">"If you confess with your mouth the Lord Jesus and believe in your heart that God has raised Him from the dead, you will be saved," showing that we must choose to confess and believe in Christ, just as Joshua called Israel to choose to serve the Lord.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

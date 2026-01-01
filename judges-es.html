@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Línea de Tiempo de Jueces - Personajes Principales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>📖 Personajes de Jueces</h1>
+            <p class="subtitle">Personajes Principales en el Período de los Jueces</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Personajes principales en Jueces
+        const mainCharacters = [
+            {
+                name: "Otoniel",
+                date: "c. 1375-1335 a.C.",
+                scripture: "Jueces 3:7-11",
+                intro: "El primer juez de Israel, quien libera al pueblo de Cusán-risataim, rey de Mesopotamia. Es el hermano menor de Caleb y demuestra que Dios levanta libertadores cuando Su pueblo clama.",
+                tagline: "Primer juez, libertador de la opresión",
+                summary: "Después de la muerte de Josué, los israelitas hicieron lo malo ante los ojos del Señor y olvidaron al Señor su Dios, sirviendo a los baales y a las imágenes de Asera. La ira del Señor se encendió contra Israel, y los entregó en manos de Cusán-risataim, rey de Mesopotamia, a quien estuvieron sujetos ocho años. Pero cuando clamaron al Señor, Él les levantó un libertador, Otoniel hijo de Cenaz, hermano menor de Caleb, quien los salvó. El Espíritu del Señor vino sobre él, y fue juez de Israel y salió a la guerra. El Señor entregó a Cusán-risataim, rey de Mesopotamia, en manos de Otoniel, quien lo venció. Y reposó la tierra cuarenta años, hasta que murió Otoniel hijo de Cenaz. Otoniel representa el patrón de liberación que recorre todo Jueces: cuando Israel peca, Dios permite la opresión, pero cuando claman, Él levanta un libertador. Otoniel apunta hacia adelante a Cristo, el libertador definitivo que nos salva de la opresión del pecado y la muerte."
+            },
+            {
+                name: "Aod",
+                date: "c. 1315-1235 a.C.",
+                scripture: "Jueces 3:12-30",
+                intro: "Un juez zurdo de la tribu de Benjamín que libera a Israel de Eglón, rey de Moab, asesinándolo con una espada oculta.",
+                tagline: "Libertador zurdo, guerrero astuto",
+                summary: "Otra vez los israelitas hicieron lo malo ante los ojos del Señor, y por esto el Señor dio poder a Eglón, rey de Moab, sobre Israel. Por dieciocho años estuvieron sujetos a Eglón, rey de Moab. Otra vez los israelitas clamaron al Señor, y Él les dio un libertador: Aod, un hombre zurdo, hijo de Gera, benjamita. Los israelitas lo enviaron con el tributo a Eglón, rey de Moab. Aod había hecho una espada de dos filos de un codo de largo, que ató a su muslo derecho debajo de su ropa. Presentó el tributo a Eglón, rey de Moab, quien era un hombre muy gordo. Después de presentar el tributo, Aod envió a los que lo habían llevado. Pero al llegar a los ídolos de piedra cerca de Gilgal, él mismo regresó a Eglón y dijo: 'Su Majestad, tengo un mensaje secreto para usted.' El rey dijo a sus asistentes: '¡Déjennos!' Y todos se fueron. Aod entonces se acercó a él mientras estaba sentado solo en la sala superior de su palacio y dijo: 'Tengo un mensaje de Dios para usted.' Cuando el rey se levantó de su asiento, Aod alcanzó con su mano izquierda, sacó la espada de su muslo derecho y la hundió en el vientre del rey. Incluso la empuñadura se hundió después de la hoja, y sus entrañas se derramaron. Aod no sacó la espada, y la grasa se cerró sobre ella. Luego Aod salió al pórtico; cerró las puertas de la sala superior detrás de él y las cerró con llave. Después de que se fue, los sirvientes vinieron y encontraron las puertas de la sala superior cerradas. Dijeron: 'Debe estar aliviándose en la habitación interior del palacio.' Esperaron hasta el punto de vergüenza, pero cuando no abrió las puertas de la habitación, tomaron una llave y las abrieron. Allí vieron a su señor caído al suelo, muerto. Mientras esperaban, Aod escapó. Pasó por los ídolos de piedra y escapó a Seira. Cuando llegó allí, tocó una trompeta en la región montañosa de Efraín, y los israelitas bajaron con él desde las colinas, con él liderándolos. 'Síganme,' ordenó, 'porque el Señor ha entregado a Moab, su enemigo, en sus manos.' Así que lo siguieron y tomaron posesión de los vados del Jordán que llevaban a Moab; no permitieron que nadie cruzara. En ese momento derrotaron a unos diez mil moabitas, todos vigorosos y fuertes; ninguno escapó. Así que Moab fue conquistado ese día por Israel. Y la tierra tuvo paz durante ochenta años. La astucia y el coraje de Aod demuestran cómo Dios usa personas y métodos improbables para liberar a Su pueblo. Su zurdera, que era inusual, se convirtió en una ventaja. Esto apunta a cómo Cristo, aunque parece débil y necio para el mundo, es en realidad el poder de Dios para la salvación."
+            },
+            {
+                name: "Débora",
+                date: "c. 1200-1150 a.C.",
+                scripture: "Jueces 4:1-5:31",
+                intro: "Una profetisa y juez que lidera a Israel a la victoria sobre los cananeos. Es la única juez mujer y demuestra que Dios usa a las mujeres en el liderazgo cuando los hombres fallan en levantarse.",
+                tagline: "Profetisa y juez, líder de la victoria",
+                summary: "Después de que murió Aod, los israelitas otra vez hicieron lo malo ante los ojos del Señor. Entonces el Señor los vendió en manos de Jabín, rey de Canaán, quien reinaba en Hazor. Sísara, comandante de su ejército, estaba en Haroset-goim. Porque tenía novecientos carros de hierro y había oprimido cruelmente a los israelitas durante veinte años, clamaron al Señor por ayuda. Débora, una profetisa, esposa de Lapidot, estaba liderando a Israel en ese tiempo. Ella juzgaba bajo la palmera de Débora entre Ramá y Betel en la región montañosa de Efraín, y los israelitas subían a ella para que decidiera sus disputas. Envió a llamar a Barac, hijo de Abinoam, de Cedes en Neftalí y le dijo: 'El Señor, el Dios de Israel, te ordena: \"Ve, toma contigo diez mil hombres de Neftalí y de Zabulón y llévalos al monte Tabor. Yo llevaré a Sísara, comandante del ejército de Jabín, con sus carros y sus tropas al río Quisón y lo entregaré en tus manos.\"' Barac le dijo: 'Si vas conmigo, iré; pero si no vas conmigo, no iré.' 'Muy bien,' dijo Débora, 'iré contigo. Pero debido al curso que estás tomando, el honor no será tuyo, porque el Señor entregará a Sísara en manos de una mujer.' Así que Débora fue con Barac a Cedes. Allí Barac convocó a Zabulón y Neftalí, y diez mil hombres subieron bajo su mando. Débora también subió con él. Cuando le dijeron a Sísara que Barac, hijo de Abinoam, había subido al monte Tabor, Sísara convocó desde Haroset-goim hasta el río Quisón todos sus carros y sus tropas. Entonces Débora dijo a Barac: '¡Ve! Este es el día en que el Señor ha entregado a Sísara en tus manos. ¿No ha ido el Señor delante de ti?' Así que Barac bajó del monte Tabor, con diez mil hombres siguiéndolo. Al avance de Barac, el Señor desbarató a Sísara y todos sus carros y su ejército a espada, y Sísara bajó de su carro y huyó a pie. Barac persiguió los carros y el ejército hasta Haroset-goim, y todas las tropas de Sísara cayeron a espada; no quedó ni un hombre. Sin embargo, Sísara huyó a pie a la tienda de Jael, esposa de Heber el ceneo, porque había una alianza entre Jabín, rey de Hazor, y la familia de Heber el ceneo. Jael salió al encuentro de Sísara y le dijo: 'Ven, mi señor, entra. No tengas miedo.' Así que entró en su tienda, y ella lo cubrió con una manta. 'Tengo sed,' dijo. 'Por favor, dame un poco de agua.' Ella abrió un odre de leche, le dio de beber y lo cubrió. 'Párate en la entrada de la tienda,' le dijo. 'Si alguien pasa y te pregunta: \"¿Hay alguien ahí?\" di \"No\".' Pero Jael, esposa de Heber, tomó una estaca de la tienda y un martillo y fue silenciosamente a él mientras yacía profundamente dormido, exhausto. Clavó la estaca por su sien en el suelo, y murió. Justo entonces Barac llegó persiguiendo a Sísara, y Jael salió a su encuentro. 'Ven,' dijo, 'te mostraré al hombre que buscas.' Y allí estaba Sísara, muerto, con la estaca de la tienda atravesando su sien. Así que ese día Dios sometió a Jabín, rey de Canaán, ante los israelitas. Y la mano de los israelitas presionó cada vez más contra Jabín, rey de Canaán, hasta que lo destruyeron. Entonces la tierra tuvo paz durante cuarenta años. El liderazgo de Débora y la victoria de Barac demuestran cómo Dios usa tanto a hombres como a mujeres para cumplir Sus propósitos. El canto de victoria de Débora en el capítulo 5 celebra la liberación de Dios y muestra que cuando el pueblo de Dios confía en Él, Él da la victoria. Esto apunta hacia adelante a cómo Cristo, aunque parece débil, es en realidad el poder de Dios, y cómo Él usa a Su pueblo, independientemente del género o estatus, para cumplir Sus propósitos del reino."
+            },
+            {
+                name: "Gedeón",
+                date: "c. 1150-1100 a.C.",
+                scripture: "Jueces 6:1-8:35",
+                intro: "Un juez reacio que libera a Israel de los madianitas. Dios reduce su ejército de 32,000 a 300 para demostrar que la victoria viene del Señor, no de la fuerza humana.",
+                tagline: "Guerrero valiente, débil en sí mismo pero fuerte en Dios",
+                summary: "Otra vez los israelitas hicieron lo malo ante los ojos del Señor, y por siete años los entregó en manos de los madianitas. Porque el poder de Madián era tan opresivo, los israelitas prepararon refugios para sí mismos en grietas de montañas, cuevas y fortalezas. Cada vez que los israelitas plantaban sus cultivos, los madianitas, amalecitas y otros pueblos del este invadían el país. Acamparon en la tierra y arruinaron los cultivos hasta Gaza y no perdonaron ninguna criatura viviente para Israel, ni ovejas ni ganado ni asnos. Subieron con su ganado y sus tiendas como enjambres de langostas. Era imposible contarlos o sus camellos; invadieron la tierra para devastarla. Madián empobreció tanto a los israelitas que clamaron al Señor por ayuda. Cuando los israelitas clamaron al Señor por causa de Madián, Él les envió un profeta, quien dijo: 'Esto es lo que dice el Señor, el Dios de Israel: Yo los saqué de Egipto, de la tierra de esclavitud. Los rescaté de la mano de los egipcios. Y los libré de la mano de todos sus opresores; los expulsé delante de ustedes y les di su tierra. Les dije: \"Yo soy el Señor su Dios; no adoren a los dioses de los amorreos, en cuya tierra viven.\" Pero ustedes no me han escuchado.' El ángel del Señor vino y se sentó debajo de la encina en Ofra que pertenecía a Joás el abiezerita, donde su hijo Gedeón estaba trillando trigo en un lagar para ocultarlo de los madianitas. Cuando el ángel del Señor se apareció a Gedeón, dijo: 'El Señor está contigo, guerrero valiente.' 'Perdóname, mi señor,' respondió Gedeón, 'pero si el Señor está con nosotros, ¿por qué nos ha sucedido todo esto? ¿Dónde están todas sus maravillas que nuestros antepasados nos contaron cuando dijeron: \"¿No nos sacó el Señor de Egipto?\" Pero ahora el Señor nos ha abandonado y nos ha entregado en manos de Madián.' El Señor se volvió a él y dijo: 'Ve con la fuerza que tienes y salva a Israel de la mano de Madián. ¿No te estoy enviando?' 'Perdóname, mi señor,' respondió Gedeón, 'pero ¿cómo puedo salvar a Israel? Mi clan es el más débil en Manasés, y yo soy el menor en mi familia.' El Señor respondió: 'Estaré contigo, y derrotarás a todos los madianitas, sin dejar ninguno con vida.' Gedeón pidió señales para confirmar el llamado de Dios, y Dios pacientemente se las dio. Gedeón reunió un ejército de 32,000 hombres, pero el Señor le dijo que eran demasiados. A través de un proceso de eliminación, Dios redujo el ejército a 300 hombres, para que Israel supiera que la victoria venía del Señor, no de su propia fuerza. Con solo 300 hombres armados con trompetas, antorchas y cántaros, Gedeón derrotó al vasto ejército madianita. El Señor hizo que los madianitas se volvieran unos contra otros, e Israel los persiguió hasta la victoria. La historia de Gedeón demuestra que Dios usa a los débiles e improbables para cumplir Sus propósitos, para que toda la gloria sea para Él. Esto apunta hacia adelante a cómo Cristo, aunque parece débil, es en realidad el poder de Dios, y cómo Él usa a personas débiles e improbables para cumplir Sus propósitos del reino."
+            },
+            {
+                name: "Jefté",
+                date: "c. 1100-1070 a.C.",
+                scripture: "Jueces 11:1-12:7",
+                intro: "Un juez que libera a Israel de los amonitas. Hace un voto precipitado que lleva a la tragedia, demostrando la importancia de la sabiduría y las consecuencias de las decisiones apresuradas.",
+                tagline: "Libertador con un voto trágico",
+                summary: "Jefté el galaadita era un guerrero valiente. Su padre era Galaad; su madre era una prostituta. La esposa de Galaad también le dio hijos, y cuando crecieron, expulsaron a Jefté. 'No vas a recibir ninguna herencia en nuestra familia,' dijeron, 'porque eres hijo de otra mujer.' Así que Jefté huyó de sus hermanos y se estableció en la tierra de Tob, donde una banda de malhechores se reunió alrededor de él y lo siguió. Algún tiempo después, cuando los amonitas estaban luchando contra Israel, los ancianos de Galaad fueron a buscar a Jefté de la tierra de Tob. 'Ven,' dijeron, 'sé nuestro comandante, para que podamos luchar contra los amonitas.' Jefté les dijo: '¿No me odiaron y me expulsaron de la casa de mi padre? ¿Por qué vienen a mí ahora, cuando están en problemas?' Los ancianos de Galaad le dijeron: 'Sin embargo, ahora nos volvemos a ti; ven con nosotros a luchar contra los amonitas, y serás cabeza sobre todos los que vivimos en Galaad.' Jefté respondió: 'Supongan que me llevan de vuelta a luchar contra los amonitas y el Señor me los entrega—¿seré realmente su cabeza?' Los ancianos de Galaad respondieron: 'El Señor es nuestro testigo; ciertamente haremos como dices.' Así que Jefté fue con los ancianos de Galaad, y el pueblo lo hizo cabeza y comandante sobre ellos. Y repitió todas sus palabras ante el Señor en Mizpa. Entonces el Espíritu del Señor vino sobre Jefté. Cruzó Galaad y Manasés, pasó por Mizpa de Galaad, y desde allí avanzó contra los amonitas. Y Jefté hizo un voto al Señor: 'Si entregas a los amonitas en mis manos, lo que salga de la puerta de mi casa a encontrarme cuando regrese triunfante de los amonitas será del Señor, y lo sacrificaré como holocausto.' Entonces Jefté fue a luchar contra los amonitas, y el Señor los entregó en sus manos. Devastó veinte ciudades desde Aroer hasta las cercanías de Minit, hasta Abel-queramim. Así Israel sometió a Amón. Cuando Jefté regresó a su casa en Mizpa, ¡quién saldría a encontrarlo sino su hija, bailando al son de panderos! Ella era hija única. Excepto por ella no tenía ni hijo ni hija. Cuando la vio, rasgó sus vestidos y lloró: '¡Ay, hija mía! Me has abatido y estoy devastado. He hecho un voto al Señor que no puedo romper.' 'Padre mío,' respondió ella, 'has dado tu palabra al Señor. Haz conmigo tal como prometiste, ahora que el Señor te ha vengado de tus enemigos, los amonitas. Pero concédeme esta única petición,' dijo. 'Dame dos meses para vagar por las colinas y llorar con mis amigas, porque nunca me casaré.' 'Puedes ir,' dijo. Y la dejó ir por dos meses. Ella y sus amigas fueron a las colinas y lloraron porque nunca se casaría. Después de los dos meses, regresó a su padre, y él hizo con ella como había jurado. Y ella era virgen. De esto viene la tradición israelita de que cada año las jóvenes de Israel salen durante cuatro días para conmemorar a la hija de Jefté el galaadita. La historia de Jefté demuestra tanto la fidelidad de Dios al dar la victoria como las trágicas consecuencias de los votos precipitados. Su historia apunta a la importancia de la sabiduría y la consideración cuidadosa antes de hacer compromisos. También apunta hacia adelante a cómo Cristo, quien no hizo votos precipitados sino que cumplió perfectamente todos Sus compromisos, es nuestro libertador perfecto."
+            },
+            {
+                name: "Sansón",
+                date: "c. 1070-1050 a.C.",
+                scripture: "Jueces 13:1-16:31",
+                intro: "Un juez con fuerza sobrenatural que libera a Israel de los filisteos. Su historia demuestra tanto el poder de Dios obrando a través de personas imperfectas como las consecuencias del compromiso.",
+                tagline: "Fuerte en cuerpo, débil en carácter, usado por Dios",
+                summary: "Otra vez los israelitas hicieron lo malo ante los ojos del Señor, así que el Señor los entregó en manos de los filisteos durante cuarenta años. Cierto hombre de Zora, llamado Manoa, del clan de los danitas, tenía una esposa que era estéril, incapaz de dar a luz. El ángel del Señor se apareció a ella y dijo: 'Eres estéril y sin hijos, pero vas a quedar embarazada y darás a luz un hijo. Ahora asegúrate de que no bebas vino ni otra bebida fermentada y que no comas nada inmundo. Quedarás embarazada y tendrás un hijo cuya cabeza nunca será tocada por una navaja porque el niño será nazareo, dedicado a Dios desde el vientre. Él tomará la delantera en librar a Israel de las manos de los filisteos.' La mujer dio a luz un niño y lo llamó Sansón. Creció y el Señor lo bendijo, y el Espíritu del Señor comenzó a moverlo mientras estaba en Majané-dan, entre Zora y Estaol. La fuerza de Sansón era sobrenatural, dada por Dios mientras estaba apartado como nazareo. Sin embargo, Sansón repetidamente rompió su voto nazareo tocando cuerpos muertos, comiendo miel del cadáver de un león, y finalmente permitiendo que le cortaran el cabello. También se casó con mujeres filisteas contra la ley de Dios, mostrando su desprecio por los mandamientos de Dios. A pesar de sus defectos, Dios usó a Sansón para librar a Israel de los filisteos. Mató a mil filisteos con la quijada de un asno, se llevó las puertas de Gaza, y finalmente derribó el templo de Dagón, matando más filisteos en su muerte de los que había matado en su vida. La historia de Sansón demuestra que Dios puede usar a personas imperfectas, pero también muestra las consecuencias del compromiso y la desobediencia. Su fuerza vino de Dios, no de sí mismo, y cuando rompió su voto, perdió esa fuerza. Pero al final, clamó a Dios, y Dios restauró su fuerza una última vez. La historia de Sansón apunta hacia adelante a cómo Cristo, quien fue perfectamente obediente y nunca se comprometió, es nuestro verdadero libertador, y cómo debemos confiar en la fuerza de Dios, no en la nuestra."
+            },
+            {
+                name: "El Señor (YHWH)",
+                date: "Eterno",
+                scripture: "Jueces 2:1-5, 2:11-23, 10:10-16",
+                intro: "La figura central de Jueces es el Señor mismo, quien permite la opresión cuando Israel peca pero levanta libertadores cuando claman. Él es el verdadero juez y libertador de Israel.",
+                tagline: "El verdadero juez, paciente y misericordioso",
+                summary: "A lo largo de Jueces, el Señor es el actor principal, incluso cuando parece ausente. El libro se abre con el ángel del Señor reprendiendo a Israel por romper el pacto. El patrón se repite a lo largo: Israel peca, Dios permite la opresión, Israel clama, Dios levanta un libertador, y hay paz por un tiempo. El Señor es paciente con los fracasos repetidos de Israel, mostrando misericordia una y otra vez. Levanta jueces como Otoniel, Aod, Débora, Gedeón, Jefté y Sansón, cada uno demostrando diferentes aspectos de Su carácter. La fidelidad del Señor al librar a Israel a pesar de su infidelidad apunta hacia adelante a cómo Él nos libra a través de Cristo a pesar de nuestro pecado. La paciencia y misericordia del Señor en Jueces finalmente apunta a la cruz, donde Cristo tomó el juicio que merecemos y nos libra de la opresión del pecado y la muerte. Así como los jueces libraron a Israel temporalmente, Cristo nos libra eternamente."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=RVR1960`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainCharacters.forEach((character, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${character.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${character.date}</div>
+                        ${character.scripture ? `<div class="character-scripture">${createBibleGatewayLink(character.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${character.intro}</div>
+                    <div class="character-tagline">${character.tagline}</div>
+                    <div class="character-summary">${character.summary}</div>
+                    <button class="audio-btn">Escuchar Historia</button>
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const spanishVoice = voices.find(v => 
+                v.lang.startsWith('es')
+            );
+            
+            return spanishVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Escuchar Historia';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.85;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        renderTimeline();
+
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+
