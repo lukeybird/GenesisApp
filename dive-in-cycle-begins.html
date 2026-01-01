@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: The Cycle Begins - Judges Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Cycle Begins</h1>
+            <p class="subtitle">The Pattern of Sin and Deliverance</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">The Pattern of Apostasy and Deliverance</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=Judges%202%3A6-3%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Judges 2:6-3:6</a>, we see the tragic pattern that defines the book of Judges: Israel sins, God allows oppression, Israel cries out, God raises up a deliverer, and there is peace for a time. But when the judge dies, the cycle repeats. This pattern reveals humanity's inability to save itself and the need for a permanent deliverer.</p>
+            
+            <div class="verse-callout">
+                When the Lord raised up judges for them, the Lord was with the judge and delivered them from the hand of their enemies all the days of the judge; for the Lord was moved to pity by their groaning because of those who oppressed and harassed them. But it came about when the judge died, that they would turn back and act more corruptly than their fathers, in following other gods to serve them and bow down to them; they did not abandon their practices or their stubborn ways.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Judges%202%3A18-19&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Judges 2:18-19</a>
+                </span>
+            </div>
+
+            <p>The cycle of Judges demonstrates a fundamental truth: temporary deliverance is not enough. Each judge saved Israel for a time, but when they died, the people returned to sin. This pattern shows that humanity needs more than a temporary deliverer—we need a permanent Savior who can break the cycle of sin and death once and for all.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%203%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 3:23</a>
+                    <div class="ref-explanation">"For all have sinned and fall short of the glory of God," showing that all humanity, like Israel in Judges, is trapped in sin.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ecclesiastes%207%3A20&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ecclesiastes 7:20</a>
+                    <div class="ref-explanation">"For there is not a just man on earth who does good and does not sin," showing that no human can break free from sin on their own.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Jeremiah%2017%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Jeremiah 17:9</a>
+                    <div class="ref-explanation">"The heart is deceitful above all things, and desperately wicked," showing the depth of human sinfulness that the cycle of Judges reveals.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="pattern">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Need for a Permanent Deliverer</h2>
+            <p>The cycle of Judges reveals a critical truth: temporary deliverance is not enough. Each judge saved Israel for a time, but when they died, the people returned to sin. This pattern demonstrates that humanity needs more than a temporary deliverer—we need a permanent Savior who can break the cycle of sin and death once and for all.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Christ Our Permanent Deliverer</div>
+                <p>Unlike the judges who delivered Israel temporarily, Christ delivers us permanently. He does not die, and His deliverance is eternal. Through His death and resurrection, He has broken the cycle of sin and death, giving us permanent freedom from the oppression of sin.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%207%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 7:25</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Therefore He is also able to save to the uttermost those who come to God through Him, since He always lives to make intercession for them.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%207%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 7:25</a>
+                </span>
+            </div>
+            
+            <p>Unlike the judges who died and left Israel to return to sin, Christ lives forever and always intercedes for us. His deliverance is permanent because He is permanent. The cycle of Judges points forward to our need for Christ, who breaks the cycle of sin and death and gives us eternal deliverance.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%209%3A12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 9:12</a>
+                    <div class="ref-explanation">"Not with the blood of goats and calves, but with His own blood He entered the Most Holy Place once for all, having obtained eternal redemption," showing that Christ's deliverance is eternal, unlike the temporary deliverance of the judges.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A9-10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 6:9-10</a>
+                    <div class="ref-explanation">"Knowing that Christ, having been raised from the dead, dies no more. Death no longer has dominion over Him," showing that Christ, unlike the judges, lives forever and delivers us permanently.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2010%3A28&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 10:28</a>
+                    <div class="ref-explanation">"And I give them eternal life, and they shall never perish," showing that Christ gives permanent deliverance, unlike the temporary deliverance of the judges.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="permanent">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">God's Patience and Mercy in the Cycle</h2>
+            <p>Despite Israel's repeated failures, God shows incredible patience and mercy. Each time Israel sins and faces oppression, God hears their cry and raises up a deliverer. This pattern reveals God's faithfulness to His covenant, even when His people are unfaithful. God's patience in Judges points forward to His patience with us, and ultimately to how He sent Christ to deliver us permanently.</p>
+
+            <div class="verse-callout">
+                Nevertheless, the Lord raised up judges who delivered them out of the hand of those who plundered them. Yet they would not listen to their judges, but they played the harlot with other gods, and bowed down to them. They turned quickly from the way in which their fathers walked, in obeying the commandments of the Lord; they did not do so.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Judges%202%3A16-17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Judges 2:16-17</a>
+                </span>
+            </div>
+
+            <p>God's patience with Israel in Judges is remarkable. Despite their repeated apostasy, He continues to deliver them. This demonstrates God's faithfulness to His covenant promises, even when His people are unfaithful. God's patience in Judges ultimately points to the cross, where He demonstrated the ultimate patience and mercy by sending Christ to deliver us from sin.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Peter%203%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Peter 3:9</a>
+                    <div class="ref-explanation">"The Lord is not slack concerning His promise... but is longsuffering toward us, not willing that any should perish," showing God's patience, just as He was patient with Israel in Judges.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%202%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 2:4</a>
+                    <div class="ref-explanation">"Or do you despise the riches of His goodness, forbearance, and longsuffering?" showing that God's patience should lead us to repentance, just as it should have led Israel to repentance.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%205%3A8&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 5:8</a>
+                    <div class="ref-explanation">"But God demonstrates His own love toward us, in that while we were still sinners, Christ died for us," showing that God's patience and mercy culminated in sending Christ to deliver us.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="patience">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Breaking the Cycle: Christ Our Deliverer</h2>
+            <p>The cycle of Judges shows that humanity cannot break free from sin on its own. Each judge delivered Israel temporarily, but the cycle continued. This pattern points forward to Christ, who breaks the cycle permanently. Through His death and resurrection, He delivers us from sin and death once and for all, giving us eternal freedom.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Christ Breaks the Cycle</div>
+                <p>Unlike the judges who died and left Israel to return to sin, Christ lives forever and delivers us permanently. He breaks the cycle of sin and death by taking our sin upon Himself and giving us His righteousness. Through faith in Christ, we are delivered from the cycle of sin and given eternal life.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 6:23</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 6:23</a>
+                </span>
+            </div>
+
+            <p>The cycle of Judges shows that sin leads to death and oppression. But Christ breaks this cycle by taking the wages of sin (death) upon Himself and giving us the gift of eternal life. Through faith in Christ, we are delivered from the cycle of sin and death and given eternal life in Him.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%208%3A1-2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 8:1-2</a>
+                    <div class="ref-explanation">"There is therefore now no condemnation to those who are in Christ Jesus... For the law of the Spirit of life in Christ Jesus has made me free from the law of sin and death," showing that Christ breaks the cycle of sin and death.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%205%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 5:1</a>
+                    <div class="ref-explanation">"Stand fast therefore in the liberty by which Christ has made us free," showing that Christ gives us permanent freedom from the cycle of sin.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%208%3A36&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 8:36</a>
+                    <div class="ref-explanation">"Therefore if the Son makes you free, you shall be free indeed," showing that Christ gives true and permanent freedom, unlike the temporary deliverance of the judges.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="breaking">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Christ Our Permanent Deliverer</h2>
+            <p>The cycle of Judges demonstrates humanity's inability to save itself and the need for a permanent deliverer. Each judge delivered Israel temporarily, but when they died, the cycle of sin continued. This pattern points forward to Christ, who breaks the cycle permanently by delivering us from sin and death once and for all.</p>
+
+            <p>Just as the judges delivered Israel temporarily, Christ delivers us eternally. Unlike the judges who died, Christ lives forever and always intercedes for us. The cycle of Judges reveals our need for Christ, who breaks the cycle of sin and death and gives us permanent deliverance. Through faith in Christ, we are freed from the cycle of sin and given eternal life in Him.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%207%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 7:25</a>
+                    <div class="ref-explanation">"Therefore He is also able to save to the uttermost those who come to God through Him, since He always lives to make intercession for them," showing that Christ delivers us permanently, unlike the temporary deliverance of the judges.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%206%3A9-10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 6:9-10</a>
+                    <div class="ref-explanation">"Knowing that Christ, having been raised from the dead, dies no more. Death no longer has dominion over Him," showing that Christ lives forever and delivers us permanently.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2010%3A28&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 10:28</a>
+                    <div class="ref-explanation">"And I give them eternal life, and they shall never perish," showing that Christ gives permanent deliverance, breaking the cycle of sin and death forever.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: The Fall of Jericho - Joshua Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Fall of Jericho</h1>
+            <p class="subtitle">Walls Fall by Faith</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Victory Through Faith and Obedience</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=Joshua%206%3A1-27&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Joshua 6</a>, God gives Joshua an unusual battle plan for conquering Jericho: march around the city once a day for six days, then seven times on the seventh day, and the walls will fall. This plan required complete faith and obedience—no military strategy, just trust in God's word. The victory at Jericho demonstrates that God's ways are not our ways, and that true victory comes through faith and obedience, not human strength.</p>
+            
+            <div class="verse-callout">
+                And the Lord said to Joshua: "See! I have given Jericho into your hand, its king, and the mighty men of valor. You shall march around the city, all you men of war; you shall go all around the city once. This you shall do six days. And seven priests shall bear seven trumpets of rams' horns before the ark. But the seventh day you shall march around the city seven times, and the priests shall blow the trumpets."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Joshua%206%3A2-4&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Joshua 6:2-4</a>
+                </span>
+            </div>
+
+            <p>The battle plan for Jericho required faith, not military might. Israel had to trust that God's word would be fulfilled, even though the plan seemed foolish by human standards. This demonstrates that God's power is made perfect in our weakness, and that victory comes through faith, not through our own strength or wisdom.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 1:25</a>
+                    <div class="ref-explanation">"The foolishness of God is wiser than men, and the weakness of God is stronger than men," showing that God's ways, which seem foolish to the world, are wiser than human wisdom.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2011%3A30&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 11:30</a>
+                    <div class="ref-explanation">"By faith the walls of Jericho fell down after they were encircled for seven days," showing that the fall of Jericho was an act of faith.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%2012%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 12:9</a>
+                    <div class="ref-explanation">"My strength is made perfect in weakness," showing that God's power is demonstrated when we trust in Him rather than our own strength.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="victory">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Walls Fall Down: Christ Tears Down Barriers</h2>
+            <p>When the walls of Jericho fell, it demonstrated God's power to overcome any obstacle. The walls represented the barriers between Israel and the Promised Land, and God removed them completely. This points forward to how Christ has torn down the walls that separate us from God—the wall of sin, the wall of the law, and the wall of death.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Christ Our Peace</div>
+                <p>Just as the walls of Jericho fell, Christ has torn down the dividing wall of hostility between God and humanity. Through His death and resurrection, He has removed every barrier that stood between us and God, giving us access to the Father.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Ephesians 2:14</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For He Himself is our peace, who has made both one, and has broken down the middle wall of separation, having abolished in His flesh the enmity, that is, the law of commandments contained in ordinances, so as to create in Himself one new man from the two, thus making peace.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A14-15&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Ephesians 2:14-15</a>
+                </span>
+            </div>
+            
+            <p>Just as the walls of Jericho fell down, Christ has broken down the wall of separation between God and humanity. Through His death, He removed the barrier of sin and the law, creating peace between God and those who believe. The fall of Jericho's walls points to how Christ has opened the way for us to enter God's presence.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%202%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Colossians 2:14</a>
+                    <div class="ref-explanation">"Having wiped out the handwriting of requirements that was against us, which was contrary to us," showing that Christ removed the barrier of the law, just as the walls of Jericho were removed.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2010%3A19-20&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 10:19-20</a>
+                    <div class="ref-explanation">"We have confidence to enter the Holiest by the blood of Jesus, by a new and living way which He consecrated for us," showing that Christ opened the way to God, just as the walls falling opened the way into Jericho.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%205%3A1-2&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 5:1-2</a>
+                    <div class="ref-explanation">"We have peace with God through our Lord Jesus Christ, through whom also we have access by faith," showing that Christ gives us access to God, just as the fallen walls gave Israel access to Jericho.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="walls">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Rahab's Salvation by Faith</h2>
+            <p>Rahab, a Canaanite prostitute, demonstrates that salvation is by faith, not by works or heritage. She believed in the God of Israel and acted on that faith by hiding the spies. When Jericho fell, she and her family were saved because of her faith. Rahab's story shows that God's grace extends to all who believe, regardless of their background or past.</p>
+
+            <div class="verse-callout">
+                By faith the harlot Rahab did not perish with those who did not believe, when she had received the spies with peace.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%2011%3A31&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 11:31</a>
+                </span>
+            </div>
+
+            <p>Rahab's faith saved her and her family. She believed in the God of Israel even though she was a Gentile, and her faith was counted as righteousness. Rahab becomes part of God's people and is even listed in the genealogy of Jesus, showing that God's grace extends to all who believe, regardless of their past or background.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=James%202%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">James 2:25</a>
+                    <div class="ref-explanation">"Likewise, was not Rahab the harlot also justified by works when she received the messengers and sent them out another way?" showing that Rahab's faith was demonstrated by her works.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%201%3A5&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 1:5</a>
+                    <div class="ref-explanation">"Salmon begot Boaz by Rahab," showing that Rahab is in the genealogy of Christ, demonstrating God's grace to Gentiles.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A8-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:8-9</a>
+                    <div class="ref-explanation">"For by grace you have been saved through faith," showing that salvation is by faith, just as Rahab was saved by faith.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="rahab">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The City Devoted to Destruction: Judgment and Salvation</h2>
+            <p>Jericho was devoted to destruction—everything in it was to be destroyed except for Rahab and her family. This demonstrates God's judgment on sin and idolatry, but also His mercy to those who believe. The destruction of Jericho points forward to the final judgment, where those who reject Christ will face destruction, but those who believe will be saved.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Judgment and Mercy</div>
+                <p>The destruction of Jericho shows both God's judgment on sin and His mercy to those who believe. Just as Rahab was saved by faith, all who believe in Christ are saved from the judgment that is coming on the world. The city's destruction points to the final judgment, but also to the salvation available through faith in Christ.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=John%203%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 3:16</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For God so loved the world that He gave His only begotten Son, that whoever believes in Him should not perish but have everlasting life.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=John%203%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 3:16</a>
+                </span>
+            </div>
+
+            <p>Just as Rahab was saved from the destruction of Jericho by faith, we are saved from the judgment to come by faith in Christ. The destruction of Jericho demonstrates that God judges sin, but it also shows His mercy to those who believe. Through faith in Christ, we escape the judgment that is coming on the world.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Peter%203%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Peter 3:9</a>
+                    <div class="ref-explanation">"The Lord is not slack concerning His promise... but is longsuffering toward us, not willing that any should perish," showing that God desires salvation, not destruction.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%202%3A5-6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 2:5-6</a>
+                    <div class="ref-explanation">"You are storing up wrath for yourself in the day of wrath," showing that judgment is coming, but those who believe are saved from it.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Thessalonians%205%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Thessalonians 5:9</a>
+                    <div class="ref-explanation">"For God did not appoint us to wrath, but to obtain salvation through our Lord Jesus Christ," showing that believers are saved from judgment, just as Rahab was saved from destruction.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="judgment">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Victory Through Faith in Christ</h2>
+            <p>The fall of Jericho demonstrates that victory comes through faith and obedience, not human strength. The walls fell down by God's power when Israel obeyed in faith. This points forward to how we have victory through faith in Christ—not by our own strength, but by trusting in God's power.</p>
+
+            <p>Just as the walls of Jericho fell, Christ has torn down the barriers between us and God. Just as Rahab was saved by faith, we are saved by faith in Christ. The destruction of Jericho shows God's judgment on sin, but also His mercy to those who believe. The fall of Jericho ultimately points to how we have victory and salvation through faith in Christ, our greater Joshua who leads us into our inheritance.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%205%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 John 5:4</a>
+                    <div class="ref-explanation">"This is the victory that has overcome the world—our faith," showing that victory comes through faith, just as Jericho fell through faith.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%208%3A37&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 8:37</a>
+                    <div class="ref-explanation">"Yet in all these things we are more than conquerors through Him who loved us," showing that we have victory through Christ, just as Israel had victory at Jericho through God's power.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%2015%3A57&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 15:57</a>
+                    <div class="ref-explanation">"Thanks be to God, who gives us the victory through our Lord Jesus Christ," showing that victory comes from God through Christ, just as victory at Jericho came from God.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

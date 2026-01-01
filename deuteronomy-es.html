@@ -180,6 +180,40 @@
             color: #00c3ff;
             border-left: 3px solid rgba(0, 195, 255, 0.8);
         }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
 
         header {
             background: rgba(10, 14, 39, 0.7);
@@ -617,6 +651,46 @@
                 intro: "El sucesor elegido de Moisés que es comisionado y animado en Deuteronomio. Liderará a Israel a la Tierra Prometida que Moisés no pudo entrar. Su nombre significa 'Yahweh salva'—lo mismo que Jesús.",
                 tagline: "Sucesor comisionado, futuro líder",
                 summary: "Josué aparece a lo largo de Deuteronomio como el sucesor designado de Moisés. Moisés le dice al pueblo que Josué los liderará a la tierra y los anima a seguirlo. Dios ordena a Moisés que comisione a Josué, y Moisés lo hace públicamente, diciéndole que sea fuerte y valiente. Dios mismo habla a Josué, prometiéndole estar con él. Moisés escribe una canción y se la enseña a Josué, y Josué recibe el libro de la Ley. Después de la muerte de Moisés, Josué es lleno del espíritu de sabiduría porque Moisés había puesto sus manos sobre él. La comisión de Josué en Deuteronomio apunta hacia adelante a cómo Jesús, nuestro mayor Josué, es comisionado por el Padre para llevarnos a nuestra herencia eterna. Así como Josué lideraría a Israel a la Tierra Prometida física, Jesús nos lleva a la Tierra Prometida espiritual de la vida eterna."
+            },
+            {
+                name: "Aarón",
+                date: "c. 1529-1407 a.C.",
+                scripture: "Deuteronomio 9:20, 10:6",
+                intro: "El hermano de Moisés y el primer sumo sacerdote de Israel. En Deuteronomio, Moisés menciona la muerte de Aarón en Mosera y relata cómo intercedió por Aarón cuando hizo el becerro de oro. El sacerdocio de Aarón apunta hacia adelante a Cristo, el Sumo Sacerdote perfecto.",
+                tagline: "Primer sumo sacerdote, hermano de Moisés",
+                summary: "Aarón es mencionado en Deuteronomio cuando Moisés relata la historia de Israel, particularmente el incidente del becerro de oro. Moisés cuenta cómo intercedió por Aarón cuando Dios estaba enojado con él. Aarón murió en Mosera antes de que Israel entrara a la Tierra Prometida, y su hijo Eleazar lo sucedió como sumo sacerdote. El sacerdocio de Aarón, aunque imperfecto, estableció el patrón de mediación entre Dios y Su pueblo. Su muerte antes de entrar a la tierra apunta a cómo el sacerdocio aarónico no podía llevarnos a nuestra herencia. El sacerdocio de Aarón apunta hacia adelante a Cristo, el Sumo Sacerdote perfecto que vive para siempre y nos lleva a nuestra herencia eterna."
+            },
+            {
+                name: "Caleb",
+                date: "c. 1490-1380 a.C.",
+                scripture: "Deuteronomio 1:36, 1:38",
+                intro: "El espía fiel de Números que, junto con Josué, entrará a la Tierra Prometida. En Deuteronomio, Moisés le recuerda al pueblo que Caleb recibirá su herencia porque siguió al Señor de todo corazón.",
+                tagline: "Seguidor de todo corazón, fiel hasta el final",
+                summary: "Caleb es mencionado en Deuteronomio cuando Moisés relata la historia de Israel. Moisés le recuerda al pueblo que Caleb, hijo de Jefone, entrará a la Tierra Prometida y recibirá su herencia porque siguió al Señor de todo corazón. Mientras el resto de esa generación murió en el desierto debido a la incredulidad, solo Caleb y Josué entrarían a la tierra. Caleb representa la fe que Dios recompensa—no basada en circunstancias u obstáculos, sino en la confianza de todo corazón en las promesas de Dios. Su fidelidad apunta a cómo estamos llamados a seguir a Cristo con fe y confianza completas, sabiendo que nuestra herencia en Cristo está segura."
+            },
+            {
+                name: "Eleazar",
+                date: "c. 1450-1370 a.C.",
+                scripture: "Deuteronomio 10:6",
+                intro: "El hijo de Aarón que lo sucedió como sumo sacerdote. En Deuteronomio, se menciona como el sumo sacerdote que ayudará a Josué a distribuir la Tierra Prometida entre las tribus.",
+                tagline: "Sumo sacerdote, ayudante en la herencia",
+                summary: "Eleazar aparece en Deuteronomio como el sumo sacerdote que ayudará a Josué a distribuir la Tierra Prometida. Sucedió a su padre Aarón como sumo sacerdote y continúa el sacerdocio aarónico. En Deuteronomio, Moisés menciona que Eleazar ayudará a Josué a dividir la tierra entre las tribus, mostrando la continuidad del orden sacerdotal de Dios. El servicio fiel de Eleazar como sumo sacerdote apunta hacia adelante a Cristo, nuestro Sumo Sacerdote perfecto que nos ayuda a recibir nuestra herencia eterna. Así como Eleazar ayudó a Josué a distribuir la herencia física, Cristo nos ayuda a recibir nuestra herencia espiritual."
+            },
+            {
+                name: "Los Levitas",
+                date: "c. 1406 a.C.",
+                scripture: "Deuteronomio 10:8-9, 18:1-8, 26:1-11",
+                intro: "La tribu apartada para el servicio sacerdotal. En Deuteronomio, Moisés enfatiza su papel en enseñar la ley, servir en el tabernáculo, y no recibir herencia de tierra porque el Señor es su herencia.",
+                tagline: "Apartados para el servicio, el Señor es su herencia",
+                summary: "Los Levitas son mencionados a lo largo de Deuteronomio como la tribu apartada para el servicio especial a Dios. Moisés enfatiza que los Levitas no tienen herencia de tierra porque el Señor mismo es su herencia. Deben enseñar la ley al pueblo, servir en el tabernáculo, y asistir a los sacerdotes. Los Levitas representan a aquellos que están apartados para el servicio de Dios, apuntando hacia adelante a cómo todos los creyentes en Cristo son ahora un sacerdocio real, apartados para servir a Dios. La falta de herencia de tierra de los Levitas apunta a cómo nuestra verdadera herencia no es terrenal sino celestial—tenemos a Cristo, que es nuestra verdadera herencia."
+            },
+            {
+                name: "Los Ancianos de Israel",
+                date: "c. 1406 a.C.",
+                scripture: "Deuteronomio 5:23, 27:1, 29:10, 31:9, 31:28",
+                intro: "Los líderes de Israel que están con Moisés mientras se dirige al pueblo. Son testigos del pacto y ayudarán a asegurar que la ley sea enseñada y seguida en la Tierra Prometida.",
+                tagline: "Líderes y testigos del pacto",
+                summary: "Los ancianos de Israel son mencionados a lo largo de Deuteronomio cuando Moisés se dirige tanto a ellos como a todo Israel. Están como testigos del pacto y la ley. Moisés les ordena ayudar a asegurar que la ley sea escrita en piedras y enseñada al pueblo cuando entren a la tierra. Los ancianos representan el liderazgo y la responsabilidad en el pueblo de Dios, apuntando hacia adelante a cómo la iglesia tiene ancianos que pastorean al pueblo de Dios y enseñan Su palabra. El papel de los ancianos como testigos y maestros apunta a cómo todos los creyentes están llamados a ser testigos de Cristo y maestros de Su palabra a la próxima generación."
             },
             {
                 name: "El Señor (YHWH)",

@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>1 Samuel Timeline - Major Events</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .christ-connection {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .christ-connection {
+            max-height: 500px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+            opacity: 1;
+        }
+
+        .christ-connection-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .christ-connection-text {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .christ-connection-text .scripture-link {
+            color: #88d0ff;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dive-in-btn {
+            display: none;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.3), rgba(0, 200, 255, 0.2));
+            border: 1px solid rgba(0, 180, 255, 0.6);
+            color: #88d0ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 15px rgba(0, 180, 255, 0.3),
+                inset 0 0 10px rgba(0, 200, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .timeline-content.expanded .dive-in-btn {
+            display: inline-block;
+        }
+
+        .dive-in-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .dive-in-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .dive-in-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.4), rgba(0, 200, 255, 0.3));
+            border-color: rgba(0, 180, 255, 0.9);
+            box-shadow: 
+                0 0 25px rgba(0, 180, 255, 0.5),
+                inset 0 0 20px rgba(0, 200, 255, 0.2);
+            transform: translateY(-2px);
+            color: #66d9ff;
+        }
+
+        .dive-in-btn:hover::after {
+            left: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button-container .audio-btn {
+            margin-top: 0;
+        }
+
+        .button-container .dive-in-btn {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>📖 1 Samuel Events</h1>
+            <p class="subtitle">Major Events in the Book of 1 Samuel</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in Judges
+        const mainEvents = [
+            {
+                name: "Samuel's Birth and Dedication",
+                date: "c. 1100 BC",
+                scripture: "1 Samuel 1:1-2:11",
+                intro: "Hannah, who is barren, prays for a son and dedicates him to the Lord. Samuel is born and grows up in the tabernacle, demonstrating the power of prayer and the importance of dedicating our children to God.",
+                tagline: "Prayer answered, child dedicated",
+                summary: "There was a certain man from Ramathaim, a Zuphite from the hill country of Ephraim, whose name was Elkanah son of Jeroham, the son of Elihu, the son of Tohu, the son of Zuph, an Ephraimite. He had two wives; one was called Hannah and the other Peninnah. Peninnah had children, but Hannah had none. Year after year this man went up from his town to worship and sacrifice to the Lord Almighty at Shiloh, where Hophni and Phinehas, the two sons of Eli, were priests of the Lord. Whenever the day came for Elkanah to sacrifice, he would give portions of the meat to his wife Peninnah and to all her sons and daughters. But to Hannah he gave a double portion because he loved her, and the Lord had closed her womb. Because the Lord had closed Hannah's womb, her rival kept provoking her in order to irritate her. This went on year after year. Whenever Hannah went up to the house of the Lord, her rival provoked her till she wept and would not eat. Her husband Elkanah would say to her, 'Hannah, why are you weeping? Why don't you eat? Why are you downhearted? Don't I mean more to you than ten sons?' Once when they had finished eating and drinking in Shiloh, Hannah stood up. Now Eli the priest was sitting on his chair by the doorpost of the Lord's house. In her deep anguish Hannah prayed to the Lord, weeping bitterly. And she made a vow, saying, 'Lord Almighty, if you will only look on your servant's misery and remember me, and not forget your servant but give her a son, then I will give him to the Lord for all the days of his life, and no razor will ever be used on his head.' As she kept on praying to the Lord, Eli observed her mouth. Hannah was praying in her heart, and her lips were moving but her voice was not heard. Eli thought she was drunk and said to her, 'How long are you going to stay drunk? Put away your wine.' 'Not so, my lord,' Hannah replied, 'I am a woman who is deeply troubled. I have not been drinking wine or beer; I was pouring out my soul to the Lord. Do not take your servant for a wicked woman; I have been praying here out of my great anguish and grief.' Eli answered, 'Go in peace, and may the God of Israel grant you what you have asked of him.' She said, 'May your servant find favor in your eyes.' Then she went her way and ate something, and her face was no longer downcast. Early the next morning they arose and worshiped before the Lord and then went back to their home at Ramah. Elkanah made love to his wife Hannah, and the Lord remembered her. So in the course of time Hannah became pregnant and gave birth to a son. She named him Samuel, saying, 'Because I asked the Lord for him.' When her husband Elkanah went up with all his family to offer the annual sacrifice to the Lord and to fulfill his vow, Hannah did not go. She said to her husband, 'After the boy is weaned, I will take him and present him before the Lord, and he will live there always.' 'Do what seems best to you,' her husband Elkanah told her. 'Stay here until you have weaned him; only may the Lord make good his word.' So the woman stayed at home and nursed her son until she had weaned him. After he was weaned, she took the boy with her, young as he was, along with a three-year-old bull, an ephah of flour and a skin of wine, and brought him to the house of the Lord at Shiloh. When the bull had been sacrificed, they brought the boy to Eli, and she said to him, 'Pardon me, my lord. As surely as you live, I am the woman who stood here beside you praying to the Lord. I prayed for this child, and the Lord has granted me what I asked of him. So now I give him to the Lord. For his whole life he will be given over to the Lord.' And he worshiped the Lord there.",
+                christConnection: "Hannah's prayer and dedication of Samuel points forward to how we should dedicate our lives to God. Just as Hannah gave Samuel to the Lord, we are called to give ourselves to Christ. Samuel's birth through prayer also points to how Christ was born in answer to the prayers of God's people for a Savior (<a href='https://www.biblegateway.com/passage/?search=Luke%201%3A46-55&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Luke 1:46-55</a>)."
+            },
+            {
+                name: "David and Goliath",
+                date: "c. 1020 BC",
+                scripture: "1 Samuel 17:1-58",
+                intro: "The young David defeats the Philistine giant Goliath with a sling and a stone, demonstrating that victory comes through faith in God, not human strength. This event establishes David as a hero and foreshadows Christ's victory over our enemies.",
+                tagline: "Victory through faith, not strength",
+                summary: "Now the Philistines gathered their forces for war and assembled at Sokoh in Judah. They pitched camp at Ephes Dammim, between Sokoh and Azekah. Saul and the Israelites assembled and camped in the Valley of Elah and drew up their battle line to meet the Philistines. The Philistines occupied one hill and the Israelites another, with the valley between them. A champion named Goliath, who was from Gath, came out of the Philistine camp. His height was six cubits and a span. He had a bronze helmet on his head and wore a coat of scale armor of bronze weighing five thousand shekels; on his legs he wore bronze greaves, and a bronze javelin was slung on his back. His spear shaft was like a weaver's rod, and its iron point weighed six hundred shekels. His shield bearer went ahead of him. Goliath stood and shouted to the ranks of Israel, 'Why do you come out and line up for battle? Am I not a Philistine, and are you not the servants of Saul? Choose a man and have him come down to me. If he is able to fight and kill me, we will become your subjects; but if I overcome him and kill him, you will become our subjects and serve us.' Then the Philistine said, 'This day I defy the armies of Israel! Give me a man and let us fight each other.' On hearing the Philistine's words, Saul and all the Israelites were dismayed and terrified. Now David was the son of an Ephrathite named Jesse, who was from Bethlehem in Judah. Jesse had eight sons, and in Saul's time he was very old. Jesse's three oldest sons had followed Saul to the war: The firstborn was Eliab; the second, Abinadab; and the third, Shammah. David was the youngest. The three oldest followed Saul, but David went back and forth from Saul to tend his father's sheep at Bethlehem. For forty days the Philistine came forward every morning and evening and took his stand. Now Jesse said to his son David, 'Take this ephah of roasted grain and these ten loaves of bread for your brothers and hurry to their camp. Take along these ten cheeses to the commander of their unit. See how your brothers are and bring back some assurance from them.' Early in the morning David left the flock in the care of a shepherd, loaded up and set out, as Jesse had directed. He reached the camp as the army was going out to its battle positions, shouting the war cry. Israel and the Philistines were drawing up their lines facing each other. David left his things with the keeper of supplies, ran to the battle lines and asked his brothers how they were. As he was talking with them, Goliath, the Philistine champion from Gath, stepped out from his lines and shouted his usual defiance, and David heard it. Whenever the Israelites saw the man, they all fled from him in great fear. Now the Israelites had been saying, 'Do you see how this man keeps coming out? He comes out to defy Israel. The king will give great wealth to the man who kills him. He will also give him his daughter in marriage and will exempt his family from taxes in Israel.' David asked the men standing near him, 'What will be done for the man who kills this Philistine and removes this disgrace from Israel? Who is this uncircumcised Philistine that he should defy the armies of the living God?' They repeated to him what they had been saying and told him, 'This is what will be done for the man who kills him.' When Eliab, David's oldest brother, heard him speaking with the men, he burned with anger at him and asked, 'Why have you come down here? And with whom did you leave those few sheep in the wilderness? I know how conceited you are and how wicked your heart is; you came down only to watch the battle.' 'Now what have I done?' said David. 'Can't I even speak?' He then turned away to someone else and brought up the same matter, and the men answered him as before. What David said was overheard and reported to Saul, and Saul sent for him. David said to Saul, 'Let no one lose heart on account of this Philistine; your servant will go and fight him.' Saul replied, 'You are not able to go out against this Philistine and fight him; you are only a young man, and he has been a warrior from his youth.' But David said to Saul, 'Your servant has been keeping his father's sheep. When a lion or a bear came and carried off a sheep from the flock, I went after it, struck it and rescued the sheep from its mouth. When it turned on me, I seized it by its hair, struck it and killed it. Your servant has killed both the lion and the bear; this uncircumcised Philistine will be like one of them, because he has defied the armies of the living God. The Lord who rescued me from the paw of the lion and the paw of the bear will rescue me from the hand of this Philistine.' Saul said to David, 'Go, and the Lord be with you.' Then Saul dressed David in his own tunic. He put a coat of armor on him and a bronze helmet on his head. David fastened on his sword over the tunic and tried walking around, because he was not used to them. 'I cannot go in these,' he said to Saul, 'because I am not used to them.' So he took them off. Then he took his staff in his hand, chose five smooth stones from the stream, put them in the pouch of his shepherd's bag and, with his sling in his hand, approached the Philistine. Meanwhile, the Philistine, with his shield bearer in front of him, kept coming closer to David. He looked David over and saw that he was little more than a boy, glowing with health and handsome, and he despised him. He said to David, 'Am I a dog, that you come at me with sticks?' And the Philistine cursed David by his gods. 'Come here,' he said, 'and I'll give your flesh to the birds and the wild animals!' David said to the Philistine, 'You come against me with sword and spear and javelin, but I come against you in the name of the Lord Almighty, the God of the armies of Israel, whom you have defied. This day the Lord will deliver you into my hands, and I'll strike you down and cut off your head. This very day I will give the carcasses of the Philistine army to the birds and the wild animals, and the whole world will know that there is a God in Israel. All those gathered here will know that it is not by sword or spear that the Lord saves; for the battle is the Lord's, and he will give all of you into our hands.' As the Philistine moved closer to attack him, David ran quickly toward the battle line to meet him. Reaching into his bag and taking out a stone, he slung it and struck the Philistine on the forehead. The stone sank into his forehead, and he fell facedown on the ground. So David triumphed over the Philistine with a sling and a stone; without a sword in his hand he struck down the Philistine and killed him. David ran and stood over him. He took hold of the Philistine's sword and drew it from the sheath. After he killed him, he cut off his head with the sword. When the Philistines saw that their hero was dead, they turned and ran. Then the men of Israel and Judah surged forward with a shout and pursued the Philistines to the entrance of Gath and to the gates of Ekron. Their dead were strewn along the Shaaraim road to Gath and Ekron.",
+                christConnection: "David's victory over Goliath demonstrates that victory comes through faith in God, not human strength. David's words, 'The battle is the Lord's,' point forward to how Christ achieved victory over sin and death through faith in the Father, not through human strength. Just as David defeated Goliath with a stone, Christ defeated our enemies through the apparent weakness of the cross (<a href='https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A18&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Corinthians 1:18</a>)."
+            },
+            {
+                name: "Saul's Rejection as King",
+                date: "c. 1020 BC",
+                scripture: "1 Samuel 15:1-35",
+                intro: "Saul disobeys God's command to completely destroy the Amalekites, leading to his rejection as king. This demonstrates the importance of complete obedience and points forward to our need for a king who perfectly obeys.",
+                tagline: "Disobedience leads to rejection",
+                summary: "Samuel said to Saul, 'I am the one the Lord sent to anoint you king over his people Israel; so listen now to the message from the Lord. This is what the Lord Almighty says: \"I will punish the Amalekites for what they did to Israel when they waylaid them as they came up from Egypt. Now go, attack the Amalekites and totally destroy all that belongs to them. Do not spare them; put to death men and women, children and infants, cattle and sheep, camels and donkeys.\"' So Saul summoned the men and mustered them at Telaim—two hundred thousand foot soldiers and ten thousand from Judah. Saul went to the city of Amalek and set an ambush in the ravine. Then he said to the Kenites, 'Go away, leave the Amalekites so that I do not destroy you along with them; for you showed kindness to all the Israelites when they came up out of Egypt.' So the Kenites moved away from the Amalekites. Then Saul attacked the Amalekites all the way from Havilah to Shur, near the eastern border of Egypt. He took Agag king of the Amalekites alive, and all his people he totally destroyed with the sword. But Saul and the army spared Agag and the best of the sheep and cattle, the fat calves and lambs—everything that was good. These they were unwilling to destroy completely, but everything that was despised and weak they totally destroyed. Then the word of the Lord came to Samuel: 'I regret that I have made Saul king, because he has turned away from me and has not carried out my instructions.' Samuel was angry, and he cried out to the Lord all that night. Early in the morning Samuel got up and went to meet Saul, but he was told, 'Saul has gone to Carmel. There he has set up a monument in his own honor and has turned and gone on down to Gilgal.' When Samuel reached him, Saul said, 'The Lord bless you! I have carried out the Lord's instructions.' But Samuel said, 'What then is this bleating of sheep in my ears? What is this lowing of cattle that I hear?' Saul answered, 'The soldiers brought them from the Amalekites; they spared the best of the sheep and cattle to sacrifice to the Lord your God, but we totally destroyed the rest.' 'Stop!' Samuel said to Saul. 'Let me tell you what the Lord said to me last night.' 'Tell me,' Saul replied. Samuel said, 'Although you were once small in your own eyes, did you not become the head of the tribes of Israel? The Lord anointed you king over Israel. And he sent you on a mission, saying, \"Go and completely destroy those wicked people, the Amalekites; make war on them until you have wiped them out.\" Why did you not obey the Lord? Why did you pounce on the plunder and do evil in the eyes of the Lord?' 'But I did obey the Lord,' Saul said. 'I went on the mission the Lord assigned me. I completely destroyed the Amalekites and brought back Agag their king. The soldiers took sheep and cattle from the plunder, the best of what was devoted to God, in order to sacrifice them to the Lord your God at Gilgal.' But Samuel replied: 'Does the Lord delight in burnt offerings and sacrifices as much as in obeying the Lord? To obey is better than sacrifice, and to heed is better than the fat of rams. For rebellion is like the sin of divination, and arrogance like the evil of idolatry. Because you have rejected the word of the Lord, he has rejected you as king.' Then Saul said to Samuel, 'I have sinned. I violated the Lord's command and your instructions. I was afraid of the men and so I gave in to them. Now I beg you, forgive my sin and come back with me, so that I may worship the Lord.' But Samuel said to him, 'I will not go back with you. You have rejected the word of the Lord, and the Lord has rejected you as king over Israel!' As Samuel turned to leave, Saul caught hold of the hem of his robe, and it tore. Samuel said to him, 'The Lord has torn the kingdom of Israel from you today and has given it to one of your neighbors—to one better than you. He who is the Glory of Israel does not lie or change his mind; for he is not a human being, that he should change his mind.' Saul replied, 'I have sinned. But please honor me before the elders of my people and before Israel; come back with me, so that I may worship the Lord your God.' So Samuel went back with Saul, and Saul worshiped the Lord. Then Samuel said, 'Bring me Agag king of the Amalekites.' Agag came to him in chains. And he thought, 'Surely the bitterness of death is past.' But Samuel said, 'As your sword has made women childless, so will your mother be childless among women.' And Samuel put Agag to death before the Lord at Gilgal. Then Samuel left for Ramah, but Saul went up to his home in Gibeah of Saul. Until the day Samuel died, he did not go to see Saul again, though Samuel mourned for him. And the Lord regretted that he had made Saul king over Israel.",
+                christConnection: "Saul's rejection demonstrates that partial obedience is disobedience. God requires complete obedience, which no human king could provide. This points forward to our need for a king who perfectly obeys—Christ, who was completely obedient to the Father, even to death on the cross (<a href='https://www.biblegateway.com/passage/?search=Philippians%202%3A8&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Philippians 2:8</a>). Christ is the King who was never rejected because He perfectly obeyed."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "Samuel's Birth and Dedication": "dive-in-samuel-birth.html",
+                    "David and Goliath": "dive-in-david-goliath.html",
+                    "Saul's Rejection as King": "dive-in-saul-rejection.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        renderTimeline();
+
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

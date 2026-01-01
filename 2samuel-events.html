@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>1 Samuel Timeline - Major Events</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .christ-connection {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .christ-connection {
+            max-height: 500px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+            opacity: 1;
+        }
+
+        .christ-connection-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .christ-connection-text {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .christ-connection-text .scripture-link {
+            color: #88d0ff;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dive-in-btn {
+            display: none;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.3), rgba(0, 200, 255, 0.2));
+            border: 1px solid rgba(0, 180, 255, 0.6);
+            color: #88d0ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 15px rgba(0, 180, 255, 0.3),
+                inset 0 0 10px rgba(0, 200, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .timeline-content.expanded .dive-in-btn {
+            display: inline-block;
+        }
+
+        .dive-in-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .dive-in-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .dive-in-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.4), rgba(0, 200, 255, 0.3));
+            border-color: rgba(0, 180, 255, 0.9);
+            box-shadow: 
+                0 0 25px rgba(0, 180, 255, 0.5),
+                inset 0 0 20px rgba(0, 200, 255, 0.2);
+            transform: translateY(-2px);
+            color: #66d9ff;
+        }
+
+        .dive-in-btn:hover::after {
+            left: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button-container .audio-btn {
+            margin-top: 0;
+        }
+
+        .button-container .dive-in-btn {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>📖 1 Samuel Events</h1>
+            <p class="subtitle">Major Events in the Book of 1 Samuel</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in Judges
+                const mainEvents = [
+            {
+                name: "David Becomes King Over All Israel",
+                date: "c. 1010 BC",
+                scripture: "2 Samuel 5:1-5",
+                intro: "After Saul's death, David becomes king over all Israel and establishes Jerusalem as his capital. This marks the beginning of the united kingdom and points forward to Christ, the ultimate King.",
+                tagline: "The united kingdom begins",
+                summary: "All the tribes of Israel came to David at Hebron and said, 'We are your own flesh and blood. In the past, while Saul was king over us, you were the one who led Israel on their military campaigns. And the Lord said to you, \"You will shepherd my people Israel, and you will become their ruler.\"' When all the elders of Israel had come to King David at Hebron, the king made a covenant with them at Hebron before the Lord, and they anointed David king over Israel. David was thirty years old when he became king, and he reigned forty years. In Hebron he reigned over Judah seven years and six months, and in Jerusalem he reigned over all Israel and Judah thirty-three years. David's anointing as king over all Israel fulfills God's promise and establishes the united kingdom. This points forward to how Christ is anointed as King over all, not just one nation, but over all who believe. David's reign foreshadows Christ's eternal reign as the true and perfect King.",
+                christConnection: "David's anointing as king over all Israel points forward to how Christ is anointed as King over all. Just as David united the tribes of Israel, Christ unites all believers into one kingdom. David's reign foreshadows Christ's eternal reign as the true and perfect King (<a href='https://www.biblegateway.com/passage/?search=Revelation%2011%3A15&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Revelation 11:15</a>)."
+            },
+            {
+                name: "The Davidic Covenant",
+                date: "c. 1000 BC",
+                scripture: "2 Samuel 7:1-29",
+                intro: "God makes an eternal covenant with David, promising that his kingdom will endure forever. This covenant points forward to Christ, the ultimate Son of David who fulfills this promise.",
+                tagline: "An eternal kingdom promised",
+                summary: "After the king was settled in his palace and the Lord had given him rest from all his enemies around him, he said to Nathan the prophet, 'Here I am, living in a palace of cedar, while the ark of God remains in a tent.' Nathan replied to the king, 'Whatever you have in mind, go ahead and do it, for the Lord is with you.' But that night the word of the Lord came to Nathan, saying: 'Go and tell my servant David, \"This is what the Lord says: Are you the one to build me a house to dwell in? I have not dwelt in a house from the day I brought the Israelites up out of Egypt to this day. I have been moving from place to place with a tent as my dwelling. Wherever I have moved with all the Israelites, did I ever say to any of their rulers whom I commanded to shepherd my people Israel, 'Why have you not built me a house of cedar?'' Now then, tell my servant David, 'This is what the Lord Almighty says: I took you from the pasture, from tending the flock, and appointed you ruler over my people Israel. I have been with you wherever you have gone, and I have cut off all your enemies from before you. Now I will make your name great, like the names of the greatest men on earth. And I will provide a place for my people Israel and will plant them so that they can have a home of their own and no longer be disturbed. Wicked people will not oppress them anymore, as they did at the beginning and have done ever since the time I appointed leaders over my people Israel. I will also give you rest from all your enemies. The Lord declares to you that the Lord himself will establish a house for you: When your days are over and you rest with your ancestors, I will raise up your offspring to succeed you, your own flesh and blood, and I will establish his kingdom. He is the one who will build a house for my Name, and I will establish the throne of his kingdom forever. I will be his father, and he will be my son. When he does wrong, I will punish him with a rod wielded by men, with floggings inflicted by human hands. But my love will never be taken away from him, as I took it away from Saul, whom I removed from before you. Your house and your kingdom will endure forever before me; your throne will be established forever.' Nathan reported to David all the words of this entire revelation.",
+                christConnection: "The Davidic covenant promises an eternal kingdom through David's line. This covenant finds its ultimate fulfillment in Christ, the Son of David who reigns forever. Just as God promised David an eternal kingdom, Christ establishes the eternal kingdom of God (<a href='https://www.biblegateway.com/passage/?search=Luke%201%3A32-33&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Luke 1:32-33</a>)."
+            },
+            {
+                name: "David's Sin with Bathsheba",
+                date: "c. 1000 BC",
+                scripture: "2 Samuel 11:1-12:25",
+                intro: "David commits adultery with Bathsheba and arranges for her husband Uriah to be killed. When confronted by Nathan, David repents. This demonstrates both the seriousness of sin and the power of repentance and forgiveness.",
+                tagline: "Sin, confrontation, and repentance",
+                summary: "In the spring, at the time when kings go off to war, David sent Joab out with the king's men and the whole Israelite army. They destroyed the Ammonites and besieged Rabbah. But David remained in Jerusalem. One evening David got up from his bed and walked around on the roof of the palace. From the roof he saw a woman bathing. The woman was very beautiful, and David sent someone to find out about her. The man said, 'She is Bathsheba, the daughter of Eliam and the wife of Uriah the Hittite.' Then David sent messengers to get her. She came to him, and he slept with her. (Now she was purifying herself from her monthly uncleanness.) Then she went back home. The woman conceived and sent word to David, saying, 'I am pregnant.' So David sent this word to Joab: 'Send me Uriah the Hittite.' And Joab sent him to David. When Uriah came to him, David asked him how Joab was, how the soldiers were and how the war was going. Then David said to Uriah, 'Go down to your house and wash your feet.' So Uriah left the palace, and a gift from the king was sent after him. But Uriah slept at the entrance to the palace with all his master's servants and did not go down to his house. David was told, 'Uriah did not go home.' So he asked Uriah, 'Haven't you just come from a military campaign? Why didn't you go home?' Uriah said to David, 'The ark and Israel and Judah are staying in tents, and my commander Joab and my lord's men are camped in the open country. How could I go to my house to eat and drink and make love to my wife? As surely as you live, I will not do such a thing!' Then David said to him, 'Stay here one more day, and tomorrow I will send you back.' So Uriah remained in Jerusalem that day and the next. At David's invitation, he ate and drank with him, and David made him drunk. But in the evening Uriah went out to sleep on his mat among his master's servants; he did not go home. In the morning David wrote a letter to Joab and sent it with Uriah. In it he wrote, 'Put Uriah out in front where the fighting is fiercest. Then withdraw from him so he will be struck down and die.' So while Joab had the city under siege, he put Uriah at a place where he knew the strongest defenders were. When the men of the city came out and fought against Joab, some of the men in David's army fell; moreover, Uriah the Hittite died. Joab sent word to David: 'I have fought against Rabbah and taken the water of the city. Now muster the rest of the troops and besiege the city and capture it. Otherwise I will take the city, and it will be named after me.' So David mustered the entire army and went to Rabbah, and attacked and captured it. He took the crown from their king's head, and it was placed on David's head. It weighed a talent of gold, and it was set with precious stones. David took a great quantity of plunder from the city and brought out the people who were there, consigning them to labor with saws and with iron picks and axes, and he made them work at brickmaking. David did this to all the Ammonite towns. Then he and his entire army returned to Jerusalem. After Nathan had gone home, the Lord struck the child that Uriah's wife had borne to David, and he became ill. David pleaded with God for the child. He fasted and spent the nights lying in sackcloth on the ground. The elders of his household stood beside him to get him up from the ground, but he refused, and he would not eat any food with them. On the seventh day the child died. David's servants were afraid to tell him that the child was dead, for they thought, 'While the child was still living, he wouldn't listen to us when we spoke to him. How can we now tell him the child is dead? He may do something desperate.' David noticed that his servants were whispering among themselves, and he realized the child was dead. 'Is the child dead?' he asked. 'Yes,' they replied, 'he is dead.' Then David got up from the ground. After he had washed, put on lotions and changed his clothes, he went into the house of the Lord and worshiped. Then he went to his own house, and at his request they served him food, and he ate. His attendants asked him, 'Why are you acting this way? While the child was alive, you fasted and wept, but now that the child is dead, you get up and eat!' He answered, 'While the child was still alive, I fasted and wept. I thought, \"Who knows? The Lord may be gracious to me and let the child live.\" But now that he is dead, why should I go on fasting? Can I bring him back again? I will go to him, but he will not return to me.' Then David comforted his wife Bathsheba, and he went to her and made love to her. She gave birth to a son, and they named him Solomon. The Lord loved him.",
+                christConnection: "David's sin and repentance demonstrate both the seriousness of sin and the power of God's forgiveness. David's failure points forward to our need for a perfect King who never sins. However, David's repentance also points to how we should respond when we sin—with genuine repentance and faith in God's forgiveness through Christ (<a href='https://www.biblegateway.com/passage/?search=1%20John%201%3A9&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 John 1:9</a>)."
+            }
+        ];
+
+
+
+        ];
+

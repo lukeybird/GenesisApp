@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: The Fall of Jericho - Joshua Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: The Ten Commandments Repeated</h1>
+            <p class="subtitle">God's Law for Life in the Land</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">The Law Given Again to a New Generation</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=Deuteronomy%205%3A1-33&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Deuteronomy 5</a>, Moses restates the Ten Commandments to the new generation of Israelites who are about to enter the Promised Land. This generation was not present at Mount Sinai when the law was first given; they were either children or not yet born. Moses emphasizes that the covenant was made with them, not just their ancestors, showing that God's law is for every generation.</p>
+            
+            <div class="verse-callout">
+                The Lord our God made a covenant with us in Horeb. The Lord did not make this covenant with our fathers, but with us, those who are here today, all of us who are alive.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Deuteronomy%205%3A2-3&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Deuteronomy 5:2-3</a>
+                </span>
+            </div>
+
+            <p>Moses' repetition of the Ten Commandments shows that God's law is not outdated or irrelevant—it is for every generation. Just as Moses restated the law for the new generation, the law points forward to how Christ fulfills and establishes the law for all who believe in Him. The law reveals God's holy character and our need for a Savior.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%205%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 5:17</a>
+                    <div class="ref-explanation">"Do not think that I came to destroy the Law or the Prophets. I did not come to destroy but to fulfill," showing that Christ establishes the law, just as Moses restated it for the new generation.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%203%3A31&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 3:31</a>
+                    <div class="ref-explanation">"Do we then make void the law through faith? Certainly not! On the contrary, we establish the law," showing that faith in Christ establishes the law, not abolishes it.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%209%3A21&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 9:21</a>
+                    <div class="ref-explanation">"To those who are without law, as without law (not being without law toward God, but under law toward Christ)," showing that believers are under Christ's law, which fulfills the Ten Commandments.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="generation">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Law Reveals God's Holy Character</h2>
+            <p>The Ten Commandments reveal the character of the God who gave them. They show us what God is like—holy, just, loving, and faithful. The first four commandments show us how to relate to God, while the last six show us how to relate to others. Together, they reveal God's perfect standard of righteousness.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">God's Perfect Standard</div>
+                <p>The Ten Commandments reveal God's perfect standard, which no human can keep perfectly. This shows us our need for a Savior who can keep the law perfectly on our behalf. Christ fulfilled every requirement of the law, and through faith in Him, His perfect obedience is credited to us.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%203%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 3:23</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For all have sinned and fall short of the glory of God, being justified freely by His grace through the redemption that is in Christ Jesus.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%203%3A23-24&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 3:23-24</a>
+                </span>
+            </div>
+            
+            <p>The Ten Commandments reveal that we all fall short of God's perfect standard. We cannot keep the law perfectly, which shows us our need for Christ. He kept the law perfectly and died to pay the penalty for our law-breaking. Through faith in Him, we are justified and enabled by the Holy Spirit to live according to God's law.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%203%3A24&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 3:24</a>
+                    <div class="ref-explanation">"Therefore the law was our tutor to bring us to Christ," showing that the law reveals our need for a Savior who can keep it perfectly.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%207%3A7&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 7:7</a>
+                    <div class="ref-explanation">"I would not have known sin except through the law," showing that the law reveals our sin and our need for Christ.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%203%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 John 3:4</a>
+                    <div class="ref-explanation">"Sin is lawlessness," showing that sin is breaking God's law, which the Ten Commandments reveal.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="character">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Christ Fulfills the Law</h2>
+            <p>Jesus said He came not to destroy the law but to fulfill it (<a href="https://www.biblegateway.com/passage/?search=Matthew%205%3A17&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 5:17</a>). Christ kept every commandment perfectly, something no human has ever done. His perfect obedience to the law is credited to all who believe in Him, and through the Holy Spirit, we are enabled to live according to God's law.</p>
+
+            <div class="verse-callout">
+                Do not think that I came to destroy the Law or the Prophets. I did not come to destroy but to fulfill. For assuredly, I say to you, till heaven and earth pass away, one jot or one tittle will by no means pass from the law till all is fulfilled.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%205%3A17-18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 5:17-18</a>
+                </span>
+            </div>
+
+            <p>Christ fulfilled the law in two ways: He kept it perfectly in His life, and He paid the penalty for our law-breaking in His death. Through faith in Him, His perfect obedience is credited to us, and we are declared righteous. The Holy Spirit then enables us to live according to God's law, not to earn salvation, but as a response to the grace we have received.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%208%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 8:4</a>
+                    <div class="ref-explanation">"That the righteous requirement of the law might be fulfilled in us who do not walk according to the flesh but according to the Spirit," showing that the Spirit enables us to fulfill the law.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Jeremiah%2031%3A33&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Jeremiah 31:33</a>
+                    <div class="ref-explanation">"I will put My law in their minds, and write it on their hearts," showing that in the New Covenant, the law is written on our hearts by the Holy Spirit.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%203%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 3:3</a>
+                    <div class="ref-explanation">"You are manifestly an epistle of Christ, ministered by us, written not with ink but by the Spirit of the living God," showing that the law is written on our hearts by the Spirit.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="fulfillment">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Law Written on Our Hearts</h2>
+            <p>In the New Covenant, God promises to write His law on our hearts (<a href="https://www.biblegateway.com/passage/?search=Jeremiah%2031%3A33&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Jeremiah 31:33</a>). This is fulfilled in Christ through the Holy Spirit, who enables us to love God and others from the heart. The law is no longer external rules we must follow, but internal principles that guide our lives.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Spirit Enables Obedience</div>
+                <p>The Holy Spirit enables us to keep God's law from the heart. We don't obey to earn God's favor—we obey because we have received God's favor in Christ. The Spirit gives us the desire and ability to live according to God's law, showing that we are truly His people.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%202%3A13&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Philippians 2:13</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For it is God who works in you both to will and to do for His good pleasure.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%202%3A13&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Philippians 2:13</a>
+                </span>
+            </div>
+
+            <p>Through the Holy Spirit, God works in us to give us both the desire and the ability to keep His law. This is not about external compliance but internal transformation. The law written on our hearts means we love God and others from the heart, not just follow rules. This is the fulfillment of what Moses restated in Deuteronomy—the law for life in the land becomes the law written on our hearts in Christ.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ezekiel%2036%3A26-27&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ezekiel 36:26-27</a>
+                    <div class="ref-explanation">"I will give you a new heart and put a new spirit within you... I will put My Spirit within you and cause you to walk in My statutes," showing that the Spirit enables us to keep God's law.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%202%3A29&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 2:29</a>
+                    <div class="ref-explanation">"Circumcision is that of the heart, in the Spirit," showing that true obedience comes from the heart through the Spirit, not external compliance.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%205%3A22-23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 5:22-23</a>
+                    <div class="ref-explanation">"The fruit of the Spirit is love, joy, peace... against such there is no law," showing that the Spirit produces in us what the law requires.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="hearts">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: The Law Fulfilled in Christ</h2>
+            <p>Moses' restatement of the Ten Commandments in Deuteronomy shows that God's law is for every generation. The law reveals God's holy character, our inability to keep it perfectly, and our need for a Savior. Christ fulfills the law perfectly, and through faith in Him, His perfect obedience is credited to us.</p>
+
+            <p>The law is now written on our hearts by the Holy Spirit, enabling us to love God and others from the heart. We don't obey to earn salvation—we obey because we have received salvation in Christ. The Ten Commandments, restated by Moses for the new generation, point forward to how Christ fulfills and establishes the law for all who believe in Him.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%2010%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 10:4</a>
+                    <div class="ref-explanation">"For Christ is the end of the law for righteousness to everyone who believes," showing that Christ is the fulfillment of the law for all who believe.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%203%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 3:13-14</a>
+                    <div class="ref-explanation">"Christ has redeemed us from the curse of the law... that we might receive the promise of the Spirit through faith," showing that Christ frees us from the law's curse and gives us the Spirit to enable obedience.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%208%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 8:10</a>
+                    <div class="ref-explanation">"I will put My laws in their mind and write them on their hearts," showing that in the New Covenant, the law is written on our hearts, fulfilling what Moses restated in Deuteronomy.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: El Cruce del Jordán - Línea de Tiempo de Josué</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: El Cruce del Jordán</h1>
+            <p class="subtitle">Entrando a la Tierra Prometida</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">Un Nuevo Comienzo: Cruzando a la Herencia</h2>
+            <p>En <a href="https://www.biblegateway.com/passage/?search=Josué%203%3A1-4%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 3-4</a>, Josué guía a Israel a través del río Jordán en tierra seca, así como Moisés los guió a través del Mar Rojo. Este cruce milagroso marca el comienzo de la conquista de la Tierra Prometida y demuestra la fidelidad de Dios a Sus promesas. El cruce representa un nuevo comienzo—dejando atrás el desierto y entrando en la herencia que Dios había prometido a Abraham siglos antes.</p>
+            
+            <div class="verse-callout">
+                Y aconteció que cuando el pueblo salió de sus tiendas para pasar el Jordán, con los sacerdotes delante del pueblo llevando el arca del pacto, y cuando los que llevaban el arca entraron en el Jordán, y los pies de los sacerdotes que llevaban el arca se mojaron a la orilla del agua (porque el Jordán suele desbordarse por todas sus riberas todo el tiempo de la siega), las aguas que venían de arriba se detuvieron como en un montón bien lejos de la ciudad de Adam, que está al lado de Saretán, y las que descendían al mar del Arabá, al Mar Salado, se acabaron, y fueron cortadas; y el pueblo pasó en dirección de Jericó.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%203%3A14-16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 3:14-16</a>
+                </span>
+            </div>
+
+            <p>El cruce del Jordán demuestra el poder de Dios sobre la creación y Su fidelidad a Sus promesas. Así como Dios partió el Mar Rojo para librar a Israel de Egipto, Él parte el Jordán para traerlos a la Tierra Prometida. Este milagro muestra que Dios está con Josué así como estuvo con Moisés, y que Él cumplirá Su promesa de dar a Israel la tierra.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Éxodo%2014%3A21-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Éxodo 14:21-22</a>
+                    <div class="ref-explanation">El cruce del Mar Rojo, mostrando que el poder de Dios para partir aguas es consistente a lo largo de la historia de Israel, apuntando a Su fidelidad.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%206%3A3-4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 6:3-4</a>
+                    <div class="ref-explanation">"Bautizados en Su muerte... fuimos sepultados juntamente con Él para muerte por el bautismo," mostrando que el bautismo, como cruzar el Jordán, representa pasar de la muerte a la vida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2010%3A1-2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 10:1-2</a>
+                    <div class="ref-explanation">"Todos fueron bautizados en Moisés en la nube y en el mar," mostrando que el cruce del Mar Rojo fue un tipo de bautismo, así como el cruce del Jordán apunta a nuestro bautismo en Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="beginning">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">El Arca Va Delante: La Presencia de Dios Guía el Camino</h2>
+            <p>En el cruce del Jordán, el arca del pacto va delante del pueblo, llevada por los sacerdotes. El arca representa la presencia de Dios, y su posición al frente muestra que Dios mismo está guiando a Israel a la Tierra Prometida. Se instruye al pueblo a mantener una distancia de aproximadamente dos mil codos del arca, mostrando reverencia por la santa presencia de Dios.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">La Presencia de Dios al Frente</div>
+                <p>El arca yendo delante de Israel muestra que la presencia de Dios guía a Su pueblo. En el Nuevo Testamento, Cristo es descrito como yendo delante de nosotros, guiándonos a nuestra herencia. Así como el arca guió a Israel a la Tierra Prometida, Cristo nos guía al reino de Dios.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%206%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 6:20</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Donde entró por nosotros como precursor Jesús, hecho sumo sacerdote para siempre según el orden de Melquisedec.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%206%3A20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 6:20</a>
+                </span>
+            </div>
+            
+            <p>Así como el arca fue delante de Israel a la Tierra Prometida, Cristo ha ido delante de nosotros al cielo. Él es nuestro precursor, nuestro Sumo Sacerdote que ha entrado a la presencia de Dios en nuestro favor. La posición del arca al frente de la procesión apunta a cómo Cristo nos guía a nuestra herencia eterna.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2010%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 10:4</a>
+                    <div class="ref-explanation">"Y cuando ha sacado fuera todas las propias, va delante de ellas," mostrando que Cristo, como el arca, va delante de Su pueblo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:14</a>
+                    <div class="ref-explanation">"Por tanto, teniendo un gran sumo sacerdote que traspasó los cielos," mostrando que Cristo ha ido delante de nosotros a la presencia de Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Apocalipsis%203%3A21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Apocalipsis 3:21</a>
+                    <div class="ref-explanation">"Al que venciere, le daré que se siente conmigo en Mi trono, así como Yo he vencido, y Me he sentado con Mi Padre en Su trono," mostrando que Cristo nos guía a nuestra herencia.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="ark">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Piedras Conmemorativas: Recordando la Fidelidad de Dios</h2>
+            <p>Después de cruzar el Jordán, Josué ordena a doce hombres, uno de cada tribu, tomar doce piedras del medio del Jordán y colocarlas como un memorial en Gilgal. Estas piedras sirven como un recordatorio permanente de la fidelidad de Dios al traer a Israel a la Tierra Prometida. Cuando las generaciones futuras pregunten qué significan las piedras, se les contará del acto poderoso de Dios.</p>
+
+            <div class="verse-callout">
+                Y estas piedras serán para memoria a los hijos de Israel para siempre... Y cuando vuestros hijos preguntaren a sus padres mañana, diciendo: "¿Qué significan estas piedras?" entonces informaréis a vuestros hijos, diciendo: "Israel pasó en seco por este Jordán."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Josué%204%3A7%2C%2021-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Josué 4:7, 21-22</a>
+                </span>
+            </div>
+
+            <p>Las piedras conmemorativas apuntan hacia adelante a cómo recordamos la fidelidad de Dios en Cristo. La Cena del Señor sirve como un memorial de la muerte y resurrección de Cristo, recordándonos cómo Dios nos trajo de la muerte a la vida. Así como las piedras recordaron a Israel la fidelidad de Dios, la Cena del Señor nos recuerda la fidelidad de Dios en Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%2011%3A24-25&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 11:24-25</a>
+                    <div class="ref-explanation">"Haced esto en memoria de Mí," mostrando que la Cena del Señor, como las piedras conmemorativas, sirve para recordar la fidelidad de Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Lucas%2022%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Lucas 22:19</a>
+                    <div class="ref-explanation">"Esto es Mi cuerpo, que por vosotros es dado; haced esto en memoria de Mí," mostrando que recordamos la obra de Cristo, así como Israel recordó la obra de Dios en el Jordán.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Salmos%2077%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Salmos 77:11</a>
+                    <div class="ref-explanation">"Me acordaré de las obras de Jehová," mostrando la importancia de recordar la fidelidad de Dios, como las piedras conmemorativas lo hicieron para Israel.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="memorial">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Bautismo: Pasando de la Muerte a la Vida</h2>
+            <p>El cruce del Jordán apunta hacia adelante al bautismo, donde pasamos a través de las aguas de la muerte a nueva vida en Cristo. Así como Israel dejó atrás el desierto y entró a la Tierra Prometida, nosotros dejamos atrás nuestra antigua vida y entramos al reino de Dios a través de la fe en Cristo.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Bautizados en Cristo</div>
+                <p>El bautismo representa nuestra identificación con Cristo en Su muerte y resurrección. Así como Israel cruzó a través del Jordán a la Tierra Prometida, nosotros somos bautizados en Cristo, pasando de la muerte a la vida. Las aguas del bautismo, como las aguas del Jordán, representan el límite entre la vida antigua y la nueva vida.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%206%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 6:4</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Por tanto, fuimos sepultados juntamente con Él para muerte por el bautismo, a fin de que como Cristo resucitó de los muertos por la gloria del Padre, así también nosotros andemos en vida nueva.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%206%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Romanos 6:4</a>
+                </span>
+            </div>
+
+            <p>Así como Israel cruzó el Jordán para entrar a la Tierra Prometida, nosotros somos bautizados en Cristo para entrar al reino de Dios. El cruce representa dejar el desierto del pecado y entrar a la herencia que Dios ha preparado para nosotros. A través de la fe en Cristo, cruzamos de la muerte a la vida, de la antigua creación a la nueva creación.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%202%3A12&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 2:12</a>
+                    <div class="ref-explanation">"Sepultados con Él en el bautismo, en el cual fuisteis también resucitados con Él, mediante la fe," mostrando que el bautismo nos identifica con la muerte y resurrección de Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%203%3A27&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 3:27</a>
+                    <div class="ref-explanation">"Porque todos los que habéis sido bautizados en Cristo, de Cristo estáis revestidos," mostrando que el bautismo nos identifica con Cristo, así como cruzar el Jordán identificó a Israel con la Tierra Prometida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%203%3A21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Pedro 3:21</a>
+                    <div class="ref-explanation">"El bautismo... ahora nos salva... por la resurrección de Jesucristo," mostrando que el bautismo, como cruzar el Jordán, representa nuestra salvación.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="baptism">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: Entrando a Nuestra Herencia en Cristo</h2>
+            <p>El cruce del Jordán marca la entrada de Israel a la Tierra Prometida, cumpliendo la promesa de Dios a Abraham. Este evento apunta hacia adelante a cómo entramos a nuestra herencia en Cristo a través de la fe. Así como Israel cruzó el Jordán para recibir la tierra, nosotros cruzamos de la muerte a la vida a través de la fe en Cristo.</p>
+
+            <p>El arca yendo delante de Israel muestra que la presencia de Dios guía a Su pueblo. Cristo ha ido delante de nosotros al cielo, y Él nos guía a nuestra herencia eterna. Las piedras conmemorativas nos recuerdan recordar la fidelidad de Dios, así como la Cena del Señor nos recuerda la obra de Cristo. El cruce del Jordán finalmente apunta a cómo entramos al reino de Dios a través de la fe en Cristo, nuestro mayor Josué.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%204%3A8-10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 4:8-10</a>
+                    <div class="ref-explanation">"Porque si Josué les hubiera dado el reposo, no hablaría después de otro día. Por tanto, queda un reposo para el pueblo de Dios," mostrando que el reposo de Josué en la Tierra Prometida apunta a nuestro reposo en Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%201%3A11&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 1:11</a>
+                    <div class="ref-explanation">"En Él asimismo tuvimos herencia," mostrando que en Cristo, recibimos nuestra herencia, así como Israel recibió la Tierra Prometida.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Pedro%201%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Pedro 1:4</a>
+                    <div class="ref-explanation">"Para una herencia incorruptible, incontaminada e inmarcesible, reservada en los cielos para vosotros," mostrando que nuestra herencia en Cristo es eterna, a diferencia de la tierra física que Israel recibió.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        // Find Spanish voice
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

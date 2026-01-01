@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: Gideon's Victory with 300 Men - Judges Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: Gideon's Victory with 300 Men</h1>
+            <p class="subtitle">Victory Through God's Strength, Not Ours</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">God Reduces the Army: Victory Through Weakness</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=Judges%207%3A1-25&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Judges 7</a>, God commands Gideon to reduce his army from 32,000 to just 300 men. This reduction ensures that when victory comes, it will be clear that it came from the Lord, not from human strength. God's strategy demonstrates that His power is made perfect in weakness, and that true victory comes through faith in Him, not through our own resources.</p>
+            
+            <div class="verse-callout">
+                And the Lord said to Gideon, "The people who are with you are too many for Me to give the Midianites into their hands, lest Israel claim glory for itself against Me, saying, 'My own hand has saved me.' Now therefore, proclaim in the hearing of the people, saying, 'Whoever is fearful and afraid, let him turn and depart at once from Mount Gilead.'" And twenty-two thousand of the people returned, and ten thousand remained.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Judges%207%3A2-3&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Judges 7:2-3</a>
+                </span>
+            </div>
+
+            <p>God reduces Gideon's army to ensure that victory will be attributed to Him alone. This demonstrates that God's ways are not our ways—He uses weakness to display His strength. The reduction of the army shows that victory comes through God's power, not through human might or numbers. This points forward to how Christ achieves victory through apparent weakness on the cross.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A27&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 1:27</a>
+                    <div class="ref-explanation">"But God has chosen the foolish things of the world to put to shame the wise, and God has chosen the weak things of the world to put to shame the things which are mighty," showing that God uses weakness to display His strength, just as He did with Gideon's 300 men.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%2012%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 12:9</a>
+                    <div class="ref-explanation">"My strength is made perfect in weakness," showing that God's power is demonstrated when we rely on Him rather than our own strength, just as Gideon did with 300 men.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Zechariah%204%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Zechariah 4:6</a>
+                    <div class="ref-explanation">"'Not by might nor by power, but by My Spirit,' says the Lord of hosts," showing that victory comes through God's Spirit, not human strength, just as Gideon's victory came through God's power.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="reduction">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Victory with Trumpets and Torches</h2>
+            <p>With only 300 men armed with trumpets, torches, and jars, Gideon defeats the vast Midianite army. The strategy is simple: surround the camp, blow trumpets, break jars, and shout. God causes the Midianites to turn on each other in confusion. This victory demonstrates that God's power is not limited by human resources—He can achieve victory through the weakest instruments.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Victory Through God's Power</div>
+                <p>Gideon's victory with 300 men shows that victory comes from God, not from human strength. The trumpets, torches, and jars were not weapons of war, but instruments of God's power. This demonstrates that when we trust in God rather than our own resources, He gives victory in ways that bring glory to Himself.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Judges%207%3A20&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Judges 7:20</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Then the three companies blew the trumpets and broke the pitchers—they held the torches in their left hands and the trumpets in their right hands for blowing—and they cried, "The sword of the Lord and of Gideon!" And each man stood in his place all around the camp; and the whole army ran and cried out and fled.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Judges%207%3A20-21&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Judges 7:20-21</a>
+                </span>
+            </div>
+            
+            <p>The victory at Gideon's hand demonstrates that God fights for His people. The Midianites were defeated not by human strength, but by God's power working through weak instruments. This points forward to how Christ achieves victory through apparent weakness on the cross, defeating sin and death not by human might, but by God's power.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 1:18</a>
+                    <div class="ref-explanation">"For the message of the cross is foolishness to those who are perishing, but to us who are being saved it is the power of God," showing that God's power works through what seems foolish, just as Gideon's strategy seemed foolish but achieved victory.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 1:25</a>
+                    <div class="ref-explanation">"Because the foolishness of God is wiser than men, and the weakness of God is stronger than men," showing that God's ways, which seem weak to the world, are actually powerful, just as Gideon's 300 men defeated the vast Midianite army.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%2013%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 13:4</a>
+                    <div class="ref-explanation">"For though He was crucified in weakness, yet He lives by the power of God," showing that Christ achieved victory through apparent weakness, just as Gideon achieved victory through apparent weakness.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="victory">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Gideon's Weakness and God's Strength</h2>
+            <p>Gideon was the weakest in his family, from the weakest clan in Manasseh. Yet God chose him to deliver Israel. This demonstrates that God uses the weak and unlikely to accomplish His purposes, so that all glory goes to Him. Gideon's weakness points forward to how Christ, though appearing weak on the cross, is actually the power of God for salvation.</p>
+
+            <div class="verse-callout">
+                So he said to Him, "O my Lord, how can I save Israel? Indeed my clan is the weakest in Manasseh, and I am the least in my father's house." And the Lord said to him, "Surely I will be with you, and you shall defeat the Midianites as one man."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Judges%206%3A15-16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Judges 6:15-16</a>
+                </span>
+            </div>
+
+            <p>Gideon's weakness was not a hindrance to God—it was an opportunity for God to display His strength. God's promise to be with Gideon was the source of victory, not Gideon's own strength. This demonstrates that when we are weak, God's strength is made perfect. Gideon's story points forward to how Christ, though appearing weak on the cross, achieved the greatest victory through God's power.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A27-28&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 1:27-28</a>
+                    <div class="ref-explanation">"But God has chosen the foolish things of the world to put to shame the wise, and God has chosen the weak things of the world to put to shame the things which are mighty," showing that God chooses the weak, just as He chose Gideon.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%2012%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 12:10</a>
+                    <div class="ref-explanation">"Therefore I take pleasure in infirmities... for when I am weak, then I am strong," showing that God's strength is made perfect in weakness, just as it was with Gideon.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Philippians%204%3A13&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Philippians 4:13</a>
+                    <div class="ref-explanation">"I can do all things through Christ who strengthens me," showing that strength comes from Christ, just as Gideon's strength came from God's presence with him.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="weakness">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Christ's Victory Through Weakness</h2>
+            <p>Gideon's victory with 300 men demonstrates that God achieves victory through weakness. This points forward to how Christ achieves victory through apparent weakness on the cross. Just as Gideon's small army defeated the vast Midianite host, Christ's death on the cross, which seemed like defeat, actually achieved the greatest victory—defeating sin and death.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Power of the Cross</div>
+                <p>Just as Gideon's victory came through apparent weakness, Christ's victory came through the weakness of the cross. The cross seemed like defeat, but it was actually the greatest victory. Through His death, Christ defeated sin and death, giving us eternal life. The weakness of the cross displays the power of God.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 1:18</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                For the message of the cross is foolishness to those who are perishing, but to us who are being saved it is the power of God.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Corinthians 1:18</a>
+                </span>
+            </div>
+
+            <p>Just as Gideon's strategy seemed foolish but achieved victory, the cross seems foolish to the world but is actually the power of God for salvation. Gideon's victory with 300 men points forward to how Christ achieves victory through the apparent weakness of the cross. Through faith in Christ, we share in His victory over sin and death.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 1:25</a>
+                    <div class="ref-explanation">"Because the foolishness of God is wiser than men, and the weakness of God is stronger than men," showing that God's ways, which seem weak, are actually powerful, just as Gideon's victory and Christ's cross demonstrate.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%2013%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 13:4</a>
+                    <div class="ref-explanation">"For though He was crucified in weakness, yet He lives by the power of God," showing that Christ achieved victory through apparent weakness, just as Gideon did.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colossians%202%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Colossians 2:15</a>
+                    <div class="ref-explanation">"Having disarmed principalities and powers, He made a public spectacle of them, triumphing over them in it," showing that Christ achieved victory through the cross, just as Gideon achieved victory through apparent weakness.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="christ">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Victory Through God's Strength</h2>
+            <p>Gideon's victory with 300 men demonstrates that victory comes from the Lord, not from human strength. God reduced the army to ensure that victory would be attributed to Him alone. This points forward to how Christ achieves victory through apparent weakness on the cross, demonstrating that God's power is made perfect in weakness.</p>
+
+            <p>Just as Gideon's small army defeated the vast Midianite host through God's power, Christ defeated sin and death through the apparent weakness of the cross. Gideon's victory shows that when we are weak, God is strong. Through faith in Christ, we share in His victory over sin and death, not by our own strength, but by trusting in God's power. Gideon's story ultimately points to how we have victory through faith in Christ, who achieved the greatest victory through apparent weakness.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%201%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 1:18</a>
+                    <div class="ref-explanation">"For the message of the cross is foolishness to those who are perishing, but to us who are being saved it is the power of God," showing that victory comes through God's power, just as Gideon's victory came through God's power.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Corinthians%2012%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">2 Corinthians 12:9</a>
+                    <div class="ref-explanation">"My strength is made perfect in weakness," showing that God's strength is displayed through weakness, just as it was with Gideon and with Christ on the cross.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%205%3A4&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 John 5:4</a>
+                    <div class="ref-explanation">"This is the victory that has overcome the world—our faith," showing that victory comes through faith in Christ, just as Gideon's victory came through faith in God.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+
