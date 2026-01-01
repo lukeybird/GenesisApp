@@ -669,37 +669,37 @@
         // Speech Synthesis Setup
         let currentUtterance = null;
         let currentButton = null;
-        let jarvisVoice = null;
+        let spanishVoice = null;
 
-        // Find Jarvis-like voice (Spanish)
-        function findJarvisVoice() {
+        // Find Spanish voice
+        function findSpanishVoice() {
             const voices = speechSynthesis.getVoices();
-            // Prefer Spanish voices
             const preferredVoices = [
                 'Google español',
-                'Microsoft Sabina - Spanish (Mexico)',
-                'Monica',
-                'Paulina'
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
             ];
             
-            for (const preferred of preferredVoices) {
-                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
                 if (voice) return voice;
             }
             
-            // Fallback to any Spanish voice
-            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+            const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+            return spanishVoice || voices[0];
         }
 
         // Load voices
         if (speechSynthesis.onvoiceschanged !== undefined) {
             speechSynthesis.onvoiceschanged = () => {
-                jarvisVoice = findJarvisVoice();
+                spanishVoice = findSpanishVoice();
             };
         }
         
         setTimeout(() => {
-            jarvisVoice = findJarvisVoice();
+            spanishVoice = findSpanishVoice();
         }, 100);
 
         // Get text content from a section (excluding buttons and verse references)
@@ -741,12 +741,12 @@
             // Create new utterance
             currentUtterance = new SpeechSynthesisUtterance(text);
             
-            // Set voice properties for Jarvis-like sound
-            if (jarvisVoice) {
-                currentUtterance.voice = jarvisVoice;
+            // Set voice properties for Spanish
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
             }
             currentUtterance.rate = 0.9;
-            currentUtterance.pitch = 0.8;
+            currentUtterance.pitch = 1;
             currentUtterance.volume = 1;
             currentUtterance.lang = 'es-ES';
 

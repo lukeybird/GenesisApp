@@ -15,6 +15,14 @@
         'leviticus-events.html': { book: 'leviticus', type: 'events', lang: 'en' },
         'numbers.html': { book: 'numbers', type: 'characters', lang: 'en' },
         'numbers-events.html': { book: 'numbers', type: 'events', lang: 'en' },
+        'deuteronomy.html': { book: 'deuteronomy', type: 'characters', lang: 'en' },
+        'deuteronomy-events.html': { book: 'deuteronomy', type: 'events', lang: 'en' },
+        'dive-in-ten-commandments.html': { book: 'deuteronomy', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-shema.html': { book: 'deuteronomy', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-blessings-curses.html': { book: 'deuteronomy', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-joshua-commissioning.html': { book: 'deuteronomy', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-song-moses.html': { book: 'deuteronomy', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-moses-death.html': { book: 'deuteronomy', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-creation.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-fall.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-cain-abel.html': { book: 'genesis', type: 'events', lang: 'en', special: 'dive-in' },
@@ -35,6 +43,14 @@
         'leviticus-events-es.html': { book: 'leviticus', type: 'events', lang: 'es' },
         'numbers-es.html': { book: 'numbers', type: 'characters', lang: 'es' },
         'numbers-events-es.html': { book: 'numbers', type: 'events', lang: 'es' },
+        'deuteronomy-es.html': { book: 'deuteronomy', type: 'characters', lang: 'es' },
+        'deuteronomy-events-es.html': { book: 'deuteronomy', type: 'events', lang: 'es' },
+        'dive-in-ten-commandments-es.html': { book: 'deuteronomy', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-shema-es.html': { book: 'deuteronomy', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-blessings-curses-es.html': { book: 'deuteronomy', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-joshua-commissioning-es.html': { book: 'deuteronomy', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-song-moses-es.html': { book: 'deuteronomy', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-moses-death-es.html': { book: 'deuteronomy', type: 'events', lang: 'es', special: 'dive-in' },
         'dive-in-creation-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
         'dive-in-fall-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
         'dive-in-cain-abel-es.html': { book: 'genesis', type: 'events', lang: 'es', special: 'dive-in' },
@@ -64,6 +80,10 @@
         numbers: { 
             en: { name: 'Numbers', emoji: '📖' },
             es: { name: 'Números', emoji: '📖' }
+        },
+        deuteronomy: { 
+            en: { name: 'Deuteronomy', emoji: '📖' },
+            es: { name: 'Deuteronomio', emoji: '📖' }
         }
     };
 
@@ -137,11 +157,17 @@
             } else { // events
                 return lang === 'es' ? 'leviticus-events-es.html' : 'leviticus-events.html';
             }
-        } else { // numbers
+        } else if (book === 'numbers') {
             if (type === 'characters') {
                 return lang === 'es' ? 'numbers-es.html' : 'numbers.html';
             } else { // events
                 return lang === 'es' ? 'numbers-events-es.html' : 'numbers-events.html';
+            }
+        } else { // deuteronomy
+            if (type === 'characters') {
+                return lang === 'es' ? 'deuteronomy-es.html' : 'deuteronomy.html';
+            } else { // events
+                return lang === 'es' ? 'deuteronomy-events-es.html' : 'deuteronomy-events.html';
             }
         }
     }

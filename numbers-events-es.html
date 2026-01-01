@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Línea de Tiempo de Números - Eventos Principales</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 30px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, 
+                rgba(0, 195, 255, 0.3) 0%,
+                rgba(0, 195, 255, 0.8) 50%,
+                rgba(0, 195, 255, 0.3) 100%);
+            transform: translateX(-50%);
+            z-index: 0;
+            box-shadow: 
+                0 0 10px rgba(0, 195, 255, 0.5),
+                0 0 20px rgba(0, 195, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .timeline-content {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            width: 65%;
+            max-width: 750px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 1px;
+            background: linear-gradient(135deg, 
+                rgba(0, 195, 255, 0.5),
+                rgba(255, 0, 150, 0.5),
+                rgba(0, 255, 200, 0.5));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .timeline-content:hover::before {
+            opacity: 1;
+        }
+
+        .timeline-content.expanded {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 50px rgba(0, 195, 255, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .character-tagline,
+        .character-summary {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+        }
+
+        .christ-connection {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                        margin-top 0.5s ease, 
+                        opacity 0.5s ease;
+            opacity: 0;
+            margin-top: 0;
+            padding-top: 0;
+            border-top: none;
+        }
+
+        .timeline-content.expanded .character-tagline {
+            max-height: 150px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .character-summary {
+            max-height: 2000px;
+            margin-top: 25px;
+            opacity: 1;
+        }
+
+        .timeline-content.expanded .christ-connection {
+            max-height: 500px;
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+            opacity: 1;
+        }
+
+        .christ-connection-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 0.95em;
+            margin-bottom: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .christ-connection-text {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .christ-connection-text .scripture-link {
+            color: #88d0ff;
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        .expand-icon {
+            position: absolute;
+            top: 35px;
+            right: 35px;
+            font-size: 1.8em;
+            color: #00c3ff;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(0, 195, 255, 0.1);
+        }
+
+        .timeline-content:hover .expand-icon {
+            background: rgba(0, 195, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+        }
+
+        .timeline-content.expanded .expand-icon {
+            transform: rotate(180deg);
+            background: rgba(0, 195, 255, 0.3);
+        }
+
+        .character-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2em;
+            color: #00c3ff;
+            margin-bottom: 12px;
+            font-weight: 700;
+            text-shadow: 
+                0 0 15px rgba(0, 195, 255, 0.4),
+                0 0 30px rgba(0, 195, 255, 0.2);
+            letter-spacing: 1px;
+        }
+
+        .character-date-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .character-date {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1em;
+            color: #88d0ff;
+            font-weight: 400;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            white-space: nowrap;
+        }
+
+        .character-scripture {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-weight: 400;
+            opacity: 0.8;
+            font-style: italic;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+            position: relative;
+            z-index: 10;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .character-intro {
+            color: #c0d0e0;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-top: 15px;
+            font-weight: 400;
+        }
+
+        .character-tagline {
+            font-size: 1.15em;
+            color: #88d0ff;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: 300;
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            padding-left: 15px;
+        }
+
+        .character-summary {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.05em;
+            font-weight: 300;
+        }
+
+        .audio-btn {
+            display: none;
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-content.expanded .audio-btn {
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .dive-in-btn {
+            display: none;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.3), rgba(0, 200, 255, 0.2));
+            border: 1px solid rgba(0, 180, 255, 0.6);
+            color: #88d0ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 0 15px rgba(0, 180, 255, 0.3),
+                inset 0 0 10px rgba(0, 200, 255, 0.1);
+            text-decoration: none;
+        }
+
+        .timeline-content.expanded .dive-in-btn {
+            display: inline-block;
+        }
+
+        .dive-in-btn::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            animation: wave 3s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0.8;
+            }
+        }
+
+        .dive-in-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .dive-in-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 150, 255, 0.4), rgba(0, 200, 255, 0.3));
+            border-color: rgba(0, 180, 255, 0.9);
+            box-shadow: 
+                0 0 25px rgba(0, 180, 255, 0.5),
+                inset 0 0 20px rgba(0, 200, 255, 0.2);
+            transform: translateY(-2px);
+            color: #66d9ff;
+        }
+
+        .dive-in-btn:hover::after {
+            left: 100%;
+        }
+
+        .button-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .button-container .audio-btn {
+            margin-top: 0;
+        }
+
+        .button-container .dive-in-btn {
+            margin-top: 0;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .timeline-line {
+                left: 50%;
+            }
+
+            .timeline-item {
+                padding-left: 0;
+                margin-bottom: 30px;
+            }
+
+            .timeline {
+                padding: 20px 0;
+            }
+
+            .timeline-content {
+                width: 100%;
+                max-width: 100%;
+                padding: 25px;
+            }
+
+            .character-name {
+                font-size: 1.8em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>📖 Eventos de Números</h1>
+            <p class="subtitle">Eventos Principales en Orden Cronológico</p>
+        </header>
+
+        <div class="timeline" id="timeline"></div>
+    </div>
+
+    <script>
+        // Major events in chronological order
+        const mainEvents = [
+            {
+                name: "El Censo de Israel",
+                date: "c. 1444 a.C.",
+                scripture: "Números 1:1-2:34",
+                intro: "Dios ordena a Moisés que tome un censo de todos los hombres de Israel que son aptos para ir a la guerra. El censo revela 603,550 hombres de guerra, organizados por tribus y dispuestos alrededor del tabernáculo en un orden específico.",
+                tagline: "Contando el pueblo de Dios",
+                summary: "The Lord spoke to Moses in the tent of meeting in the Desert of Sinai on the first day of the second month of the second year after the Israelites came out of Egypt. He said: 'Take a census of the whole Israelite community by their clans and families, listing every man by name, one by one. You and Aaron are to count by their divisions all the men in Israel who are twenty years old or more and able to serve in the army.' Moses and Aaron counted the men by their clans. The total number was 603,550 men twenty years old or more who were able to serve in the army. The Levites were not counted because they were set apart for the tabernacle. The tribes were arranged around the tabernacle in a specific order: Judah, Issachar, and Zebulun on the east; Reuben, Simeon, and Gad on the south; Ephraim, Manasseh, and Benjamin on the west; and Dan, Asher, and Naphtali on the north. The Levites camped around the tabernacle itself.",
+                christConnection: "The census shows God's care for each individual in His people. Christ knows each of His sheep by name (<a href='https://www.biblegateway.com/passage/?search=John%2010%3A3&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>John 10:3</a>). We are numbered among God's people through faith in Christ (<a href='https://www.biblegateway.com/passage/?search=Revelation%207%3A9&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Revelation 7:9</a>)."
+            },
+            {
+                name: "El Voto Nazareo",
+                date: "c. 1444 a.C.",
+                scripture: "Números 6:1-21",
+                intro: "Dios establece el voto nazareo, una consagración especial al Señor. Los que toman este voto deben abstenerse del vino, evitar cortarse el cabello, y mantenerse alejados de los cadáveres por un período determinado.",
+                tagline: "Apartado para Dios",
+                summary: "The Lord said to Moses, 'Speak to the Israelites and say to them: If a man or woman wants to make a special vow, a vow of dedication to the Lord as a Nazirite, they must abstain from wine and other fermented drink and must not drink vinegar made from wine or other fermented drink. They must not drink grape juice or eat grapes or raisins. As long as they remain under their Nazirite vow, they must not eat anything that comes from the grapevine, not even the seeds or skins. During the entire period of their Nazirite vow, no razor may be used on their head. They must be holy until the period of their dedication to the Lord is over; they must let their hair grow long. Throughout the period of their dedication to the Lord, the Nazirite must not go near a dead body. Even if their own father or mother or brother or sister dies, they must not make themselves ceremonially unclean on account of them, because the symbol of their dedication to God is on their head. When the period of their dedication is over, they are to bring a year-old male lamb as a burnt offering, a year-old ewe lamb as a sin offering, a ram as a fellowship offering, together with their grain offerings and drink offerings, and a basket of bread made without yeast—cakes made of fine flour mixed with oil, and wafers spread with oil. The priest is to present all these before the Lord and make the sin offering and the burnt offering. They are to shave their head at the entrance to the tent of meeting and put the hair in the fire that is under the fellowship offering.",
+                christConnection: "The Nazirite vow points to complete consecration to God. Christ was the ultimate Nazirite, completely set apart for God's purposes (<a href='https://www.biblegateway.com/passage/?search=Hebrews%207%3A26&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 7:26</a>). We are called to be set apart for God's service (<a href='https://www.biblegateway.com/passage/?search=Romans%2012%3A1&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Romans 12:1</a>)."
+            },
+            {
+                name: "Los Espías y la Incredulidad",
+                date: "c. 1443 a.C.",
+                scripture: "Números 13:1-14:45",
+                intro: "Moisés envía doce espías a Canaán. Diez regresan con un informe temeroso, causando que el pueblo se rebele. Dios juzga su incredulidad condenando a esa generación a morir en el desierto, mientras que solo Josué y Caleb entrarán a la tierra prometida.",
+                tagline: "El costo de la incredulidad",
+                summary: "The Lord said to Moses, 'Send some men to explore the land of Canaan, which I am giving to the Israelites. From each ancestral tribe send one of its leaders.' Moses sent them to explore Canaan. He told them, 'Go up through the Negev and on into the hill country. See what the land is like and whether the people who live there are strong or weak, few or many. What kind of land do they live in? Is it good or bad? What kind of towns do they live in? Are they unwalled or fortified? How is the soil? Is it fertile or poor? Are there trees in it or not? Do your best to bring back some of the fruit of the land.' After forty days they returned. They came back to Moses and Aaron and the whole Israelite community and reported: 'We went into the land to which you sent us, and it does flow with milk and honey! Here is its fruit. But the people who live there are powerful, and the cities are fortified and very large. We even saw descendants of Anak there. We can't attack those people; they are stronger than we are.' Caleb silenced the people before Moses and said, 'We should go up and take possession of the land, for we can certainly do it.' But the men who had gone up with him said, 'We can't attack those people; they are stronger than we are.' And they spread among the Israelites a bad report about the land. That night all the members of the community raised their voices and wept aloud. They said, 'If only we had died in Egypt! Or in this wilderness! Why is the Lord bringing us to this land only to let us fall by the sword?' The Lord said to Moses, 'How long will these people treat me with contempt? How long will they refuse to believe in me, in spite of all the signs I have performed among them? I will strike them down with a plague and destroy them, but I will make you into a nation greater and stronger than they.' Moses pleaded with the Lord, and the Lord said, 'I have forgiven them, as you asked. Nevertheless, as surely as I live, not one of those who saw my glory and the signs I performed in Egypt and in the wilderness but who disobeyed me and tested me ten times—not one of them will ever see the land I promised on oath to their ancestors. No one who has treated me with contempt will ever see it. But because my servant Caleb has a different spirit and follows me wholeheartedly, I will bring him into the land he went to, and his descendants will inherit it. As for you, your bodies will fall in this wilderness. Your children will be shepherds here for forty years, suffering for your unfaithfulness, until the last of your bodies lies in the wilderness. For forty years—one year for each of the forty days you explored the land—you will suffer for your sins and know what it is like to have me against you.'",
+                christConnection: "The unbelief of Israel contrasts with the faith we are called to have in Christ. We must not harden our hearts like they did (<a href='https://www.biblegateway.com/passage/?search=Hebrews%203%3A12-19&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 3:12-19</a>). Through faith in Christ, we enter God's rest (<a href='https://www.biblegateway.com/passage/?search=Hebrews%204%3A1-3&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 4:1-3</a>)."
+            },
+            {
+                name: "La Rebelión de Coré",
+                date: "c. 1443 a.C.",
+                scripture: "Números 16:1-50",
+                intro: "Coré, Datán y Abiram lideran una rebelión contra Moisés y Aarón, desafiando su autoridad. Dios juzga a los rebeldes haciendo que la tierra los trague a ellos y a sus familias, y el fuego consume a 250 de sus seguidores.",
+                tagline: "Rebelión contra la autoridad de Dios",
+                summary: "Korah son of Izhar, the son of Kohath, the son of Levi, and certain Reubenites—Dathan and Abiram, sons of Eliab, and On son of Peleth—became insolent and rose up against Moses. With them were 250 Israelite men, well-known community leaders who had been appointed members of the council. They came as a group to oppose Moses and Aaron and said to them, 'You have gone too far! The whole community is holy, every one of them, and the Lord is with them. Why then do you set yourselves above the Lord's assembly?' When Moses heard this, he fell facedown. Then he said to Korah and all his followers: 'Tomorrow morning the Lord will show who belongs to him and who is holy, and he will have that person come near him. The man he chooses he will cause to come near him.' Moses also said to Korah, 'Listen, you Levites! Isn't it enough for you that the God of Israel has separated you from the rest of the Israelite community and brought you near himself to do the work at the Lord's tabernacle and to stand before the community and minister to them? He has brought you and all your fellow Levites near himself, but now you are trying to get the priesthood too. It is against the Lord that you and all your followers have banded together. Who is Aaron that you should grumble against him?' The next day Korah and all his followers presented themselves at the entrance to the tent of meeting. Moses said, 'This is how you will know that the Lord has sent me to do all these things and that it was not my idea: If these men die a natural death and suffer the fate of all mankind, then the Lord has not sent me. But if the Lord brings about something totally new, and the earth opens its mouth and swallows them, with everything that belongs to them, and they go down alive into the realm of the dead, then you will know that these men have treated the Lord with contempt.' As soon as he finished saying all this, the ground under them split apart and the earth opened its mouth and swallowed them and their households, and all those associated with Korah, together with their possessions. They went down alive into the realm of the dead, with everything they owned; the earth closed over them, and they perished and were gone from the community. At their cries, all the Israelites around them fled, shouting, 'The earth is going to swallow us too!' And fire came out from the Lord and consumed the 250 men who were offering the incense.",
+                christConnection: "Korah's rebellion shows the danger of rejecting God's appointed authority. Christ is God's appointed High Priest and King (<a href='https://www.biblegateway.com/passage/?search=Hebrews%205%3A4-6&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 5:4-6</a>). We must submit to Christ's authority (<a href='https://www.biblegateway.com/passage/?search=Philippians%202%3A9-11&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Philippians 2:9-11</a>)."
+            },
+            {
+                name: "La Serpiente de Bronce",
+                date: "c. 1407 a.C.",
+                scripture: "Números 21:4-9",
+                intro: "Después de que el pueblo se queja nuevamente, Dios envía serpientes venenosas. Cuando se arrepienten, Dios instruye a Moisés a hacer una serpiente de bronce. Cualquiera que la mire es sanado, apuntando hacia la obra de Cristo en la cruz.",
+                tagline: "Mira y vive",
+                summary: "They traveled from Mount Hor along the route to the Red Sea, to go around Edom. But the people grew impatient on the way; they spoke against God and against Moses, and said, 'Why have you brought us up out of Egypt to die in the wilderness? There is no bread! There is no water! And we detest this miserable food!' Then the Lord sent venomous snakes among them; they bit the people and many Israelites died. The people came to Moses and said, 'We sinned when we spoke against the Lord and against you. Pray that the Lord will take the snakes away from us.' So Moses prayed for the people. The Lord said to Moses, 'Make a snake and put it up on a pole; anyone who is bitten can look at it and live.' So Moses made a bronze snake and put it up on a pole. Then when anyone was bitten by a snake and looked at the bronze snake, they lived.",
+                christConnection: "The bronze serpent is a powerful picture of Christ on the cross. Just as the Israelites looked to the bronze serpent and lived, we look to Christ and receive eternal life (<a href='https://www.biblegateway.com/passage/?search=John%203%3A14-15&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>John 3:14-15</a>). Christ became sin for us that we might become the righteousness of God (<a href='https://www.biblegateway.com/passage/?search=2%20Corinthians%205%3A21&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>2 Corinthians 5:21</a>)."
+            },
+            {
+                name: "Balaam y Balac",
+                date: "c. 1407 a.C.",
+                scripture: "Números 22:1-24:25",
+                intro: "Balac, rey de Moab, contrata a Balaam para maldecir a Israel. Pero Dios obliga a Balaam a bendecir a Israel en su lugar, y Balaam profetiza sobre una estrella y un cetro venideros—apuntando al Mesías.",
+                tagline: "Dios convierte maldiciones en bendiciones",
+                summary: "Then the Israelites traveled to the plains of Moab and camped along the Jordan across from Jericho. Now Balak son of Zippor saw all that Israel had done to the Amorites, and Moab was terrified because there were so many people. Moab said to the elders of Midian, 'This horde is going to lick up everything around us, as an ox licks up the grass of the field.' So Balak son of Zippor, who was king of Moab at that time, sent messengers to summon Balaam son of Beor, who was at Pethor, near the Euphrates River, in his native land. Balak said: 'A people has come out of Egypt; they cover the face of the land and have settled next to me. Now come and put a curse on these people, because they are too powerful for me. Perhaps then I will be able to defeat them and drive them out of the land. For I know that whoever you bless is blessed, and whoever you curse is cursed.' The elders of Moab and Midian left, taking with them the fee for divination. When they came to Balaam, they told him what Balak had said. 'Spend the night here,' Balaam said to them, 'and I will report back to you with the answer the Lord gives me.' So the Moabite officials stayed with him. God came to Balaam and asked, 'Who are these men with you?' Balaam said to God, 'Balak son of Zippor, king of Moab, sent me this message: A people that has come out of Egypt covers the face of the land. Now come and put a curse on them for me. Perhaps then I will be able to fight them and drive them away.' But God said to Balaam, 'Do not go with them. You must not put a curse on those people, because they are blessed.' The next morning Balaam got up and said to Balak's officials, 'Go back to your own country, for the Lord has refused to let me go with you.' But Balak sent other officials, more numerous and more distinguished than the first. They came to Balaam and said: 'This is what Balak son of Zippor says: Do not let anything keep you from coming to me, because I will reward you handsomely and do whatever you say. Come and put a curse on these people for me.' But Balaam answered them, 'Even if Balak gave me all the silver and gold in his palace, I could not do anything great or small to go beyond the command of the Lord my God.' That night God came to Balaam and said, 'Since these men have come to summon you, go with them, but do only what I tell you.' Balaam got up in the morning, saddled his donkey and went with the Moabite officials. But God was very angry when he went, and the angel of the Lord stood in the road to oppose him. Balaam's donkey saw the angel and turned off the road into a field. Balaam beat her to get her back on the road. Then the angel of the Lord stood in a narrow path between two vineyards, with walls on both sides. When the donkey saw the angel of the Lord, she pressed close to the wall, crushing Balaam's foot against it. So he beat her again. Then the angel of the Lord moved on ahead and stood in a narrow place where there was no room to turn, either to the right or to the left. When the donkey saw the angel of the Lord, she lay down under Balaam, and he was angry and beat her with his staff. Then the Lord opened the donkey's mouth, and she said to Balaam, 'What have I done to you to make you beat me these three times?' Balaam answered the donkey, 'You have made a fool of me! If only I had a sword in my hand, I would kill you right now.' The donkey said to Balaam, 'Am I not your own donkey, which you have always ridden, to this day? Have I been in the habit of doing this to you?' 'No,' he said. Then the Lord opened Balaam's eyes, and he saw the angel of the Lord standing in the road with his sword drawn. So he bowed low and fell facedown. The angel of the Lord asked him, 'Why have you beaten your donkey these three times? I have come here to oppose you because your path is a reckless one before me. The donkey saw me and turned away from me these three times. If it had not turned away, I would certainly have killed you by now, but I would have spared it.' Balaam said to the angel of the Lord, 'I have sinned. I did not realize you were standing in the road to oppose me. Now if you are displeased, I will go back.' The angel of the Lord said to Balaam, 'Go with the men, but speak only what I tell you.' So Balaam went with Balak's officials. When Balak heard that Balaam was coming, he went out to meet him at the Moabite town on the Arnon border, at the edge of his territory. Balak said to Balaam, 'Did I not send you an urgent summons? Why didn't you come to me? Am I really not able to reward you?' 'Well, I have come to you now,' Balaam replied. 'But I can't say whatever I please. I must speak only what God puts in my mouth.' Then Balaam spoke his message: 'How can I curse those whom God has not cursed? How can I denounce those whom the Lord has not denounced? From the rocky peaks I see them, from the heights I view them. I see a people who live apart and do not consider themselves one of the nations. Who can count the dust of Jacob or number even a fourth of Israel? Let me die the death of the righteous, and may my final end be like theirs!' Balak said to Balaam, 'What have you done to me? I brought you to curse my enemies, but you have done nothing but bless them!' He answered, 'Must I not speak what the Lord puts in my mouth?' Then Balaam spoke his message: 'A star will come out of Jacob; a scepter will rise out of Israel. He will crush the foreheads of Moab, the skulls of all the people of Sheth. Edom will be conquered; Seir, his enemy, will be conquered, but Israel will grow strong. A ruler will come out of Jacob and destroy the survivors of the city.'",
+                christConnection: "Balaam's prophecy of a star and scepter points directly to Christ, the Messiah (<a href='https://www.biblegateway.com/passage/?search=Matthew%202%3A2&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Matthew 2:2</a>). God cannot be manipulated—He blesses whom He chooses, and in Christ, we are blessed (<a href='https://www.biblegateway.com/passage/?search=Ephesians%201%3A3&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Ephesians 1:3</a>)."
+            },
+            {
+                name: "Josué Elegido como Sucesor",
+                date: "c. 1407 a.C.",
+                scripture: "Números 27:12-23",
+                intro: "Dios le dice a Moisés que no entrará a la tierra prometida debido a su pecado en Meriba. Moisés le pide a Dios que nombre un sucesor, y Dios elige a Josué, que guiará a Israel a Canaán.",
+                tagline: "Preparando la próxima generación",
+                summary: "The Lord said to Moses, 'Go up this mountain in the Abarim Range and see the land I have given the Israelites. After you have seen it, you too will be gathered to your people, as your brother Aaron was, for when the community rebelled at the waters in the Desert of Zin, both of you disobeyed my command to honor me as holy before their eyes.' Moses said to the Lord, 'May the Lord, the God who gives breath to all living things, appoint someone over this community to go out and come in before them, one who will lead them out and bring them in, so the Lord's people will not be like sheep without a shepherd.' So the Lord said to Moses, 'Take Joshua son of Nun, a man in whom is the spirit of leadership, and lay your hand on him. Have him stand before Eleazar the priest and the entire assembly and commission him in their presence. Give him some of your authority so the whole Israelite community will obey him. He is to stand before Eleazar the priest, who will obtain decisions for him by inquiring of the Urim before the Lord. At his command he and the entire community of the Israelites will go out, and at his command they will come in.' Moses did as the Lord commanded him. He took Joshua and had him stand before Eleazar the priest and the whole assembly. Then he laid his hands on him and commissioned him, as the Lord instructed through Moses.",
+                christConnection: "Joshua's appointment points forward to Jesus (Joshua and Jesus share the same Hebrew name). Just as Joshua led Israel into the promised land, Jesus leads us into our eternal inheritance (<a href='https://www.biblegateway.com/passage/?search=Hebrews%204%3A8-10&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 4:8-10</a>). Christ is our perfect leader and shepherd (<a href='https://www.biblegateway.com/passage/?search=Hebrews%2013%3A20&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 13:20</a>)."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=RVR1960`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "El Censo de Israel": "dive-in-census-es.html",
+                    "El Voto Nazareo": "dive-in-nazirite-es.html",
+                    "Los Espías y la Incredulidad": "dive-in-spies-es.html",
+                    "La Rebelión de Coré": "dive-in-korah-es.html",
+                    "La Serpiente de Bronce": "dive-in-bronze-serpent-es.html",
+                    "Balaam y Balac": "dive-in-balaam-es.html",
+                    "Josué Elegido como Sucesor": "dive-in-joshua-successor-es.html"
+                };
+                
+                // Also map English names for backwards compatibility
+                const diveInPagesEn = {
+                    "The Census of Israel": "dive-in-census-es.html",
+                    "The Nazirite Vow": "dive-in-nazirite-es.html",
+                    "The Spies and Unbelief": "dive-in-spies-es.html",
+                    "Korah's Rebellion": "dive-in-korah-es.html",
+                    "The Bronze Serpent": "dive-in-bronze-serpent-es.html",
+                    "Balaam and Balak": "dive-in-balaam-es.html",
+                    "Joshua Chosen as Successor": "dive-in-joshua-successor-es.html"
+                };
+                
+                const diveInPage = diveInPages[event.name] || diveInPagesEn[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                        <a href="${diveInPage}" class="dive-in-btn">¡Sumérgete!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Cristo en Esta Historia</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Helena',
+                'Microsoft Laura',
+                'Paulina',
+                'Monica'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const spanishVoice = voices.find(v => v.lang.startsWith('es'));
+            return spanishVoice || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Escuchar Historia';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 1;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        renderTimeline();
+
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+
