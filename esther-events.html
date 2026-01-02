@@ -773,18 +773,226 @@
     </div>
 
     <script>
-        // Major events in Judges
-                const mainEvents = [
+        // Major events in Esther
+        const mainEvents = [
             {
-                name: "Esther Saves Her People",
-                date: "474 BC",
-                scripture: "Esther 4:1-9:32",
-                intro: "Esther risks her life to approach the king and save her people from destruction. Her courage points forward to how Christ saves His people.",
-                tagline: "Courage in the face of danger, salvation for the people",
-                summary: "When Mordecai learns of Haman's plot to destroy all the Jews, he urges Esther to intercede with the king. Esther knows that approaching the king without being summoned could mean death, but she decides to risk her life, saying, "If I perish, I perish." She approaches the king, who receives her. She then exposes Haman's plot and saves her people. The Jews are allowed to defend themselves, and they are victorious. Esther's courage and willingness to risk everything to save her people points forward to how Christ risked everything and gave His life to save His people from sin and death.",
-                christConnection: "Esther's courage in saving her people points forward to how Christ saves His people. Just as Esther risked her life to save the Jews, Christ gave His life to save all who believe. Esther's story demonstrates God's providential care, which is fully revealed in Christ's work of salvation (<a href="https://www.biblegateway.com/passage/?search=Romans%205%3A8&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 5:8</a>)."
+                name: "Esther Becomes Queen",
+                date: "c. 478 BC",
+                scripture: "Esther 2:1-18",
+                intro: "Esther, a Jewish orphan, is chosen to be queen of Persia. God's providential care places her in a position to save her people, pointing forward to how Christ is placed in a position to save His people.",
+                tagline: "Providence in action, a queen for such a time",
+                summary: "After Queen Vashti is removed from her position, King Xerxes searches for a new queen. Esther, a beautiful Jewish orphan raised by her cousin Mordecai, is taken to the palace. She finds favor with the king's eunuch Hegai, who gives her special treatment. When it is her turn to go before the king, she wins his favor and is chosen as queen. However, she keeps her Jewish identity secret, as Mordecai had instructed her. Esther's rise to queen demonstrates God's providential care, placing her in a position where she can later save her people. This points forward to how Christ was placed in a position of authority to save His people.",
+                christConnection: "Esther's rise to queen demonstrates God's providential care, placing her in a position to save her people. This points forward to how Christ was placed in a position of authority to save His people. Just as Esther was chosen for such a time as this, Christ was sent at the right time to save us (<a href='https://www.biblegateway.com/passage/?search=Galatians%204%3A4&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Galatians 4:4</a>)."
             },
-        ];;
-
+            {
+                name: "Haman's Plot and Esther's Courage",
+                date: "c. 474 BC",
+                scripture: "Esther 3:1-5:8",
+                intro: "Haman plots to destroy all the Jews, but Esther risks her life to intercede with the king. Her courage points forward to how Christ intercedes for His people.",
+                tagline: "Evil plot, courageous intercession",
+                summary: "Haman, the king's highest official, becomes enraged when Mordecai refuses to bow down to him. In his anger, Haman plots to destroy all the Jews throughout the Persian Empire. He convinces the king to issue a decree for their destruction. When Mordecai learns of the plot, he urges Esther to intercede with the king. Esther knows that approaching the king without being summoned could mean death, but she decides to risk her life, saying, 'If I perish, I perish.' She fasts and prays, then approaches the king, who receives her and offers her anything up to half his kingdom. Esther invites the king and Haman to a banquet, where she will reveal her request. Esther's courage in risking her life to save her people points forward to how Christ risked everything to save His people.",
+                christConnection: "Esther's courage in interceding for her people points forward to how Christ intercedes for His people. Just as Esther risked her life to save the Jews, Christ gave His life to save all who believe. Esther's intercession demonstrates the power of one person's sacrifice for many (<a href='https://www.biblegateway.com/passage/?search=Romans%205%3A8&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Romans 5:8</a>)."
+            },
+            {
+                name: "The Jews' Deliverance",
+                date: "474 BC",
+                scripture: "Esther 6:1-9:32",
+                intro: "Haman's plot is exposed, he is executed, and the Jews are delivered. This deliverance points forward to how Christ delivers His people from sin and death.",
+                tagline: "Evil defeated, God's people delivered",
+                summary: "On the night before Esther's second banquet, the king cannot sleep and has the chronicles read to him. He learns that Mordecai had once saved his life but was never rewarded. The next day, Haman comes to ask permission to hang Mordecai, but the king asks Haman what should be done for someone the king wants to honor. Thinking the king means him, Haman suggests an elaborate honor. The king then commands Haman to honor Mordecai in this way. At the second banquet, Esther reveals that she is a Jew and that Haman has plotted to destroy her people. The king is enraged and orders Haman to be hanged on the gallows he had prepared for Mordecai. Esther is given Haman's estate, and Mordecai is elevated to Haman's position. The king issues a new decree allowing the Jews to defend themselves, and they are victorious over their enemies. The Jews' deliverance demonstrates God's providential care and points forward to how Christ delivers His people from sin and death.",
+                christConnection: "The Jews' deliverance from Haman's plot points forward to how Christ delivers His people from sin and death. Just as the Jews were saved from destruction, we are saved from eternal destruction through Christ. The victory of the Jews demonstrates God's faithfulness to His people, which is fully revealed in Christ's work of salvation (<a href='https://www.biblegateway.com/passage/?search=1%20Corinthians%2015%3A57&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Corinthians 15:57</a>)."
+            }
         ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            if (!timeline) {
+                console.error('Timeline element not found');
+                return;
+            }
+            if (!mainEvents || mainEvents.length === 0) {
+                console.error('mainEvents is empty or undefined');
+                return;
+            }
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "Esther Becomes Queen": "dive-in-esther-queen.html",
+                    "Haman's Plot and Esther's Courage": "dive-in-esther-courage.html",
+                    "The Jews' Deliverance": "dive-in-esther-deliverance.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferredName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferredName));
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-US';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize - script is at end of body so DOM is ready
+        renderTimeline();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
 

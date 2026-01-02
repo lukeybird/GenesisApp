@@ -54,6 +54,9 @@
         'dive-in-solomon-dedicates-temple.html': { book: '2chronicles', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-hezekiah-reformation.html': { book: '2chronicles', type: 'events', lang: 'en', special: 'dive-in' },
         'dive-in-temple-destroyed.html': { book: '2chronicles', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-return-exile.html': { book: 'ezra', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-temple-rebuilt.html': { book: 'ezra', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-ezra-teaches-law.html': { book: 'ezra', type: 'events', lang: 'en', special: 'dive-in' },
         
         // Spanish pages
         'index-es.html': { book: 'genesis', type: 'characters', lang: 'es' },
@@ -130,7 +133,22 @@
         'dive-in-david-temple-prep-es.html': { book: '1chronicles', type: 'events', lang: 'es', special: 'dive-in' },
         'dive-in-solomon-dedicates-temple-es.html': { book: '2chronicles', type: 'events', lang: 'es', special: 'dive-in' },
         'dive-in-hezekiah-reformation-es.html': { book: '2chronicles', type: 'events', lang: 'es', special: 'dive-in' },
-        'dive-in-temple-destroyed-es.html': { book: '2chronicles', type: 'events', lang: 'es', special: 'dive-in' }
+        'dive-in-temple-destroyed-es.html': { book: '2chronicles', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-return-exile-es.html': { book: 'ezra', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-temple-rebuilt-es.html': { book: 'ezra', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-ezra-teaches-law-es.html': { book: 'ezra', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-walls-rebuilt.html': { book: 'nehemiah', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-reading-law.html': { book: 'nehemiah', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-covenant-renewal.html': { book: 'nehemiah', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-walls-rebuilt-es.html': { book: 'nehemiah', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-reading-law-es.html': { book: 'nehemiah', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-covenant-renewal-es.html': { book: 'nehemiah', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-esther-queen.html': { book: 'esther', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-esther-courage.html': { book: 'esther', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-esther-deliverance.html': { book: 'esther', type: 'events', lang: 'en', special: 'dive-in' },
+        'dive-in-esther-queen-es.html': { book: 'esther', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-esther-courage-es.html': { book: 'esther', type: 'events', lang: 'es', special: 'dive-in' },
+        'dive-in-esther-deliverance-es.html': { book: 'esther', type: 'events', lang: 'es', special: 'dive-in' }
     };
 
     // Book categories configuration

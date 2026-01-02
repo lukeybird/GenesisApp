@@ -634,31 +634,31 @@
     </div>
 
     <script>
-        // Main characters in 1 Samuel
-                const mainCharacters = [
+        // Personajes principales en Nehemías
+        const mainCharacters = [
             {
-                name: "Nehemiah",
-                date: "c. 445 BC",
-                scripture: "Nehemiah 1:1-13:31",
-                intro: "A cupbearer to the Persian king who becomes governor of Judah and leads the rebuilding of Jerusalem's walls. His leadership points forward to Christ, the ultimate Leader.",
-                tagline: "Wall rebuilder, faithful leader",
-                summary: "Nehemiah is a cupbearer to King Artaxerxes who hears that Jerusalem's walls are broken down. He prays and fasts, then asks the king for permission to go to Jerusalem to rebuild the walls. Despite opposition, Nehemiah leads the people in rebuilding the walls in just 52 days. He also leads a spiritual reformation, having Ezra read the Law to the people. Nehemiah's leadership points forward to how Christ leads us in building the kingdom of God and in spiritual renewal."
+                name: "Nehemías",
+                date: "c. 445 a.C.",
+                scripture: "Nehemías 1:1-13:31",
+                intro: "Un copero del rey persa que se convierte en gobernador de Judá y lidera la reconstrucción de los muros de Jerusalén. Su liderazgo apunta hacia Cristo, el Líder supremo.",
+                tagline: "Reconstructor de muros, líder fiel",
+                summary: "Nehemías es un copero del rey Artajerjes que escucha que los muros de Jerusalén están derribados. Ora y ayuna, luego le pide al rey permiso para ir a Jerusalén a reconstruir los muros. A pesar de la oposición, Nehemías lidera al pueblo en la reconstrucción de los muros en solo 52 días. También lidera una reforma espiritual, haciendo que Esdras lea la Ley al pueblo. El liderazgo de Nehemías apunta hacia cómo Cristo nos lidera en la construcción del reino de Dios y en la renovación espiritual."
             },
             {
-                name: "Ezra",
-                date: "c. 445 BC",
-                scripture: "Nehemiah 8:1-18",
-                intro: "The priest who reads the Law to the people, leading to repentance and renewal. His teaching points forward to Christ, the ultimate Teacher.",
-                tagline: "Teacher of the Law, bringer of renewal",
-                summary: "Ezra reads the Book of the Law to all the people, and they respond with repentance and celebration. This leads to a great spiritual renewal. Ezra's teaching points forward to how Christ teaches us and brings spiritual renewal through His Word and Spirit."
+                name: "Esdras",
+                date: "c. 445 a.C.",
+                scripture: "Nehemías 8:1-18",
+                intro: "El sacerdote que lee la Ley al pueblo, llevando al arrepentimiento y la renovación. Su enseñanza apunta hacia Cristo, el Maestro supremo.",
+                tagline: "Maestro de la Ley, portador de renovación",
+                summary: "Esdras lee el Libro de la Ley a todo el pueblo, y ellos responden con arrepentimiento y celebración. Esto lleva a una gran renovación espiritual. La enseñanza de Esdras apunta hacia cómo Cristo nos enseña y trae renovación espiritual a través de Su Palabra y Espíritu."
             },
             {
-                name: "The Lord (YHWH)",
-                date: "Eternal",
-                scripture: "Nehemiah 1:1-13:31 (throughout)",
-                intro: "The God who enables the rebuilding of Jerusalem and brings spiritual renewal. His work points forward to Christ's work of building the kingdom.",
-                tagline: "The builder and renewer",
-                summary: "Throughout Nehemiah, the Lord demonstrates His power in enabling the rebuilding of Jerusalem's walls and bringing spiritual renewal. He answers Nehemiah's prayers and protects the people from their enemies. The Lord's work points forward to how Christ builds the kingdom of God and brings spiritual renewal to all who believe."
+                name: "El Señor (YHWH)",
+                date: "Eterno",
+                scripture: "Nehemías 1:1-13:31 (a lo largo)",
+                intro: "El Dios que permite la reconstrucción de Jerusalén y trae renovación espiritual. Su obra apunta hacia la obra de Cristo de construir el reino.",
+                tagline: "El constructor y renovador",
+                summary: "A lo largo de Nehemías, el Señor demuestra Su poder al permitir la reconstrucción de los muros de Jerusalén y traer renovación espiritual. Responde a las oraciones de Nehemías y protege al pueblo de sus enemigos. La obra del Señor apunta hacia cómo Cristo construye el reino de Dios y trae renovación espiritual a todos los que creen."
             },
         ]
 
@@ -725,14 +725,14 @@
         let currentButton = null;
         let spanishVoice = null;
 
-        function findJarvisVoice() {
+        function findSpanishVoice() {
             const voices = speechSynthesis.getVoices();
             const preferredVoices = [
-                'Google UK English Male',
-                'Microsoft Zira - English (United States)',
-                'Microsoft David - English (United States)',
-                'Alex',
-                'Daniel'
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
             ];
             
             for (const voiceName of preferredVoices) {
@@ -741,13 +741,12 @@
             }
             
             const maleVoice = voices.find(v => 
-                v.lang.startsWith('en') && 
+                v.lang.startsWith('es') && 
                 (v.name.toLowerCase().includes('male') || 
-                 v.name.toLowerCase().includes('david') ||
-                 v.name.toLowerCase().includes('daniel'))
+                 v.name.toLowerCase().includes('pablo'))
             );
             
-            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+            return maleVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
         }
 
         if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -757,7 +756,7 @@
         }
 
         setTimeout(() => {
-            jarvisVoice = findJarvisVoice();
+            spanishVoice = findSpanishVoice();
         }, 100);
 
         function playAudio(button, text) {

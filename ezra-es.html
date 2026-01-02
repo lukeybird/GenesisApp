@@ -634,31 +634,31 @@
     </div>
 
     <script>
-        // Main characters in 1 Samuel
-                const mainCharacters = [
+        // Personajes principales en Esdras
+        const mainCharacters = [
             {
-                name: "Ezra",
-                date: "c. 458 BC",
-                scripture: "Ezra 7:1-10:44",
-                intro: "A priest and scribe who leads the second wave of exiles back to Jerusalem and teaches the people the Law. His ministry points forward to Christ, the ultimate Teacher.",
-                tagline: "Priest, scribe, teacher of the Law",
-                summary: "Ezra is a priest and scribe who is skilled in the Law of Moses. He leads a group of exiles back to Jerusalem and teaches the people the Law. When he discovers that the people have intermarried with foreign nations, he leads them in repentance. Ezra's teaching of the Law points forward to how Christ teaches us the true meaning of the Law and fulfills it perfectly."
+                name: "Esdras",
+                date: "c. 458 a.C.",
+                scripture: "Esdras 7:1-10:44",
+                intro: "Un sacerdote y escriba que lidera la segunda ola de exiliados de regreso a Jerusalén y enseña al pueblo la Ley. Su ministerio apunta hacia Cristo, el Maestro supremo.",
+                tagline: "Sacerdote, escriba, maestro de la Ley",
+                summary: "Esdras es un sacerdote y escriba hábil en la Ley de Moisés. Lidera un grupo de exiliados de regreso a Jerusalén y enseña al pueblo la Ley. Cuando descubre que el pueblo se ha casado con naciones extranjeras, los lleva al arrepentimiento. La enseñanza de la Ley por Esdras apunta hacia cómo Cristo nos enseña el verdadero significado de la Ley y la cumple perfectamente."
             },
             {
-                name: "Zerubbabel",
-                date: "c. 538 BC",
-                scripture: "Ezra 1:1-6:22",
-                intro: "A descendant of David who leads the first wave of exiles back to Jerusalem and begins rebuilding the temple. He points forward to Christ, the true Son of David.",
-                tagline: "Leader of the return, temple rebuilder",
-                summary: "Zerubbabel is a descendant of David who leads the first wave of exiles back to Jerusalem. He begins rebuilding the temple, but the work is interrupted by opposition. However, with the encouragement of the prophets Haggai and Zechariah, the temple is completed. Zerubbabel's role in rebuilding the temple points forward to how Christ builds the true temple—the church."
+                name: "Zorobabel",
+                date: "c. 538 a.C.",
+                scripture: "Esdras 1:1-6:22",
+                intro: "Un descendiente de David que lidera la primera ola de exiliados de regreso a Jerusalén y comienza a reconstruir el templo. Apunta hacia Cristo, el verdadero Hijo de David.",
+                tagline: "Líder del regreso, reconstructor del templo",
+                summary: "Zorobabel es un descendiente de David que lidera la primera ola de exiliados de regreso a Jerusalén. Comienza a reconstruir el templo, pero el trabajo es interrumpido por la oposición. Sin embargo, con el estímulo de los profetas Hageo y Zacarías, el templo es completado. El papel de Zorobabel en la reconstrucción del templo apunta hacia cómo Cristo construye el verdadero templo—la iglesia."
             },
             {
-                name: "The Lord (YHWH)",
-                date: "Eternal",
-                scripture: "Ezra 1:1-10:44 (throughout)",
-                intro: "The God who restores His people from exile and enables them to rebuild the temple. His restoration points forward to Christ's work of redemption.",
-                tagline: "The restorer and redeemer",
-                summary: "Throughout Ezra, the Lord demonstrates His faithfulness in restoring His people from exile. He moves the heart of the Persian king to allow the exiles to return. He enables them to rebuild the temple despite opposition. The Lord's restoration of His people points forward to how Christ restores us from the exile of sin and enables us to be part of God's kingdom."
+                name: "El Señor (YHWH)",
+                date: "Eterno",
+                scripture: "Esdras 1:1-10:44 (a lo largo)",
+                intro: "El Dios que restaura a Su pueblo del exilio y les permite reconstruir el templo. Su restauración apunta hacia la obra de redención de Cristo.",
+                tagline: "El restaurador y redentor",
+                summary: "A lo largo de Esdras, el Señor demuestra Su fidelidad al restaurar a Su pueblo del exilio. Mueve el corazón del rey persa para permitir que los exiliados regresen. Les permite reconstruir el templo a pesar de la oposición. La restauración del Señor de Su pueblo apunta hacia cómo Cristo nos restaura del exilio del pecado y nos permite ser parte del reino de Dios."
             },
         ]
 
@@ -725,14 +725,14 @@
         let currentButton = null;
         let spanishVoice = null;
 
-        function findJarvisVoice() {
+        function findSpanishVoice() {
             const voices = speechSynthesis.getVoices();
             const preferredVoices = [
-                'Google UK English Male',
-                'Microsoft Zira - English (United States)',
-                'Microsoft David - English (United States)',
-                'Alex',
-                'Daniel'
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
             ];
             
             for (const voiceName of preferredVoices) {
@@ -741,13 +741,12 @@
             }
             
             const maleVoice = voices.find(v => 
-                v.lang.startsWith('en') && 
+                v.lang.startsWith('es') && 
                 (v.name.toLowerCase().includes('male') || 
-                 v.name.toLowerCase().includes('david') ||
-                 v.name.toLowerCase().includes('daniel'))
+                 v.name.toLowerCase().includes('pablo'))
             );
             
-            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+            return maleVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
         }
 
         if (speechSynthesis.onvoiceschanged !== undefined) {
@@ -757,7 +756,7 @@
         }
 
         setTimeout(() => {
-            jarvisVoice = findJarvisVoice();
+            spanishVoice = findSpanishVoice();
         }, 100);
 
         function playAudio(button, text) {

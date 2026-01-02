@@ -773,8 +773,8 @@
     </div>
 
     <script>
-        // Major events in Judges
-                const mainEvents = [
+        // Major events in Ezra
+        const mainEvents = [
             {
                 name: "The Return from Exile",
                 date: "538 BC",
@@ -782,7 +782,7 @@
                 intro: "The first wave of exiles returns to Jerusalem under Zerubbabel's leadership. This restoration points forward to how Christ restores us from the exile of sin.",
                 tagline: "Restoration begins, exiles return",
                 summary: "In fulfillment of Jeremiah's prophecy, King Cyrus of Persia issues a decree allowing the Jewish exiles to return to Jerusalem to rebuild the temple. Zerubbabel leads a group of exiles back to Jerusalem. They begin rebuilding the temple, but face opposition from their enemies. However, with the encouragement of the prophets Haggai and Zechariah, the work continues. The return from exile points forward to how Christ restores us from the exile of sin and enables us to be part of God's kingdom.",
-                christConnection: "The return from exile points forward to how Christ restores us from the exile of sin. Just as the exiles returned to Jerusalem, we are restored to God through Christ and become part of His kingdom (<a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 1:13-14</a>)."
+                christConnection: "The return from exile points forward to how Christ restores us from the exile of sin. Just as the exiles returned to Jerusalem, we are restored to God through Christ and become part of His kingdom (<a href='https://www.biblegateway.com/passage/?search=Colossians%201%3A13-14&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Colossians 1:13-14</a>)."
             },
             {
                 name: "The Temple is Rebuilt",
@@ -791,9 +791,208 @@
                 intro: "The temple is rebuilt despite opposition. This points forward to how Christ builds the true temple—the church—despite opposition.",
                 tagline: "The temple rebuilt, worship restored",
                 summary: "Despite opposition from their enemies, the exiles continue rebuilding the temple. When the work is questioned by the Persian officials, they appeal to King Darius, who confirms Cyrus's original decree. The temple is completed and dedicated with great celebration. The rebuilding of the temple points forward to how Christ builds the true temple—the church—and how true worship is restored through Him.",
-                christConnection: "The temple's rebuilding points forward to how Christ builds the true temple—the church. Just as the physical temple was rebuilt, Christ builds the spiritual temple—the church—and restores true worship (<a href="https://www.biblegateway.com/passage/?search=1%20Peter%202%3A5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Peter 2:5</a>)."
+                christConnection: "The temple's rebuilding points forward to how Christ builds the true temple—the church. Just as the physical temple was rebuilt, Christ builds the spiritual temple—the church—and restores true worship (<a href='https://www.biblegateway.com/passage/?search=1%20Peter%202%3A5&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Peter 2:5</a>)."
             },
-        ];;
-
+            {
+                name: "Ezra Returns and Teaches the Law",
+                date: "458 BC",
+                scripture: "Ezra 7:1-10:44",
+                intro: "Ezra leads the second wave of exiles back to Jerusalem and teaches the people the Law. His teaching points forward to how Christ teaches us the true meaning of the Law.",
+                tagline: "The Law taught, the people reformed",
+                summary: "Ezra, a priest and scribe skilled in the Law of Moses, leads a second wave of exiles back to Jerusalem. He is given authority by King Artaxerxes to teach the Law and to enforce it. When Ezra discovers that the people have intermarried with foreign nations, he leads them in repentance. The people separate themselves from their foreign wives and commit to following the Law. Ezra's teaching of the Law points forward to how Christ teaches us the true meaning of the Law and fulfills it perfectly.",
+                christConnection: "Ezra's teaching of the Law points forward to how Christ teaches us the true meaning of the Law. Just as Ezra taught the Law to the people, Christ teaches us the Law and fulfills it perfectly (<a href='https://www.biblegateway.com/passage/?search=Matthew%205%3A17&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Matthew 5:17</a>)."
+            }
         ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            if (!timeline) {
+                console.error('Timeline element not found');
+                return;
+            }
+            if (!mainEvents || mainEvents.length === 0) {
+                console.error('mainEvents is empty or undefined');
+                return;
+            }
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "The Return from Exile": "dive-in-return-exile.html",
+                    "The Temple is Rebuilt": "dive-in-temple-rebuilt.html",
+                    "Ezra Returns and Teaches the Law": "dive-in-ezra-teaches-law.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize - script is at end of body so DOM is ready
+        renderTimeline();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
 

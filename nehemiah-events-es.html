@@ -773,25 +773,225 @@
     </div>
 
     <script>
-        // Major events in Judges
-                const mainEvents = [
+        // Eventos principales en Nehemías
+        const mainEvents = [
             {
-                name: "The Walls are Rebuilt",
-                date: "445 BC",
-                scripture: "Nehemiah 2:1-6:19",
-                intro: "Nehemiah leads the people in rebuilding Jerusalem's walls in just 52 days, despite opposition. This points forward to how Christ builds the kingdom despite opposition.",
-                tagline: "Walls rebuilt in 52 days",
-                summary: "Nehemiah receives permission from King Artaxerxes to go to Jerusalem and rebuild the walls. Despite opposition from Sanballat, Tobiah, and others, Nehemiah leads the people in rebuilding the walls. Each family is assigned a section of the wall to rebuild. The work is completed in just 52 days, demonstrating God's power and the people's unity. The rebuilding of the walls points forward to how Christ builds the kingdom of God despite opposition and how we are called to work together in building His kingdom.",
-                christConnection: "The rebuilding of the walls points forward to how Christ builds the kingdom of God. Just as the walls were rebuilt despite opposition, Christ builds His kingdom despite all opposition. We are called to participate in building His kingdom (<a href="https://www.biblegateway.com/passage/?search=Matthew%2016%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 16:18</a>)."
+                name: "Los Muros son Reconstruidos",
+                date: "445 a.C.",
+                scripture: "Nehemías 2:1-6:19",
+                intro: "Nehemías lidera al pueblo en la reconstrucción de los muros de Jerusalén en solo 52 días, a pesar de la oposición. Esto apunta hacia cómo Cristo construye el reino a pesar de la oposición.",
+                tagline: "Muros reconstruidos en 52 días",
+                summary: "Nehemías recibe permiso del rey Artajerjes para ir a Jerusalén y reconstruir los muros. A pesar de la oposición de Sanbalat, Tobías y otros, Nehemías lidera al pueblo en la reconstrucción de los muros. A cada familia se le asigna una sección del muro para reconstruir. El trabajo se completa en solo 52 días, demostrando el poder de Dios y la unidad del pueblo. La reconstrucción de los muros apunta hacia cómo Cristo construye el reino de Dios a pesar de la oposición y cómo somos llamados a trabajar juntos en la construcción de Su reino.",
+                christConnection: "La reconstrucción de los muros apunta hacia cómo Cristo construye el reino de Dios. Así como los muros fueron reconstruidos a pesar de la oposición, Cristo construye Su reino a pesar de toda oposición. Somos llamados a participar en la construcción de Su reino (<a href='https://www.biblegateway.com/passage/?search=Mateo%2016%3A18&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Mateo 16:18</a>)."
             },
             {
-                name: "The Reading of the Law",
-                date: "445 BC",
-                scripture: "Nehemiah 8:1-18",
-                intro: "Ezra reads the Book of the Law to all the people, leading to repentance and spiritual renewal. This points forward to how Christ brings spiritual renewal through His Word.",
-                tagline: "Spiritual renewal through God's Word",
-                summary: "Ezra reads the Book of the Law to all the people from daybreak until noon. As he reads, the people listen attentively and respond with repentance and celebration. They celebrate the Feast of Tabernacles for the first time in many years. This leads to a great spiritual renewal. The reading of the Law points forward to how Christ brings spiritual renewal through His Word and how we should respond to God's Word with repentance and faith.",
-                christConnection: "The reading of the Law points forward to how Christ brings spiritual renewal through His Word. Just as the people were renewed by hearing the Law, we are renewed by hearing and responding to Christ, the Word made flesh (<a href="https://www.biblegateway.com/passage/?search=John%201%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 1:1</a>)."
+                name: "La Lectura de la Ley",
+                date: "445 a.C.",
+                scripture: "Nehemías 8:1-18",
+                intro: "Esdras lee el Libro de la Ley a todo el pueblo, llevando al arrepentimiento y la renovación espiritual. Esto apunta hacia cómo Cristo trae renovación espiritual a través de Su Palabra.",
+                tagline: "Renovación espiritual a través de la Palabra de Dios",
+                summary: "Esdras lee el Libro de la Ley a todo el pueblo desde el amanecer hasta el mediodía. Mientras lee, el pueblo escucha atentamente y responde con arrepentimiento y celebración. Celebran la Fiesta de los Tabernáculos por primera vez en muchos años. Esto lleva a una gran renovación espiritual. La lectura de la Ley apunta hacia cómo Cristo trae renovación espiritual a través de Su Palabra y cómo debemos responder a la Palabra de Dios con arrepentimiento y fe.",
+                christConnection: "La lectura de la Ley apunta hacia cómo Cristo trae renovación espiritual a través de Su Palabra. Así como el pueblo fue renovado al escuchar la Ley, somos renovados al escuchar y responder a Cristo, el Verbo hecho carne (<a href='https://www.biblegateway.com/passage/?search=Juan%201%3A1&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Juan 1:1</a>)."
             },
-        ];;
+            {
+                name: "La Renovación del Pacto",
+                date: "445 a.C.",
+                scripture: "Nehemías 9:1-10:39",
+                intro: "El pueblo renueva su pacto con Dios, comprometiéndose a seguir Su Ley. Esto apunta hacia cómo Cristo establece el nuevo pacto a través de Su sangre.",
+                tagline: "Un nuevo compromiso con el pacto de Dios",
+                summary: "Después de escuchar la Ley leída, el pueblo se reúne para un día de ayuno y confesión. Recuentan la fidelidad de Dios a lo largo de su historia y renuevan su compromiso de seguir Su Ley. Firman un pacto escrito, comprometiéndose a guardar el sábado, apoyar el templo y seguir todos los mandamientos de Dios. La renovación del pacto apunta hacia cómo Cristo establece el nuevo pacto a través de Su sangre, permitiéndonos guardar los mandamientos de Dios a través del poder del Espíritu Santo.",
+                christConnection: "La renovación del pacto apunta hacia cómo Cristo establece el nuevo pacto. Así como el pueblo se comprometió a seguir la Ley, Cristo nos permite guardar los mandamientos de Dios a través del nuevo pacto en Su sangre (<a href='https://www.biblegateway.com/passage/?search=Hebreos%208%3A6&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebreos 8:6</a>)."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=RVR1960`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            if (!timeline) {
+                console.error('Timeline element not found');
+                return;
+            }
+            if (!mainEvents || mainEvents.length === 0) {
+                console.error('mainEvents is empty or undefined');
+                return;
+            }
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs (Spanish versions)
+                const diveInPages = {
+                    "Los Muros son Reconstruidos": "dive-in-walls-rebuilt-es.html",
+                    "La Lectura de la Ley": "dive-in-reading-law-es.html",
+                    "La Renovación del Pacto": "dive-in-covenant-renewal-es.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                        <a href="${diveInPage}" class="dive-in-btn">¡Sumérgete!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Cristo en Esta Historia</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('es') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('pablo'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Escuchar Historia';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize - script is at end of body so DOM is ready
+        renderTimeline();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
 

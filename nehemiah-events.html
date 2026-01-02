@@ -773,8 +773,8 @@
     </div>
 
     <script>
-        // Major events in Judges
-                const mainEvents = [
+        // Major events in Nehemiah
+        const mainEvents = [
             {
                 name: "The Walls are Rebuilt",
                 date: "445 BC",
@@ -782,7 +782,7 @@
                 intro: "Nehemiah leads the people in rebuilding Jerusalem's walls in just 52 days, despite opposition. This points forward to how Christ builds the kingdom despite opposition.",
                 tagline: "Walls rebuilt in 52 days",
                 summary: "Nehemiah receives permission from King Artaxerxes to go to Jerusalem and rebuild the walls. Despite opposition from Sanballat, Tobiah, and others, Nehemiah leads the people in rebuilding the walls. Each family is assigned a section of the wall to rebuild. The work is completed in just 52 days, demonstrating God's power and the people's unity. The rebuilding of the walls points forward to how Christ builds the kingdom of God despite opposition and how we are called to work together in building His kingdom.",
-                christConnection: "The rebuilding of the walls points forward to how Christ builds the kingdom of God. Just as the walls were rebuilt despite opposition, Christ builds His kingdom despite all opposition. We are called to participate in building His kingdom (<a href="https://www.biblegateway.com/passage/?search=Matthew%2016%3A18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Matthew 16:18</a>)."
+                christConnection: "The rebuilding of the walls points forward to how Christ builds the kingdom of God. Just as the walls were rebuilt despite opposition, Christ builds His kingdom despite all opposition. We are called to participate in building His kingdom (<a href='https://www.biblegateway.com/passage/?search=Matthew%2016%3A18&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Matthew 16:18</a>)."
             },
             {
                 name: "The Reading of the Law",
@@ -791,9 +791,208 @@
                 intro: "Ezra reads the Book of the Law to all the people, leading to repentance and spiritual renewal. This points forward to how Christ brings spiritual renewal through His Word.",
                 tagline: "Spiritual renewal through God's Word",
                 summary: "Ezra reads the Book of the Law to all the people from daybreak until noon. As he reads, the people listen attentively and respond with repentance and celebration. They celebrate the Feast of Tabernacles for the first time in many years. This leads to a great spiritual renewal. The reading of the Law points forward to how Christ brings spiritual renewal through His Word and how we should respond to God's Word with repentance and faith.",
-                christConnection: "The reading of the Law points forward to how Christ brings spiritual renewal through His Word. Just as the people were renewed by hearing the Law, we are renewed by hearing and responding to Christ, the Word made flesh (<a href="https://www.biblegateway.com/passage/?search=John%201%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 1:1</a>)."
+                christConnection: "The reading of the Law points forward to how Christ brings spiritual renewal through His Word. Just as the people were renewed by hearing the Law, we are renewed by hearing and responding to Christ, the Word made flesh (<a href='https://www.biblegateway.com/passage/?search=John%201%3A1&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>John 1:1</a>)."
             },
-        ];;
-
+            {
+                name: "The Covenant Renewal",
+                date: "445 BC",
+                scripture: "Nehemiah 9:1-10:39",
+                intro: "The people renew their covenant with God, committing to follow His Law. This points forward to how Christ establishes the new covenant through His blood.",
+                tagline: "A new commitment to God's covenant",
+                summary: "After hearing the Law read, the people gather for a day of fasting and confession. They recount God's faithfulness throughout their history and renew their commitment to follow His Law. They sign a written covenant, committing to keep the Sabbath, support the temple, and follow all of God's commands. The covenant renewal points forward to how Christ establishes the new covenant through His blood, enabling us to keep God's commands through the power of the Holy Spirit.",
+                christConnection: "The covenant renewal points forward to how Christ establishes the new covenant. Just as the people committed to follow the Law, Christ enables us to keep God's commands through the new covenant in His blood (<a href='https://www.biblegateway.com/passage/?search=Hebrews%208%3A6&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 8:6</a>)."
+            }
         ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            if (!timeline) {
+                console.error('Timeline element not found');
+                return;
+            }
+            if (!mainEvents || mainEvents.length === 0) {
+                console.error('mainEvents is empty or undefined');
+                return;
+            }
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "The Walls are Rebuilt": "dive-in-walls-rebuilt.html",
+                    "The Reading of the Law": "dive-in-reading-law.html",
+                    "The Covenant Renewal": "dive-in-covenant-renewal.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize - script is at end of body so DOM is ready
+        renderTimeline();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
 

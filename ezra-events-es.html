@@ -773,25 +773,225 @@
     </div>
 
     <script>
-        // Major events in Judges
-                const mainEvents = [
+        // Eventos principales en Esdras
+        const mainEvents = [
             {
-                name: "The Return from Exile",
-                date: "538 BC",
-                scripture: "Ezra 1:1-2:70",
-                intro: "The first wave of exiles returns to Jerusalem under Zerubbabel's leadership. This restoration points forward to how Christ restores us from the exile of sin.",
-                tagline: "Restoration begins, exiles return",
-                summary: "In fulfillment of Jeremiah's prophecy, King Cyrus of Persia issues a decree allowing the Jewish exiles to return to Jerusalem to rebuild the temple. Zerubbabel leads a group of exiles back to Jerusalem. They begin rebuilding the temple, but face opposition from their enemies. However, with the encouragement of the prophets Haggai and Zechariah, the work continues. The return from exile points forward to how Christ restores us from the exile of sin and enables us to be part of God's kingdom.",
-                christConnection: "The return from exile points forward to how Christ restores us from the exile of sin. Just as the exiles returned to Jerusalem, we are restored to God through Christ and become part of His kingdom (<a href="https://www.biblegateway.com/passage/?search=Colossians%201%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Colossians 1:13-14</a>)."
+                name: "El Regreso del Exilio",
+                date: "538 a.C.",
+                scripture: "Esdras 1:1-2:70",
+                intro: "La primera ola de exiliados regresa a Jerusalén bajo el liderazgo de Zorobabel. Esta restauración apunta hacia cómo Cristo nos restaura del exilio del pecado.",
+                tagline: "Comienza la restauración, los exiliados regresan",
+                summary: "En cumplimiento de la profecía de Jeremías, el rey Ciro de Persia emite un decreto que permite a los exiliados judíos regresar a Jerusalén para reconstruir el templo. Zorobabel lidera un grupo de exiliados de regreso a Jerusalén. Comienzan a reconstruir el templo, pero enfrentan oposición de sus enemigos. Sin embargo, con el estímulo de los profetas Hageo y Zacarías, el trabajo continúa. El regreso del exilio apunta hacia cómo Cristo nos restaura del exilio del pecado y nos permite ser parte del reino de Dios.",
+                christConnection: "El regreso del exilio apunta hacia cómo Cristo nos restaura del exilio del pecado. Así como los exiliados regresaron a Jerusalén, somos restaurados a Dios a través de Cristo y nos convertimos en parte de Su reino (<a href='https://www.biblegateway.com/passage/?search=Colosenses%201%3A13-14&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Colosenses 1:13-14</a>)."
             },
             {
-                name: "The Temple is Rebuilt",
-                date: "516 BC",
-                scripture: "Ezra 3:1-6:22",
-                intro: "The temple is rebuilt despite opposition. This points forward to how Christ builds the true temple—the church—despite opposition.",
-                tagline: "The temple rebuilt, worship restored",
-                summary: "Despite opposition from their enemies, the exiles continue rebuilding the temple. When the work is questioned by the Persian officials, they appeal to King Darius, who confirms Cyrus's original decree. The temple is completed and dedicated with great celebration. The rebuilding of the temple points forward to how Christ builds the true temple—the church—and how true worship is restored through Him.",
-                christConnection: "The temple's rebuilding points forward to how Christ builds the true temple—the church. Just as the physical temple was rebuilt, Christ builds the spiritual temple—the church—and restores true worship (<a href="https://www.biblegateway.com/passage/?search=1%20Peter%202%3A5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Peter 2:5</a>)."
+                name: "El Templo es Reconstruido",
+                date: "516 a.C.",
+                scripture: "Esdras 3:1-6:22",
+                intro: "El templo es reconstruido a pesar de la oposición. Esto apunta hacia cómo Cristo construye el verdadero templo—la iglesia—a pesar de la oposición.",
+                tagline: "El templo reconstruido, la adoración restaurada",
+                summary: "A pesar de la oposición de sus enemigos, los exiliados continúan reconstruyendo el templo. Cuando el trabajo es cuestionado por los oficiales persas, apelan al rey Darío, quien confirma el decreto original de Ciro. El templo es completado y dedicado con gran celebración. La reconstrucción del templo apunta hacia cómo Cristo construye el verdadero templo—la iglesia—y cómo la verdadera adoración es restaurada a través de Él.",
+                christConnection: "La reconstrucción del templo apunta hacia cómo Cristo construye el verdadero templo—la iglesia. Así como el templo físico fue reconstruido, Cristo construye el templo espiritual—la iglesia—y restaura la verdadera adoración (<a href='https://www.biblegateway.com/passage/?search=1%20Pedro%202%3A5&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>1 Pedro 2:5</a>)."
             },
-        ];;
+            {
+                name: "Esdras Regresa y Enseña la Ley",
+                date: "458 a.C.",
+                scripture: "Esdras 7:1-10:44",
+                intro: "Esdras lidera la segunda ola de exiliados de regreso a Jerusalén y enseña al pueblo la Ley. Su enseñanza apunta hacia cómo Cristo nos enseña el verdadero significado de la Ley.",
+                tagline: "La Ley enseñada, el pueblo reformado",
+                summary: "Esdras, un sacerdote y escriba hábil en la Ley de Moisés, lidera una segunda ola de exiliados de regreso a Jerusalén. Se le da autoridad por el rey Artajerjes para enseñar la Ley y hacerla cumplir. Cuando Esdras descubre que el pueblo se ha casado con naciones extranjeras, los lleva al arrepentimiento. El pueblo se separa de sus esposas extranjeras y se compromete a seguir la Ley. La enseñanza de la Ley por Esdras apunta hacia cómo Cristo nos enseña el verdadero significado de la Ley y la cumple perfectamente.",
+                christConnection: "La enseñanza de la Ley por Esdras apunta hacia cómo Cristo nos enseña el verdadero significado de la Ley. Así como Esdras enseñó la Ley al pueblo, Cristo nos enseña la Ley y la cumple perfectamente (<a href='https://www.biblegateway.com/passage/?search=Mateo%205%3A17&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Mateo 5:17</a>)."
+            }
+        ];
+
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=RVR1960`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            if (!timeline) {
+                console.error('Timeline element not found');
+                return;
+            }
+            if (!mainEvents || mainEvents.length === 0) {
+                console.error('mainEvents is empty or undefined');
+                return;
+            }
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs (Spanish versions)
+                const diveInPages = {
+                    "El Regreso del Exilio": "dive-in-return-exile-es.html",
+                    "El Templo es Reconstruido": "dive-in-temple-rebuilt-es.html",
+                    "Esdras Regresa y Enseña la Ley": "dive-in-ezra-teaches-law-es.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                        <a href="${diveInPage}" class="dive-in-btn">¡Sumérgete!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Cristo en Esta Historia</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('es') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('pablo'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Escuchar Historia';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Historia';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize - script is at end of body so DOM is ready
+        renderTimeline();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
 
