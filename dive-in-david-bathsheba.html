@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: David's Sin with Bathsheba - 2 Samuel Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: David's Sin with Bathsheba</h1>
+            <p class="subtitle">Sin, Confrontation, and Repentance</p>
+        </header>
+
+                <div class="content-section">
+            <h2 class="section-title">The Sin</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2011%3A1-12%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 11:1-12:25</a>, we see David, a man after God's own heart, fall into serious sin. David commits adultery with Bathsheba and then arranges for her husband Uriah to be killed. This demonstrates that even the greatest of God's servants are not immune to sin.</p>
+
+            <div class="verse-callout">
+                "Then David said to Nathan, 'I have sinned against the Lord.' Nathan replied, 'The Lord has taken away your sin. You are not going to die. But because by doing this you have shown utter contempt for the Lord, the son born to you will die.'"
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2012%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 12:13-14</a>
+                </span>
+            </div>
+            <p>David's sin is serious and has grave consequences. He violates God's law by committing adultery and murder. This story shows us that sin is serious and that even those who love God can fall into terrible sin. However, it also shows us the power of repentance and God's willingness to forgive.</p>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Exodus%2020%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Exodus 20:13-14</a>
+                    <div class="ref-explanation">You shall not murder. You shall not commit adultery—the commandments David violated.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%203%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 3:23</a>
+                    <div class="ref-explanation">For all have sinned and fall short of the glory of God, showing that all people, including David, are sinners.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section1">Listen to Section</button>
+        </div>
+        <div class="content-section">
+            <h2 class="section-title">Nathan's Confrontation</h2>
+            <p>God sends Nathan the prophet to confront David about his sin. Nathan uses a parable to help David see the seriousness of what he has done. This confrontation leads to David's repentance.</p>
+
+            <div class="verse-callout">
+                "Then Nathan said to David, 'You are the man! This is what the Lord, the God of Israel, says: 'I anointed you king over Israel, and I delivered you from the hand of Saul. I gave your master's house to you, and your master's wives into your arms. I gave you all Israel and Judah. And if all this had been too little, I would have given you even more. Why did you despise the word of the Lord by doing what is evil in his eyes? You struck down Uriah the Hittite with the sword and took his wife to be your own.'"
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2012%3A7-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 12:7-9</a>
+                </span>
+            </div>
+            <p>Nathan's confrontation of David is courageous and necessary. He doesn't shy away from speaking the truth, even to the king. Nathan's parable helps David see his sin clearly, and when David realizes what he has done, he immediately repents. This shows the importance of godly confrontation and the power of repentance.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Need for a Perfect King</div>
+                <p>David's sin demonstrates that even the best human king is flawed. David's failure points forward to our need for a perfect King who never sins. However, David's repentance also points to how we should respond when we sin—with genuine repentance and faith in God's forgiveness through Christ.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%201%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 John 1:9</a>
+                </div>
+            </div>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%206%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 6:1</a>
+                    <div class="ref-explanation">Brothers and sisters, if someone is caught in a sin, you who live by the Spirit should restore that person gently, showing the importance of godly confrontation.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Proverbs%2027%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Proverbs 27:6</a>
+                    <div class="ref-explanation">Wounds from a friend can be trusted, but an enemy multiplies kisses, showing that true friendship involves honest confrontation.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section2">Listen to Section</button>
+        </div>
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Repentance and Forgiveness</h2>
+            <p>David's response to Nathan's confrontation demonstrates true repentance. While David's sin has consequences, God forgives him. This story shows both the seriousness of sin and the power of God's forgiveness through repentance.</p>
+            <p>David's repentance is genuine and immediate. When confronted with his sin, he doesn't make excuses or blame others. He simply says, 'I have sinned against the Lord.' This is true repentance—acknowledging sin, taking responsibility, and turning to God for forgiveness.</p>
+
+            <div class="verse-callout">
+                "Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions. Wash away all my iniquity and cleanse me from my sin."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Psalm%2051%3A1-2&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Psalm 51:1-2</a>
+                </span>
+            </div>
+            <p>Psalm 51, written by David after this incident, shows the depth of his repentance and his understanding of God's forgiveness. David's story teaches us that while sin is serious, God's forgiveness is available to all who truly repent. Through Christ, we have the ultimate example of forgiveness and the means by which we are forgiven.</p>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%201%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 John 1:9</a>
+                    <div class="ref-explanation">If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Psalm%2051%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Psalm 51:10</a>
+                    <div class="ref-explanation">Create in me a pure heart, O God, and renew a steadfast spirit within me—David's prayer of repentance.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:15</a>
+                    <div class="ref-explanation">For we do not have a high priest who is unable to empathize with our weaknesses, but we have one who has been tempted in every way, just as we are—yet he did not sin, showing that Christ is the perfect King who never sinned.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section3">Listen to Section</button>
+        </div>
+            <button class="audio-btn" data-section="prayer">Listen to Section</button>
+        </div>
+
+                <div class="content-section">
+            <h2 class="section-title">The Sin</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2011%3A1-12%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 11:1-12:25</a>, we see David, a man after God's own heart, fall into serious sin. David commits adultery with Bathsheba and then arranges for her husband Uriah to be killed. This demonstrates that even the greatest of God's servants are not immune to sin.</p>
+
+            <div class="verse-callout">
+                "Then David said to Nathan, 'I have sinned against the Lord.' Nathan replied, 'The Lord has taken away your sin. You are not going to die. But because by doing this you have shown utter contempt for the Lord, the son born to you will die.'"
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2012%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 12:13-14</a>
+                </span>
+            </div>
+            <p>David's sin is serious and has grave consequences. He violates God's law by committing adultery and murder. This story shows us that sin is serious and that even those who love God can fall into terrible sin. However, it also shows us the power of repentance and God's willingness to forgive.</p>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Exodus%2020%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Exodus 20:13-14</a>
+                    <div class="ref-explanation">You shall not murder. You shall not commit adultery—the commandments David violated.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%203%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 3:23</a>
+                    <div class="ref-explanation">For all have sinned and fall short of the glory of God, showing that all people, including David, are sinners.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section1">Listen to Section</button>
+        </div>
+        <div class="content-section">
+            <h2 class="section-title">Nathan's Confrontation</h2>
+            <p>God sends Nathan the prophet to confront David about his sin. Nathan uses a parable to help David see the seriousness of what he has done. This confrontation leads to David's repentance.</p>
+
+            <div class="verse-callout">
+                "Then Nathan said to David, 'You are the man! This is what the Lord, the God of Israel, says: 'I anointed you king over Israel, and I delivered you from the hand of Saul. I gave your master's house to you, and your master's wives into your arms. I gave you all Israel and Judah. And if all this had been too little, I would have given you even more. Why did you despise the word of the Lord by doing what is evil in his eyes? You struck down Uriah the Hittite with the sword and took his wife to be your own.'"
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2012%3A7-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 12:7-9</a>
+                </span>
+            </div>
+            <p>Nathan's confrontation of David is courageous and necessary. He doesn't shy away from speaking the truth, even to the king. Nathan's parable helps David see his sin clearly, and when David realizes what he has done, he immediately repents. This shows the importance of godly confrontation and the power of repentance.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Need for a Perfect King</div>
+                <p>David's sin demonstrates that even the best human king is flawed. David's failure points forward to our need for a perfect King who never sins. However, David's repentance also points to how we should respond when we sin—with genuine repentance and faith in God's forgiveness through Christ.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%201%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 John 1:9</a>
+                </div>
+            </div>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%206%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 6:1</a>
+                    <div class="ref-explanation">Brothers and sisters, if someone is caught in a sin, you who live by the Spirit should restore that person gently, showing the importance of godly confrontation.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Proverbs%2027%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Proverbs 27:6</a>
+                    <div class="ref-explanation">Wounds from a friend can be trusted, but an enemy multiplies kisses, showing that true friendship involves honest confrontation.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section2">Listen to Section</button>
+        </div>
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Repentance and Forgiveness</h2>
+            <p>David's response to Nathan's confrontation demonstrates true repentance. While David's sin has consequences, God forgives him. This story shows both the seriousness of sin and the power of God's forgiveness through repentance.</p>
+            <p>David's repentance is genuine and immediate. When confronted with his sin, he doesn't make excuses or blame others. He simply says, 'I have sinned against the Lord.' This is true repentance—acknowledging sin, taking responsibility, and turning to God for forgiveness.</p>
+
+            <div class="verse-callout">
+                "Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions. Wash away all my iniquity and cleanse me from my sin."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Psalm%2051%3A1-2&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Psalm 51:1-2</a>
+                </span>
+            </div>
+            <p>Psalm 51, written by David after this incident, shows the depth of his repentance and his understanding of God's forgiveness. David's story teaches us that while sin is serious, God's forgiveness is available to all who truly repent. Through Christ, we have the ultimate example of forgiveness and the means by which we are forgiven.</p>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%201%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 John 1:9</a>
+                    <div class="ref-explanation">If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Psalm%2051%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Psalm 51:10</a>
+                    <div class="ref-explanation">Create in me a pure heart, O God, and renew a steadfast spirit within me—David's prayer of repentance.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:15</a>
+                    <div class="ref-explanation">For we do not have a high priest who is unable to empathize with our weaknesses, but we have one who has been tempted in every way, just as we are—yet he did not sin, showing that Christ is the perfect King who never sinned.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section3">Listen to Section</button>
+        </div>
+            <button class="audio-btn" data-section="dedication">Listen to Section</button>
+        </div>
+
+                <div class="content-section">
+            <h2 class="section-title">The Sin</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2011%3A1-12%3A25&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 11:1-12:25</a>, we see David, a man after God's own heart, fall into serious sin. David commits adultery with Bathsheba and then arranges for her husband Uriah to be killed. This demonstrates that even the greatest of God's servants are not immune to sin.</p>
+
+            <div class="verse-callout">
+                "Then David said to Nathan, 'I have sinned against the Lord.' Nathan replied, 'The Lord has taken away your sin. You are not going to die. But because by doing this you have shown utter contempt for the Lord, the son born to you will die.'"
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2012%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 12:13-14</a>
+                </span>
+            </div>
+            <p>David's sin is serious and has grave consequences. He violates God's law by committing adultery and murder. This story shows us that sin is serious and that even those who love God can fall into terrible sin. However, it also shows us the power of repentance and God's willingness to forgive.</p>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Exodus%2020%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Exodus 20:13-14</a>
+                    <div class="ref-explanation">You shall not murder. You shall not commit adultery—the commandments David violated.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romans%203%3A23&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Romans 3:23</a>
+                    <div class="ref-explanation">For all have sinned and fall short of the glory of God, showing that all people, including David, are sinners.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section1">Listen to Section</button>
+        </div>
+        <div class="content-section">
+            <h2 class="section-title">Nathan's Confrontation</h2>
+            <p>God sends Nathan the prophet to confront David about his sin. Nathan uses a parable to help David see the seriousness of what he has done. This confrontation leads to David's repentance.</p>
+
+            <div class="verse-callout">
+                "Then Nathan said to David, 'You are the man! This is what the Lord, the God of Israel, says: 'I anointed you king over Israel, and I delivered you from the hand of Saul. I gave your master's house to you, and your master's wives into your arms. I gave you all Israel and Judah. And if all this had been too little, I would have given you even more. Why did you despise the word of the Lord by doing what is evil in his eyes? You struck down Uriah the Hittite with the sword and took his wife to be your own.'"
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Samuel%2012%3A7-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Samuel 12:7-9</a>
+                </span>
+            </div>
+            <p>Nathan's confrontation of David is courageous and necessary. He doesn't shy away from speaking the truth, even to the king. Nathan's parable helps David see his sin clearly, and when David realizes what he has done, he immediately repents. This shows the importance of godly confrontation and the power of repentance.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">The Need for a Perfect King</div>
+                <p>David's sin demonstrates that even the best human king is flawed. David's failure points forward to our need for a perfect King who never sins. However, David's repentance also points to how we should respond when we sin—with genuine repentance and faith in God's forgiveness through Christ.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%201%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 John 1:9</a>
+                </div>
+            </div>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Galatians%206%3A1&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Galatians 6:1</a>
+                    <div class="ref-explanation">Brothers and sisters, if someone is caught in a sin, you who live by the Spirit should restore that person gently, showing the importance of godly confrontation.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Proverbs%2027%3A6&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Proverbs 27:6</a>
+                    <div class="ref-explanation">Wounds from a friend can be trusted, but an enemy multiplies kisses, showing that true friendship involves honest confrontation.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section2">Listen to Section</button>
+        </div>
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Repentance and Forgiveness</h2>
+            <p>David's response to Nathan's confrontation demonstrates true repentance. While David's sin has consequences, God forgives him. This story shows both the seriousness of sin and the power of God's forgiveness through repentance.</p>
+            <p>David's repentance is genuine and immediate. When confronted with his sin, he doesn't make excuses or blame others. He simply says, 'I have sinned against the Lord.' This is true repentance—acknowledging sin, taking responsibility, and turning to God for forgiveness.</p>
+
+            <div class="verse-callout">
+                "Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions. Wash away all my iniquity and cleanse me from my sin."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Psalm%2051%3A1-2&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Psalm 51:1-2</a>
+                </span>
+            </div>
+            <p>Psalm 51, written by David after this incident, shows the depth of his repentance and his understanding of God's forgiveness. David's story teaches us that while sin is serious, God's forgiveness is available to all who truly repent. Through Christ, we have the ultimate example of forgiveness and the means by which we are forgiven.</p>
+
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%201%3A9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 John 1:9</a>
+                    <div class="ref-explanation">If we confess our sins, he is faithful and just and will forgive us our sins and purify us from all unrighteousness.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Psalm%2051%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Psalm 51:10</a>
+                    <div class="ref-explanation">Create in me a pure heart, O God, and renew a steadfast spirit within me—David's prayer of repentance.</div>
+                </div>
+
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A15&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:15</a>
+                    <div class="ref-explanation">For we do not have a high priest who is unable to empathize with our weaknesses, but we have one who has been tempted in every way, just as we are—yet he did not sin, showing that Christ is the perfect King who never sinned.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="section3">Listen to Section</button>
+        </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.name.toLowerCase().includes('male')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+

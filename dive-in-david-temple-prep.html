@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: David Prepares for the Temple - 1 Chronicles Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+        @media (max-width: 768px) {
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+            transition: all 0.4s ease;
+        }
+
+        .content-section:hover {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #b0d0f0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 150, 255, 0.1);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .theme-box p {
+            color: #c0d0e0;
+            line-height: 1.8;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .reference-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid rgba(0, 195, 255, 0.3);
+        }
+
+        .ref-link {
+            color: #88d0ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .ref-link:hover {
+            color: #00c3ff;
+            padding-left: 5px;
+        }
+
+        .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: David Prepares for the Temple</h1>
+            <p class="subtitle">Preparing for God's House</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">David's Desire to Build the Temple</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2022%3A1-5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 22:1-5</a>, David expresses his desire to build a house for the Lord. However, God tells David that he cannot build the temple because he is a man of war and has shed blood. Instead, God promises that David's son Solomon will build the temple. David accepts this and begins making extensive preparations.</p>
+            
+            <div class="verse-callout">
+                David said, "My son Solomon is young and inexperienced, and the house to be built for the Lord should be of great magnificence and fame and splendor in the sight of all the nations. Therefore I will make preparations for it." So David made extensive preparations before his death.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2022%3A5&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 22:5</a>
+                </span>
+            </div>
+
+            <p>David's heart is set on building a house for the Lord, even though he cannot do it himself. His willingness to prepare for what he cannot complete points forward to how God prepared the way for Christ throughout history, and how we are called to prepare the way for Christ's return.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2028%3A2-3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Chronicles 28:2-3</a>
+                    <div class="ref-explanation">David explains why he cannot build the temple, showing God's sovereignty in choosing who will build His house.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Matthew%203%3A3&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Matthew 3:3</a>
+                    <div class="ref-explanation">John the Baptist prepares the way for Christ, just as David prepared the way for the temple.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="desire">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Gathering Materials and Organizing Workers</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2022%3A14-16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 22:14-16</a>, David gathers vast amounts of materials for the temple: gold, silver, bronze, iron, wood, and precious stones. He also organizes the priests and Levites, giving them specific assignments for the temple service. David's preparations are thorough and extensive.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Preparing for God's Work</div>
+                <p>David's careful preparation shows the importance of being ready for God's work. Just as David prepared materials and organized workers for the temple, God prepared everything for the coming of Christ, and we are called to prepare ourselves and others for Christ's work in the world.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A10&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Ephesians 2:10</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                "I have taken great pains to provide for the temple of the Lord a hundred thousand talents of gold, a million talents of silver, quantities of bronze and iron too great to be weighed, and wood and stone. And you may add to them. You have many workers: stonecutters, masons and carpenters, as well as those skilled in every kind of work."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2022%3A14-15&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 22:14-15</a>
+                </span>
+            </div>
+            
+            <p>David's extensive preparations demonstrate his wholehearted commitment to building God's house. He spares no expense and organizes everything carefully. This points forward to how God prepared everything for Christ's coming and how Christ builds the true temple—the church—with careful preparation and organization.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2023%3A1-32&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Chronicles 23:1-32</a>
+                    <div class="ref-explanation">David's organization of the Levites for temple service, showing his careful preparation for worship.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2024%3A1-31&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Chronicles 24:1-31</a>
+                    <div class="ref-explanation">David's organization of the priests, showing his thorough preparation for the temple.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="materials">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">David's Instructions to Solomon</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2028%3A1-21&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 28:1-21</a>, David gives detailed instructions to Solomon about building the temple. He provides the plans that God gave him and charges Solomon to be strong and courageous and to build the temple according to God's specifications.</p>
+
+            <div class="verse-callout">
+                "Be strong and courageous, and do the work. Do not be afraid or discouraged, for the Lord God, my God, is with you. He will not fail you or forsake you until all the work for the service of the temple of the Lord is finished."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2028%3A20&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 28:20</a>
+                </span>
+            </div>
+
+            <p>David's instructions to Solomon emphasize the importance of following God's plans exactly and trusting in God's presence and help. This points forward to how Christ builds the church according to God's plan and how we are called to build up the church, trusting in God's presence and power.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2029%3A1-9&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Chronicles 29:1-9</a>
+                    <div class="ref-explanation">David's final contribution and the people's response, showing the importance of giving to God's work.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A19-22&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:19-22</a>
+                    <div class="ref-explanation">Christ builds the church as the true temple, showing that the church is God's house built on the foundation of the apostles and prophets, with Christ as the cornerstone.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="instructions">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Preparing for the True Temple</h2>
+            <p>David's extensive preparations for the temple demonstrate his wholehearted commitment to God's work. Although he cannot build the temple himself, he does everything he can to prepare for it. His preparations point forward to how God prepared the way for Christ throughout history.</p>
+
+            <p>Just as David prepared for the physical temple, God prepared for the coming of Christ, the true temple. Christ now builds the church, the true house of God, and we are called to participate in this work. David's preparations remind us that we are to prepare ourselves and others for Christ's work, building up the church as the temple of the Holy Spirit.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A19-22&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:19-22</a>
+                    <div class="ref-explanation">In him the whole building is joined together and rises to become a holy temple in the Lord, showing that the church is the true temple of God.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%203%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 3:16</a>
+                    <div class="ref-explanation">Don't you know that you yourselves are God's temple and that God's Spirit dwells in your midst?</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferredName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferredName));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            clone.querySelectorAll('.scripture-link').forEach(el => el.remove());
+            clone.querySelectorAll('.verse-reference').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
