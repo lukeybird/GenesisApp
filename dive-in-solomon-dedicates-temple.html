@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Dive In: Solomon Dedicates the Temple - 2 Chronicles Timeline</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+        @media (max-width: 768px) {
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+            transition: all 0.4s ease;
+        }
+
+        .content-section:hover {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #b0d0f0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 150, 255, 0.1);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .theme-box p {
+            color: #c0d0e0;
+            line-height: 1.8;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .reference-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid rgba(0, 195, 255, 0.3);
+        }
+
+        .ref-link {
+            color: #88d0ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .ref-link:hover {
+            color: #00c3ff;
+            padding-left: 5px;
+        }
+
+        .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Dive In: Solomon Dedicates the Temple</h1>
+            <p class="subtitle">God's Glory Fills the Temple</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">The Ark Brought Into the Temple</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=2%20Chronicles%205%3A1-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Chronicles 5:1-14</a>, when the temple is completed, Solomon brings the ark of the covenant into the Most Holy Place. As the priests withdraw, the glory of the Lord fills the temple so powerfully that the priests cannot perform their service. This moment marks the fulfillment of God's promise to dwell among His people.</p>
+            
+            <div class="verse-callout">
+                When the priests came out of the Holy Place (for all the priests who were present had consecrated themselves, without regard to their divisions), and all the Levitical singers, Asaph, Heman, Jeduthun, and their sons and kinsmen, clothed in fine linen, with cymbals, harps, and lyres, standing east of the altar, and with them one hundred and twenty priests blowing trumpets in unison when the trumpeters and the singers were to make themselves heard with one voice to praise and to glorify the Lord, and when they lifted up their voice accompanied by trumpets and cymbals and instruments of music, and when they praised the Lord saying, "He indeed is good for His lovingkindness is everlasting," then the house, the house of the Lord, was filled with a cloud, so that the priests could not stand to minister because of the cloud, for the glory of the Lord filled the house of God.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Chronicles%205%3A11-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Chronicles 5:11-14</a>
+                </span>
+            </div>
+
+            <p>The glory of the Lord filling the temple demonstrates God's presence among His people. This visible manifestation of God's glory points forward to how God's glory is fully revealed in Christ, who is the true temple and the perfect manifestation of God's presence.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%201%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 1:14</a>
+                    <div class="ref-explanation">The Word became flesh and made his dwelling among us. We have seen his glory, the glory of the one and only Son, who came from the Father, full of grace and truth, showing that Christ is the true manifestation of God's glory.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%209%3A11-12&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 9:11-12</a>
+                    <div class="ref-explanation">But when Christ came as high priest of the good things that are now already here, he went through the greater and more perfect tabernacle that is not made with human hands, showing that Christ is the true temple.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="ark">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Solomon's Dedicatory Prayer</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=2%20Chronicles%206%3A1-42&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Chronicles 6:1-42</a>, Solomon prays a dedicatory prayer, asking God to hear the prayers of His people when they pray toward the temple. He acknowledges that God cannot be contained in a building, yet asks God to hear from heaven when His people pray.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Prayer and God's Presence</div>
+                <p>Solomon's prayer recognizes that while God fills the temple with His glory, He cannot be contained by it. This points forward to how through Christ, we can approach God in prayer from anywhere, knowing that He hears us through His Son.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 4:16</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                But will God really dwell on earth with humans? The heavens, even the highest heavens, cannot contain you. How much less this temple I have built! Yet, Lord my God, give attention to your servant's prayer and his plea for mercy. Hear the cry and the prayer that your servant is praying in your presence. May your eyes be open toward this temple day and night, this place of which you said you would put your Name there. May you hear the prayer your servant prays toward this place.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Chronicles%206%3A18-20&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Chronicles 6:18-20</a>
+                </span>
+            </div>
+            
+            <p>Solomon's prayer demonstrates both humility and faith. He recognizes God's transcendence while asking for His immanence. This points forward to how through Christ, we have access to God's presence and can pray with confidence, knowing that He hears us.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:16</a>
+                    <div class="ref-explanation">Let us then approach God's throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need, showing that through Christ we can approach God in prayer.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2014%3A13-14&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 14:13-14</a>
+                    <div class="ref-explanation">And I will do whatever you ask in my name, so that the Father may be glorified in the Son. You may ask me for anything in my name, and I will do it, showing that we pray through Christ.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="prayer">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">God's Response and Promise</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=2%20Chronicles%207%3A1-22&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Chronicles 7:1-22</a>, God appears to Solomon and promises to hear the prayers of His people. He also warns that if the people turn away, He will reject the temple. This demonstrates both God's faithfulness and His justice.</p>
+
+            <div class="verse-callout">
+                The Lord said to him: "I have heard your prayer and your plea, which you have made before me; I have consecrated this temple, which you have built, by putting my Name there forever. My eyes and my heart will always be there. As for you, if you walk before me faithfully as David your father did, and do all I command, and observe my decrees and laws, I will establish your royal throne, as I covenanted with David your father when I said, 'You shall never fail to have a successor to rule over Israel.'"
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Chronicles%207%3A12-18&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Chronicles 7:12-18</a>
+                </span>
+            </div>
+
+            <p>God's response to Solomon's prayer shows His commitment to His people and His temple. However, it also contains a warning about the consequences of unfaithfulness. This points forward to how Christ is the true temple, and through faith in Him, we have access to God's presence forever.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A19-22&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:19-22</a>
+                    <div class="ref-explanation">Consequently, you are no longer foreigners and strangers, but fellow citizens with God's people and also members of his household, built on the foundation of the apostles and prophets, with Christ Jesus himself as the chief cornerstone, showing that the church is the true temple.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%203%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 3:16</a>
+                    <div class="ref-explanation">Don't you know that you yourselves are God's temple and that God's Spirit dwells in your midst? showing that believers are the temple of the Holy Spirit.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="response">Listen to Section</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Christ, the True Temple</h2>
+            <p>The dedication of Solomon's temple points forward to Christ, who is the true temple. Just as God's glory filled the physical temple, God's glory is fully revealed in Christ. Just as the temple was the place where God's people could approach Him, Christ is the way through which we approach God.</p>
+
+            <p>Through Christ, we have access to God's presence that is not limited to a physical location. We are the temple of the Holy Spirit, and through Christ, we can approach God's throne of grace with confidence. The dedication of Solomon's temple finds its ultimate fulfillment in Christ, who makes true worship possible.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%202%3A19-21&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">John 2:19-21</a>
+                    <div class="ref-explanation">Jesus answered them, "Destroy this temple, and I will raise it again in three days." They replied, "It has taken forty-six years to build this temple, and you are going to raise it in three days?" But the temple he had spoken of was his body, showing that Christ is the true temple.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Revelation%2021%3A22&version=NKJV" target="_blank" rel="noopener noreferrer" class="ref-link">Revelation 21:22</a>
+                    <div class="ref-explanation">I did not see a temple in the city, because the Lord God Almighty and the Lamb are its temple, showing that in the new creation, God and the Lamb are the temple.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Listen to Section</button>
+        </div>
+
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferredName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferredName));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            clone.querySelectorAll('.scripture-link').forEach(el => el.remove());
+            clone.querySelectorAll('.verse-reference').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Listen to Section';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Listen to Section';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Section';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>

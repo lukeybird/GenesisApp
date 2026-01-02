@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: El Templo es Destruido - Línea de Tiempo de 2 Crónicas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+        @media (max-width: 768px) {
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+            transition: all 0.4s ease;
+        }
+
+        .content-section:hover {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #b0d0f0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 150, 255, 0.1);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .theme-box p {
+            color: #c0d0e0;
+            line-height: 1.8;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .reference-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid rgba(0, 195, 255, 0.3);
+        }
+
+        .ref-link {
+            color: #88d0ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .ref-link:hover {
+            color: #00c3ff;
+            padding-left: 5px;
+        }
+
+        .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head><body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: El Templo es Destruido</h1>
+            <p class="subtitle">Juicio y Esperanza</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">La Infidelidad Persistente del Pueblo</h2>
+            <p>En <a href="https://www.biblegateway.com/passage/?search=2%20Crónicas%2036%3A11-16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Crónicas 36:11-16</a>, a pesar de las repetidas advertencias de los profetas, el pueblo continúa en su infidelidad. Rey tras rey lleva al pueblo a la idolatría y la rebelión contra Dios. El Señor envía profetas para advertirlos, pero se burlan y rechazan a los mensajeros de Dios.</p>
+            
+            <div class="verse-callout">
+                De veintiún años era Sedequías cuando comenzó a reinar, y once años reinó en Jerusalén. E hizo lo malo ante los ojos de Jehová su Dios, y no se humilló delante del profeta Jeremías, que le hablaba de parte de Jehová. Se rebeló asimismo contra Nabucodonosor, al cual había jurado por Dios; y endureció su cerviz, y obstinó su corazón para no volverse a Jehová el Dios de Israel. Y todos los principales sacerdotes, y el pueblo, aumentaron la iniquidad, siguiendo todas las abominaciones de las naciones, y contaminando la casa de Jehová, la cual él había santificado en Jerusalén.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Crónicas%2036%3A11-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Crónicas 36:11-14</a>
+                </span>
+            </div>
+
+            <p>La infidelidad persistente del pueblo demuestra la seriedad del pecado y la necesidad de juicio. A pesar de la paciencia de Dios y las repetidas advertencias, el pueblo se niega a arrepentirse. Esto apunta hacia cómo todos han pecado y necesitan el juicio que Cristo llevó en la cruz.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%203%3A23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 3:23</a>
+                    <div class="ref-explanation">Por cuanto todos pecaron, y están destituidos de la gloria de Dios, mostrando que todos son culpables ante Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%206%3A23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 6:23</a>
+                    <div class="ref-explanation">Porque la paga del pecado es muerte, mas la dádiva de Dios es vida eterna en Cristo Jesús Señor nuestro, mostrando la consecuencia del pecado y el don de la salvación.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="unfaithfulness">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Destrucción del Templo</h2>
+            <p>En <a href="https://www.biblegateway.com/passage/?search=2%20Crónicas%2036%3A17-21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Crónicas 36:17-21</a>, el Señor envía a los babilonios para destruir Jerusalén. Destruyen el templo, queman el palacio, derriban los muros y llevan al pueblo al exilio. El templo, que había sido el centro de adoración, es completamente destruido.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Juicio y el Fin de una Era</div>
+                <p>La destrucción del templo marca el fin de una era. El viejo sistema de adoración centrado en el templo físico llega a su fin. Esto apunta hacia cómo el viejo pacto pasa, y el nuevo pacto en Cristo es establecido.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%208%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebreos 8:13</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Por lo cual trajo contra ellos al rey de los caldeos, que mató a espada a sus jóvenes en la casa de su santuario, sin perdonar joven ni doncella, anciano ni decrépito; todos los entregó en sus manos. Asimismo todos los utensilios de la casa de Dios, grandes y chicos, los tesoros de la casa de Jehová, y los tesoros del rey y de sus príncipes, todo lo llevó a Babilonia. Y quemaron la casa de Dios, y rompieron el muro de Jerusalén, y consumieron a fuego todos sus palacios, y destruyeron todos sus objetos deseables.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Crónicas%2036%3A17-19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Crónicas 36:17-19</a>
+                </span>
+            </div>
+            
+            <p>La destrucción completa del templo demuestra la seriedad del juicio de Dios. Sin embargo, también apunta hacia cómo el viejo sistema pasa, dando paso al nuevo pacto en Cristo, quien es el verdadero templo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebreos%208%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebreos 8:13</a>
+                    <div class="ref-explanation">Al decir: Nuevo pacto, ha dado por viejo al primero; y lo que se da por viejo y se envejece, está próximo a desaparecer, mostrando que el viejo pacto pasa.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%202%3A19-21&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Juan 2:19-21</a>
+                    <div class="ref-explanation">Respondió Jesús y les dijo: Destruid este templo, y en tres días lo levantaré. Dijeron luego los judíos: En cuarenta y seis años fue edificado este templo, ¿y tú en tres días lo levantarás? Mas él hablaba del templo de su cuerpo, mostrando que Cristo es el verdadero templo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="destruction">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Esperanza en el Exilio: La Promesa de Retorno</h2>
+            <p>En <a href="https://www.biblegateway.com/passage/?search=2%20Crónicas%2036%3A22-23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Crónicas 36:22-23</a>, el libro termina con una nota de esperanza. Ciro, rey de Persia, emite un decreto permitiendo que los exiliados regresen a Jerusalén y reconstruyan el templo. Esto muestra que el juicio de Dios no es el fin de la historia—hay esperanza de restauración.</p>
+
+            <div class="verse-callout">
+                Mas al primer año de Ciro rey de Persia, para que se cumpliese la palabra de Jehová por boca de Jeremías, Jehová despertó el espíritu de Ciro rey de Persia, el cual hizo pregonar de palabra y también por escrito por todo su reino, diciendo: Así ha dicho Ciro rey de Persia: Jehová el Dios de los cielos me ha dado todos los reinos de la tierra, y me ha mandado que le edifique casa en Jerusalén, que está en Judá. Quien haya entre vosotros de todo su pueblo, sea Jehová su Dios con él, y suba.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Crónicas%2036%3A22-23&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">2 Crónicas 36:22-23</a>
+                </span>
+            </div>
+
+            <p>La promesa de retorno y restauración apunta hacia cómo a través de Cristo, somos restaurados a Dios. Así como a los exiliados se les permitió regresar, nosotros que fuimos exiliados de Dios por el pecado somos restaurados a través de Cristo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%202%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 2:13</a>
+                    <div class="ref-explanation">Pero ahora en Cristo Jesús, vosotros que en otro tiempo estabais lejos, habéis sido hechos cercanos por la sangre de Cristo, mostrando que somos restaurados a Dios a través de Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Colosenses%201%3A21-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Colosenses 1:21-22</a>
+                    <div class="ref-explanation">Y a vosotros también, que erais en otro tiempo extraños y enemigos en vuestra mente, haciendo malas obras, ahora os ha reconciliado en su cuerpo de carne, por medio de la muerte, para presentaros santos y sin mancha e irreprensibles delante de él, mostrando que somos reconciliados con Dios a través de Cristo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="hope">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: El Verdadero Templo en Cristo</h2>
+            <p>La destrucción del templo marca el fin del viejo sistema, pero también apunta hacia el nuevo pacto en Cristo. Así como el templo físico fue destruido, el viejo pacto pasa, pero Cristo establece el nuevo pacto y el verdadero templo—la iglesia.</p>
+
+            <p>A través de Cristo, somos el templo del Espíritu Santo. Tenemos acceso a la presencia de Dios no a través de un edificio físico, sino a través de Cristo, quien es el verdadero templo. La destrucción del templo de Salomón encuentra su significado definitivo en cómo Cristo, a través de Su muerte y resurrección, establece el verdadero templo que nunca puede ser destruido.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corintios%203%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 3:16</a>
+                    <div class="ref-explanation">¿No sabéis que sois templo de Dios, y que el Espíritu de Dios mora en vosotros? mostrando que los creyentes son el templo del Espíritu Santo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%202%3A19-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 2:19-22</a>
+                    <div class="ref-explanation">Así que ya no sois extranjeros ni advenedizos, sino conciudadanos de los santos, y miembros de la familia de Dios, edificados sobre el fundamento de los apóstoles y profetas, siendo la principal piedra del ángulo Jesucristo mismo, mostrando que la iglesia es el verdadero templo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+
+    </div>
+
+<script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+                function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
+            ];
+            
+            for (const preferredName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferredName));
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('es') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('pablo'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+            
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            clone.querySelectorAll('.scripture-link').forEach(el => el.remove());
+            clone.querySelectorAll('.verse-reference').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>

@@ -773,16 +773,190 @@
     </div>
 
     <script>
-        // Major events in Judges
-                const mainEvents = [
+        // Eventos principales en Ester
+        const mainEvents = [
             {
-                name: "Esther Saves Her People",
-                date: "474 BC",
-                scripture: "Esther 4:1-9:32",
-                intro: "Esther risks her life to approach the king and save her people from destruction. Her courage points forward to how Christ saves His people.",
-                tagline: "Courage in the face of danger, salvation for the people",
-                summary: "When Mordecai learns of Haman's plot to destroy all the Jews, he urges Esther to intercede with the king. Esther knows that approaching the king without being summoned could mean death, but she decides to risk her life, saying, "If I perish, I perish." She approaches the king, who receives her. She then exposes Haman's plot and saves her people. The Jews are allowed to defend themselves, and they are victorious. Esther's courage and willingness to risk everything to save her people points forward to how Christ risked everything and gave His life to save His people from sin and death.",
-                christConnection: "Esther's courage in saving her people points forward to how Christ saves His people. Just as Esther risked her life to save the Jews, Christ gave His life to save all who believe. Esther's story demonstrates God's providential care, which is fully revealed in Christ's work of salvation (<a href="https://www.biblegateway.com/passage/?search=Romans%205%3A8&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Romans 5:8</a>)."
-            },
-        ];;
+                name: "Ester Salva a Su Pueblo",
+                date: "474 a.C.",
+                scripture: "Ester 4:1-9:32",
+                intro: "Ester arriesga su vida para acercarse al rey y salvar a su pueblo de la destrucción. Su valentía apunta hacia cómo Cristo salva a Su pueblo.",
+                tagline: "Valentía ante el peligro, salvación para el pueblo",
+                summary: "Cuando Mardoqueo se entera de la trama de Amán para destruir a todos los judíos, insta a Ester a interceder con el rey. Ester sabe que acercarse al rey sin ser convocada podría significar la muerte, pero decide arriesgar su vida, diciendo: 'Si perezco, perezco.' Se acerca al rey, quien la recibe. Luego expone la trama de Amán y salva a su pueblo. A los judíos se les permite defenderse, y son victoriosos. La valentía de Ester y su disposición a arriesgar todo para salvar a su pueblo apunta hacia cómo Cristo arriesgó todo y dio Su vida para salvar a Su pueblo del pecado y la muerte.",
+                christConnection: "La valentía de Ester al salvar a su pueblo apunta hacia cómo Cristo salva a Su pueblo. Así como Ester arriesgó su vida para salvar a los judíos, Cristo dio Su vida para salvar a todos los que creen. La historia de Ester demuestra el cuidado providencial de Dios, que se revela plenamente en la obra de salvación de Cristo (<a href='https://www.biblegateway.com/passage/?search=Romanos%205%3A8&version=RVR1960' target='_blank' rel='noopener noreferrer' class='scripture-link'>Romanos 5:8</a>)."
+            }
+        ];
 
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=RVR1960`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs (if any)
+                const diveInPages = {
+                    // Add dive-in pages here when created
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                        <a href="${diveInPage}" class="dive-in-btn">¡Sumérgete!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Escuchar Historia</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Cristo en Esta Historia</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+        function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
+            ];
+            
+            for (const preferredName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferredName));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        function playAudio(button, text) {
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                if (currentButton) {
+                    currentButton.textContent = 'Escuchar Historia';
+                    currentButton.classList.remove('playing');
+                }
+            }
+
+            if (currentButton === button && currentUtterance) {
+                currentButton = null;
+                currentUtterance = null;
+                return;
+            }
+
+            currentButton = button;
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (!spanishVoice) {
+                spanishVoice = findSpanishVoice();
+            }
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            
+            currentUtterance.lang = 'es-ES';
+            currentUtterance.pitch = 0.85;
+            currentUtterance.rate = 0.9;
+            currentUtterance.volume = 1;
+
+            currentUtterance.onend = () => {
+                button.textContent = 'Escuchar Historia';
+                button.classList.remove('playing');
+                currentButton = null;
+                currentUtterance = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.textContent = 'Escuchar Historia';
+                button.classList.remove('playing');
+                currentButton = null;
+                currentUtterance = null;
+            };
+
+            button.textContent = '⏸ Detener';
+            button.classList.add('playing');
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+
+        // Initialize
+        renderTimeline();
+        spanishVoice = findSpanishVoice();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>

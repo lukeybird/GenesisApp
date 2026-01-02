@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: El Shema - Línea de Tiempo de Deuteronomio</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 15px rgba(0, 195, 255, 0.4);
+            letter-spacing: 1px;
+            border-bottom: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #c0d0e0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-callout::before {
+            content: '"';
+            font-size: 4em;
+            color: rgba(0, 195, 255, 0.2);
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            font-family: serif;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            opacity: 1;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 195, 255, 0.05);
+            border: 1px solid rgba(0, 195, 255, 0.2);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .reference-item {
+            margin-bottom: 12px;
+            padding-left: 15px;
+            border-left: 2px solid rgba(0, 195, 255, 0.3);
+            padding-bottom: 8px;
+        }
+
+        .reference-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reference-item .ref-link {
+            color: #88d0ff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item .ref-link:hover {
+            color: #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .reference-item .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            margin-top: 3px;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .audio-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.4),
+                inset 0 0 20px rgba(0, 195, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+            box-shadow: 
+                0 0 25px rgba(0, 255, 150, 0.5),
+                inset 0 0 25px rgba(0, 255, 150, 0.2);
+        }
+
+        .audio-btn.playing::after {
+            content: ' 🔊';
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+
+            .nav-menu {
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+                gap: 20px;
+            }
+
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: El Shema</h1>
+            <p class="subtitle">Viendo a Cristo en el Principio</p>
+        </header>
+
+<div class="content-section">
+            <h2 class="section-title">El Mandamiento Más Grande</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=Deuteronomio%206%3A4-9&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Deuteronomio 6:4-9</a>, Moisés le da a Israel lo que se conoce como el Shema—el mandamiento más grande. La palabra "Shema" significa "escucha" en hebreo, y este pasaje comienza con "Oye, Israel: Jehová nuestro Dios, Jehová uno es." Esta es la confesión central de la fe judía y es citada por Jesús como el mandamiento más grande.</p>
+            
+            <div class="verse-callout">
+                Hear, O Israel: The Lord our God, the Lord is one. Amarás a Jehová tu Dios de todo tu corazón, y de toda tu alma, y con todas tus fuerzas.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Deuteronomio%206%3A4-5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Deuteronomio 6:4-5</a>
+                </span>
+            </div>
+
+            <p>El Shema declara tanto la unidad de Dios como el llamado a amarlo completamente. No es suficiente reconocer la existencia de Dios—debemos amarlo con todo nuestro ser. Este amor debe ser comprensivo, involucrando corazón (emociones y voluntad), alma (la vida misma), y fuerza (todos nuestros recursos y habilidades). El Shema apunta hacia cómo Cristo nos habilita para amar a Dios completamente a través del Espíritu Santo.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Marcos%2012%3A29-30&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Marcos 12:29-30</a>
+                    <div class="ref-explanation">Jesús cita el Shema como el mandamiento más grande, mostrando su importancia central tanto en el Antiguo como en el Nuevo Testamento.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2022%3A37-38&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 22:37-38</a>
+                    <div class="ref-explanation">Jesús identifica el Shema como el primer y más grande mandamiento, mostrando que el amor por Dios es el fundamento de toda obediencia.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Lucas%2010%3A27&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Lucas 10:27</a>
+                    <div class="ref-explanation">Un abogado cita el Shema a Jesús, mostrando que era bien conocido como el resumen de la ley.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="greatest">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">La Unidad de Dios</h2>
+            <p>El Shema comienza con una declaración de la unidad de Dios: "Jehová nuestro Dios, Jehová uno es." Esta declaración afirma el monoteísmo—solo hay un Dios verdadero. Esta unidad de Dios se revela plenamente en la Trinidad—un Dios en tres personas: Padre, Hijo y Espíritu Santo. La declaración de la unidad de Dios en el Shema apunta hacia cómo la Trinidad revela la plenitud de la naturaleza de Dios.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Un Dios, Tres Personas</div>
+                <p>El Shema declara la unidad de Dios, que se revela perfectamente en la Trinidad. El Padre, el Hijo y el Espíritu Santo son un Dios, pero personas distintas. Este misterio de la Trinidad nos muestra que Dios es tanto uno como tres—unificado en esencia, distinto en personalidad. La declaración de la unidad de Dios en el Shema encuentra su expresión plena en la Trinidad.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2010%3A30&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 10:30</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Yo y el Padre uno somos.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Juan%2010%3A30&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Juan 10:30</a>
+                </span>
+            </div>
+            
+            <p>La declaración de Jesús de que Él y el Padre son uno cumple la declaración de la unidad de Dios en el Shema. La Trinidad revela que Dios es uno en esencia pero tres en personalidad. El llamado del Shema a amar "a Jehová nuestro Dios" encuentra su cumplimiento en amar al Dios trino—Padre, Hijo y Espíritu Santo. A través de Cristo, somos habilitados para amar al único Dios verdadero completamente.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%208%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corintios 8:6</a>
+                    <div class="ref-explanation">"Para nosotros, sin embargo, solo hay un Dios, el Padre... y un Señor, Jesucristo," mostrando que el Nuevo Testamento afirma la unidad de Dios mientras revela la Trinidad.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2028%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Mateo 28:19</a>
+                    <div class="ref-explanation">"Bautizándolos en el nombre del Padre, y del Hijo, y del Espíritu Santo," mostrando la Trinidad mientras mantiene la unidad de Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%204%3A4-6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 4:4-6</a>
+                    <div class="ref-explanation">"Un Señor, una fe, un bautismo; un Dios y Padre de todos," afirmando la unidad de Dios mientras reconoce la Trinidad.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="unity">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Amando a Dios con Todo Nuestro Corazón</h2>
+            <p>El Shema nos llama a amar a Dios con todo nuestro corazón—con nuestras emociones, deseos y voluntad. Esto no es una afección superficial sino una devoción profunda y sincera. El corazón representa el centro de nuestro ser, donde se originan nuestras afecciones y decisiones. Amar a Dios con todo nuestro corazón significa que Él tiene el primer lugar en nuestras afecciones y deseos.</p>
+
+            <div class="verse-callout">
+                Amarás al Señor tu Dios con todo tu corazón, y con toda tu alma, y con toda tu mente, y con todas tus fuerzas.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Marcos%2012%3A30&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Marcos 12:30</a>
+                </span>
+            </div>
+
+            <p>Jesús expande el Shema para incluir "toda tu mente," mostrando que nuestro amor por Dios debe involucrar también nuestro intelecto. No podemos amar a Dios plenamente sin entender quién es Él y qué ha hecho. A través de Cristo, somos habilitados para amar a Dios con todo nuestro corazón porque Él nos amó primero y se dio a sí mismo por nosotros. El Espíritu Santo obra en nuestros corazones para producir este amor.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%205%3A5&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 5:5</a>
+                    <div class="ref-explanation">"El amor de Dios ha sido derramado en nuestros corazones por el Espíritu Santo," mostrando que el Espíritu nos habilita para amar a Dios con todo nuestro corazón.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%204%3A19&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Juan 4:19</a>
+                    <div class="ref-explanation">"Nosotros le amamos a él, porque él nos amó primero," mostrando que nuestro amor por Dios es una respuesta a Su amor por nosotros en Cristo.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Jeremías%2029%3A13&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Jeremías 29:13</a>
+                    <div class="ref-explanation">"Me buscaréis y me hallaréis, porque me buscaréis de todo vuestro corazón," mostrando que el amor sincero por Dios lleva a encontrarlo.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="heart">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Enseñando a la Próxima Generación</h2>
+            <p>El Shema incluye instrucciones para enseñar estas palabras a los niños, hablar de ellas constantemente, y hacerlas recordatorios visibles. Esto muestra que el amor por Dios no es solo personal sino que debe ser transmitido a la próxima generación. El Shema debe estar en nuestros corazones, impreso en nuestros hijos, hablado en la vida diaria, y mostrado como recordatorios.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">Transmitiendo la Fe</div>
+                <p>Las instrucciones del Shema para enseñar a los niños y hacer la ley visible muestran que la fe está destinada a ser compartida. Debemos transmitir nuestro amor por Dios a la próxima generación, enseñándoles a amar a Dios con todo su corazón, alma y fuerza. Esto apunta hacia cómo la iglesia es llamada a hacer discípulos, enseñándoles a observar todo lo que Cristo mandó.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=Mateo%2028%3A19-20&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Mateo 28:19-20</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                Y estas palabras que yo te mando hoy, estarán sobre tu corazón. You shall teach them diligently to your children, and shall talk of them when you sit in your house, when you walk by the way, when you lie down, and when you rise up.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=Deuteronomio%206%3A6-7&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">Deuteronomio 6:6-7</a>
+                </span>
+            </div>
+
+            <p>The Shema's call to teach children and make the law visible shows that love for God is not private but public. We are to live out our love for God in such a way that others, especially our children, see it and learn from it. This points forward to how the church is called to make disciples, teaching them to love God and obey His commands. The Shema's emphasis on teaching the next generation finds its fulfillment in the Great Commission.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Proverbios%2022%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Proverbios 22:6</a>
+                    <div class="ref-explanation">"Instruye al niño en su camino," mostrando la importancia de enseñar a los niños a amar a Dios, como el Shema ordena.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Efesios%206%3A4&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Efesios 6:4</a>
+                    <div class="ref-explanation">"Criadlos en disciplina y amonestación del Señor," mostrando que los padres deben enseñar a los niños a amar a Dios, cumpliendo el mandato del Shema.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=2%20Timothy%203%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">2 Timoteo 3:15</a>
+                    <div class="ref-explanation">"Desde la niñez has sabido las Sagradas Escrituras," mostrando la importancia de enseñar a los niños las Escrituras, como el Shema ordena.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="teaching">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusión: El Shema Cumplido en Cristo</h2>
+            <p>El Shema es el mandamiento más grande, llamándonos a amar a Dios con todo nuestro corazón, alma y fuerza. Declara la unidad de Dios y llama a la devoción sincera. A través de Cristo, somos habilitados para cumplir el Shema porque Él nos amó primero y se dio a sí mismo por nosotros. El Espíritu Santo obra en nuestros corazones para producir este amor.</p>
+
+            <p>El llamado del Shema a amar a Dios completamente encuentra su cumplimiento en Cristo, quien amó al Padre perfectamente y nos habilita para amar a Dios a través del Espíritu Santo. No amamos a Dios para ganar Su favor—lo amamos porque hemos recibido Su favor en Cristo. El Shema, dado a Israel en Deuteronomio, apunta hacia cómo Cristo nos habilita para amar a Dios con todo nuestro corazón, alma, mente y fuerza.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Referencias Adicionales</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20John%204%3A9-10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Juan 4:9-10</a>
+                    <div class="ref-explanation">"En esto se mostró el amor de Dios para con nosotros... en que Dios envió a su Hijo unigénito," mostrando que el amor de Dios por nosotros nos habilita para amarlo, cumpliendo el Shema.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Gálatas%205%3A22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Gálatas 5:22</a>
+                    <div class="ref-explanation">"El fruto del Espíritu es amor," mostrando que el Espíritu produce amor en nosotros, habilitándonos para cumplir el llamado del Shema a amar a Dios.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Romanos%208%3A28&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Romanos 8:28</a>
+                    <div class="ref-explanation">"Y sabemos que a los que aman a Dios, todas las cosas les ayudan a bien," mostrando que aquellos que aman a Dios (cumpliendo el Shema) son bendecidos por Él.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        // Find Jarvis-like voice (Spanish)
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            // Prefer Spanish voices
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Monica',
+                'Paulina'
+            ];
+            
+            for (const preferred of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferred) || v.lang.startsWith('es'));
+                if (voice) return voice;
+            }
+            
+            // Fallback to any Spanish voice
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        // Load voices
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        // Get text content from a section (excluding buttons and verse references)
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            // Clone the section to avoid modifying the original
+            const clone = sectionElement.cloneNode(true);
+            
+            // Remove buttons, verse callouts, and verse references
+            clone.querySelectorAll('.audio-btn, .verse-callout, .verse-reference').forEach(el => el.remove());
+            
+            // Get all text content
+            return clone.textContent.trim();
+        }
+
+        // Play audio function
+        function playAudio(button, text) {
+            // If this button is already playing, stop it
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            // Stop any other currently playing speech
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            // Create new utterance
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            // Set voice properties for Jarvis-like sound
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            // Update button state
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Reproduciendo...';
+            currentButton = button;
+
+            // Handle speech end
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Handle speech error
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            // Start speaking
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize audio buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
+
