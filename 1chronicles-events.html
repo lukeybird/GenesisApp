@@ -773,8 +773,8 @@
     </div>
 
     <script>
-        // Major events in Judges
-                const mainEvents = [
+        // Major events in 1 Chronicles
+        const mainEvents = [
             {
                 name: "David Brings the Ark to Jerusalem",
                 date: "c. 1000 BC",
@@ -782,7 +782,7 @@
                 intro: "David brings the ark of the covenant to Jerusalem, establishing it as the center of worship. This points forward to how Christ brings us into God's presence.",
                 tagline: "The ark comes to Jerusalem",
                 summary: "David decides to bring the ark of the covenant to Jerusalem. On the first attempt, Uzzah touches the ark and dies because they did not follow God's instructions. David learns the importance of following God's ways. On the second attempt, they follow the proper procedures, and the ark is brought to Jerusalem with great celebration. David organizes worship and appoints Levites to minister before the ark. The ark's coming to Jerusalem points forward to how Christ brings us into God's presence and establishes true worship.",
-                christConnection: "The ark coming to Jerusalem points forward to how Christ brings us into God's presence. Just as the ark represented God's presence, Christ is the true presence of God among us. Through Christ, we can come into God's presence with confidence (<a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A16&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 4:16</a>)."
+                christConnection: "The ark coming to Jerusalem points forward to how Christ brings us into God's presence. Just as the ark represented God's presence, Christ is the true presence of God among us. Through Christ, we can come into God's presence with confidence (<a href='https://www.biblegateway.com/passage/?search=Hebrews%204%3A16&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 4:16</a>)."
             },
             {
                 name: "David Prepares for the Temple",
@@ -791,9 +791,189 @@
                 intro: "David makes extensive preparations for the temple that his son Solomon will build. This points forward to how God prepares the way for Christ and the church.",
                 tagline: "Preparations for God's house",
                 summary: "Although David is not allowed to build the temple because he is a man of war, he makes extensive preparations. He gathers materials, organizes the priests and Levites, and gives detailed instructions to Solomon. David's heart is set on building a house for the Lord. His preparations point forward to how God prepared the way for Christ and how Christ builds the true temple—the church.",
-                christConnection: "David's preparations for the temple point forward to how God prepared the way for Christ. Just as David prepared for the physical temple, God prepared for the coming of Christ, the true temple. Christ now builds the church, the true house of God (<a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A19-22&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Ephesians 2:19-22</a>)."
-            },
-        ];;
-
+                christConnection: "David's preparations for the temple point forward to how God prepared the way for Christ. Just as David prepared for the physical temple, God prepared for the coming of Christ, the true temple. Christ now builds the church, the true house of God (<a href='https://www.biblegateway.com/passage/?search=Ephesians%202%3A19-22&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Ephesians 2:19-22</a>)."
+            }
         ];
 
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            if (!timeline) {
+                console.error('Timeline element not found');
+                return;
+            }
+            if (!mainEvents || mainEvents.length === 0) {
+                console.error('mainEvents is empty or undefined');
+                return;
+            }
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "David Brings the Ark to Jerusalem": "dive-in-ark-jerusalem.html",
+                    "David Prepares for the Temple": "dive-in-david-temple-prep.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferredName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferredName));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize - script is at end of body so DOM is ready
+        renderTimeline();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>

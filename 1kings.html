@@ -650,7 +650,7 @@
                 scripture: "1 Kings 17:1-2 Kings 2:11",
                 intro: "A powerful prophet who confronts King Ahab and the prophets of Baal. His ministry demonstrates God's power over false gods and points forward to Christ, the ultimate Prophet.",
                 tagline: "Prophet of fire, defender of the true God",
-                summary: "Elijah is a prophet during the reign of Ahab, one of Israel's most wicked kings. When Ahab and his wife Jezebel lead Israel into Baal worship, Elijah confronts them. He declares a drought that lasts three years. On Mount Carmel, Elijah challenges the prophets of Baal to a contest: the god who answers with fire is the true God. Baal fails, but when Elijah prays, fire falls from heaven, consuming his sacrifice. The people declare, "The Lord—he is God!" However, when Jezebel threatens to kill him, Elijah flees in fear. God meets him at Mount Horeb, not in the wind, earthquake, or fire, but in a gentle whisper. Elijah's ministry demonstrates God's power and points forward to Christ, who is the ultimate Prophet and who demonstrates God's power through His miracles and ultimately through His resurrection."
+                summary: "Elijah is a prophet during the reign of Ahab, one of Israel's most wicked kings. When Ahab and his wife Jezebel lead Israel into Baal worship, Elijah confronts them. He declares a drought that lasts three years. On Mount Carmel, Elijah challenges the prophets of Baal to a contest: the god who answers with fire is the true God. Baal fails, but when Elijah prays, fire falls from heaven, consuming his sacrifice. The people declare, \"The Lord—he is God!\" However, when Jezebel threatens to kill him, Elijah flees in fear. God meets him at Mount Horeb, not in the wind, earthquake, or fire, but in a gentle whisper. Elijah's ministry demonstrates God's power and points forward to Christ, who is the ultimate Prophet and who demonstrates God's power through His miracles and ultimately through His resurrection."
             },
             {
                 name: "Ahab",
@@ -661,6 +661,30 @@
                 summary: "Ahab becomes king of Israel and does more evil than any king before him. He marries Jezebel, a Phoenician princess who promotes Baal worship. Ahab builds a temple for Baal and sets up an Asherah pole. He is confronted by the prophet Elijah, who demonstrates that the Lord is the true God. Despite this, Ahab continues in his wickedness. He covets Naboth's vineyard and, with Jezebel's help, has Naboth killed to take it. The prophet Elijah pronounces judgment on Ahab and Jezebel. Ahab's story demonstrates the consequences of idolatry and the importance of faithfulness to God. It points forward to how we need a king who is perfectly faithful—Christ, who never compromised with sin or idolatry."
             },
             {
+                name: "Rehoboam",
+                date: "c. 930-913 BC",
+                scripture: "1 Kings 11:43-14:31",
+                intro: "Solomon's son who becomes king and causes the kingdom to split by rejecting wise counsel and threatening to increase the people's burden. His foolishness demonstrates the consequences of pride.",
+                tagline: "Foolish king, caused the kingdom to split",
+                summary: "Rehoboam is Solomon's son who becomes king after his father's death. When the people ask him to lighten the heavy burden Solomon had placed on them, Rehoboam rejects the wise counsel of the elders and instead follows the advice of his young friends. He threatens to make the burden even heavier, saying he will discipline the people with scorpions. In response, ten tribes rebel and make Jeroboam their king, leaving only Judah and Benjamin with Rehoboam. The kingdom is permanently divided. Rehoboam's foolishness demonstrates how pride and rejecting wise counsel leads to disaster. His story points forward to how we need a king who is wise and humble—Christ, who came not to be served but to serve, and who lightens our burden rather than increasing it."
+            },
+            {
+                name: "Jeroboam",
+                date: "c. 930-909 BC",
+                scripture: "1 Kings 11:26-14:20",
+                intro: "The first king of the northern kingdom of Israel who leads the people into idolatry by setting up golden calves. His story demonstrates how fear leads to sin.",
+                tagline: "First king of Israel, led the people into idolatry",
+                summary: "Jeroboam is an official under Solomon who rebels and becomes the first king of the northern kingdom of Israel. However, Jeroboam fears that if the people go to Jerusalem to worship, they will turn back to Rehoboam. So he sets up two golden calves, one in Bethel and one in Dan, telling the people these are their gods. He also appoints priests from all the people, not just the Levites, and creates his own religious festivals. Jeroboam's idolatry demonstrates how fear leads to sin. His story points forward to how we need a king who trusts God completely—Christ, who never gave in to fear but trusted the Father completely, even to the point of death on the cross."
+            },
+            {
+                name: "Jezebel",
+                date: "c. 874-850 BC",
+                scripture: "1 Kings 16:31-22:53",
+                intro: "Ahab's Phoenician wife who promotes Baal worship and persecutes the prophets of the Lord. Her story demonstrates the danger of leading others into idolatry.",
+                tagline: "Wicked queen, promoter of Baal worship",
+                summary: "Jezebel is a Phoenician princess who marries Ahab and becomes queen of Israel. She actively promotes Baal worship, building a temple for Baal and maintaining 450 prophets of Baal and 400 prophets of Asherah. She persecutes and kills the prophets of the Lord. When Elijah defeats the prophets of Baal, Jezebel threatens to kill him, causing Elijah to flee in fear. Jezebel also helps Ahab murder Naboth to take his vineyard. Her wickedness demonstrates the danger of leading others into idolatry and the consequences of rejecting the true God. Her story points forward to how we need a queen who is faithful—ultimately pointing to the church as the bride of Christ, who is faithful to Him."
+            },
+            {
                 name: "The Lord (YHWH)",
                 date: "Eternal",
                 scripture: "1 Kings 1:1-22:53 (throughout)",
@@ -669,6 +693,8 @@
                 summary: "Throughout 1 Kings, the Lord demonstrates His sovereignty and faithfulness. He establishes Solomon as king and allows him to build the temple. However, when Solomon and subsequent kings turn to idolatry, the Lord judges them. He raises up prophets like Elijah to confront the wicked kings and call the people back to Himself. The Lord's judgment on unfaithful kings points forward to how He will judge all unfaithfulness. Yet His faithfulness in maintaining the Davidic line despite the failures of individual kings points forward to how He will ultimately establish the perfect King, Christ, who is perfectly faithful and who fulfills all the promises of the Davidic covenant."
             }
         ];
+
+        // Helper function to create Bible Gateway link
         function createBibleGatewayLink(scripture) {
             if (!scripture) return '';
             const encodedScripture = encodeURIComponent(scripture);
@@ -707,6 +733,13 @@
                         !e.target.closest('.scripture-link')) {
                         content.classList.toggle('expanded');
                     }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
                 });
 
                 const audioBtn = content.querySelector('.audio-btn');
@@ -813,6 +846,7 @@
             speechSynthesis.speak(currentUtterance);
         }
 
+        // Initialize
         renderTimeline();
 
     </script>

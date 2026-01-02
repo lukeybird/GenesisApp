@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="shortcut icon" type="image/png" href="favicon.png">
-    <title>1 Samuel Timeline - Major Events</title>
+    <title>2 Samuel Timeline - Major Events</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
         
@@ -765,16 +765,16 @@
         <div class="nav-menu"></div>
 
         <header>
-            <h1>📖 1 Samuel Events</h1>
-            <p class="subtitle">Major Events in the Book of 1 Samuel</p>
+            <h1>📖 2 Samuel Events</h1>
+            <p class="subtitle">Major Events in the Book of 2 Samuel</p>
         </header>
 
         <div class="timeline" id="timeline"></div>
     </div>
 
     <script>
-        // Major events in Judges
-                const mainEvents = [
+        // Major events in 2 Samuel
+        const mainEvents = [
             {
                 name: "David Becomes King Over All Israel",
                 date: "c. 1010 BC",
@@ -804,7 +804,179 @@
             }
         ];
 
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
 
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            timeline.innerHTML = '<div class="timeline-line"></div>';
 
-        ];
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "David Becomes King Over All Israel": "dive-in-david-king.html",
+                    "The Davidic Covenant": "dive-in-davidic-covenant.html",
+                    "David's Sin with Bathsheba": "dive-in-david-bathsheba.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const preferredName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferredName));
+                if (voice) return voice;
+            }
+            
+            return voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        function playAudio(button, text) {
+            if (currentUtterance) {
+                speechSynthesis.cancel();
+                if (currentButton) {
+                    currentButton.textContent = 'Listen to Story';
+                    currentButton.classList.remove('playing');
+                }
+            }
+
+            if (currentButton === button && currentUtterance) {
+                currentButton = null;
+                currentUtterance = null;
+                return;
+            }
+
+            currentButton = button;
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (!jarvisVoice) {
+                jarvisVoice = findJarvisVoice();
+            }
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            
+            currentUtterance.lang = 'en-GB';
+            currentUtterance.pitch = 0.8;
+            currentUtterance.rate = 0.9;
+            currentUtterance.volume = 1;
+
+            currentUtterance.onend = () => {
+                button.textContent = 'Listen to Story';
+                button.classList.remove('playing');
+                currentButton = null;
+                currentUtterance = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.textContent = 'Listen to Story';
+                button.classList.remove('playing');
+                currentButton = null;
+                currentUtterance = null;
+            };
+
+            button.textContent = '⏸ Stop';
+            button.classList.add('playing');
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        // Initialize
+        renderTimeline();
+        jarvisVoice = findJarvisVoice();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
 

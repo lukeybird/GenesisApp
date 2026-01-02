@@ -773,7 +773,7 @@
     </div>
 
     <script>
-        // Major events in Judges
+        // Major events in 2 Chronicles
                 const mainEvents = [
             {
                 name: "Solomon Dedicates the Temple",
@@ -782,7 +782,25 @@
                 intro: "Solomon dedicates the completed temple, and the glory of the Lord fills it. This points forward to how God's glory is revealed in Christ.",
                 tagline: "The temple dedicated, God's glory fills it",
                 summary: "When the temple is completed, Solomon brings the ark into the Most Holy Place. As the priests withdraw, the glory of the Lord fills the temple so that the priests cannot perform their service. Solomon then prays a dedicatory prayer, asking God to hear the prayers of His people. God appears to Solomon and promises to hear their prayers and to establish his kingdom if he remains faithful. The temple's dedication points forward to how God's glory is fully revealed in Christ, and how through Christ, we can approach God in prayer.",
-                christConnection: "The temple dedication points forward to how God's glory is fully revealed in Christ. Just as God's glory filled the temple, God's glory is fully revealed in Christ (<a href="https://www.biblegateway.com/passage/?search=John%201%3A14&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">John 1:14</a>). Through Christ, we can approach God with confidence."
+                christConnection: "The temple dedication points forward to how God's glory is fully revealed in Christ. Just as God's glory filled the temple, God's glory is fully revealed in Christ (<a href='https://www.biblegateway.com/passage/?search=John%201%3A14&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>John 1:14</a>). Through Christ, we can approach God with confidence."
+            },
+            {
+                name: "Hezekiah's Reformation",
+                date: "c. 715-686 BC",
+                scripture: "2 Chronicles 29:1-32:33",
+                intro: "Hezekiah restores temple worship and leads a great reformation. His faithfulness demonstrates the blessing of obedience and points forward to Christ.",
+                tagline: "Temple worship restored, reformation begins",
+                summary: "Hezekiah becomes king and immediately begins to restore the temple. He removes idols, cleanses the temple, and restores proper worship. He celebrates the Passover and leads the people in a great reformation. When the Assyrians threaten Jerusalem, Hezekiah trusts in the Lord and sees God deliver the city. His faithfulness demonstrates the blessing of obedience and points forward to how we should trust in Christ and worship Him in spirit and truth.",
+                christConnection: "Hezekiah's reformation points forward to how Christ brings true reformation. Just as Hezekiah restored temple worship, Christ restores true worship. Through Christ, we can worship God in spirit and truth (<a href='https://www.biblegateway.com/passage/?search=John%204%3A23-24&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>John 4:23-24</a>)."
+            },
+            {
+                name: "Josiah's Reformation",
+                date: "c. 640-609 BC",
+                scripture: "2 Chronicles 34:1-35:27",
+                intro: "Josiah discovers the Book of the Law and leads a great reformation. His story demonstrates the power of God's Word and points forward to Christ, the Word made flesh.",
+                tagline: "The Law rediscovered, reformation follows",
+                summary: "Josiah becomes king and begins to seek the Lord. During temple repairs, the Book of the Law is discovered. When Josiah hears the Law read, he tears his clothes in repentance. He leads a great reformation, removing all idols, restoring temple worship, and celebrating the Passover. His faithfulness demonstrates the power of God's Word to bring revival. This points forward to how Christ, the Word made flesh, brings ultimate revival.",
+                christConnection: "Josiah's reformation points forward to how Christ, the Word made flesh, brings ultimate revival. Just as the Book of the Law brought reformation, Christ brings true transformation (<a href='https://www.biblegateway.com/passage/?search=John%201%3A1&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>John 1:1</a>)."
             },
             {
                 name: "The Temple is Destroyed",
@@ -791,9 +809,199 @@
                 intro: "The Babylonians destroy the temple and take the people into exile. This marks the end of the kingdom but points forward to the true temple in Christ.",
                 tagline: "Judgment and exile, but hope remains",
                 summary: "Despite repeated warnings from the prophets, the people continue in their unfaithfulness. The Lord sends the Babylonians, who destroy the temple, burn the palace, and break down the walls of Jerusalem. The people are taken into exile. However, the book ends with a note of hope: Cyrus, king of Persia, issues a decree allowing the exiles to return. The temple's destruction points forward to how the old system of worship passes away, but the true temple—Christ and the church—is established.",
-                christConnection: "The temple's destruction points forward to how the old system passes away, but the true temple—Christ—is established. Just as the physical temple was destroyed, the old covenant passes away, but Christ establishes the new covenant and the true temple—the church (<a href="https://www.biblegateway.com/passage/?search=Hebrews%208%3A13&version=NKJV" target="_blank" rel="noopener noreferrer" class="scripture-link">Hebrews 8:13</a>)."
-            },
-        ];;
-
+                christConnection: "The temple's destruction points forward to how the old system passes away, but the true temple—Christ—is established. Just as the physical temple was destroyed, the old covenant passes away, but Christ establishes the new covenant and the true temple—the church (<a href='https://www.biblegateway.com/passage/?search=Hebrews%208%3A13&version=NKJV' target='_blank' rel='noopener noreferrer' class='scripture-link'>Hebrews 8:13</a>)."
+            }
         ];
 
+        // Helper function to create Bible Gateway link
+        function createBibleGatewayLink(scripture) {
+            if (!scripture) return '';
+            const encodedScripture = encodeURIComponent(scripture);
+            const url = `https://www.biblegateway.com/passage/?search=${encodedScripture}&version=NKJV`;
+            return `<a href="${url}" target="_blank" rel="noopener noreferrer" class="scripture-link">${scripture}</a>`;
+        }
+
+        // Render timeline
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            if (!timeline) {
+                console.error('Timeline element not found');
+                return;
+            }
+            if (!mainEvents || mainEvents.length === 0) {
+                console.error('mainEvents is empty or undefined');
+                return;
+            }
+            timeline.innerHTML = '<div class="timeline-line"></div>';
+
+            mainEvents.forEach((event, index) => {
+                const item = document.createElement('div');
+                item.className = 'timeline-item';
+
+                const content = document.createElement('div');
+                content.className = 'timeline-content';
+                
+                // Map event names to their dive-in page URLs
+                const diveInPages = {
+                    "Solomon Dedicates the Temple": "dive-in-solomon-dedicates-temple.html",
+                    "Hezekiah's Reformation": "dive-in-hezekiah-reformation.html",
+                    "Josiah's Reformation": "dive-in-josiah-reformation.html",
+                    "The Temple is Destroyed": "dive-in-temple-destroyed.html"
+                };
+                
+                const diveInPage = diveInPages[event.name];
+                const buttonsHTML = diveInPage 
+                    ? `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                        <a href="${diveInPage}" class="dive-in-btn">Dive In!</a>
+                    </div>`
+                    : `<div class="button-container">
+                        <button class="audio-btn">Listen to Story</button>
+                    </div>`;
+                
+                content.innerHTML = `
+                    <div class="expand-icon">▼</div>
+                    <div class="character-name">${event.name}</div>
+                    <div class="character-date-row">
+                        <div class="character-date">${event.date}</div>
+                        ${event.scripture ? `<div class="character-scripture">${createBibleGatewayLink(event.scripture)}</div>` : ''}
+                    </div>
+                    <div class="character-intro">${event.intro}</div>
+                    <div class="character-tagline">${event.tagline}</div>
+                    <div class="character-summary">${event.summary}</div>
+                    ${event.christConnection ? `<div class="christ-connection">
+                        <div class="christ-connection-title">Christ in This Story</div>
+                        <div class="christ-connection-text">${event.christConnection}</div>
+                    </div>` : ''}
+                    ${buttonsHTML}
+                `;
+
+                content.addEventListener('click', (e) => {
+                    if (!e.target.classList.contains('audio-btn') && 
+                        !e.target.classList.contains('dive-in-btn') &&
+                        !e.target.closest('.dive-in-btn') &&
+                        !e.target.classList.contains('scripture-link') &&
+                        !e.target.closest('.scripture-link') &&
+                        !e.target.closest('.character-scripture')) {
+                        content.classList.toggle('expanded');
+                    }
+                });
+
+                const scriptureLinks = content.querySelectorAll('.scripture-link');
+                scriptureLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                    });
+                });
+
+                const audioBtn = content.querySelector('.audio-btn');
+                audioBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const nameEl = content.querySelector('.character-name');
+                    const introEl = content.querySelector('.character-intro');
+                    const taglineEl = content.querySelector('.character-tagline');
+                    const summaryEl = content.querySelector('.character-summary');
+                    const christEl = content.querySelector('.christ-connection-text');
+                    
+                    const fullText = `${nameEl.textContent}. ${introEl.textContent} ${taglineEl.textContent ? taglineEl.textContent + '. ' : ''}${summaryEl.textContent}${christEl ? '. ' + christEl.textContent : ''}`;
+                    playAudio(audioBtn, fullText);
+                });
+
+                item.appendChild(content);
+                timeline.appendChild(item);
+            });
+        }
+
+        // Speech synthesis setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let jarvisVoice = null;
+
+        function findJarvisVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google UK English Male',
+                'Microsoft Zira - English (United States)',
+                'Microsoft David - English (United States)',
+                'Alex',
+                'Daniel'
+            ];
+            
+            for (const voiceName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(voiceName) || v.name === voiceName);
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('en') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('david') ||
+                 v.name.toLowerCase().includes('daniel'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('en')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                jarvisVoice = findJarvisVoice();
+            };
+        }
+
+        setTimeout(() => {
+            jarvisVoice = findJarvisVoice();
+        }, 100);
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                currentButton.classList.remove('playing');
+                currentButton.textContent = 'Listen to Story';
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (jarvisVoice) {
+                currentUtterance.voice = jarvisVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'en-GB';
+
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Listen to Story';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        // Initialize - script is at end of body so DOM is ready
+        renderTimeline();
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>

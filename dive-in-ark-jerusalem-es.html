@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="shortcut icon" type="image/png" href="favicon.png">
+    <title>Sumérgete: David Brings the Ark to Jerusalem - Línea de Tiempo de 1 Crónicas</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: #0a0e27;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 195, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 150, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(0, 255, 200, 0.05) 0%, transparent 50%);
+            color: #e0e0e0;
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20% 30%, rgba(0, 195, 255, 0.3), transparent),
+                radial-gradient(2px 2px at 60% 70%, rgba(255, 0, 150, 0.3), transparent),
+                radial-gradient(1px 1px at 50% 50%, rgba(0, 255, 200, 0.3), transparent),
+                radial-gradient(1px 1px at 80% 10%, rgba(0, 195, 255, 0.2), transparent);
+            background-size: 200% 200%;
+            animation: particleMove 20s ease infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        @keyframes particleMove {
+            0%, 100% { background-position: 0% 0%, 100% 100%, 50% 50%, 80% 20%; }
+            50% { background-position: 100% 100%, 0% 0%, 50% 50%, 20% 80%; }
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 150px;
+            justify-content: space-between;
+        }
+
+        .dropdown-btn .emoji {
+            display: none;
+        }
+
+        .dropdown-btn .text {
+            display: inline;
+        }
+
+        .dropdown-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .dropdown-btn.active {
+            background: rgba(0, 195, 255, 0.4);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 25px rgba(0, 195, 255, 0.5);
+        }
+
+        .dropdown-btn::after {
+            content: '▼';
+            font-size: 0.7em;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown-btn.open::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            border-radius: 15px;
+            min-width: 200px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.2);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .dropdown-menu.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #88d0ff;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 0.95em;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid rgba(0, 195, 255, 0.1);
+            display: block;
+            text-decoration: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(0, 195, 255, 0.2);
+            color: #00c3ff;
+            padding-left: 25px;
+        }
+
+        .dropdown-item.active {
+            background: rgba(0, 195, 255, 0.3);
+            color: #00c3ff;
+            border-left: 3px solid rgba(0, 195, 255, 0.8);
+        }
+
+        .dropdown-item.category-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .dropdown-item.category-item .arrow {
+            font-size: 0.7em;
+            transition: transform 0.2s ease;
+            margin-left: auto;
+        }
+
+        .dropdown-item.category-item:hover .arrow {
+            transform: translateX(3px);
+        }
+
+        .submenu {
+            background: rgba(5, 10, 25, 0.95);
+            border-left: 3px solid rgba(0, 195, 255, 0.5);
+            margin-left: 10px;
+            border-radius: 0 0 10px 10px;
+            overflow: hidden;
+        }
+
+        .submenu-item {
+            padding-left: 35px !important;
+            font-size: 0.9em;
+        }
+
+        .submenu-item:hover {
+            padding-left: 40px !important;
+        }
+
+        @media (max-width: 768px) {
+            .dropdown-btn {
+                padding: 10px 15px;
+                min-width: auto;
+                width: 70px;
+                height: 70px;
+                justify-content: center;
+                border-radius: 18px;
+            }
+
+            .dropdown-btn .text {
+                display: none;
+            }
+
+            .dropdown-btn .emoji {
+                display: inline;
+                font-size: 1.5em;
+            }
+
+            .dropdown-btn::after {
+                display: none;
+            }
+
+            .dropdown-menu {
+                left: 50%;
+                transform: translateX(-50%) translateY(-10px);
+                min-width: 180px;
+            }
+
+            .dropdown-menu.open {
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+
+        header {
+            background: rgba(10, 14, 39, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 195, 255, 0.1), transparent);
+            animation: scan 3s infinite;
+        }
+
+        @keyframes scan {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 900;
+            text-shadow: 
+                0 0 20px rgba(0, 195, 255, 0.5),
+                0 0 40px rgba(0, 195, 255, 0.3);
+            letter-spacing: 2px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: #88d0ff;
+            font-size: 1.2em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-section {
+            background: rgba(10, 14, 39, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 40px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(0, 195, 255, 0);
+            transition: all 0.4s ease;
+        }
+
+        .content-section:hover {
+            border-color: rgba(0, 195, 255, 0.6);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.4),
+                0 0 40px rgba(0, 195, 255, 0.3);
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.3);
+        }
+
+        .content-section p {
+            color: #d0e0f0;
+            line-height: 1.9;
+            font-size: 1.1em;
+            font-weight: 300;
+            margin-bottom: 20px;
+        }
+
+        .verse-callout {
+            background: rgba(0, 195, 255, 0.1);
+            border-left: 4px solid rgba(0, 195, 255, 0.6);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-style: italic;
+            color: #b0d0f0;
+            line-height: 1.8;
+            position: relative;
+        }
+
+        .verse-reference {
+            display: block;
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #88d0ff;
+            font-style: normal;
+        }
+
+        .scripture-link {
+            color: #88d0ff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .scripture-link:hover {
+            color: #00c3ff;
+            border-bottom: 1px solid #00c3ff;
+            text-shadow: 0 0 10px rgba(0, 195, 255, 0.5);
+        }
+
+        .theme-box {
+            background: rgba(0, 150, 255, 0.1);
+            border: 1px solid rgba(0, 195, 255, 0.3);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+
+        .theme-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .theme-box p {
+            color: #c0d0e0;
+            line-height: 1.8;
+        }
+
+        .additional-references {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(0, 195, 255, 0.2);
+        }
+
+        .additional-references-title {
+            font-family: 'Orbitron', sans-serif;
+            color: #00c3ff;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .reference-item {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            border-left: 3px solid rgba(0, 195, 255, 0.3);
+        }
+
+        .ref-link {
+            color: #88d0ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1em;
+            display: block;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .ref-link:hover {
+            color: #00c3ff;
+            padding-left: 5px;
+        }
+
+        .ref-explanation {
+            color: #b0c0d0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            font-style: italic;
+        }
+
+        .audio-btn {
+            margin-top: 25px;
+            padding: 12px 30px;
+            background: rgba(0, 195, 255, 0.2);
+            border: 1px solid rgba(0, 195, 255, 0.5);
+            color: #00c3ff;
+            border-radius: 25px;
+            cursor: pointer;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .audio-btn:hover {
+            background: rgba(0, 195, 255, 0.3);
+            border-color: rgba(0, 195, 255, 0.8);
+            box-shadow: 0 0 20px rgba(0, 195, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .audio-btn.playing {
+            background: rgba(0, 255, 150, 0.3);
+            border-color: rgba(0, 255, 150, 0.8);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .content-section {
+                padding: 25px;
+            }
+
+            .section-title {
+                font-size: 1.4em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="nav-menu"></div>
+
+        <header>
+            <h1>🌊 Sumérgete: David Trae el Arca a Jerusalén</h1>
+            <p class="subtitle">El Centro de Adoración Establecido</p>
+        </header>
+
+        <div class="content-section">
+            <h2 class="section-title">The First Attempt: Learning God's Ways</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2013%3A1-14&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 13:1-14</a>, David decides to bring the ark of the covenant to Jerusalem. However, on the first attempt, they transport it on a cart instead of carrying it on poles as God commanded. When the oxen stumble, Uzzah reaches out to steady the ark and is struck down by God. This teaches David and all Israel the importance of following God's instructions exactly.</p>
+            
+            <div class="verse-callout">
+                They moved the ark of God from Abinadab's house on a new cart, with Uzzah and Ahio guiding it. David and all the Israelites were celebrating with all their might before God, with songs and with harps, lyres, timbrels, cymbals and trumpets. When they came to the threshing floor of Kidon, Uzzah reached out his hand to steady the ark, because the oxen stumbled. The Lord's anger burned against Uzzah, and he struck him down because he had put his hand on the ark. So he died there before God.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2013%3A7-10&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 13:7-10</a>
+                </span>
+            </div>
+
+            <p>Uzzah's death serves as a sobering reminder that God's holiness must be respected. The ark represented God's presence, and it was to be handled only according to God's specific instructions. This event points forward to how we must approach God through Christ, the only way to God's presence, and how we must worship in spirit and truth according to God's word.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Numbers%204%3A15&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Numbers 4:15</a>
+                    <div class="ref-explanation">God's instructions for how the ark was to be carried, showing the importance of following God's ways exactly.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2014%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">John 14:6</a>
+                    <div class="ref-explanation">Jesus said, "I am the way and the truth and the life. No one comes to the Father except through me," showing that we must approach God through Christ.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="first">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Second Attempt: Following God's Instructions</h2>
+            <p>In <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2015%3A1-29&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 15:1-29</a>, David learns from his mistake and brings the ark to Jerusalem the correct way. This time, the Levites carry the ark on poles as God commanded. David organizes worship, appoints musicians, and the ark is brought to Jerusalem with great celebration and joy.</p>
+
+            <div class="theme-box">
+                <div class="theme-title">True Worship in God's Way</div>
+                <p>David's correction shows the importance of worshiping God according to His instructions. Just as the ark had to be carried in the specific way God commanded, we must worship God in the way He has revealed—through Christ and in spirit and truth.</p>
+                <div class="verse-reference" style="margin-top: 15px;">
+                    <a href="https://www.biblegateway.com/passage/?search=John%204%3A24&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">John 4:24</a>
+                </div>
+            </div>
+
+            <div class="verse-callout">
+                David built houses for himself in the City of David, and he prepared a place for the ark of God and pitched a tent for it. Then David said, "No one but the Levites may carry the ark of God, because the Lord chose them to carry the ark of the Lord and to minister before him forever."
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2015%3A1-2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 15:1-2</a>
+                </span>
+            </div>
+            
+            <p>When David follows God's instructions, the ark is successfully brought to Jerusalem. The celebration is marked by music, dancing, and great joy. This successful bringing of the ark points forward to how Christ brings us into God's presence when we approach Him through faith in Christ, the only way to the Father.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2016%3A1-43&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Chronicles 16:1-43</a>
+                    <div class="ref-explanation">David's organization of worship before the ark, showing the establishment of proper worship in Jerusalem.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:16</a>
+                    <div class="ref-explanation">Let us then approach God's throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need, showing that through Christ we can come into God's presence.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="second">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">The Ark in Jerusalem: God's Presence Among His People</h2>
+            <p>With the ark now in Jerusalem, David establishes it as the center of worship. He appoints Levites to minister before the ark and organizes the worship services. The ark's presence in Jerusalem represents God dwelling among His people, pointing forward to how Christ dwells among us and how the church is the temple of the Holy Spirit.</p>
+
+            <div class="verse-callout">
+                So they brought the ark of God and set it inside the tent that David had pitched for it, and they presented burnt offerings and fellowship offerings before God. After David had finished sacrificing the burnt offerings and fellowship offerings, he blessed the people in the name of the Lord.
+                <span class="verse-reference">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Chronicles%2016%3A1-2&version=RVR1960" target="_blank" rel="noopener noreferrer" class="scripture-link">1 Chronicles 16:1-2</a>
+                </span>
+            </div>
+
+            <p>The ark's establishment in Jerusalem marks a new era in Israel's worship. God's presence is now centered in the city that will become the site of the temple. This points forward to how Christ is the true presence of God among us and how the church, as the body of Christ, is the temple where God's Spirit dwells.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=1%20Corinthians%203%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">1 Corinthians 3:16</a>
+                    <div class="ref-explanation">Don't you know that you yourselves are God's temple and that God's Spirit dwells in your midst? showing that believers are the temple of the Holy Spirit.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Ephesians%202%3A19-22&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Ephesians 2:19-22</a>
+                    <div class="ref-explanation">In him the whole building is joined together and rises to become a holy temple in the Lord, showing that the church is the true temple of God.</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="presence">Escuchar Sección</button>
+        </div>
+
+        <div class="content-section">
+            <h2 class="section-title">Conclusion: Christ Brings Us Into God's Presence</h2>
+            <p>David's bringing of the ark to Jerusalem demonstrates both the seriousness of approaching God in the right way and the joy of being in God's presence. The ark represented God's presence among His people, and it had to be handled according to God's specific instructions.</p>
+
+            <p>This event points forward to how Christ brings us into God's presence. Just as the ark had to be carried in the specific way God commanded, we must come to God through Christ, the only way to the Father. Through Christ, we can approach God's throne of grace with confidence, knowing that He has made a way for us to be in His presence forever.</p>
+            
+            <div class="additional-references">
+                <div class="additional-references-title">Additional References</div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=Hebrews%204%3A16&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">Hebrews 4:16</a>
+                    <div class="ref-explanation">Let us then approach God's throne of grace with confidence, so that we may receive mercy and find grace to help us in our time of need.</div>
+                </div>
+                <div class="reference-item">
+                    <a href="https://www.biblegateway.com/passage/?search=John%2014%3A6&version=RVR1960" target="_blank" rel="noopener noreferrer" class="ref-link">John 14:6</a>
+                    <div class="ref-explanation">Jesus answered, "I am the way and the truth and the life. No one comes to the Father except through me."</div>
+                </div>
+            </div>
+            <button class="audio-btn" data-section="conclusion">Escuchar Sección</button>
+        </div>
+    </div>
+
+    <script>
+        // Speech Synthesis Setup
+        let currentUtterance = null;
+        let currentButton = null;
+        let spanishVoice = null;
+
+                function findSpanishVoice() {
+            const voices = speechSynthesis.getVoices();
+            const preferredVoices = [
+                'Google español',
+                'Microsoft Sabina - Spanish (Mexico)',
+                'Microsoft Pablo - Spanish (Spain)',
+                'Microsoft Helena - Spanish (Spain)',
+                'Microsoft Laura - Spanish (Spain)'
+            ];
+            
+            for (const preferredName of preferredVoices) {
+                const voice = voices.find(v => v.name.includes(preferredName));
+                if (voice) return voice;
+            }
+            
+            const maleVoice = voices.find(v => 
+                v.lang.startsWith('es') && 
+                (v.name.toLowerCase().includes('male') || 
+                 v.name.toLowerCase().includes('pablo'))
+            );
+            
+            return maleVoice || voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+            
+            return voices.find(v => v.lang.startsWith('es')) || voices[0];
+        }
+
+        if (speechSynthesis.onvoiceschanged !== undefined) {
+            speechSynthesis.onvoiceschanged = () => {
+                spanishVoice = findSpanishVoice();
+            };
+        }
+        
+        setTimeout(() => {
+            spanishVoice = findSpanishVoice();
+        }, 100);
+
+        function getSectionText(section) {
+            const sectionElement = section.closest('.content-section');
+            if (!sectionElement) return '';
+            
+            const clone = sectionElement.cloneNode(true);
+            clone.querySelectorAll('.audio-btn').forEach(el => el.remove());
+            clone.querySelectorAll('.scripture-link').forEach(el => el.remove());
+            clone.querySelectorAll('.verse-reference').forEach(el => el.remove());
+            return clone.textContent.trim();
+        }
+
+        function playAudio(button, text) {
+            if (button === currentButton && button.classList.contains('playing')) {
+                speechSynthesis.cancel();
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+                return;
+            }
+
+            if (currentUtterance && currentButton) {
+                speechSynthesis.cancel();
+                document.querySelectorAll('.audio-btn').forEach(btn => {
+                    btn.classList.remove('playing');
+                    btn.textContent = 'Escuchar Sección';
+                });
+            }
+
+            currentUtterance = new SpeechSynthesisUtterance(text);
+            
+            if (spanishVoice) {
+                currentUtterance.voice = spanishVoice;
+            }
+            currentUtterance.rate = 0.9;
+            currentUtterance.pitch = 0.8;
+            currentUtterance.volume = 1;
+            currentUtterance.lang = 'es-ES';
+
+            document.querySelectorAll('.audio-btn').forEach(btn => {
+                btn.classList.remove('playing');
+                btn.textContent = 'Escuchar Sección';
+            });
+            
+            button.classList.add('playing');
+            button.textContent = 'Playing...';
+            currentButton = button;
+
+            currentUtterance.onend = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            currentUtterance.onerror = () => {
+                button.classList.remove('playing');
+                button.textContent = 'Escuchar Sección';
+                currentUtterance = null;
+                currentButton = null;
+            };
+
+            speechSynthesis.speak(currentUtterance);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const audioButtons = document.querySelectorAll('.audio-btn');
+            
+            audioButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const text = getSectionText(this);
+                    if (text) {
+                        playAudio(this, text);
+                    }
+                });
+            });
+        });
+    </script>
+    <script src="menu.js"></script>
+</body>
+</html>
